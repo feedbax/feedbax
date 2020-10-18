@@ -13,7 +13,7 @@ let address: AddressInfo;
 
 beforeAll((done) => {
   server = fork(
-    path.join(__dirname, '../../../processes/single.ts'),
+    path.join(__dirname, '../../../processes/single-server.ts'),
     [], { execArgv: ['-r', 'ts-node/register'], silent: true },
   );
 
