@@ -22,8 +22,6 @@ beforeAll((done) => {
     done();
   });
 
-  server.channel;
-
   server.send('ping');
 });
 
