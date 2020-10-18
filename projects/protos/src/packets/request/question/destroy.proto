@@ -1,0 +1,6 @@
+package feedbax.Packets.Request.Question;
+syntax = "proto3";
+
+message Destroy {
+  feedbax.Model.Question question = 1;
+}

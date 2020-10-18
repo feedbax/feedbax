@@ -1,0 +1,47 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String  @id
+  email    String  @unique
+  password String
+  events   Event[]
+}
+
+model Event {
+  slug           String     @id
+  startDate      DateTime
+  durationInDays Int
+  userId         String
+  user           User       @relation(fields: [userId], references: [id])
+  questions      Question[]
+
+  @@index([userId], name: "userId")
+}
+
+model Question {
+  id        String       @id
+  text      String
+  type      QuestionType @default(NONE)
+  eventSlug String
+  event     Event        @relation(fields: [eventSlug], references: [slug])
+
+  @@index([eventSlug], name: "eventSlug")
+}
+
+model Worker {
+  id        Int      @id
+  keepAlive DateTime
+}
+
+enum QuestionType {
+  NONE
+  POLL
+  VOTE
+}

@@ -1,0 +1,7 @@
+package feedbax.Packets.Request.User;
+syntax = "proto3";
+
+message Login {
+  feedbax.Model.User user = 1;
+  feedbax.Model.Event event = 2;
+}

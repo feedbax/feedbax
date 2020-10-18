@@ -1,0 +1,12 @@
+package feedbax.Packets.Request.Question;
+syntax = "proto3";
+
+message Create {
+  enum InsertionType {
+    APPEND = 0;
+    PREPEND = 1;
+  }
+
+  InsertionType insertion_type = 1;
+  feedbax.Model.Question question = 2;
+}

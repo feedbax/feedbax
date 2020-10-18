@@ -1,0 +1,13 @@
+package feedbax.Packets.Response.Utils.Update;
+syntax = "proto3";
+
+message Like {
+  message Update {
+    oneof update {
+      feedbax.Model.Question question = 1;
+      feedbax.Model.Answer answer = 2;  
+    }
+  }
+
+  repeated Update updates = 1;
+}

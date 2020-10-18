@@ -1,0 +1,6 @@
+package feedbax.Packets.Request.Answer;
+syntax = "proto3";
+
+message Edit {
+  feedbax.Model.Answer answer = 1;
+}

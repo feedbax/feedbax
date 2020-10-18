@@ -1,0 +1,18 @@
+package feedbax.Model;
+syntax = "proto3";
+
+message Event {
+  message Settings {
+    bool show_social_share_buttons = 1;
+    bool is_archived = 2;
+    string footer = 3;
+  }
+
+  string slug = 2;
+  Settings settings = 3;
+
+  int32 start_date = 4;
+  int32 duration_in_days = 5;
+
+  repeated feedbax.Model.Question questions = 6;
+}

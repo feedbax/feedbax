@@ -1,0 +1,6 @@
+package feedbax.Packets.Response.Answer;
+syntax = "proto3";
+
+message Merge {
+  feedbax.Utils.Error error = 1;
+}

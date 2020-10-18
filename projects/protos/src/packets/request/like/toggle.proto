@@ -1,0 +1,6 @@
+package feedbax.Packets.Request.Like;
+syntax = "proto3";
+
+message Toggle {
+  feedbax.Model.Answer answer = 1;
+}

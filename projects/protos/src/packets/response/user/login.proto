@@ -1,0 +1,19 @@
+package feedbax.Packets.Response.User;
+syntax = "proto3";
+
+message Login {
+  feedbax.Utils.Error error = 1;
+
+  message ResponseUser {
+    feedbax.Model.Event event = 1;
+  }
+
+  message ResponseAdmin {
+    repeated feedbax.Model.Event events = 1;
+  }
+
+  oneof oneof_event {
+    ResponseUser user = 2;
+    ResponseAdmin admin = 3;
+  }
+}

@@ -1,0 +1,13 @@
+package feedbax.Model;
+syntax = "proto3";
+
+message Answer {
+  int32 id = 1;
+  string text = 2;
+
+  int32 time_created = 3;
+  int32 likes_count = 4;
+
+  bool has_liked = 5;
+  bool is_mine = 6;
+}
