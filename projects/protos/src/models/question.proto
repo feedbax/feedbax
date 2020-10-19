@@ -8,24 +8,13 @@ message Question {
     VOTE = 2;
   }
 
-  message Settings {
-    enum LikesDisplayType {
-      PERCENTAGE = 0;
-      NUMBER = 1;  
-    }
-
-    LikesDisplayType likes_count_display_type = 1;
-    bool new_answers_allowed = 2;
-  }
-
-  int32 id = 1;
+  string id = 1;
   Type type = 2;
-  string text = 3;
-  int32 order = 4;
-  Settings settings = 5;
+  int32 order = 3;
+  string text = 4;
 
-  bool has_liked = 6;
-  int32 likes_count = 7;
+  bool has_liked = 5;
+  int32 likes_count = 6;
 
-  repeated feedbax.Model.Answer answers = 8;
+  repeated feedbax.Model.Answer answers = 7;
 }

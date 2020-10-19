@@ -2,6 +2,5 @@ package feedbax.Model;
 syntax = "proto3";
 
 message Like {
-  int32 id = 1;
-  string author = 2;
+  string author = 1;
 }
