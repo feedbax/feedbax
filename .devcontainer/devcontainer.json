@@ -2,7 +2,10 @@
   "name": "@feedbax",
   "image": "node:12.19.0-stretch",
   "forwardPorts": [3000],
-  "postCreateCommand": "echo \"`/sbin/ip route|awk '/default/ { print $3 }'`\tdocker.host.internal\" | tee -a /etc/hosts > /dev/null",
+
+  "postCreateCommand": "sh ./.devcontainer/setdockerhost.sh",
+  "postStartCommand": "sh ./.devcontainer/setdockerhost.sh",
+  "postAttachCommand": "sh ./.devcontainer/setdockerhost.sh",
 
   "extensions": [
     "zxh404.vscode-proto3",
