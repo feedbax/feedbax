@@ -18,30 +18,58 @@ model Event {
   slug           String     @id
   startDate      DateTime
   durationInDays Int
-  userId         String
-  user           User       @relation(fields: [userId], references: [id])
   questions      Question[]
+  settings       Json?
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
 
   @@index([userId], name: "userId")
 }
 
 model Question {
-  id        String       @id
-  text      String
-  type      QuestionType @default(NONE)
+  id      String       @id
+  order   Int
+  type    QuestionType @default(NONE)
+  text    String
+  answers Answer[]
+
   eventSlug String
-  event     Event        @relation(fields: [eventSlug], references: [slug])
+  event     Event  @relation(fields: [eventSlug], references: [slug])
 
   @@index([eventSlug], name: "eventSlug")
-}
-
-model Worker {
-  id        Int      @id
-  keepAlive DateTime
 }
 
 enum QuestionType {
   NONE
   POLL
   VOTE
+}
+
+model Answer {
+  id      String   @id
+  text    String
+  author  String
+  created DateTime
+  likes   Like[]
+
+  questionId String
+  question   Question @relation(fields: [questionId], references: [id])
+
+  @@index([questionId], name: "questionId")
+}
+
+model Like {
+  author String
+
+  answerId String
+  answer   Answer @relation(fields: [answerId], references: [id])
+
+  @@id([answerId, author])
+  @@index([answerId], name: "answerId")
+}
+
+model Worker {
+  id        Int      @id
+  keepAlive DateTime
 }
