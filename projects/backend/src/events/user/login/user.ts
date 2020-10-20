@@ -47,12 +47,11 @@ const userLoginHandler = (
     console.log(`[worker-${workerId}]`, `[socket-${this.id}]`, 'handling packet', packet);
 
     if (isValid(packet)) {
+      const { uuid } = packet.user;
       const { slug } = packet.event;
 
-      const event = await EventService.getBy({ slug }, { questions: true });
-      const eventMessage = feedbax.Model.Event.fromObject(event);
-
-      const answer: ResponsePacket = Response.create({ user: { event: eventMessage } });
+      const event = await EventService.getBy({ slug }, { questions: true }, uuid);
+      const answer: ResponsePacket = Response.create({ user: { event } });
       const answerBinary = Response.encode(answer).finish();
 
       addUser(this.id);
