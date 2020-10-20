@@ -11,12 +11,15 @@ let server: ChildProcess;
 let socket: SocketIOClient.Socket;
 let address: AddressInfo;
 
+const log = (data: Buffer) => console.log(data.toString());
+
 beforeAll((done) => {
   server = fork(
     path.join(__dirname, '../../../processes/single-server.ts'),
     [], { execArgv: ['-r', 'ts-node/register'], silent: true },
   );
 
+  server.stdout?.on('data', log);
   server.on('message', (addressJson) => {
     address = JSON.parse(addressJson.toString());
     done();
@@ -26,6 +29,7 @@ beforeAll((done) => {
 });
 
 afterAll(() => {
+  server.stdout?.off('data', log);
   server.kill();
 });
 
