@@ -4,11 +4,6 @@ syntax = "proto3";
 import "google/protobuf/struct.proto";
 
 message Event {
-  message Settings {
-    bool show_social_share_buttons = 1;
-    string custom_footer = 2;
-  }
-
   string slug = 1;
   google.protobuf.Struct settings = 2;
 
