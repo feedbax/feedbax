@@ -108,7 +108,12 @@ export default class UUID {
         const getFirstAvailableReducer = (
           (prev: number, curr: number, i: number, array: number[]): number => {
             if (i === 0 && curr >= 1) return curr - 1;
-            if (prev !== -1) return prev;
+
+            if (prev !== -1) {
+              array.splice(1);
+              return prev;
+            }
+
             if (array[i + 1] - curr > 1) return curr + 1;
 
             return prev;
