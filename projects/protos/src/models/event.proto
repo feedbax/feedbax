@@ -1,6 +1,8 @@
 package feedbax.Model;
 syntax = "proto3";
 
+import "google/protobuf/struct.proto";
+
 message Event {
   message Settings {
     bool show_social_share_buttons = 1;
@@ -8,7 +10,7 @@ message Event {
   }
 
   string slug = 1;
-  Settings settings = 2;
+  google.protobuf.Struct settings = 2;
 
   int32 start_date = 3;
   int32 duration_in_days = 4;
