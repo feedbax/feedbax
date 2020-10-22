@@ -1,5 +1,6 @@
 import { workerId } from '@utils/worker';
 import { prisma } from '@utils/prisma';
+import { sleep } from '@utils/misc';
 
 import Flake from 'flake-idgen';
 import baseX from 'base-x';
@@ -129,12 +130,6 @@ export default class UUID {
     );
 
     let $worker: Worker | undefined;
-
-    const sleep = (
-      async (ms: number): Promise<void> => (
-        new Promise<void>((resolve) => setTimeout(resolve, ms))
-      )
-    );
 
     while (!$worker) {
       try {
