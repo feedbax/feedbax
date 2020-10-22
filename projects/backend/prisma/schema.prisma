@@ -18,58 +18,55 @@ model Event {
   slug           String     @id
   startDate      DateTime
   durationInDays Int
-  questions      Question[]
   settings       Json?
-
-  userId String
-  user   User   @relation(fields: [userId], references: [id])
+  userId         String?
+  user           User?      @relation(fields: [userId], references: [id])
+  questions      Question[]
 
   @@index([userId], name: "userId")
 }
 
 model Question {
-  id      String       @id
-  order   Int
-  type    QuestionType @default(NONE)
-  text    String
-  answers Answer[]
-
-  eventSlug String
-  event     Event  @relation(fields: [eventSlug], references: [slug])
+  id        String        @id
+  order     Int
+  type      QuestionType @default(NONE)
+  text      String
+  eventSlug String?
+  event     Event?        @relation(fields: [eventSlug], references: [slug])
+  answers   Answer[]
 
   @@index([eventSlug], name: "eventSlug")
 }
 
-enum QuestionType {
-  NONE
-  POLL
-  VOTE
-}
-
 model Answer {
-  id      String   @id
-  text    String
-  author  String
-  created DateTime
-  likes   Like[]
-
-  questionId String
-  question   Question @relation(fields: [questionId], references: [id])
+  id         String    @id
+  text       String
+  author     String
+  created    DateTime
+  questionId String?
+  question   Question? @relation(fields: [questionId], references: [id])
+  likes      Like[]
 
   @@index([questionId], name: "questionId")
 }
 
 model Like {
-  author String
+  id       String  @id
+  author   String
+  answerId String?
+  answer   Answer? @relation(fields: [answerId], references: [id])
 
-  answerId String
-  answer   Answer @relation(fields: [answerId], references: [id])
-
-  @@id([answerId, author])
+  @@unique([answerId, author], name: "Like.answerId_author_unique")
   @@index([answerId], name: "answerId")
 }
 
 model Worker {
   id        Int      @id
   keepAlive DateTime
+}
+
+enum QuestionType {
+  NONE
+  POLL
+  VOTE
 }

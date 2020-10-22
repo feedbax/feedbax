@@ -27,7 +27,7 @@ CREATE TABLE `Answer` (
   `text` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `author` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created` datetime(3) NOT NULL,
-  `questionId` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `questionId` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `questionId` (`questionId`),
   CONSTRAINT `Answer_ibfk_1` FOREIGN KEY (`questionId`) REFERENCES `Question` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -46,7 +46,7 @@ CREATE TABLE `Event` (
   `startDate` datetime(3) NOT NULL,
   `durationInDays` int NOT NULL,
   `settings` json DEFAULT NULL,
-  `userId` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `userId` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`slug`),
   KEY `userId` (`userId`),
   CONSTRAINT `Event_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `User` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -61,9 +61,11 @@ DROP TABLE IF EXISTS `Like`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Like` (
+  `id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `author` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `answerId` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`answerId`,`author`),
+  `answerId` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `Like.answerId_author_unique` (`answerId`,`author`),
   KEY `answerId` (`answerId`),
   CONSTRAINT `Like_ibfk_1` FOREIGN KEY (`answerId`) REFERENCES `Answer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -81,7 +83,7 @@ CREATE TABLE `Question` (
   `order` int NOT NULL,
   `type` enum('NONE','POLL','VOTE') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'NONE',
   `text` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `eventSlug` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `eventSlug` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `eventSlug` (`eventSlug`),
   CONSTRAINT `Question_ibfk_1` FOREIGN KEY (`eventSlug`) REFERENCES `Event` (`slug`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -127,4 +129,4 @@ CREATE TABLE `Worker` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-22 12:42:14
+-- Dump completed on 2020-10-22 22:59:20
