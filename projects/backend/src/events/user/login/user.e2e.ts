@@ -1,43 +1,31 @@
-import path from 'path';
-import { fork } from 'child_process';
 import { feedbax } from '@feedbax/protos';
+import { setupServer, seedDatabase } from '@utils/e2e';
 
 import $io from 'socket.io-client';
 
-import type { AddressInfo } from 'net';
-import type { ChildProcess } from 'child_process';
+import type { Server, Seed } from '@utils/e2e';
 
-let server: ChildProcess;
+let server: Server;
+let seed: Seed;
+
 let socket: SocketIOClient.Socket;
-let address: AddressInfo;
 
-const log = (data: Buffer) => console.log('server-data ', data.toString());
-const err = (data: Buffer) => console.log('server-error', data.toString());
+const TIMEOUT = 60 * 1000;
 
-beforeAll((done) => {
-  server = fork(
-    path.join(__dirname, '../../../processes/single-server.ts'),
-    [], { execArgv: ['-r', 'ts-node/register'], silent: true },
-  );
+beforeAll(async () => {
+  server = await setupServer();
+  seed = await seedDatabase();
+}, TIMEOUT);
 
-  server.stdout?.on('data', log);
-  server.stderr?.on('data', err);
-
-  server.on('message', (addressJson) => {
-    address = JSON.parse(addressJson.toString());
-    done();
-  });
-
-  server.send('ping');
-});
-
-afterAll(() => {
-  server.stdout?.off('data', log);
-  server.kill();
-});
+afterAll(async () => {
+  await seed.destroy();
+  server.destroy();
+}, TIMEOUT);
 
 beforeEach((done) => {
-  socket = $io(`http://${address?.address}:${address?.port}`, {
+  const address = server?.address;
+
+  socket = $io(`http://${address.address}:${address.port}`, {
     forceNew: true,
     transports: ['websocket'],
   });
@@ -45,13 +33,13 @@ beforeEach((done) => {
   socket.on('connect', () => {
     done();
   });
-});
+}, TIMEOUT);
 
 afterEach(() => {
   if (socket.connected) {
     socket.disconnect();
   }
-});
+}, TIMEOUT);
 
 it('nothing', (done) => {
   const Request = feedbax.Packets.Request.User.Login;
@@ -64,7 +52,7 @@ it('nothing', (done) => {
     },
 
     event: {
-      slug: 'test',
+      slug: seed.eventSlug,
     },
   });
 
@@ -77,4 +65,4 @@ it('nothing', (done) => {
 
     done();
   });
-});
+}, TIMEOUT);
