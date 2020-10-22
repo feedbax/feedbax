@@ -11,7 +11,8 @@ let server: ChildProcess;
 let socket: SocketIOClient.Socket;
 let address: AddressInfo;
 
-const log = (data: Buffer) => console.log(data.toString());
+const log = (data: Buffer) => console.log('server-data ', data.toString());
+const err = (data: Buffer) => console.log('server-error', data.toString());
 
 beforeAll((done) => {
   server = fork(
@@ -20,6 +21,8 @@ beforeAll((done) => {
   );
 
   server.stdout?.on('data', log);
+  server.stderr?.on('data', err);
+
   server.on('message', (addressJson) => {
     address = JSON.parse(addressJson.toString());
     done();
