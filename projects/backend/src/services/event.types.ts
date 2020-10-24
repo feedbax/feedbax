@@ -21,6 +21,7 @@ export type GetBySlug = { slug: string; };
 
 export type GetBy = {
   /* eslint-disable max-len */
+  ({ slug }: GetBySlug): Promise<Payload<'event'>>;
   <T extends Include>({ slug }: GetBySlug, include?: T): Promise<Payload<T>>;
   /* eslint-enable max-len */
 };
