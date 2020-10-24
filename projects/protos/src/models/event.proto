@@ -4,8 +4,12 @@ syntax = "proto3";
 import "google/protobuf/struct.proto";
 
 message Event {
+  message EventSettings {
+    string custom_footer = 1;
+  }
+
   string slug = 1;
-  google.protobuf.Struct settings = 2;
+  EventSettings settings = 2;
 
   int32 start_date = 3;
   int32 duration_in_days = 4;
