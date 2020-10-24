@@ -9,6 +9,7 @@
   "exclude": [
     "src/**/*.test.ts",
     "src/**/*.e2e.ts",
-    "src/**/*.types.ts"
+    "src/**/*.types.ts",
+    "node_modules"
   ]
 }
