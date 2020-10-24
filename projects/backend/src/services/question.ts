@@ -36,7 +36,7 @@ const checkHasLiked = (
 );
 
 export default class QuestionService {
-  static transform = (
+  public static transform = (
     (question: Payload<Include>, uuid: string): feedbax.Model.Question => {
       const answers = 'answers' in question ? question.answers : [];
       const allLikes = answers.reduce(getLikesReducer, []);

@@ -19,7 +19,7 @@ type EventModel = feedbax.Model.Event;
 const EventModel = feedbax.Model.Event;
 
 export default class EventService {
-  static transform = (
+  public static transform = (
     (event: Payload<Include>, uuid: string): EventModel => {
       const questions = 'questions' in event ? event.questions : [];
 

@@ -14,7 +14,7 @@ const checkHasLiked = (
 );
 
 export default class AnswerService {
-  static transform = (
+  public static transform = (
     (answer: Payload<Include>, uuid: string): feedbax.Model.Answer => {
       const likes = 'likes' in answer ? answer.likes : [];
 
