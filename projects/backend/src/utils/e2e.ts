@@ -63,7 +63,7 @@ export const seedDatabase = (
     await prisma.user.create({
       data: {
         id: userId,
-        email: `${eventSlug}@feedb.ax`,
+        email: `${userId}@feedb.ax`,
         password: 'jest',
         events: {
           create: {
@@ -71,7 +71,91 @@ export const seedDatabase = (
             startDate: new Date(),
             durationInDays: 3,
             settings: {
-              custom_footer: 'jest',
+              customFooter: 'jest',
+            },
+
+            questions: {
+              create: [
+                {
+                  id: UUID.create('string'),
+                  order: 0,
+                  text: 'question-1',
+                  type: 'POLL',
+                  answers: {
+                    create: [
+                      {
+                        id: UUID.create('string'),
+                        author: 'a535a43b-a8d9-4e03-ac5c-0dc70f9767f3',
+                        created: new Date(),
+                        text: 'question-1--answer-1',
+                        likes: {
+                          create: [
+                            {
+                              id: UUID.create('string'),
+                              author: 'a535a43b-a8d9-4e03-ac5c-0dc70f9767f4',
+                            },
+                          ],
+                        },
+                      },
+
+                      {
+                        id: UUID.create('string'),
+                        author: 'a535a43b-a8d9-4e03-ac5c-0dc70f9767f4',
+                        created: new Date(),
+                        text: 'question-1--answer-2',
+                        likes: {
+                          create: [
+                            {
+                              id: UUID.create('string'),
+                              author: 'a535a43b-a8d9-4e03-ac5c-0dc70f9767f3',
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+
+                {
+                  id: UUID.create('string'),
+                  order: 0,
+                  text: 'question vote',
+                  type: 'VOTE',
+                  answers: {
+                    create: [
+                      {
+                        id: UUID.create('string'),
+                        author: 'a535a43b-a8d9-4e03-ac5c-0dc70f9767f3',
+                        created: new Date(),
+                        text: 'question-2--answer-1',
+                        likes: {
+                          create: [
+                            {
+                              id: UUID.create('string'),
+                              author: 'a535a43b-a8d9-4e03-ac5c-0dc70f9767f4',
+                            },
+                          ],
+                        },
+                      },
+
+                      {
+                        id: UUID.create('string'),
+                        author: 'a535a43b-a8d9-4e03-ac5c-0dc70f9767f4',
+                        created: new Date(),
+                        text: 'question-2--answer-2',
+                        likes: {
+                          create: [
+                            {
+                              id: UUID.create('string'),
+                              author: 'a535a43b-a8d9-4e03-ac5c-0dc70f9767f3',
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
             },
           },
         },
@@ -85,23 +169,11 @@ export const seedDatabase = (
       destroy: async () => {
         UUID.destroy();
 
-        // await prisma.event.delete({
-        //   where: {
-        //     slug: eventSlug,
-        //   },
-        // });
-
-        console.log('before', (await prisma.user.findMany()).length, 'users');
-        console.log('before', (await prisma.event.findMany()).length, 'events');
-
         await prisma.user.delete({
           where: {
             id: userId,
           },
         });
-
-        console.log('after', (await prisma.user.findMany()).length, 'users');
-        console.log('after', (await prisma.event.findMany()).length, 'events');
 
         await prisma.$disconnect();
       },

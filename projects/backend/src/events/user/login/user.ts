@@ -50,7 +50,8 @@ const userLoginHandler = (
       const { uuid } = packet.user;
       const { slug } = packet.event;
 
-      const event = await EventService.getBy({ slug }, { questions: true }, uuid);
+      const event = await EventService.getProtoBy({ slug }, uuid, 'event.questions.answers.likes');
+
       const answer: ResponsePacket = Response.create({ user: { event } });
       const answerBinary = Response.encode(answer).finish();
 

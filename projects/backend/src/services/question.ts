@@ -4,7 +4,7 @@ import { QuestionType } from '@utils/prisma';
 
 import AnswerService from '@services/answer';
 
-import type { TransformQuestion } from './question.types';
+import type { Include, Payload } from './question.types';
 import type { Like } from '@utils/prisma';
 
 const getQuestionType = (
@@ -37,8 +37,8 @@ const checkHasLiked = (
 
 export default class QuestionService {
   static transform = (
-    (question: TransformQuestion, uuid: string): feedbax.Model.Question => {
-      const answers = question.answers ?? [];
+    (question: Payload<Include>, uuid: string): feedbax.Model.Question => {
+      const answers = 'answers' in question ? question.answers : [];
       const allLikes = answers.reduce(getLikesReducer, []);
 
       const QuestionModel = feedbax.Model.Question;

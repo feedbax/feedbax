@@ -1,12 +1,13 @@
 import { prisma } from '@utils/prisma';
 import { feedbax } from '@feedbax/protos';
+import { GetProtoBy, includes, Payload } from './event.types';
 
 import QuestionService from '@services/question';
 
 import type { JsonObject, JsonValue } from '@utils/prisma';
-import type { GetBy, Include, TransformEvent } from './event.types';
+import type { GetBy, Include } from './event.types';
 
-export function validSettings(value: JsonValue): value is JsonObject {
+export function validSettings(value: JsonValue): value is Required<JsonObject> {
   if (value === null) return false;
   if (typeof value !== 'object') return false;
   if (Array.isArray(value)) return false;
@@ -14,15 +15,18 @@ export function validSettings(value: JsonValue): value is JsonObject {
   return true;
 }
 
+type EventModel = feedbax.Model.Event;
+const EventModel = feedbax.Model.Event;
+
 export default class EventService {
   static transform = (
-    (event: TransformEvent, uuid: string): feedbax.Model.Event => {
-      const questions = event.questions ?? [];
+    (event: Payload<Include>, uuid: string): EventModel => {
+      const questions = 'questions' in event ? event.questions : [];
 
-      const EventModel = feedbax.Model.Event;
+      const { EventSettings } = EventModel;
       const eventProto = EventModel.create({
         slug: event.slug,
-        settings: validSettings(event.settings) ? event.settings : {},
+        settings: validSettings(event.settings) ? EventSettings.fromObject(event.settings) : null,
         startDate: event.startDate.getTime() / 1000,
         durationInDays: event.durationInDays,
 
@@ -35,9 +39,15 @@ export default class EventService {
     }
   );
 
+  public static getProtoBy: GetProtoBy = (
+    async (props: any, uuid: string, include: Include = 'event'): Promise<any> => {
+      const event = await EventService.getBy(props, include);
+      return EventService.transform(event, uuid);
+    }
+  );
+
   public static getBy: GetBy = (
-    // eslint-disable-next-line max-len
-    async (props: any, include?: Include, uuid?: string): Promise<any> => {
+    async (props: any, include: Include = 'event'): Promise<any> => {
       if (props.slug) {
         const event = (
           await prisma.event
@@ -46,16 +56,12 @@ export default class EventService {
                 slug: props.slug,
               },
 
-              include,
+              include: includes[include],
             })
         );
 
         if (event === null) {
           throw new Error('Event.getBy - event not found');
-        }
-
-        if (uuid) {
-          return EventService.transform(event, uuid);
         }
 
         return event;

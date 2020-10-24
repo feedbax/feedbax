@@ -1,16 +1,15 @@
 import type { AnswerGetPayload } from '@utils/prisma';
-import type { PPartial } from '@utils/types';
 
-type TransformAnswerPayload = (
-  AnswerGetPayload<{
-    include: {
-      likes: true;
-    };
-  }>
-);
+/* eslint-disable max-len, quote-props */
+export const includes = {
+  'answers': null,
+  'answers.likes': { likes: true },
+};
+/* eslint-enable max-len, quote-props */
 
-export type TransformAnswer = (
-  PPartial<TransformAnswerPayload, {
-    likes: true;
-  }>
+export type Include = keyof typeof includes;
+export type Payload<T extends Include> = (
+  T extends Include
+  ? AnswerGetPayload<{ include: typeof includes[T] }>
+  : AnswerGetPayload<{ include: null }>
 );

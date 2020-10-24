@@ -1,31 +1,32 @@
 import type { feedbax } from '@feedbax/protos';
-import type { EventGetPayload, FindFirstEventArgs } from '@utils/prisma';
+import type { EventGetPayload } from '@utils/prisma';
 
-import type { PPartial } from '@utils/types';
+/* eslint-disable max-len, quote-props */
+export const includes = {
+  'event': null,
+  'event.questions': { questions: true },
+  'event.questions.answers': { questions: { include: { answers: true } } },
+  'event.questions.answers.likes': { questions: { include: { answers: { include: { likes: true } } } } },
+};
+/* eslint-enable max-len, quote-props */
 
-type TransformEventPayload = (
-  EventGetPayload<{
-    include: {
-      questions: true;
-    };
-  }>
-);
-
-export type TransformEvent = (
-  PPartial<TransformEventPayload, {
-    questions: true;
-  }>
+export type Include = keyof typeof includes;
+export type Payload<T extends Include> = (
+  T extends Include
+  ? EventGetPayload<{ include: typeof includes[T] }>
+  : EventGetPayload<{ include: null }>
 );
 
 export type GetBySlug = { slug: string; };
-export type Include = FindFirstEventArgs['include'];
 
 export type GetBy = {
   /* eslint-disable max-len */
+  <T extends Include>({ slug }: GetBySlug, include?: T): Promise<Payload<T>>;
+  /* eslint-enable max-len */
+};
 
-  ({ slug }: GetBySlug): Promise<EventGetPayload<Record<string, unknown>>>;
-  <T extends Include>({ slug }: GetBySlug, include: T): Promise<EventGetPayload<{ include: T }>>;
-  <T extends Include>({ slug }: GetBySlug, include: T, uuid: string): Promise<feedbax.Model.IEvent>;
-
+export type GetProtoBy = {
+  /* eslint-disable max-len */
+  ({ slug }: GetBySlug, uuid: string, include?: Include): Promise<feedbax.Model.IEvent>;
   /* eslint-enable max-len */
 };

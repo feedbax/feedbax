@@ -1,5 +1,5 @@
 import type { Like } from '@utils/prisma';
-import type { TransformAnswer } from '@services/answer.types';
+import type { Payload, Include } from '@services/answer.types';
 
 type Reducer = (
   (_acc: boolean, curr: Like, _i: number, arr: Like[]) => boolean
@@ -22,9 +22,9 @@ export const createHasLikedReducer = (
 );
 
 export type GetLikesReducer = (
-  (prev: Like[], curr: TransformAnswer) => Like[]
+  (prev: Like[], curr: Payload<Include>) => Like[]
 );
 
 export const getLikesReducer: GetLikesReducer = (
-  (prev, curr) => prev.concat(curr.likes ?? [])
+  (prev, curr) => prev.concat('likes' in curr ? curr.likes : [])
 );
