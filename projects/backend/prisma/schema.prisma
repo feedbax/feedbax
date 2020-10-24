@@ -27,12 +27,12 @@ model Event {
 }
 
 model Question {
-  id        String        @id
+  id        String       @id
   order     Int
   type      QuestionType @default(NONE)
   text      String
   eventSlug String?
-  event     Event?        @relation(fields: [eventSlug], references: [slug])
+  event     Event?       @relation(fields: [eventSlug], references: [slug])
   answers   Answer[]
 
   @@index([eventSlug], name: "eventSlug")
@@ -56,7 +56,7 @@ model Like {
   answerId String?
   answer   Answer? @relation(fields: [answerId], references: [id])
 
-  @@unique([answerId, author], name: "Like.answerId_author_unique")
+  @@unique([answerId, author])
   @@index([answerId], name: "answerId")
 }
 
