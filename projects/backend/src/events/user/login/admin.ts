@@ -36,7 +36,10 @@ export function isValid(packet: RequestPacket): packet is ValidRequestPacket {
     uuidPattern.test(packet.user?.uuid ?? ''),
   ];
 
-  return validations.reduce((a, b) => a && b, true);
+  const $isValid = validations.reduce((a, b) => a && b, true);
+
+  if (!$isValid) throw new Error('invalid packet request data');
+  return true;
 }
 
 const adminLoginHandler = (
@@ -49,7 +52,7 @@ const adminLoginHandler = (
     if (isValid(packet)) {
       const { email, password } = packet.user;
 
-      const user = await UserService.getBy({ email, password }, { events: true });
+      const user = await UserService.getBy({ email, password }, 'user.events');
       const events = user.events.map((e) => ({ slug: e.slug }));
 
       const answer: ResponsePacket = Response.create({ admin: { events } });
