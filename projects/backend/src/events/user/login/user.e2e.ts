@@ -25,15 +25,17 @@ it('should return an event object', async (done) => {
   const Response = feedbax.Packets.Response.User.Login;
   const PacketIds = feedbax.Packets.Ids;
 
-  const message = Request.create({
-    user: {
-      uuid: 'a535a43b-a8d9-4e03-ac5c-0dc70f9767f3',
-    },
+  const message = (
+    Request.create({
+      user: {
+        uuid: 'a535a43b-a8d9-4e03-ac5c-0dc70f9767f3',
+      },
 
-    event: {
-      slug: seed.eventSlug,
-    },
-  });
+      event: {
+        slug: seed.eventSlug,
+      },
+    })
+  );
 
   const encoded = Request.encode(message);
   const bytes = encoded.finish();
@@ -63,15 +65,17 @@ it('should fail', async (done) => {
   const Response = feedbax.Packets.Response.User.Login;
   const PacketIds = feedbax.Packets.Ids;
 
-  const message = Request.create({
-    user: {
-      uuid: 'invalid',
-    },
+  const message = (
+    Request.create({
+      user: {
+        uuid: 'invalid',
+      },
 
-    event: {
-      slug: seed.eventSlug,
-    },
-  });
+      event: {
+        slug: seed.eventSlug,
+      },
+    })
+  );
 
   const encoded = Request.encode(message);
   const bytes = encoded.finish();
