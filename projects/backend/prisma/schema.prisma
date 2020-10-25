@@ -56,7 +56,7 @@ model Like {
   answerId String?
   answer   Answer? @relation(fields: [answerId], references: [id])
 
-  @@unique([answerId, author])
+  @@unique([answerId, author], name: "answerId_author")
   @@index([answerId], name: "answerId")
 }
 

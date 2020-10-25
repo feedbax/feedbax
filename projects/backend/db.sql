@@ -65,7 +65,7 @@ CREATE TABLE `Like` (
   `author` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `answerId` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `Like.answerId_author_unique` (`answerId`,`author`),
+  UNIQUE KEY `answerId_author` (`answerId`,`author`),
   KEY `answerId` (`answerId`),
   CONSTRAINT `Like_ibfk_1` FOREIGN KEY (`answerId`) REFERENCES `Answer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -129,4 +129,4 @@ CREATE TABLE `Worker` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-22 22:59:20
+-- Dump completed on 2020-10-25  9:53:41
