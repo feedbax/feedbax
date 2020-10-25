@@ -24,7 +24,7 @@ beforeAll(() => {
   console.log = jest.fn();
 });
 
-test('should throw Error(`invalid request packet`) #1', async () => {
+test('should throw Error(`invalid packet request data`) #1', async () => {
   const packetData: RequestData = {};
   const packet = Request.create(packetData);
   const raw = Request.encode(packet).finish();
@@ -32,11 +32,11 @@ test('should throw Error(`invalid request packet`) #1', async () => {
   try {
     await adminLoginHandler.bind(socket)(raw, () => ({}));
   } catch (error) {
-    expect(error.message).toBe('invalid request packet');
+    expect(error.message).toBe('invalid packet request data');
   }
 });
 
-test('should throw Error(`invalid request packet`) #2', async () => {
+test('should throw Error(`invalid packet request data`) #2', async () => {
   const packetData: RequestData = {
     user: undefined,
   };
@@ -47,11 +47,11 @@ test('should throw Error(`invalid request packet`) #2', async () => {
   try {
     await adminLoginHandler.bind(socket)(raw, () => ({}));
   } catch (error) {
-    expect(error.message).toBe('invalid request packet');
+    expect(error.message).toBe('invalid packet request data');
   }
 });
 
-test('should throw Error(`invalid request packet`) #3', async () => {
+test('should throw Error(`invalid packet request data`) #3', async () => {
   const packetData: RequestData = {
     user: {},
   };
@@ -62,11 +62,11 @@ test('should throw Error(`invalid request packet`) #3', async () => {
   try {
     await adminLoginHandler.bind(socket)(raw, () => ({}));
   } catch (error) {
-    expect(error.message).toBe('invalid request packet');
+    expect(error.message).toBe('invalid packet request data');
   }
 });
 
-test('should throw Error(`invalid request packet`) #3', async () => {
+test('should throw Error(`invalid packet request data`) #3', async () => {
   const packetData: RequestData = {
     user: {
       uuid: 'a535a43b-a8d9-4e03-ac5c-0dc70f9767f3',
@@ -81,11 +81,11 @@ test('should throw Error(`invalid request packet`) #3', async () => {
   try {
     await adminLoginHandler.bind(socket)(raw, () => ({}));
   } catch (error) {
-    expect(error.message).toBe('invalid request packet');
+    expect(error.message).toBe('invalid packet request data');
   }
 });
 
-test('should throw Error(`invalid request packet`) #4', async () => {
+test('should throw Error(`invalid packet request data`) #4', async () => {
   const packetData: RequestData = {
     user: {
       uuid: 'a535a43b-a8d9-4e03-ac5c-0dc70f9767f3',
@@ -100,11 +100,11 @@ test('should throw Error(`invalid request packet`) #4', async () => {
   try {
     await adminLoginHandler.bind(socket)(raw, () => ({}));
   } catch (error) {
-    expect(error.message).toBe('invalid request packet');
+    expect(error.message).toBe('invalid packet request data');
   }
 });
 
-test('should throw Error(`invalid request packet`) #5', async () => {
+test('should throw Error(`invalid packet request data`) #5', async () => {
   const packetData: RequestData = {
     user: {
       uuid: 'invalid',
@@ -119,7 +119,7 @@ test('should throw Error(`invalid request packet`) #5', async () => {
   try {
     await adminLoginHandler.bind(socket)(raw, () => ({}));
   } catch (error) {
-    expect(error.message).toBe('invalid request packet');
+    expect(error.message).toBe('invalid packet request data');
   }
 });
 

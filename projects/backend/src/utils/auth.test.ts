@@ -6,8 +6,8 @@ test('should add an admin to the set', () => {
   expect(isAdmin('jest-test')).toEqual(true);
 });
 
-test('should return false', () => {
-  expect(isAdmin('jest-test-invalid')).toEqual(false);
+test('should throw error', () => {
+  expect(() => isAdmin('jest-test-invalid')).toThrowError('socket-id is not authorized for this event.');
 });
 
 test('should add an user to the set', () => {
@@ -15,6 +15,6 @@ test('should add an user to the set', () => {
   expect(isUser('jest-test')).toEqual(true);
 });
 
-test('should return false', () => {
-  expect(isUser('jest-test-invalid')).toEqual(false);
+test('should throw error', () => {
+  expect(() => isUser('jest-test-invalid')).toThrowError('socket-id is not authorized for this event.');
 });
