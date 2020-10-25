@@ -1,16 +1,12 @@
 import { feedbax } from '@feedbax/protos';
-import { setupServer, seedDatabase } from '@utils/e2e';
-
-import $io from 'socket.io-client';
+import { setupServer, seedDatabase, setupSocket } from '@utils/e2e';
 
 import type { Server, Seed } from '@utils/e2e';
 
+const TIMEOUT = 60 * 1000;
+
 let server: Server;
 let seed: Seed;
-
-let socket: SocketIOClient.Socket;
-
-const TIMEOUT = 60 * 1000;
 
 beforeAll(async () => {
   server = await setupServer();
@@ -22,26 +18,9 @@ afterAll(async () => {
   server.destroy();
 }, TIMEOUT);
 
-beforeEach((done) => {
-  const address = server?.address;
+it('should return an event object', async (done) => {
+  const socket = await setupSocket(server.address);
 
-  socket = $io(`http://${address.address}:${address.port}`, {
-    forceNew: true,
-    transports: ['websocket'],
-  });
-
-  socket.on('connect', () => {
-    done();
-  });
-}, TIMEOUT);
-
-afterEach(() => {
-  if (socket.connected) {
-    socket.disconnect();
-  }
-}, TIMEOUT);
-
-it('nothing', (done) => {
   const Request = feedbax.Packets.Request.User.Login;
   const Response = feedbax.Packets.Response.User.Login;
   const PacketIds = feedbax.Packets.Ids;
@@ -61,8 +40,54 @@ it('nothing', (done) => {
 
   socket.emit(`${PacketIds.Login.USER}`, bytes, (data: Uint8Array) => {
     const $message = Response.decode(data);
-    console.log('message', JSON.stringify($message, null, 2));
 
+    expect($message).toEqual(
+      expect.objectContaining({
+        user: expect.objectContaining({
+          event: expect.objectContaining({
+            slug: expect.any(String),
+          }),
+        }),
+      }),
+    );
+
+    socket.disconnect();
+    done();
+  });
+}, TIMEOUT);
+
+it('should fail', async (done) => {
+  const socket = await setupSocket(server.address);
+
+  const Request = feedbax.Packets.Request.User.Login;
+  const Response = feedbax.Packets.Response.User.Login;
+  const PacketIds = feedbax.Packets.Ids;
+
+  const message = Request.create({
+    user: {
+      uuid: 'invalid',
+    },
+
+    event: {
+      slug: seed.eventSlug,
+    },
+  });
+
+  const encoded = Request.encode(message);
+  const bytes = encoded.finish();
+
+  socket.emit(`${PacketIds.Login.USER}`, bytes, (data: Uint8Array) => {
+    const $message = Response.decode(data);
+
+    expect($message).toEqual(
+      expect.objectContaining({
+        error: expect.objectContaining({
+          message: 'invalid packet request data',
+        }),
+      }),
+    );
+
+    socket.disconnect();
     done();
   });
 }, TIMEOUT);

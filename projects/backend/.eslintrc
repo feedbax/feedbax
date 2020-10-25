@@ -47,7 +47,8 @@
         "devDependencies": [
           "**/*.test.ts",
           "**/*.e2e.ts",
-          "**/jest.config.*"
+          "**/jest.config.*",
+          "**/e2e.ts"
         ]
       }
     ],

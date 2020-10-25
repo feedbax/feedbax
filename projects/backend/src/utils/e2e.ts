@@ -3,6 +3,8 @@ import { fork } from 'child_process';
 import { prisma } from '@utils/prisma';
 import UUID from '@utils/uuid';
 
+import $io from 'socket.io-client';
+
 import type { AddressInfo } from 'net';
 import type { ChildProcess } from 'child_process';
 
@@ -15,7 +17,21 @@ export type Server = {
 const log = (data: Buffer) => console.log('server-data ', data.toString());
 const err = (data: Buffer) => console.log('server-error', data.toString());
 
-// eslint-disable-next-line import/prefer-default-export
+export const setupSocket = (
+  async (address: AddressInfo): Promise<SocketIOClient.Socket> => (
+    new Promise<SocketIOClient.Socket>((resolve) => {
+      const $socket = $io(`http://${address.address}:${address.port}`, {
+        forceNew: true,
+        transports: ['websocket'],
+      });
+
+      $socket.on('connect', () => {
+        resolve($socket);
+      });
+    })
+  )
+);
+
 export const setupServer = (
   async (): Promise<Server> => (
     new Promise<Server>((resolve) => {

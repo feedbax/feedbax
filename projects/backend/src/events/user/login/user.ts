@@ -36,7 +36,10 @@ export function isValid(packet: RequestPacket): packet is ValidRequestPacket {
     uuidPattern.test(packet.user?.uuid ?? ''),
   ];
 
-  return validations.reduce((a, b) => a && b, true);
+  const $isValid = validations.reduce((a, b) => a && b, true);
+
+  if (!$isValid) throw new Error('invalid packet request data');
+  return $isValid;
 }
 
 const userLoginHandler = (
