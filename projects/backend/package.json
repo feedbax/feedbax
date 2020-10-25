@@ -12,7 +12,7 @@
     "start": "node dist/main.js",
     "lint": "eslint 'src/**/*.ts' --fix",
     "test:unit": "jest --config=jest.config.unit.js",
-    "test:e2e": "jest --config=jest.config.e2e.js",
+    "test:e2e": "jest --config=jest.config.e2e.js --silent",
     "build": "yarn task build:backend",
     "build:protos": "yarn task build:protos",
     "task": "yarn --cwd ../../ task"
