@@ -23,10 +23,9 @@ export default class EventService {
     (event: Payload<Include>, uuid: string): EventModel => {
       const questions = 'questions' in event ? event.questions : [];
 
-      const { EventSettings } = EventModel;
       const eventProto = EventModel.create({
         slug: event.slug,
-        settings: validSettings(event.settings) ? EventSettings.fromObject(event.settings) : null,
+        settings: validSettings(event.settings) ? event.settings : null,
         startDate: event.startDate.getTime() / 1000,
         durationInDays: event.durationInDays,
 
@@ -61,13 +60,13 @@ export default class EventService {
         );
 
         if (event === null) {
-          throw new Error('Event.getBy - event not found');
+          throw new Error('EventService.getBy - event not found');
         }
 
         return event;
       }
 
-      throw new Error('Event.getBy - wrong usage');
+      throw new Error('EventService.getBy - wrong usage');
     }
   );
 }
