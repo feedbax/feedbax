@@ -68,36 +68,13 @@ export default class UUID {
   }
 
   public static async init(): Promise<void> {
+    await UUID.clearOldWorkerIds();
+
     UUID.$workerId = await UUID.getWorkerId();
     UUID.flake = new Flake({ id: UUID.$workerId });
 
     console.log(`[worker-${workerId}]`, 'UUID.init', UUID.$workerId);
-
     UUID.updateInterval = setInterval(UUID.updateKeepAlive, UUID.TTL / 2);
-  }
-
-  public static destroy(): void {
-    clearInterval(UUID.updateInterval);
-  }
-
-  private static async updateKeepAlive(): Promise<void> {
-    await prisma.worker.deleteMany({
-      where: {
-        keepAlive: {
-          lte: moment().subtract(UUID.TTL, 'milliseconds').toDate(),
-        },
-      },
-    });
-
-    await prisma.worker.update({
-      data: {
-        keepAlive: moment().toDate(),
-      },
-
-      where: {
-        id: UUID.$workerId,
-      },
-    });
   }
 
   private static async getWorkerId(): Promise<number> {
@@ -150,6 +127,34 @@ export default class UUID {
     }
 
     return $worker.id;
+  }
+
+  private static async updateKeepAlive(): Promise<void> {
+    await UUID.clearOldWorkerIds();
+
+    await prisma.worker.update({
+      data: {
+        keepAlive: moment().toDate(),
+      },
+
+      where: {
+        id: UUID.$workerId,
+      },
+    });
+  }
+
+  public static destroy(): void {
+    clearInterval(UUID.updateInterval);
+  }
+
+  private static async clearOldWorkerIds(): Promise<void> {
+    await prisma.worker.deleteMany({
+      where: {
+        keepAlive: {
+          lte: moment().subtract(UUID.TTL, 'milliseconds').toDate(),
+        },
+      },
+    });
   }
 
   private uuidBuffer!: Buffer;
