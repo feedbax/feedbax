@@ -1,5 +1,6 @@
 import { prisma } from '@utils/prisma';
 import { includes } from './user.types';
+import { compare } from 'bcrypt';
 
 import type { GetBy, Include } from './user.types';
 
@@ -11,7 +12,6 @@ export default class UserService {
           await prisma.user.findFirst({
             where: {
               email: props.email,
-              password: props.password,
             },
 
             include: includes[include],
@@ -20,6 +20,14 @@ export default class UserService {
 
         if (user === null) {
           throw new Error('UserService.getBy - user not found');
+        }
+
+        const validPassword = (
+          await compare(props.password, user?.password ?? '')
+        );
+
+        if (!validPassword) {
+          throw new Error('UserService.getBy - invalid password');
         }
 
         return user;

@@ -7,6 +7,7 @@ import $io from 'socket.io-client';
 
 import type { AddressInfo } from 'net';
 import type { ChildProcess } from 'child_process';
+import { hash } from 'bcrypt';
 
 export type Server = {
   server: ChildProcess;
@@ -79,13 +80,15 @@ export const seedDatabase = (
     await UUID.init();
 
     const userId = UUID.create('string');
+    const userPassword = 'jest';
+
     const eventSlug = UUID.create('string');
 
     await prisma.user.create({
       data: {
         id: userId,
         email: `${userId}@feedb.ax`,
-        password: 'jest',
+        password: await hash(userPassword, 10),
         events: {
           create: {
             slug: eventSlug,
@@ -189,7 +192,7 @@ export const seedDatabase = (
       user: {
         id: userId,
         email: `${userId}@feedb.ax`,
-        password: 'jest',
+        password: userPassword,
       },
 
       destroy: async () => {
