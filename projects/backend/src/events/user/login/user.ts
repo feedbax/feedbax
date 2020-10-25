@@ -39,7 +39,7 @@ export function isValid(packet: RequestPacket): packet is ValidRequestPacket {
   const $isValid = validations.reduce((a, b) => a && b, true);
 
   if (!$isValid) throw new Error('invalid packet request data');
-  return $isValid;
+  return true;
 }
 
 const userLoginHandler = (

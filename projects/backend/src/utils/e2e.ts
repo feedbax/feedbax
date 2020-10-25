@@ -64,7 +64,12 @@ export const setupServer = (
 
 export type Seed = {
   eventSlug: string;
-  userId: string;
+
+  user: {
+    id: string;
+    email: string;
+    password: string;
+  };
 
   destroy: () => Promise<void>;
 };
@@ -179,8 +184,13 @@ export const seedDatabase = (
     });
 
     return {
-      userId,
       eventSlug,
+
+      user: {
+        id: userId,
+        email: `${userId}@feedb.ax`,
+        password: 'jest',
+      },
 
       destroy: async () => {
         UUID.destroy();
