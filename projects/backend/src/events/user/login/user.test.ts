@@ -1,12 +1,12 @@
 import { Socket } from 'socket.io';
 import { feedbax } from '@feedbax/protos';
 import { addUser } from '@utils/auth';
-import UserService from '@services/user';
+import EventService from '@services/event';
 
 import userLoginHandler from './user';
 
-jest.mock('@services/user');
-const mockedUserService = UserService as jest.Mocked<typeof UserService>;
+jest.mock('@services/event');
+const mockedUserService = EventService as jest.Mocked<typeof EventService>;
 
 jest.mock('@utils/auth');
 const mockedAddUser = addUser as jest.MockedFunction<typeof addUser>;
@@ -182,69 +182,44 @@ test('should throw Error(`invalid packet request data`) #8', async () => {
   }
 });
 
-// test('should return an answer packet & auth the socket', async (done) => {
-//   done();
+test('should return an answer packet & auth the socket', async (done) => {
+  const packetData: RequestData = {
+    event: {
+      slug: 'valid',
+    },
 
-//   const packetData: RequestData = {
-//     event: {
-//       slug: 'valid',
-//     },
+    user: {
+      uuid: 'a535a43b-a8d9-4e03-ac5c-0dc70f9767f3',
+    },
+  };
 
-//     user: {
-//       uuid: 'a535a43b-a8d9-4e03-ac5c-0dc70f9767f3',
-//     },
-//   };
+  const packet = Request.create(packetData);
+  const raw = Request.encode(packet).finish();
 
-//   const packet = Request.create(packetData);
-//   const raw = Request.encode(packet).finish();
+  mockedUserService.getProtoBy.mockImplementationOnce(
+    async (): Promise<any> => (
+      feedbax.Model.Event.create({
+        slug: 'event-jest',
+      })
+    ),
+  );
 
-//   mockedUserService.getBy.mockImplementationOnce(
-//     async (): Promise<any> => ({
-//       events: [
-//         { slug: 'event-jest' },
-//       ],
-//     }),
-//   );
+  await userLoginHandler.bind(socket)(
+    raw, (data: Uint8Array) => {
+        type IResponseUser = feedbax.Packets.Response.User.Login.IResponseUser;
+        type IResponseUserEvent = NonNullable<IResponseUser['event']>;
 
-//   await userLoginHandler.bind(socket)(
-//     raw, (data: Uint8Array) => {
-//       type IResponseUser = feedbax.Packets.Response.User.Login.IResponseUser;
-//       type IResponseUserEvent = NonNullable<IResponseUser['event']>;
-//       const QuestionType = feedbax.Model.Question.Type;
+        const answer = Response.decode(data);
 
-//       const answer = Response.decode(data);
+        expect(mockedAddUser).toBeCalledWith('socket-jest');
+        expect(answer.oneofEvent).toBe('user');
+        expect(answer.user?.event).toEqual(
+          expect.objectContaining<IResponseUserEvent>({
+            slug: 'event-jest',
+          }),
+        );
 
-//       expect(mockedAddUser).toBeCalledWith('socket-jest');
-//       expect(answer.oneofEvent).toBe('user');
-//       expect(answer.user?.event).toEqual(
-//         expect.objectContaining<IResponseUserEvent>({
-//           slug: 'event-jest',
-//           settings: {},
-//           questions: expect.arrayContaining(
-//             expect.objectContaining({
-//               id: 1,
-//               order: 0,
-//               type: QuestionType.POLL,
-//               text: 'question-jest',
-//               settings: {},
-//               hasLiked: false,
-//               likesCount: 0,
-//               answers: expect.arrayContaining(
-//                 expect.objectContaining({
-//                   id: 1,
-//                   text: 'answer-jest',
-//                   isMine: false,
-//                   hasLiked: false,
-//                   likesCount: 0,
-//                   timeCreated: 0,
-//                 }),
-//               ),
-//             }),
-//           ),
-//         }),
-//       );
-
-//       done();
-//     },
-//   );
-// });
+        done();
+    },
+  );
+});
