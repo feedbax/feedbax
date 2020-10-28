@@ -34,41 +34,24 @@ export const $try = (
   }
 );
 
-const isNull = (
-  <T>(value: T | null): value is null => {
-    if (value === null) return true;
-    return false;
-  }
-);
-
-// const notNull = (
-//   <T>(value: T | null): value is T => !isNull(value)
-// );
-
 export type CheckTypes = 'string' | 'object';
 export const checkValid = (
   (value: unknown, checkType: CheckTypes): boolean => {
     switch (checkType) {
       case 'string': {
-        if (typeof value !== 'string') {
-          return false;
-        }
+        if (typeof value !== 'string') return false;
+        if (value === '') return false;
 
-        const isSet = value !== undefined;
-        const isEmpty = value === '';
-
-        return isSet && !isEmpty;
+        return true;
       }
 
       case 'object': {
-        if (typeof value !== 'object' || isNull(value)) {
-          return false;
-        }
+        if (typeof value !== 'object') return false;
+        if (value === null) return false;
+        if (Array.isArray(value)) return false;
+        if (Object.keys(value).length === 0) return false;
 
-        const isSet = value !== undefined;
-        const isEmpty = Object.keys(value).length === 0;
-
-        return isSet && !isEmpty;
+        return true;
       }
 
       default:
