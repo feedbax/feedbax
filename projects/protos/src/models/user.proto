@@ -5,4 +5,6 @@ message User {
   string uuid = 1;
   string email = 2;
   string password = 3;
+
+  repeated feedbax.Model.Event events = 4;
 }
