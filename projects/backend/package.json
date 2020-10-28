@@ -50,6 +50,7 @@
   "dependencies": {
     "@feedbax/protos": "link:../protos/dist",
     "@prisma/client": "^2.10.0",
+    "ajv": "^6.12.6",
     "base-x": "^3.0.8",
     "bcrypt": "^5.0.0",
     "express": "^4.17.1",
