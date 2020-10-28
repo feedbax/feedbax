@@ -16,18 +16,3 @@ export type Payload<T extends Include> = (
   ? UserGetPayload<{ include: typeof includes[T] }>
   : UserGetPayload<{ include: null }>
 );
-
-export type GetByEmail = { email: string; };
-export type GetByEmailPassword = { email: string; password: string; };
-
-export type GetBy = {
-  /* eslint-disable max-len */
-
-  ({ email, password }: GetByEmailPassword): Promise<Payload<'user'>>;
-  <T extends Include>({ email, password }: GetByEmailPassword, include?: T): Promise<Payload<T>>;
-
-  ({ email }: GetByEmail): Promise<Payload<'user'>>;
-  <T extends Include>({ email }: GetByEmail, include?: T): Promise<Payload<T>>;
-
-  /* eslint-enable max-len */
-};

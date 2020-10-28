@@ -1,3 +1,7 @@
+export type PickPartial<T, K extends keyof T> = (
+  Pick<T, Exclude<keyof T, K>> & Partial<Pick<T, K>>
+);
+
 export type DeepRequired<T> = (
   T extends Record<string, any>
     ? {
@@ -27,3 +31,18 @@ export type PPartial<
     )
   }
 );
+
+export type RequireDeep<
+  T extends Record<string, any>,
+  K extends Record<string, any>,
+> = T & ({
+  [P in keyof K]-?: (
+    P extends keyof T ? (
+      T[P] extends Record<string, any> ? (
+        K[P] extends Record<string, any> ? (
+          RequireDeep<T[P], K[P]>
+        ) : NonNullable<T[P]>
+      ) : NonNullable<T[P]>
+    ) : never
+  );
+});

@@ -89,7 +89,7 @@ it('should fail with error `event not found`', async (done) => {
     expect($message).toEqual(
       expect.objectContaining({
         error: expect.objectContaining({
-          message: 'EventService.getBy - event not found',
+          message: 'EventService.getBySlug - event not found',
         }),
       }),
     );

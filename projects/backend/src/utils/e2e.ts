@@ -1,13 +1,14 @@
-import path from 'path';
-import { fork } from 'child_process';
-import { prisma } from '@utils/prisma';
+import UserService from '@services/user';
 import UUID from '@utils/uuid';
 
+import path from 'path';
 import $io from 'socket.io-client';
+
+import { fork } from 'child_process';
+import { prisma } from '@utils/prisma';
 
 import type { AddressInfo } from 'net';
 import type { ChildProcess } from 'child_process';
-import { hash } from 'bcrypt';
 
 export type Server = {
   server: ChildProcess;
@@ -79,11 +80,48 @@ export const seedDatabase = (
   async (): Promise<Seed> => {
     await UUID.init();
 
-    const userId = UUID.create('string');
-    const userPassword = 'jest';
+    const eventData = {
+      slug: UUID.create('string'),
+      startDate: new Date(),
+      durationInDays: 3,
+      settings: {
+        customFooter: 'jest',
+      },
+    };
 
-    const eventSlug = UUID.create('string');
+    const userData = {
+      email: `${UUID.create('string')}@feedb.ax`,
+      password: 'jest',
+      events: [eventData],
+    };
 
+    const user = await UserService.create(userData, 'user.events');
+
+    return {
+      eventSlug: eventData.slug,
+
+      user: {
+        id: user.id,
+        email: userData.email,
+        password: userData.password,
+      },
+
+      destroy: async () => {
+        UUID.destroy();
+
+        await prisma.user.delete({
+          where: {
+            id: user.id,
+          },
+        });
+
+        await prisma.$disconnect();
+      },
+    };
+  }
+);
+
+/**
     await prisma.user.create({
       data: {
         id: userId,
@@ -185,27 +223,4 @@ export const seedDatabase = (
         },
       },
     });
-
-    return {
-      eventSlug,
-
-      user: {
-        id: userId,
-        email: `${userId}@feedb.ax`,
-        password: userPassword,
-      },
-
-      destroy: async () => {
-        UUID.destroy();
-
-        await prisma.user.delete({
-          where: {
-            id: userId,
-          },
-        });
-
-        await prisma.$disconnect();
-      },
-    };
-  }
-);
+ */
