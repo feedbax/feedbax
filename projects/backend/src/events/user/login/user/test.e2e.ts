@@ -108,11 +108,50 @@ it('should fail with error `invalid packet request data`', async (done) => {
   const message = (
     Request.create({
       user: {
-        uuid: 'invalid',
+        uuid: '',
       },
 
       event: {
         slug: seed.eventSlug,
+      },
+    })
+  );
+
+  const encoded = Request.encode(message);
+  const bytes = encoded.finish();
+
+  socket.emit(`${PacketIds.Login.USER}`, bytes, (data: Uint8Array) => {
+    socket.disconnect();
+
+    const $message = Response.decode(data);
+
+    expect($message).toEqual(
+      expect.objectContaining({
+        error: expect.objectContaining({
+          message: 'invalid packet request data',
+        }),
+      }),
+    );
+
+    done();
+  });
+}, TIMEOUT);
+
+it('should fail with error `invalid packet request data`', async (done) => {
+  const socket = await setupSocket(server.address);
+
+  const Request = feedbax.Packets.Request.User.Login;
+  const Response = feedbax.Packets.Response.User.Login;
+  const PacketIds = feedbax.Packets.Ids;
+
+  const message = (
+    Request.create({
+      user: {
+        uuid: 'a535a43b-a8d9-4e03-ac5c-0dc70f9767f3',
+      },
+
+      event: {
+        slug: '',
       },
     })
   );

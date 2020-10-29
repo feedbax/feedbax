@@ -13,5 +13,3 @@ export type ValidRequestPacket = RequestPacket & {
     slug: string;
   };
 };
-
-export type Validator = (packet: RequestPacket) => asserts packet is ValidRequestPacket;

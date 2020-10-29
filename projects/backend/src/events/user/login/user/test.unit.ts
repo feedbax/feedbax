@@ -3,7 +3,7 @@ import { feedbax } from '@feedbax/protos';
 import { addUser } from '@utils/auth';
 import EventService from '@services/event';
 
-import userLoginHandler from './user';
+import userLoginHandler from '.';
 
 jest.mock('@services/event');
 const mockedUserService = EventService as jest.Mocked<typeof EventService>;

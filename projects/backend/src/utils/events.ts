@@ -33,29 +33,3 @@ export const $try = (
     return $handler;
   }
 );
-
-export type CheckTypes = 'string' | 'object';
-export const checkValid = (
-  (value: unknown, checkType: CheckTypes): boolean => {
-    switch (checkType) {
-      case 'string': {
-        if (typeof value !== 'string') return false;
-        if (value === '') return false;
-
-        return true;
-      }
-
-      case 'object': {
-        if (typeof value !== 'object') return false;
-        if (value === null) return false;
-        if (Array.isArray(value)) return false;
-        if (Object.keys(value).length === 0) return false;
-
-        return true;
-      }
-
-      default:
-        return false;
-    }
-  }
-);

@@ -3,7 +3,7 @@ import { feedbax } from '@feedbax/protos';
 import { addAdmin } from '@utils/auth';
 import UserService from '@services/user';
 
-import adminLoginHandler from './admin';
+import adminLoginHandler from '.';
 
 jest.mock('@services/user');
 const mockedUserService = UserService as jest.Mocked<typeof UserService>;

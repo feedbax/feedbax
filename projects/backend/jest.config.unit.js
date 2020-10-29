@@ -15,6 +15,6 @@ module.exports = {
   ),
 
   testMatch: [
-    '**/src/**/?(*.)+(test).[jt]s?(x)',
+    '**/src/**/(*.)+(unit).[jt]s?(x)',
   ],
 };
