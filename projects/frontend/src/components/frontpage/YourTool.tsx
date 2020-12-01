@@ -1,16 +1,16 @@
 /** @jsx jsx */
 
-import "react"
+import "react";
 
-import { jsx, css } from "@emotion/react"
-import { between } from "polished"
-import { colors } from "~theme"
+import { jsx, css } from "@emotion/react";
+import { between } from "polished";
+import { colors } from "~theme";
 
-import Img from "gatsby-image"
-import { useStaticQuery, graphql } from "gatsby"
+import Img from "gatsby-image";
+import { useStaticQuery, graphql } from "gatsby";
 
 export default function YourTool() {
-  const data = useStaticQuery(query)
+  const data = useStaticQuery(query);
 
   return (
     <div css={stylesTool}>
@@ -23,7 +23,7 @@ export default function YourTool() {
         alt="tool preview"
       />
     </div>
-  )
+  );
 }
 
 const query = graphql`
@@ -36,7 +36,7 @@ const query = graphql`
       }
     }
   }
-`
+`;
 
 const stylesTool = css`
   position: relative;
@@ -91,4 +91,4 @@ const stylesTool = css`
       width: 100%;
     }
   }
-`
+`;

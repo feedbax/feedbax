@@ -3,4 +3,4 @@ export const colors = {
   second: "#ff7d65",
   third: "#ffffff",
   fourth: "#1f1f1f",
-} as const
+} as const;

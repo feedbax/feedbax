@@ -1,34 +1,34 @@
 /** @jsx jsx */
 
-import { useState } from "react"
+import { useState } from "react";
 
-import Background from "~components/frontpage/Background"
-import Title from "~components/frontpage/Title"
-import EventLogin from "~components/frontpage/EventLogin"
-import SeeMore from "~components/frontpage/SeeMore"
-import YourTool from "~components/frontpage/YourTool"
-import Benefits from "~components/frontpage/Benefits"
+import Background from "~components/frontpage/Background";
+import Title from "~components/frontpage/Title";
+import EventLogin from "~components/frontpage/EventLogin";
+import SeeMore from "~components/frontpage/SeeMore";
+import YourTool from "~components/frontpage/YourTool";
+import Benefits from "~components/frontpage/Benefits";
 
-import Layout from "~components/Layout"
-import Logo from "~components/Logo"
-import Footer from "~components/Footer"
+import Layout from "~components/Layout";
+import Logo from "~components/Logo";
+import Footer from "~components/Footer";
 
-import { jsx, css } from "@emotion/react"
-import { colors } from "~theme"
+import { jsx, css } from "@emotion/react";
+import { colors } from "~theme";
 
-import { useCallback } from "react"
-import { navigate } from "gatsby"
+import { useCallback } from "react";
+import { navigate } from "gatsby";
 
-const isProduction = process.env.GATSBY_ACTIVE_ENV === "production"
+const isProduction = process.env.GATSBY_ACTIVE_ENV === "production";
 
 export default function Home() {
-  const eventCodeState = useState<string>("")
-  const [eventCode] = eventCodeState
+  const eventCodeState = useState<string>("");
+  const [eventCode] = eventCodeState;
 
   const onLogin = useCallback(
     () => navigate(isProduction ? `/${eventCode}` : `/join/${eventCode}`),
     [eventCode]
-  )
+  );
 
   return (
     <Layout>
@@ -55,7 +55,7 @@ export default function Home() {
         <Footer />
       </div>
     </Layout>
-  )
+  );
 }
 
 const stylesMore = css`
@@ -63,7 +63,7 @@ const stylesMore = css`
   padding: 20px;
   padding-top: 100px;
   box-sizing: border-box;
-`
+`;
 
 const stylesFront = css`
   position: relative;
@@ -87,4 +87,4 @@ const stylesFront = css`
     min-height: 100vh;
     min-height: calc(var(--vh, 1vh) * 100);
   }
-`
+`;

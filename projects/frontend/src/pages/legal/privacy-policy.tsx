@@ -1,13 +1,13 @@
 /** @jsx jsx */
 
-import "react"
+import "react";
 
-import { jsx, css } from "@emotion/react"
-import { colors } from "~theme"
+import { jsx, css } from "@emotion/react";
+import { colors } from "~theme";
 
-import Layout from "~components/Layout"
-import Footer from "~components/Footer"
-import Logo from "~components/Logo"
+import Layout from "~components/Layout";
+import Footer from "~components/Footer";
+import Logo from "~components/Logo";
 
 export default function PrivacyPolicy() {
   return (
@@ -318,7 +318,7 @@ export default function PrivacyPolicy() {
         <Footer />
       </div>
     </Layout>
-  )
+  );
 }
 
 const stylesLegal = css`
@@ -341,4 +341,4 @@ const stylesLegal = css`
     padding: 0 20px;
     box-sizing: border-box;
   }
-`
+`;

@@ -1,25 +1,25 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 
-import React from "react"
-import { jsx, ClassNames } from "@emotion/react"
+import React from "react";
+import { jsx, ClassNames } from "@emotion/react";
 
-import { graphql, useStaticQuery } from "gatsby"
-import Img, { FluidObject } from "gatsby-image"
+import { graphql, useStaticQuery } from "gatsby";
+import Img, { FluidObject } from "gatsby-image";
 
 type Data = {
   background_landscape: {
     childImageSharp: {
-      fluid: FluidObject
-    }
-  }
+      fluid: FluidObject;
+    };
+  };
 
   background_portrait: {
     childImageSharp: {
-      fluid: FluidObject
-    }
-  }
-}
+      fluid: FluidObject;
+    };
+  };
+};
 
 const query = graphql`
   {
@@ -77,10 +77,10 @@ const query = graphql`
       }
     }
   }
-`
+`;
 
 export default function Background() {
-  const data = useStaticQuery<Data>(query)
+  const data = useStaticQuery<Data>(query);
 
   return (
     <ClassNames>
@@ -106,5 +106,5 @@ export default function Background() {
         />
       )}
     </ClassNames>
-  )
+  );
 }

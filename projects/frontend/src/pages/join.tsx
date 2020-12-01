@@ -1,34 +1,34 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 
-import React, { useEffect, useState } from "react"
-import { Router } from "@reach/router"
+import React, { useEffect, useState } from "react";
+import { Router } from "@reach/router";
 
-import { jsx, css } from "@emotion/react"
+import { jsx, css } from "@emotion/react";
 
-import Layout from "~components/Layout"
-import Loading from "~components/join/Loading"
-import Logo from "~components/Logo"
+import Layout from "~components/Layout";
+import Loading from "~components/join/Loading";
+import Logo from "~components/Logo";
 
-import Questions from "~components/event/Questions"
-import Slider from "~components/event/Slider"
-import Pagination from "~components/event/Pagination"
-import Filter from "~components/event/Filter"
+import Questions from "~components/event/Questions";
+import Slider from "~components/event/Slider";
+import Pagination from "~components/event/Pagination";
+import Filter from "~components/event/Filter";
 
-import { Provider } from "react-redux"
-import { store } from "~store"
+import { Provider } from "react-redux";
+import { store } from "~store";
 
 type Props = {
-  path: string
-  eventSlug?: string
-}
+  path: string;
+  eventSlug?: string;
+};
 
 function Event({ eventSlug }: Props) {
-  const [isLoading, setLoading] = useState(true)
+  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => setLoading(false), 2000)
-  }, [])
+    setTimeout(() => setLoading(false), 2000);
+  }, []);
 
   return (
     <>
@@ -66,7 +66,7 @@ function Event({ eventSlug }: Props) {
         <div className="toolbar" />
       </div>
     </>
-  )
+  );
 }
 
 export default function Join() {
@@ -79,7 +79,7 @@ export default function Join() {
         </Router>
       </Layout>
     </Provider>
-  )
+  );
 }
 
 const stylesEventHeader = css`
@@ -94,7 +94,7 @@ const stylesEventHeader = css`
     padding-top: 25px;
     overflow: hidden;
   }
-`
+`;
 
 const stylesEvent = css`
   position: relative;
@@ -131,4 +131,4 @@ const stylesEvent = css`
     height: 60px;
     background: #3a5568;
   }
-`
+`;

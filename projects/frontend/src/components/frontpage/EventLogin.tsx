@@ -1,13 +1,13 @@
 /** @jsx jsx */
 
-import React from "react"
+import React from "react";
 
-import { jsx, css } from "@emotion/react"
-import { between } from "polished"
-import { colors } from "~theme"
+import { jsx, css } from "@emotion/react";
+import { between } from "polished";
+import { colors } from "~theme";
 
 export default function EventLogin({ eventCodeState, onLogin }: Props) {
-  const [eventCode, setEventCode] = eventCodeState
+  const [eventCode, setEventCode] = eventCodeState;
 
   return (
     <div css={stylesEventLogin}>
@@ -26,22 +26,22 @@ export default function EventLogin({ eventCodeState, onLogin }: Props) {
         onClick={onLogin}
       />
     </div>
-  )
+  );
 }
 
 const createShadow = (min: number, max: number) => {
-  const px1p = between(`${min}px`, `${max}px`, "300px", "1400px")
-  const px1n = between(`${-min}px`, `${-max}px`, "300px", "1400px")
-  const px2p = between(`${min + 1}px`, `${max + 1}px`, "300px", "1400px")
-  const px2n = between(`${-(min + 1)}px`, `${-(max + 1)}px`, "300px", "1400px")
+  const px1p = between(`${min}px`, `${max}px`, "300px", "1400px");
+  const px1n = between(`${-min}px`, `${-max}px`, "300px", "1400px");
+  const px2p = between(`${min + 1}px`, `${max + 1}px`, "300px", "1400px");
+  const px2n = between(`${-(min + 1)}px`, `${-(max + 1)}px`, "300px", "1400px");
 
   return `
     ${px1n} ${px1n} 0px #FF7D65, 
     ${px1p} ${px1p} 0px #3A5568,
     ${px2n} ${px2n} 0px #FFFFFF,
     ${px2p} ${px2p} 0px #FFFFFF
-  `
-}
+  `;
+};
 
 const stylesEventLogin = css`
   position: relative;
@@ -109,11 +109,11 @@ const stylesEventLogin = css`
       border: 2px solid ${colors.second};
     }
   }
-`
+`;
 
-type UseState<S> = [S, React.Dispatch<React.SetStateAction<S>>]
+type UseState<S> = [S, React.Dispatch<React.SetStateAction<S>>];
 
 type Props = {
-  onLogin: () => void
-  eventCodeState: UseState<string>
-}
+  onLogin: () => void;
+  eventCodeState: UseState<string>;
+};

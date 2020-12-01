@@ -1,12 +1,12 @@
 /** @jsx jsx */
 
-import "react"
+import "react";
 
-import { jsx, css } from "@emotion/react"
-import { between } from "polished"
-import { colors } from "~theme"
+import { jsx, css } from "@emotion/react";
+import { between } from "polished";
+import { colors } from "~theme";
 
-import { Link } from "gatsby"
+import { Link } from "gatsby";
 
 export default function Footer() {
   return (
@@ -17,7 +17,7 @@ export default function Footer() {
         Datenschutz &amp; Impressum
       </Link>
     </div>
-  )
+  );
 }
 
 const stylesFooter = css`
@@ -47,4 +47,4 @@ const stylesFooter = css`
       color: ${colors.third};
     }
   }
-`
+`;

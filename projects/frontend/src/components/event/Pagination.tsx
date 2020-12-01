@@ -1,37 +1,28 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 
-import React from "react"
+import React from "react";
 
-import { jsx, css } from "@emotion/react"
+import { jsx, css } from "@emotion/react";
 
-import { useSelector } from "react-redux"
-import { RootState } from "~store"
+import { useSelector } from "react-redux";
+import { selectors } from "~store/modules/questions";
 
-type RenderDot = (_: unknown, index: number) => JSX.Element
-
-const currentIndexSelector = (state: RootState) => state.questionsState.currentIndex
-const questionsLengthSelector = (state: RootState) => state.questionsState.questions.length
+type RenderDot = (_: unknown, index: number) => JSX.Element;
 
 const renderDot: RenderDot = (_, index) => {
-  const currentIndex = useSelector(currentIndexSelector)
-  const isCurrent = currentIndex === index
-  const className = isCurrent ? "dot current" : "dot"
+  const currentIndex = useSelector(selectors.currentIndex);
+  const isCurrent = currentIndex === index;
+  const className = isCurrent ? "dot current" : "dot";
 
-  return (
-    <div key={index} className={className} />
-  )
-}
+  return <div key={index} className={className} />;
+};
 
 export default function Pagination() {
-  const questionsLength = useSelector(questionsLengthSelector)
+  const questionsLength = useSelector(selectors.questionsLength);
   const dots = new Array(questionsLength).fill(0);
 
-  return (
-    <div css={stylesDots}>
-      {dots.map(renderDot)}
-    </div>
-  )
+  return <div css={stylesDots}>{dots.map(renderDot)}</div>;
 }
 
 const stylesDots = css`
@@ -57,4 +48,4 @@ const stylesDots = css`
       opacity: 1;
     }
   }
-`
+`;

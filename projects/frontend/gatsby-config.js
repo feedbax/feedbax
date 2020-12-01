@@ -4,7 +4,7 @@
  * See: https://www.gatsbyjs.com/docs/gatsby-config/
  */
 
-const path = require(`path`)
+const path = require(`path`);
 
 module.exports = {
   /* Your site config here */
@@ -21,4 +21,4 @@ module.exports = {
     `gatsby-plugin-sharp`,
     `gatsby-plugin-emotion`,
   ],
-}
+};

@@ -1,26 +1,24 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 
-import React from "react"
+import React from "react";
 
-import { jsx, css } from "@emotion/react"
-import { between } from "polished"
-import { colors } from "~theme"
+import { jsx, css } from "@emotion/react";
+import { between } from "polished";
+import { colors } from "~theme";
 
-import { QuestionState } from "~store/modules/questions"
-import { useSelector } from "react-redux"
-import { RootState } from "~store"
+import { useSelector } from "react-redux";
+import { selectors } from "~store/modules/questions";
 
-type RenderQuestion = (question: QuestionState, index: number) => JSX.Element
+import type { QuestionState } from "~store/modules/questions";
 
-const currentIndexSelector = (state: RootState) => state.questionsState.currentIndex
-const questionsSelector = (state: RootState) => state.questionsState.questions
+type RenderQuestion = (question: QuestionState, index: number) => JSX.Element;
 
 const renderQuestion: RenderQuestion = (question, index) => {
-  const currentIndex = useSelector(currentIndexSelector)
-  const deltaIndex = index - currentIndex
-  const isCurrent = currentIndex === index
-  const className = isCurrent ? "question current" : "question"
+  const currentIndex = useSelector(selectors.currentIndex);
+  const deltaIndex = index - currentIndex;
+  const isCurrent = currentIndex === index;
+  const className = isCurrent ? "question current" : "question";
 
   return (
     <div
@@ -32,17 +30,12 @@ const renderQuestion: RenderQuestion = (question, index) => {
       <div className="number">{`${index + 1}`.padStart(2, "0")}</div>
       <div className="text">{question.text}</div>
     </div>
-  )
-}
+  );
+};
 
 export default function Questions() {
-  const questions = useSelector(questionsSelector)
-
-  return (
-    <>
-      {questions.map(renderQuestion)}
-    </>
-  )
+  const questions = useSelector(selectors.questions);
+  return <>{questions.map(renderQuestion)}</>;
 }
 
 const stylesQuestion = css`
@@ -87,4 +80,4 @@ const stylesQuestion = css`
 
     z-index: 2;
   }
-`
+`;

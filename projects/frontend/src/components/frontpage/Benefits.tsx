@@ -1,15 +1,15 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 
-import React from "react"
+import React from "react";
 
-import { jsx, css } from "@emotion/react"
-import { between } from "polished"
-import { colors } from "~theme"
+import { jsx, css } from "@emotion/react";
+import { between } from "polished";
+import { colors } from "~theme";
 
-import Img, { FluidObject } from "gatsby-image"
-import { useStaticQuery, graphql } from "gatsby"
-import { useCallback } from "react"
+import Img, { FluidObject } from "gatsby-image";
+import { useStaticQuery, graphql } from "gatsby";
+import { useCallback } from "react";
 
 const benefits = [
   {
@@ -85,30 +85,30 @@ const benefits = [
       ),
     },
   },
-] as const
+] as const;
 
-type Benefit = typeof benefits[number]
+type Benefit = typeof benefits[number];
 
 type Data = {
   [P in typeof benefits[number]["image"]]: {
     childImageSharp: {
-      fluid: FluidObject
-    }
-  }
-}
+      fluid: FluidObject;
+    };
+  };
+};
 
 const createRenderBenefit = (data: Data) => ({ image, text }: Benefit) => (
   <div css={stylesBenefit} key={image}>
     <Img className="image" fluid={data[image].childImageSharp.fluid} />
     <div className={`text ${text.align}`}>{text.content}</div>
   </div>
-)
+);
 
 export default function Benefits() {
-  const data = useStaticQuery(query)
-  const renderBenefit = useCallback(createRenderBenefit(data), [data])
+  const data = useStaticQuery(query);
+  const renderBenefit = useCallback(createRenderBenefit(data), [data]);
 
-  return <div css={stylesBenefits}>{benefits.map(renderBenefit)}</div>
+  return <div css={stylesBenefits}>{benefits.map(renderBenefit)}</div>;
 }
 
 const query = graphql`
@@ -161,7 +161,7 @@ const query = graphql`
       }
     }
   }
-`
+`;
 
 const stylesBenefit = css`
   position: relative;
@@ -219,7 +219,7 @@ const stylesBenefit = css`
       }
     }
   }
-`
+`;
 
 const stylesBenefits = css`
   position: relative;
@@ -233,4 +233,4 @@ const stylesBenefits = css`
   justify-content: center;
   align-items: flex-end;
   flex-wrap: wrap;
-`
+`;

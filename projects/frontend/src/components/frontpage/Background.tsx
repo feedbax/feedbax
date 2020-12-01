@@ -1,10 +1,10 @@
 /** @jsx jsx */
 
-import "react"
-import { jsx, css } from "@emotion/react"
+import "react";
+import { jsx, css } from "@emotion/react";
 
-import top from "~assets/images/top.svg"
-import bot from "~assets/images/bot.svg"
+import top from "~assets/images/top.svg";
+import bot from "~assets/images/bot.svg";
 
 export default function Background() {
   return (
@@ -12,7 +12,7 @@ export default function Background() {
       <div className="img top" />
       <div className="img bot" />
     </div>
-  )
+  );
 }
 
 const stylesBackround = css`
@@ -57,4 +57,4 @@ const stylesBackround = css`
       max-width: 100%;
     }
   }
-`
+`;

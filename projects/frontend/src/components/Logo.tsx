@@ -1,44 +1,44 @@
 /** @jsx jsx */
 
-import "react"
+import "react";
 
-import { jsx, css } from "@emotion/react"
-import { CSSInterpolation } from "@emotion/serialize"
-import { between } from "polished"
+import { jsx, css } from "@emotion/react";
+import { CSSInterpolation } from "@emotion/serialize";
+import { between } from "polished";
 
-import { Link } from "gatsby"
+import { Link } from "gatsby";
 
-import logo from "~assets/images/logo.svg"
-import logoNoText from "~assets/images/logo_no_text.svg"
-import logoNoShadowAndText from "~assets/images/logo_no_shadow_no_text.svg"
+import logo from "~assets/images/logo.svg";
+import logoNoText from "~assets/images/logo_no_text.svg";
+import logoNoShadowAndText from "~assets/images/logo_no_shadow_no_text.svg";
 
-type Variant = "text" | "no-text" | "no-shadow-and-text"
+type Variant = "text" | "no-text" | "no-shadow-and-text";
 
 type Props = {
-  styles?: CSSInterpolation
-  variant?: Variant
-}
+  styles?: CSSInterpolation;
+  variant?: Variant;
+};
 
 const getSrc = (variant: Variant) => {
   switch (variant) {
     case "no-shadow-and-text": {
-      return logoNoShadowAndText
+      return logoNoShadowAndText;
     }
 
     case "no-text": {
-      return logoNoText
+      return logoNoText;
     }
 
     default:
     case "text": {
-      return logo
+      return logo;
     }
   }
-}
+};
 
 export default function Logo(props: Props) {
-  const { styles = {} } = props
-  const { variant = "text" } = props
+  const { styles = {} } = props;
+  const { variant = "text" } = props;
 
   return (
     <Link to="/">
@@ -46,7 +46,7 @@ export default function Logo(props: Props) {
         <img css={stylesImage} src={getSrc(variant)} />
       </div>
     </Link>
-  )
+  );
 }
 
 const stylesText = css`
@@ -54,14 +54,14 @@ const stylesText = css`
   width: ${between("90px", "120px", "300px", "1400px")};
   max-height: 155px;
   max-width: 120px;
-`
+`;
 
 const stylesSquare = css`
   height: 120px;
   width: 120px;
   max-height: 120px;
   max-width: 120px;
-`
+`;
 
 const stylesImageWrapper = (variant: Variant = "text") => css`
   position: relative;
@@ -70,7 +70,7 @@ const stylesImageWrapper = (variant: Variant = "text") => css`
   margin: 0 auto;
 
   ${variant === "text" ? stylesText : stylesSquare}
-`
+`;
 
 const stylesImage = css`
   position: absolute;
@@ -80,4 +80,4 @@ const stylesImage = css`
   height: 100%;
   object-fit: contain;
   object-position: center center;
-`
+`;

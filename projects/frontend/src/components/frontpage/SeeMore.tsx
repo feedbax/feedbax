@@ -1,9 +1,9 @@
 /** @jsx jsx */
 
-import "react"
+import "react";
 
-import { jsx, css } from "@emotion/react"
-import { colors } from "~theme"
+import { jsx, css } from "@emotion/react";
+import { colors } from "~theme";
 
 export default function SeeMore() {
   return (
@@ -11,7 +11,7 @@ export default function SeeMore() {
       <span>Mehr über feedb.ax</span>
       <div />
     </div>
-  )
+  );
 }
 
 const stylesSeeMore = css`
@@ -55,4 +55,4 @@ const stylesSeeMore = css`
     border-right: 2px solid ${colors.third};
     border-radius: 2px;
   }
-`
+`;

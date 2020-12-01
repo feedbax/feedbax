@@ -1,39 +1,35 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 
-import React from "react"
+import React from "react";
 
-import { jsx, css } from "@emotion/react"
-import { between } from "polished"
-import { colors } from "~theme"
+import { jsx, css } from "@emotion/react";
+import { between } from "polished";
+import { colors } from "~theme";
 
-import { QuestionState } from "~store/modules/questions"
-import { useSelector } from "react-redux"
-import { RootState } from "~store"
+import { useSelector } from "react-redux";
+import { selectors } from "~store/modules/questions";
 
-import iconLikedFilled from '~assets/images/icons/favorite_filled.svg'
-import iconLikedOutline from '~assets/images/icons/favorite_outline.svg'
+import iconLikedFilled from "~assets/images/icons/favorite_filled.svg";
+import iconLikedOutline from "~assets/images/icons/favorite_outline.svg";
 
-import iconRecentFilled from '~assets/images/icons/clock_filled.svg'
-import iconRecentOutline from '~assets/images/icons/clock_outline.svg'
+import iconRecentFilled from "~assets/images/icons/clock_filled.svg";
+import iconRecentOutline from "~assets/images/icons/clock_outline.svg";
 
-import iconMineFilled from '~assets/images/icons/person_filled.svg'
-import iconMineOutline from '~assets/images/icons/person_outline.svg'
+import iconMineFilled from "~assets/images/icons/person_filled.svg";
+import iconMineOutline from "~assets/images/icons/person_outline.svg";
 
-type RenderDot = (_: unknown, index: number) => JSX.Element
+import type { QuestionState } from "~store/modules/questions";
 
-const currentIndexSelector = (state: RootState) => state.questionsState.currentIndex
-const questionsLengthSelector = (state: RootState) => state.questionsState.questions.length
+type RenderDot = (_: unknown, index: number) => JSX.Element;
 
 const renderDot: RenderDot = (_, index) => {
-  const currentIndex = useSelector(currentIndexSelector)
-  const isCurrent = currentIndex === index
-  const className = isCurrent ? "dot current" : "dot"
+  const currentIndex = useSelector(selectors.currentIndex);
+  const isCurrent = currentIndex === index;
+  const className = isCurrent ? "dot current" : "dot";
 
-  return (
-    <div key={index} className={className} />
-  )
-}
+  return <div key={index} className={className} />;
+};
 
 export default function Filter() {
   return (
@@ -56,7 +52,7 @@ export default function Filter() {
         </button>
       </div>
     </div>
-  )
+  );
 }
 
 const stylesFilter = css`
@@ -99,7 +95,8 @@ const stylesFilter = css`
       height: 28px;
 
       background-color: rgb(255, 125, 101);
-      box-shadow: rgba(0, 0, 0, 0.18) 3px 3px 6px, rgba(255, 255, 255, 0.18) -3px -3px 6px;
+      box-shadow: rgba(0, 0, 0, 0.18) 3px 3px 6px,
+        rgba(255, 255, 255, 0.18) -3px -3px 6px;
 
       img {
         padding: 0px;
@@ -118,4 +115,4 @@ const stylesFilter = css`
       }
     }
   }
-`
+`;

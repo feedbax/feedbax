@@ -1,22 +1,22 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 
-import React from "react"
+import React from "react";
 
-import { jsx, css, keyframes } from "@emotion/react"
-import { CSSInterpolation } from "@emotion/serialize"
-import { between } from "polished"
-import { colors } from "~theme"
+import { jsx, css, keyframes } from "@emotion/react";
+import { CSSInterpolation } from "@emotion/serialize";
+import { between } from "polished";
+import { colors } from "~theme";
 
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
 
-import Logo from "~components/Logo"
-import Background from "./Background"
+import Logo from "~components/Logo";
+import Background from "./Background";
 
 type Props = {
-  state?: "visible" | "hidden"
-  styles?: CSSInterpolation
-}
+  state?: "visible" | "hidden";
+  styles?: CSSInterpolation;
+};
 
 const variants = {
   visible: {
@@ -30,11 +30,11 @@ const variants = {
       display: "none",
     },
   },
-}
+};
 
 export default function Loading(props: Props) {
-  const { styles = {} } = props
-  const { state = "visible" } = props
+  const { styles = {} } = props;
+  const { state = "visible" } = props;
 
   return (
     <motion.div
@@ -50,7 +50,7 @@ export default function Loading(props: Props) {
         <Logo />
       </div>
     </motion.div>
-  )
+  );
 }
 
 const pulse = keyframes`
@@ -63,7 +63,7 @@ const pulse = keyframes`
 		transform: scale(1);
     opacity: 0;
 	}
-`
+`;
 
 const stylesLoading = css`
   position: absolute;
@@ -105,4 +105,4 @@ const stylesLoading = css`
       animation: ${pulse} 1s ease infinite;
     }
   }
-`
+`;

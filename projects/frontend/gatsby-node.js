@@ -1,4 +1,4 @@
-const path = require("path")
+const path = require("path");
 
 exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
@@ -12,21 +12,21 @@ exports.onCreateWebpackConfig = ({ actions }) => {
         "~theme": path.resolve(__dirname, "src/theme"),
       },
     },
-  })
-}
+  });
+};
 
 exports.onCreatePage = async ({ page, actions }) => {
-  const { createPage } = actions
+  const { createPage } = actions;
 
   if (page.path.match(/\/join/)) {
-    page.matchPath = "/join/*"
-    createPage(page)
+    page.matchPath = "/join/*";
+    createPage(page);
 
     createPage({
       ...page,
 
       path: "404",
       matchPath: "404",
-    })
+    });
   }
-}
+};
