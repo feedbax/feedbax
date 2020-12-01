@@ -6227,9 +6227,13 @@ gatsby-page-utils@^0.3.0:
     lodash "^4.17.20"
     micromatch "^4.0.2"
 
-"gatsby-plugin-emotion@link:./plugins/gatsby-plugin-emotion":
-  version "0.0.0"
-  uid ""
+gatsby-plugin-emotion@5.1.0-next.0:
+  version "5.1.0-next.0"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-emotion/-/gatsby-plugin-emotion-5.1.0-next.0.tgz#e3d02a7e82794d60de2dc90eaf82fca05e2b0d5c"
+  integrity sha512-AScsObNNM0LvX3QFx5ktcna9Ef5nLSFr6NLR9aU/wwkpD4Xwf5D8ByBLALGoZQZdD94twMeVEfkLAKstBBSLxA==
+  dependencies:
+    "@babel/runtime" "^7.11.2"
+    "@emotion/babel-preset-css-prop" "^11.0.0"
 
 gatsby-plugin-page-creator@^2.4.0:
   version "2.4.0"

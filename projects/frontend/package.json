@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
-    "gatsby-plugin-emotion": "link:./plugins/gatsby-plugin-emotion",
+    "gatsby-plugin-emotion": "5.1.0-next.0",
     "gatsby-plugin-sharp": "^2.9.1",
     "gatsby-source-filesystem": "^2.6.1",
     "gatsby-transformer-sharp": "^2.7.0",
