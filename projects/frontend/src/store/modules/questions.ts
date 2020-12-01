@@ -35,6 +35,17 @@ export const questionsSlice = createSlice({
       { order: 4, text: "Was kommt mindestens ein­mal in der Wo­che in dei­nen Ge­be­ten vor?" },
       // prettier-ignore
       { order: 5, text: "Wie be­test du? Was kommt mindestens ein­mal in der Wo­che in dei­nen Ge­be­ten vor? Was kommt mindestens ein­mal in der Wo­che in dei­nen Ge­be­ten vor?" },
+      // prettier-ignore
+      { order: 6, text: "Was kommt mindestens ein­mal in der Wo­che in dei­nen Ge­be­ten vor? Was kommt mindestens ein­mal in der Wo­che in dei­nen Ge­be­ten vor?" },
+      // prettier-ignore
+      { order: 7, text: "Was kommt mindestens ein­mal in der Wo­che in dei­nen Ge­be­ten vor?" },
+      { order: 8, text: "Wie häu­fig be­test du pri­vat?" },
+      { order: 9, text: "Wo be­test du am häu­figs­ten?" },
+      { order: 10, text: "Wie be­test du?" },
+      // prettier-ignore
+      { order: 11, text: "Was kommt mindestens ein­mal in der Wo­che in dei­nen Ge­be­ten vor?" },
+      // prettier-ignore
+      { order: 12, text: "Wie be­test du? Was kommt mindestens ein­mal in der Wo­che in dei­nen Ge­be­ten vor? Was kommt mindestens ein­mal in der Wo­che in dei­nen Ge­be­ten vor?" },
     ],
   } as QuestionsState,
 

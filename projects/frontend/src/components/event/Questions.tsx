@@ -12,9 +12,12 @@ import { selectors } from "~store/modules/questions";
 
 import type { QuestionState } from "~store/modules/questions";
 
-type RenderQuestion = (question: QuestionState, index: number) => JSX.Element;
+type QuestionProps = {
+  question: QuestionState;
+  index: number;
+};
 
-const renderQuestion: RenderQuestion = (question, index) => {
+function Question({ question, index }: QuestionProps) {
   const currentIndex = useSelector(selectors.currentIndex);
   const deltaIndex = index - currentIndex;
   const isCurrent = currentIndex === index;
@@ -31,11 +34,18 @@ const renderQuestion: RenderQuestion = (question, index) => {
       <div className="text">{question.text}</div>
     </div>
   );
-};
+}
 
 export default function Questions() {
   const questions = useSelector(selectors.questions);
-  return <>{questions.map(renderQuestion)}</>;
+
+  return (
+    <>
+      {questions.map((q, i) => (
+        <Question key={q.order} question={q} index={i} />
+      ))}
+    </>
+  );
 }
 
 const stylesQuestion = css`
