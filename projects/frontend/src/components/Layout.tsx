@@ -21,6 +21,8 @@ import RobotoSlabBold_woff from "~assets/fonts/RobotoSlab-Bold.woff";
 import RobotoSlabRegular_woff2 from "~assets/fonts/RobotoSlab-Regular.woff2";
 import RobotoSlabRegular_woff from "~assets/fonts/RobotoSlab-Regular.woff";
 
+import "normalize.css";
+
 type Props = {
   color?: keyof typeof colors;
   children: React.ReactNode;
@@ -76,6 +78,7 @@ const stylesGlobal = css`
 
   * {
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    -webkit-overflow-scrolling: touch;
   }
 
   @font-face {
