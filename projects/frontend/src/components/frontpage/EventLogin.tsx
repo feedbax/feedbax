@@ -56,6 +56,9 @@ const stylesEventLogin = css`
 
   & .text,
   & .button {
+    border-radius: 0 !important;
+    -webkit-appearance: none;
+
     display: inline-block;
     position: relative;
     box-sizing: border-box;
