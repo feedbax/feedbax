@@ -11,7 +11,7 @@ import IconButton from "~components/IconButton";
 
 import Questions from "~components/event/Questions";
 import Slider from "~components/event/Questions/Slider";
-import Pagination from "~components/event/Pagination";
+import Navigation from "~components/event/Navigation";
 import Filters from "~components/event/Filters";
 import Answers from "./Answers";
 
@@ -39,7 +39,7 @@ const Event = React.memo(() => {
               }}
             />
 
-            <Pagination />
+            <Navigation />
 
             <Slider>
               <Questions />
@@ -69,7 +69,6 @@ const stylesEventHeader = css`
     max-width: 540px;
     margin: 0 auto;
     padding-top: 25px;
-    overflow: hidden;
   }
 `;
 
@@ -87,6 +86,7 @@ const stylesEvent = css`
   .scroll-container {
     flex: 1 1 auto;
     overflow-y: scroll;
+    overflow-x: hidden;
     touch-action: pan-y;
   }
 
