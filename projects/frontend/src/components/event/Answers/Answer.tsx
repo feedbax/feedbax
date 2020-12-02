@@ -12,6 +12,8 @@ import { selectors } from "~store/modules/answers";
 
 import { useTwemoji } from "~hooks";
 
+import IconButton from "~components/IconButton";
+
 type Props = {
   answerId: string;
   first: boolean;
@@ -25,8 +27,18 @@ const Answer = React.memo(({ answerId, first }: Props) => {
   const [answer] = useSelector(selector);
 
   return (
-    <div ref={injectEmojis} css={[stylesAnswer, stylesFirst]}>
-      {answer.text}
+    <div css={[stylesAnswer, stylesFirst]}>
+      <div className="text" ref={injectEmojis}>
+        {answer.text}
+      </div>
+
+      <div className="like">
+        <IconButton
+          icon="heart"
+          variant="outline"
+          color={{ icon: "first", background: "third" }}
+        />
+      </div>
     </div>
   );
 });
@@ -34,19 +46,36 @@ const Answer = React.memo(({ answerId, first }: Props) => {
 export default Answer;
 
 const stylesAnswer = css`
+  position: relative;
+  z-index: 1;
+
   max-width: 540px;
   margin: 15px auto;
   padding: 15px;
+
   box-sizing: border-box;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px;
-  position: relative;
-  color: ${colors.first};
-  font-size: ${between("14px", "16px", "300px", "1400px")};
-  background: ${colors.third};
-  z-index: 1;
 
-  &:nth-of-type(2) {
+  background: ${colors.third};
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  &:first-of-type {
     margin-top: 0;
+  }
+
+  .text {
+    flex: 1 1 auto;
+    color: ${colors.first};
+    font-size: ${between("14px", "16px", "300px", "1400px")};
+    padding-right: 15px;
+  }
+
+  .like {
+    flex: 0 0 auto;
   }
 `;
 
