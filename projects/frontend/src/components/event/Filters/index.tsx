@@ -23,5 +23,5 @@ const stylesFilters = css`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 25px;
+  padding-bottom: 25px;
 `;
