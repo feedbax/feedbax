@@ -36,14 +36,22 @@ const Slider = React.memo(({ children }: Props) => {
     setLockAnimation(true);
     setLockDrag(true);
 
-    if (info.offset.x >= 1 && currentIndex >= 1) {
+    const isSwipeLeft = info.offset.x >= 1 && currentIndex >= 1;
+    const isSwipeRight =
+      info.offset.x <= -1 && currentIndex < questionsLength - 1;
+
+    if (isSwipeLeft) {
       await controls.start("right");
-      store.dispatch(actions.setCurrentIndex(-1));
+      store.dispatch(actions.addToCurrentIndex(-1));
     }
 
-    if (info.offset.x <= -1 && currentIndex < questionsLength - 1) {
+    if (isSwipeRight) {
       await controls.start("left");
-      store.dispatch(actions.setCurrentIndex(1));
+      store.dispatch(actions.addToCurrentIndex(1));
+    }
+
+    if (!isSwipeLeft && !isSwipeRight) {
+      await controls.start("none");
     }
 
     controls.set("none");
