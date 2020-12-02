@@ -17,16 +17,15 @@ type QuestionProps = {
   index: number;
 };
 
-function Question({ question, index }: QuestionProps) {
+const Question = React.memo(({ question, index }: QuestionProps) => {
   const currentIndex = useSelector(selectors.currentIndex);
   const deltaIndex = index - currentIndex;
   const isCurrent = currentIndex === index;
-  const className = isCurrent ? "question current" : "question";
+  const stylesCurrent = isCurrent ? stylesQuestionCurrent : {};
 
   return (
     <div
-      css={stylesQuestion}
-      className={className}
+      css={[stylesQuestion, stylesCurrent]}
       style={{ transform: `translate(${deltaIndex * 100}%, 0)` }}
       key={question.order}
     >
@@ -34,19 +33,9 @@ function Question({ question, index }: QuestionProps) {
       <div className="text">{question.text}</div>
     </div>
   );
-}
+});
 
-export default function Questions() {
-  const questions = useSelector(selectors.questions);
-
-  return (
-    <>
-      {questions.map((q, i) => (
-        <Question key={q.order} question={q} index={i} />
-      ))}
-    </>
-  );
-}
+export default Question;
 
 const stylesQuestion = css`
   position: absolute;
@@ -81,13 +70,13 @@ const stylesQuestion = css`
     margin-left: 10px;
     border-left: 1px solid ${colors.first};
   }
+`;
 
-  &.current {
-    position: relative;
+const stylesQuestionCurrent = css`
+  position: relative;
 
-    top: 0;
-    left: 0;
+  top: 0;
+  left: 0;
 
-    z-index: 2;
-  }
+  z-index: 2;
 `;

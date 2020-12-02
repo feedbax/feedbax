@@ -1,7 +1,8 @@
-import { useEffect, useLayoutEffect, useRef } from "react";
-import { useState } from "react";
+import { useEffect, useLayoutEffect } from "react";
+import { useState, useRef } from "react";
 import { useCallback } from "react";
 
+import twemoji from "twemoji";
 import ResizeObserver from "resize-observer-polyfill";
 
 export const useSize = (type: "w" | "h" | "wh" = "wh") => {
@@ -81,4 +82,14 @@ export const useHorizontalSwipe = () => {
   }, []);
 
   return pointerEvent;
+};
+
+export const useTwemoji = () => {
+  const ref = useCallback((element: HTMLElement | null) => {
+    if (element) {
+      twemoji.parse(element);
+    }
+  }, []);
+
+  return ref;
 };

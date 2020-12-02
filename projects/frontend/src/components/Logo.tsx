@@ -1,12 +1,13 @@
 /** @jsx jsx */
 
-import "react";
+import React from "react";
+import { Link } from "gatsby";
+
+import isEqual from "lodash.isequal";
 
 import { jsx, css } from "@emotion/react";
 import { CSSInterpolation } from "@emotion/serialize";
 import { between } from "polished";
-
-import { Link } from "gatsby";
 
 import logo from "~assets/images/logo.svg";
 import logoNoText from "~assets/images/logo_no_text.svg";
@@ -17,7 +18,24 @@ type Variant = "text" | "no-text" | "no-shadow-and-text";
 type Props = {
   styles?: CSSInterpolation;
   variant?: Variant;
+  link?: string;
 };
+
+const Logo = React.memo((props: Props) => {
+  const { styles = {} } = props;
+  const { variant = "text" } = props;
+  const { link = "/" } = props;
+
+  return (
+    <Link to={link}>
+      <div css={[stylesImageWrapper(variant), styles]}>
+        <img css={stylesImage} src={getSrc(variant)} />
+      </div>
+    </Link>
+  );
+}, isEqual);
+
+export default Logo;
 
 const getSrc = (variant: Variant) => {
   switch (variant) {
@@ -35,19 +53,6 @@ const getSrc = (variant: Variant) => {
     }
   }
 };
-
-export default function Logo(props: Props) {
-  const { styles = {} } = props;
-  const { variant = "text" } = props;
-
-  return (
-    <Link to="/">
-      <div css={[stylesImageWrapper(variant), styles]}>
-        <img css={stylesImage} src={getSrc(variant)} />
-      </div>
-    </Link>
-  );
-}
 
 const stylesText = css`
   height: ${between("116px", "155px", "300px", "1400px")};

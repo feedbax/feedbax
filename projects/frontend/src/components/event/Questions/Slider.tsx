@@ -18,7 +18,7 @@ type OnDragEnd = (event: DragEvent, info: PanInfo) => Promise<void>;
 
 type Props = { children: React.ReactNode };
 
-export default function Slider({ children }: Props) {
+const Slider = React.memo(({ children }: Props) => {
   const currentIndex = useSelector(selectors.currentIndex);
   const questionsLength = useSelector(selectors.questionsLength);
 
@@ -81,7 +81,9 @@ export default function Slider({ children }: Props) {
       </motion.div>
     </div>
   );
-}
+});
+
+export default Slider;
 
 const stylesWrapper = css`
   position: relative;

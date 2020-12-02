@@ -19,13 +19,17 @@
     "framer-motion": "^2.9.4",
     "gatsby": "^2.26.1",
     "gatsby-image": "^2.6.0",
+    "lodash.isequal": "^4.5.0",
+    "lodash.memoize": "^4.1.2",
+    "lorem-ipsum": "^2.0.3",
     "polished": "^4.0.5",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-redux": "^7.2.2",
     "redux": "^4.0.5",
     "reselect": "^4.0.0",
-    "resize-observer-polyfill": "^1.5.1"
+    "resize-observer-polyfill": "^1.5.1",
+    "twemoji": "^13.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

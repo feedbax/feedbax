@@ -8,25 +8,19 @@ import { jsx, css } from "@emotion/react";
 import { useSelector } from "react-redux";
 import { selectors } from "~store/modules/questions";
 
-function Dot({ index }: { index: number }) {
-  const currentIndex = useSelector(selectors.currentIndex);
+import Dot from "./Dot";
+import { DOTS_CENTER, MAX_DOTS, DOT_SIZE } from "./const";
 
-  const isCurrent = currentIndex === index;
-  const className = isCurrent ? "dot current" : "dot";
-
-  return <div className={className} />;
-}
-
-export default function Pagination() {
+const Pagination = React.memo(() => {
   const currentIndex = useSelector(selectors.currentIndex);
   const questionsLength = useSelector(selectors.questionsLength);
   const dots = new Array(questionsLength).fill(0);
 
   let style: React.CSSProperties = {};
 
-  if (currentIndex > 3 && questionsLength > 7) {
-    const $shiftX = (currentIndex - 3) * 9;
-    const shiftX = Math.min($shiftX, (questionsLength - 7) * 9);
+  if (currentIndex > DOTS_CENTER && questionsLength > MAX_DOTS) {
+    const $shiftX = (currentIndex - DOTS_CENTER) * DOT_SIZE;
+    const shiftX = Math.min($shiftX, (questionsLength - MAX_DOTS) * DOT_SIZE);
 
     style = {
       transform: `translateX(-${shiftX}px)`,
@@ -42,12 +36,14 @@ export default function Pagination() {
       </div>
     </div>
   );
-}
+});
+
+export default Pagination;
 
 const stylesDots = css`
   position: relative;
 
-  width: 63px;
+  width: ${MAX_DOTS * DOT_SIZE}px;
   overflow: hidden;
   margin: 0 auto;
   margin-top: 25px;
@@ -63,24 +59,5 @@ const stylesDots = css`
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
-
-    .dot {
-      flex: 0 0 auto;
-
-      position: relative;
-      width: 5px;
-      height: 5px;
-      background-color: #fff;
-      border-radius: 50%;
-      margin: 0px 2px;
-      transition: transform 0.3s ease 0s, opacity 0.3s ease 0s;
-      transform: scale(0.6);
-      opacity: 0.6;
-
-      &.current {
-        transform: scale(1);
-        opacity: 1;
-      }
-    }
   }
 `;

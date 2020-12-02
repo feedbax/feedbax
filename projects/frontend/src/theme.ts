@@ -4,3 +4,5 @@ export const colors = {
   third: "#ffffff",
   fourth: "#1f1f1f",
 } as const;
+
+export type Colors = keyof typeof colors;
