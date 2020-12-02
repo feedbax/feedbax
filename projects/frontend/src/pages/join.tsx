@@ -12,17 +12,24 @@ import Loading from "~components/join/Loading";
 import Event from "~components/event/Event";
 
 import { store } from "~store";
+import { actions } from "~store/modules/questions";
 
 type Props = {
   path: string;
   eventSlug?: string;
+  questionIndex?: string;
 };
 
-function JoinRoute({ eventSlug }: Props) {
+function JoinRoute({ eventSlug, questionIndex }: Props) {
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
     setTimeout(() => setLoading(false), 2000);
+
+    if (typeof questionIndex !== "undefined") {
+      const $questionIndex = parseInt(questionIndex, 10) - 1;
+      store.dispatch(actions.setCurrentIndex($questionIndex));
+    }
   }, []);
 
   return (
@@ -38,6 +45,8 @@ export default function Join() {
     <Provider store={store}>
       <Layout color="third">
         <Router>
+          <JoinRoute path="/join/:eventSlug/:questionIndex" />
+          <JoinRoute path="/:eventSlug/:questionIndex" />
           <JoinRoute path="/join/:eventSlug" />
           <JoinRoute path="/:eventSlug" />
         </Router>
