@@ -8,14 +8,17 @@ import { useSelector } from "react-redux";
 import { selectors } from "~store/modules/answers";
 
 import Answer from "./Answer";
+import { colors } from "~theme";
 
 const Answers = React.memo(() => {
   const answersIds = useSelector(selectors.currentAnswersIds);
 
   return (
     <div css={stylesAnswers}>
-      {answersIds.map(answerId => (
-        <Answer key={answerId} answerId={answerId} />
+      <div className="background" />
+
+      {answersIds.map((answerId, i) => (
+        <Answer key={answerId} answerId={answerId} first={i === 0} />
       ))}
     </div>
   );
@@ -24,6 +27,18 @@ const Answers = React.memo(() => {
 export default Answers;
 
 const stylesAnswers = css`
-  padding: 15px;
+  position: relative;
+  padding: 0 15px;
   box-sizing: border-box;
+  z-index: 1;
+
+  .background {
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 25px;
+    background-color: ${colors.second};
+  }
 `;

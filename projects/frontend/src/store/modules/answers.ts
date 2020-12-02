@@ -1,13 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createSelectorCreator, defaultMemoize } from "reselect";
-import { shallowEqual } from "react-redux";
 
-import { LoremIpsum } from "lorem-ipsum";
-
-import { WORDS } from "lorem-ipsum/src/constants/words";
-import emojis from "~assets/emoji-compact.json";
-
-import { initialState, selectors as questionsSelectors } from "./questions";
+import { selectors as questionsSelectors } from "./questions";
+import { createSelector } from "./selector";
+import { generateAnswer } from "./seed";
 
 import type { RootState } from "~store";
 import type { PayloadAction } from "@reduxjs/toolkit";
@@ -37,30 +32,6 @@ export type AnswersState = {
   currentFilter: AnswersFilter;
   answers: Array<AnswerState>;
 };
-
-const createSelector = createSelectorCreator(defaultMemoize, shallowEqual);
-const lorem = new LoremIpsum({
-  wordsPerSentence: {
-    max: 26,
-    min: 4,
-  },
-  words: [...new Array(1000).fill(WORDS).flat(), ...emojis],
-});
-
-// prettier-ignore
-const randomIntBetween = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1)) + min;
-const randomBool = () => Math.random() > 0.5;
-const randomInt = () => Math.round(Math.random() * 100);
-
-const generateAnswer = (index: number): AnswerState => ({
-  id: `answer-${index}`,
-  // prettier-ignore
-  questionId: `question-${randomIntBetween(0, initialState.questions.length - 1)}`,
-  text: lorem.generateSentences(1),
-  isMine: randomBool(),
-  hasLiked: randomBool(),
-  likesCount: randomInt(),
-});
 
 export const answersSlice = createSlice({
   name: "answer",

@@ -12,16 +12,20 @@ import { selectors } from "~store/modules/answers";
 
 import { useTwemoji } from "~hooks";
 
-type Props = { answerId: string };
+type Props = {
+  answerId: string;
+  first: boolean;
+};
 
-const Answer = React.memo(({ answerId }: Props) => {
-  const twemojiRef = useTwemoji();
+const Answer = React.memo(({ answerId, first }: Props) => {
+  const { injectEmojis } = useTwemoji();
 
+  const stylesFirst = first ? stylesAnswerFirst : null;
   const selector = useCallback(selectors.answerById(answerId), [answerId]);
   const [answer] = useSelector(selector);
 
   return (
-    <div ref={twemojiRef} css={stylesAnswer}>
+    <div ref={injectEmojis} css={[stylesAnswer, stylesFirst]}>
       {answer.text}
     </div>
   );
@@ -38,4 +42,14 @@ const stylesAnswer = css`
   position: relative;
   color: ${colors.first};
   font-size: ${between("14px", "16px", "300px", "1400px")};
+  background: ${colors.third};
+  z-index: 1;
+
+  &:nth-of-type(2) {
+    margin-top: 0;
+  }
+`;
+
+const stylesAnswerFirst = css`
+  margin-top: 0;
 `;

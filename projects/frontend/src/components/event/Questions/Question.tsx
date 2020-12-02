@@ -10,6 +10,8 @@ import { colors } from "~theme";
 import { useSelector } from "react-redux";
 import { selectors } from "~store/modules/questions";
 
+import { useTwemoji } from "~hooks";
+
 import type { QuestionState } from "~store/modules/questions";
 
 type QuestionProps = {
@@ -18,6 +20,8 @@ type QuestionProps = {
 };
 
 const Question = React.memo(({ question, index }: QuestionProps) => {
+  const { injectEmojis } = useTwemoji();
+
   const currentIndex = useSelector(selectors.currentIndex);
   const deltaIndex = index - currentIndex;
   const isCurrent = currentIndex === index;
@@ -30,7 +34,9 @@ const Question = React.memo(({ question, index }: QuestionProps) => {
       key={question.order}
     >
       <div className="number">{`${index + 1}`.padStart(2, "0")}</div>
-      <div className="text">{question.text}</div>
+      <div ref={injectEmojis} className="text">
+        {question.text}
+      </div>
     </div>
   );
 });

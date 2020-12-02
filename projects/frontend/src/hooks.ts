@@ -85,11 +85,11 @@ export const useHorizontalSwipe = () => {
 };
 
 export const useTwemoji = () => {
-  const ref = useCallback((element: HTMLElement | null) => {
+  const injectEmojis = useCallback((element: HTMLElement | null) => {
     if (element) {
       twemoji.parse(element);
     }
   }, []);
 
-  return ref;
+  return { injectEmojis };
 };

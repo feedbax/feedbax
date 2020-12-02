@@ -1,8 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createSelectorCreator, defaultMemoize } from "reselect";
-import { shallowEqual } from "react-redux";
 
-import { LoremIpsum } from "lorem-ipsum";
+import { generateQuestion } from "./seed";
+import { createSelector } from "./selector";
 
 import type { RootState } from "~store";
 import type { PayloadAction } from "@reduxjs/toolkit";
@@ -17,20 +16,6 @@ export type QuestionsState = {
   currentIndex: number;
   questions: Array<QuestionState>;
 };
-
-const createSelector = createSelectorCreator(defaultMemoize, shallowEqual);
-const lorem = new LoremIpsum({
-  wordsPerSentence: {
-    max: 16,
-    min: 4,
-  },
-});
-
-const generateQuestion = (order: number): QuestionState => ({
-  order,
-  id: `question-${order}`,
-  text: lorem.generateSentences(1),
-});
 
 export const initialState: QuestionsState = {
   currentIndex: 0,
