@@ -48,11 +48,11 @@ const stylesBackround = css`
   & .bot {
     background-image: url(${bot});
     background-position: bottom;
+
+    padding-bottom: 1px;
   }
 
   @media (orientation: portrait) {
-    /* height: 177vw; */
-
     & .top {
       max-width: 100%;
     }
