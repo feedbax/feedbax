@@ -14,6 +14,7 @@ export type AnswerState = {
   isMine: boolean;
   hasLiked: boolean;
   likesCount: number;
+  created: number;
 };
 
 export enum AnswersFilter {
@@ -55,6 +56,27 @@ export const actions = answersSlice.actions;
 const currentFilterSelector = (state: RootState) => state.answersState.currentFilter;
 const answersSelector = (state: RootState) => state.answersState.answers;
 
+type FilterAnswers = (
+  answers: AnswerState[],
+  filter: AnswersFilter
+) => AnswerState[];
+const filterAnswers: FilterAnswers = (answers, filter) => {
+  switch (filter) {
+    default:
+    case AnswersFilter.Recent: {
+      return answers;
+    }
+
+    case AnswersFilter.Mine: {
+      return answers.filter(a => a.isMine);
+    }
+
+    case AnswersFilter.Liked: {
+      return answers.sort((a, b) => b.likesCount - a.likesCount);
+    }
+  }
+};
+
 const currentAnswersSelector = createSelector(
   answersSelector,
   currentFilterSelector,
@@ -62,9 +84,14 @@ const currentAnswersSelector = createSelector(
 
   // prettier-ignore
   (answers, currentFilter, currentQuestionId) => (
-    answers
-      .filter(a => a.questionId === currentQuestionId)
+    filterAnswers(
+      answers
+        .filter(a => a.questionId === currentQuestionId)
+        .sort((a, b) => b.created - a.created),
+
+      currentFilter
     )
+  )
 );
 
 const currentAnswersIdsSelector = createSelector(

@@ -19,16 +19,11 @@ import { colors } from "~theme";
 import { useCallback } from "react";
 import { navigate } from "gatsby";
 
-const isProduction = process.env.GATSBY_ACTIVE_ENV === "production";
-
 export default function Home() {
   const eventCodeState = useState<string>("");
   const [eventCode] = eventCodeState;
 
-  const onLogin = useCallback(
-    () => navigate(isProduction ? `/${eventCode}` : `/join/${eventCode}`),
-    [eventCode]
-  );
+  const onLogin = useCallback(() => navigate(`/@/${eventCode}`), [eventCode]);
 
   return (
     <Layout>

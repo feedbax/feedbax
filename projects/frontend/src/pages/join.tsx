@@ -45,10 +45,9 @@ export default function Join() {
     <Provider store={store}>
       <Layout color="third">
         <Router>
-          <JoinRoute path="/join/:eventSlug/:questionIndex" />
-          <JoinRoute path="/:eventSlug/:questionIndex" />
-          <JoinRoute path="/join/:eventSlug" />
-          <JoinRoute path="/:eventSlug" />
+          <JoinRoute path="/@/:eventSlug/:questionIndex" />
+          <JoinRoute path="/@/:eventSlug" />
+          <JoinRoute path="/@" />
         </Router>
       </Layout>
     </Provider>

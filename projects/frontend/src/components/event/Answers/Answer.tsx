@@ -33,9 +33,11 @@ const Answer = React.memo(({ answerId, first }: Props) => {
       </div>
 
       <div className="like">
+        <span className="count">{answer.likesCount}</span>
+
         <IconButton
           icon="heart"
-          variant="outline"
+          variant={answer.hasLiked ? "filled" : "outline"}
           color={{ icon: "first", background: "third" }}
         />
       </div>
@@ -63,6 +65,8 @@ const stylesAnswer = css`
   justify-content: center;
   align-items: center;
 
+  font-family: "Klinic Slab Book";
+
   &:first-of-type {
     margin-top: 0;
   }
@@ -76,6 +80,19 @@ const stylesAnswer = css`
 
   .like {
     flex: 0 0 auto;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    .count {
+      min-width: 30px;
+      padding-right: 8px;
+      color: ${colors.first};
+      text-align: right;
+      font-size: ${between("12px", "14px", "300px", "1400px")};
+    }
   }
 `;
 

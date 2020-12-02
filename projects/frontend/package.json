@@ -5,7 +5,7 @@
   "version": "0.1.0",
   "license": "0BSD",
   "scripts": {
-    "build": "GATSBY_ACTIVE_ENV=production gatsby build",
+    "build": "gatsby build",
     "develop": "gatsby develop -p 3000",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "npm run develop",

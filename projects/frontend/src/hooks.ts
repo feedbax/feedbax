@@ -40,7 +40,6 @@ export const useSize = (type: "w" | "h" | "wh" = "wh") => {
 };
 
 export const useHorizontalSwipe = () => {
-  const rootRef = useRef(document.getElementById("___gatsby"));
   const [pointerEvent, setPointerEvent] = useState<TouchEvent>();
 
   useEffect(() => {

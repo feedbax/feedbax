@@ -19,14 +19,7 @@ exports.onCreatePage = async ({ page, actions }) => {
   const { createPage } = actions;
 
   if (page.path.match(/\/join/)) {
-    page.matchPath = "/join/*";
+    page.matchPath = "/@/*";
     createPage(page);
-
-    createPage({
-      ...page,
-
-      path: "404",
-      matchPath: "404",
-    });
   }
 };

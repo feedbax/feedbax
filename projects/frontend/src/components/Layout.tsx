@@ -22,6 +22,7 @@ import RobotoSlabRegular_woff2 from "~assets/fonts/RobotoSlab-Regular.woff2";
 import RobotoSlabRegular_woff from "~assets/fonts/RobotoSlab-Regular.woff";
 
 import "normalize.css";
+import { useEffect } from "react";
 
 type Props = {
   color?: keyof typeof colors;
@@ -33,10 +34,16 @@ const fixVhUnit = () => {
   document.documentElement.style.setProperty("--vh", `${vh}px`);
 };
 
-window.addEventListener("resize", fixVhUnit);
-fixVhUnit();
-
 export default function Layout({ children, color = "first" }: Props) {
+  useEffect(() => {
+    window.addEventListener("resize", fixVhUnit);
+    fixVhUnit();
+
+    return () => {
+      window.removeEventListener("resize", fixVhUnit);
+    };
+  }, []);
+
   return (
     <>
       <Global

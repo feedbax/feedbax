@@ -29,7 +29,7 @@ const loremQuestion = new LoremIpsum({
 
   // prettier-ignore
   words: [
-    ...new Array(200).fill(WORDS).flat(),
+    ...new Array(400).fill(WORDS).flat(),
     ...emojis
   ],
 });
@@ -53,4 +53,5 @@ export const generateAnswer = (index: number): AnswerState => ({
   isMine: randomBool(),
   hasLiked: randomBool(),
   likesCount: randomInt(),
+  created: Math.round(Date.now() * Math.random()),
 });

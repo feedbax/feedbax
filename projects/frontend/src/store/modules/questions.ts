@@ -28,25 +28,33 @@ export const questionsSlice = createSlice({
 
   reducers: {
     addToCurrentIndex: (state, action: PayloadAction<number>) => {
-      const newIndex = state.currentIndex + action.payload;
-      const newIndexBoundLeft =
-        newIndex < 0 ? state.questions.length - 1 : newIndex;
-      const newIndexBoundRight =
-        newIndexBoundLeft >= state.questions.length ? 0 : newIndexBoundLeft;
+      const questionsCount = state.questions.length;
 
-      state.currentIndex = newIndexBoundRight;
+      const minIndex = 0;
+      const maxIndex = questionsCount - 1;
+
+      let newIndex = state.currentIndex + action.payload;
+
+      newIndex = newIndex <= minIndex ? minIndex : newIndex;
+      newIndex = newIndex > maxIndex ? maxIndex : newIndex;
+
+      state.currentIndex = newIndex;
 
       return state;
     },
 
     setCurrentIndex: (state, action: PayloadAction<number>) => {
-      const newIndex = action.payload;
-      const newIndexBoundLeft =
-        newIndex < 0 ? state.questions.length - 1 : newIndex;
-      const newIndexBoundRight =
-        newIndexBoundLeft >= state.questions.length ? 0 : newIndexBoundLeft;
+      const questionsCount = state.questions.length;
 
-      state.currentIndex = newIndexBoundRight;
+      const minIndex = 0;
+      const maxIndex = questionsCount - 1;
+
+      let newIndex = action.payload;
+
+      newIndex = newIndex <= minIndex ? minIndex : newIndex;
+      newIndex = newIndex > maxIndex ? maxIndex : newIndex;
+
+      state.currentIndex = newIndex;
 
       return state;
     },
