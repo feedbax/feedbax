@@ -9,16 +9,16 @@ import isEqual from "lodash.isequal";
 import { jsx, css } from "@emotion/react";
 import { colors } from "~theme";
 
-import iconExitApp from "~assets/images/icons/exit_app.svg";
+import IconExitApp from "~assets/images/icons/exit_app.inline.svg";
 
-import iconHeartFilled from "~assets/images/icons/favorite_filled.svg";
-import iconHeartOutline from "~assets/images/icons/favorite_outline.svg";
+import IconHeartFilled from "~assets/images/icons/favorite_filled.inline.svg";
+import IconHeartOutline from "~assets/images/icons/favorite_outline.inline.svg";
 
-import iconClockFilled from "~assets/images/icons/clock_filled.svg";
-import iconClockOutline from "~assets/images/icons/clock_outline.svg";
+import IconClockFilled from "~assets/images/icons/clock_filled.inline.svg";
+import IconClockOutline from "~assets/images/icons/clock_outline.inline.svg";
 
-import iconPersonFilled from "~assets/images/icons/person_filled.svg";
-import iconPersonOutline from "~assets/images/icons/person_outline.svg";
+import IconPersonFilled from "~assets/images/icons/person_filled.inline.svg";
+import IconPersonOutline from "~assets/images/icons/person_outline.inline.svg";
 
 import type { CSSInterpolation } from "@emotion/serialize";
 import type { Colors } from "~theme";
@@ -26,79 +26,94 @@ import type { Colors } from "~theme";
 export type Icons = "heart" | "exit" | "clock" | "person";
 export type Variants = "none" | "filled" | "outline";
 
+type IconButtonColors = {
+  icon: Colors;
+  background: Colors;
+};
+
 type Props = {
-  color?: Colors;
+  color?: IconButtonColors;
   icon: Icons;
   variant?: Variants;
   size?: number;
   to?: string;
   styles?: CSSInterpolation;
-} & JSX.IntrinsicElements["button"];
+};
+
+const defaultColors: IconButtonColors = {
+  icon: "third",
+  background: "second",
+};
 
 const IconButton = React.memo((props: Props) => {
   const { icon, variant, to } = props;
   const { styles = {} } = props;
+  const { color = defaultColors } = props;
 
-  const image = <img src={getSrc(icon, variant)} />;
+  const Icon = getIcon(icon, variant);
   const $styles = [getStyles(props), css(styles)];
 
   if (to) {
     return (
       <Link to={to} css={$styles}>
-        {image}
+        <Icon fill={colors[color.icon]} />
       </Link>
     );
   } else {
-    return <button css={$styles}>{image}</button>;
+    return (
+      <button css={$styles}>
+        <Icon fill={colors[color.icon]} />
+      </button>
+    );
   }
 }, isEqual);
 
 export default IconButton;
 
-const getSrc = (icon: Icons, variant: Variants = "none") => {
+const getIcon = (icon: Icons, variant: Variants = "none") => {
   switch (`${icon}_${variant}`) {
     case "exit_none":
     case "exit_filled":
     case "exit_outline": {
-      return iconExitApp;
+      return IconExitApp;
     }
 
     case "heart_none":
     case "heart_filled": {
-      return iconHeartFilled;
+      return IconHeartFilled;
     }
 
     case "heart_outline": {
-      return iconHeartOutline;
+      return IconHeartOutline;
     }
 
     case "clock_none":
     case "clock_filled": {
-      return iconClockFilled;
+      return IconClockFilled;
     }
 
     case "clock_outline": {
-      return iconClockOutline;
+      return IconClockOutline;
     }
 
     case "person_none":
     case "person_filled": {
-      return iconPersonFilled;
+      return IconPersonFilled;
     }
 
     case "person_outline": {
-      return iconPersonOutline;
+      return IconPersonOutline;
     }
 
     default: {
-      return iconHeartFilled;
+      return IconHeartFilled;
     }
   }
 };
 
 const getStyles = (props: Props) => {
-  const { size = 28, disabled = false } = props;
-  const { color = "second" } = props;
+  const { size = 28 } = props;
+  const { color = defaultColors } = props;
 
   const shadowXY = Math.round(size * 0.1);
   const shadowBlur = Math.round(size * 0.2);
@@ -121,11 +136,11 @@ const getStyles = (props: Props) => {
     width: ${size}px;
     height: ${size}px;
 
-    background-color: ${colors[color]};
+    background-color: ${colors[color.background]};
     box-shadow: ${shadowXY}px ${shadowXY}px ${shadowBlur}px rgba(0, 0, 0, 0.18),
       -${shadowXY}px -${shadowXY}px ${shadowBlur}px rgba(255, 255, 255, 0.18);
 
-    img {
+    svg {
       padding: 0px;
       position: relative;
       cursor: pointer;
@@ -137,8 +152,8 @@ const getStyles = (props: Props) => {
       align-items: center;
       transition: opacity 0.3s ease 0s;
 
-      width: ${size - 12}px;
-      height: ${size - 12}px;
+      width: ${size - 14}px;
+      height: ${size - 14}px;
     }
   `;
 };

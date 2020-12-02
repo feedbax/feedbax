@@ -22,6 +22,7 @@
     "lodash.isequal": "^4.5.0",
     "lodash.memoize": "^4.1.2",
     "lorem-ipsum": "^2.0.3",
+    "normalize.css": "^8.0.1",
     "polished": "^4.0.5",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
@@ -34,6 +35,7 @@
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "gatsby-plugin-emotion": "5.1.0-next.0",
+    "gatsby-plugin-react-svg": "^3.0.0",
     "gatsby-plugin-sharp": "^2.9.1",
     "gatsby-source-filesystem": "^2.6.1",
     "gatsby-transformer-sharp": "^2.7.0",
