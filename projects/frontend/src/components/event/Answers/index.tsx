@@ -15,7 +15,7 @@ const Answers = React.memo(() => {
 
   return (
     <div css={stylesAnswers}>
-      <div className="background" />
+      <i className="background" />
 
       {answersIds.map((answerId, i) => (
         <Answer key={answerId} answerId={answerId} first={i === 0} />
@@ -34,11 +34,14 @@ const stylesAnswers = css`
 
   .background {
     position: absolute;
+    display: block;
     z-index: 0;
+
     top: 0;
     left: 0;
     width: 100%;
     height: 25px;
+
     background-color: ${colors.second};
   }
 `;
