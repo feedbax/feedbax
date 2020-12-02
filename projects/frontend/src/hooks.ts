@@ -41,14 +41,18 @@ export const useSize = (type: "w" | "h" | "wh" = "wh") => {
 
 export const useHorizontalSwipe = () => {
   const rootRef = useRef(document.getElementById("___gatsby"));
-  const [pointerEvent, setPointerEvent] = useState<PointerEvent>();
+  const [pointerEvent, setPointerEvent] = useState<TouchEvent>();
 
   useEffect(() => {
-    const handlePointerDown = (eventA: PointerEvent) => {
-      const { pageX: pageXA, pageY: pageYA } = eventA;
+    const onTouchStart = (eventA: TouchEvent) => {
+      if (eventA.touches.length > 1) return;
 
-      const onPointerMove = (eventB: PointerEvent) => {
-        const { pageX: pageXB, pageY: pageYB } = eventB;
+      const firstTouchA = eventA.touches[0];
+      const { pageX: pageXA, pageY: pageYA } = firstTouchA;
+
+      const onTouchMove = (eventB: TouchEvent) => {
+        const firstTouchB = eventB.touches[0];
+        const { pageX: pageXB, pageY: pageYB } = firstTouchB;
 
         const deltaX = pageXB - pageXA;
         const deltaY = pageYB - pageYA;
@@ -60,24 +64,24 @@ export const useHorizontalSwipe = () => {
 
         if (deltaXSquared > deltaYSquared && distance >= 20) {
           setPointerEvent(eventB);
-          rootRef.current?.removeEventListener("pointermove", onPointerMove);
+          window.removeEventListener("touchmove", onTouchMove);
         }
       };
 
-      const onPointerUp = () => {
+      const onTouchEnd = () => {
         setPointerEvent(undefined);
-        rootRef.current?.removeEventListener("pointermove", onPointerMove);
-        rootRef.current?.removeEventListener("pointerup", onPointerUp);
+        window.removeEventListener("touchmove", onTouchMove);
+        window.removeEventListener("touchend", onTouchEnd);
       };
 
-      rootRef.current?.addEventListener("pointermove", onPointerMove);
-      rootRef.current?.addEventListener("pointerup", onPointerUp);
+      window.addEventListener("touchmove", onTouchMove);
+      window.addEventListener("touchend", onTouchEnd);
     };
 
-    rootRef.current?.addEventListener("pointerdown", handlePointerDown);
+    window.addEventListener("touchstart", onTouchStart);
 
     return () => {
-      rootRef.current?.removeEventListener("pointerdown", handlePointerDown);
+      window.removeEventListener("touchstart", onTouchStart);
     };
   }, []);
 
