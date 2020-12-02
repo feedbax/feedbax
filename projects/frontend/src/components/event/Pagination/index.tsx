@@ -45,8 +45,6 @@ const stylesDots = css`
 
   width: ${MAX_DOTS * DOT_SIZE}px;
   overflow: hidden;
-  margin: 0 auto;
-  margin-top: 25px;
 
   display: flex;
   justify-content: flex-start;
