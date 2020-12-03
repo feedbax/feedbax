@@ -90,40 +90,65 @@ const stylesGlobal = css`
 
   @font-face {
     font-family: "Klinic Slab";
-    src: url(${KlinicSlabBold_woff2}) format("woff2"),
-      url(${KlinicSlabBold_woff}) format("woff");
+
+    // prettier-ignore
+    src:  local("Georgia"),
+          url(${KlinicSlabBold_woff2}) format("woff2"),
+          url(${KlinicSlabBold_woff}) format("woff");
+
     font-weight: bold;
     font-style: normal;
+    font-display: swap;
   }
 
   @font-face {
     font-family: "Klinic Slab Book";
-    src: url(${KlinicSlabBook_woff2}) format("woff2"),
-      url(${KlinicSlabBook_woff}) format("woff");
+
+    // prettier-ignore
+    src:  local("Georgia"),
+          url(${KlinicSlabBook_woff2}) format("woff2"),
+          url(${KlinicSlabBook_woff}) format("woff");
+
+    font-display: swap;
     font-weight: normal;
     font-style: normal;
   }
 
   @font-face {
     font-family: "Klinic Slab Book";
-    src: url(${KlinicSlabBookItalic_woff2}) format("woff2"),
-      url(${KlinicSlabBookItalic_woff}) format("woff");
+
+    // prettier-ignore
+    src:  local("Georgia"),
+          url(${KlinicSlabBookItalic_woff2}) format("woff2"),
+          url(${KlinicSlabBookItalic_woff}) format("woff");
+
+    font-display: swap;
     font-weight: normal;
     font-style: italic;
   }
 
   @font-face {
     font-family: "Roboto Slab";
-    src: url(${RobotoSlabBold_woff2}) format("woff2"),
-      url(${RobotoSlabBold_woff}) format("woff");
+
+    // prettier-ignore
+    src:  local("Georgia"),
+          url(${RobotoSlabBold_woff2}) format("woff2"),
+          url(${RobotoSlabBold_woff}) format("woff");
+
+    font-display: swap;
     font-weight: bold;
     font-style: normal;
   }
 
   @font-face {
     font-family: "Roboto Slab";
-    src: url(${RobotoSlabRegular_woff2}) format("woff2"),
-      url(${RobotoSlabRegular_woff}) format("woff");
+
+    // prettier-ignore
+    src:  local("Georgia"),
+          url(${RobotoSlabRegular_woff2}) format("woff2"),
+          url(${RobotoSlabRegular_woff}) format("woff");
+
+    font-display: swap;
     font-weight: normal;
     font-style: normal;
   }
