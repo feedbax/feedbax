@@ -37,10 +37,10 @@ const stylesAnswers = css`
     display: block;
     z-index: 0;
 
-    top: 0;
+    top: -1px;
     left: 0;
     width: 100%;
-    height: 25px;
+    height: 26px;
 
     background-color: ${colors.second};
   }
