@@ -19,7 +19,7 @@ const Filter = React.memo(({ filter }: FilterProps) => {
   const currentFilter = useSelector(selectors.currentFilter);
 
   const isCurrent = filter === currentFilter;
-  const css = isCurrent ? stylesFilterCurrent : {};
+  const stylesCurrent = isCurrent ? stylesFilterCurrent : null;
   const variant = isCurrent ? "filled" : "outline";
   const icon = getIcon(filter);
 
@@ -27,7 +27,7 @@ const Filter = React.memo(({ filter }: FilterProps) => {
   const setFilter = () => store.dispatch(action);
 
   return (
-    <div css={[stylesFilter, css]} onClick={setFilter}>
+    <div css={[stylesFilter, stylesCurrent]} onClick={setFilter}>
       <IconButton icon={icon} variant={variant} />
     </div>
   );
