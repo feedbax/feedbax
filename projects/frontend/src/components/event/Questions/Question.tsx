@@ -13,13 +13,18 @@ import { selectors } from "~store/modules/questions";
 import { useTwemoji } from "~hooks";
 
 import type { QuestionState } from "~store/modules/questions";
+import { useCallback } from "react";
 
 type QuestionProps = {
-  question: QuestionState;
+  questionId: string;
   index: number;
 };
 
-const Question = React.memo(({ question, index }: QuestionProps) => {
+const Question = React.memo(({ questionId, index }: QuestionProps) => {
+  // prettier-ignore
+  const selector = useCallback(selectors.questionById(questionId), [questionId,]);
+  const [question] = useSelector(selector);
+
   const { injectEmojis } = useTwemoji();
 
   const currentIndex = useSelector(selectors.currentIndex);

@@ -11,12 +11,12 @@ import { selectors } from "~store/modules/questions";
 import Question from "./Question";
 
 const Questions = React.memo(() => {
-  const questions = useSelector(selectors.questions);
+  const questionsIds = useSelector(selectors.questionsIds);
 
   return (
     <>
-      {questions.map((q, i) => (
-        <Question key={q.order} question={q} index={i} />
+      {questionsIds.map((questionId, i) => (
+        <Question key={questionId} questionId={questionId} index={i} />
       ))}
     </>
   );
