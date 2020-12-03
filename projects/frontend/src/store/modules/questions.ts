@@ -63,9 +63,14 @@ export const questionsSlice = createSlice({
 
 export const actions = questionsSlice.actions;
 
-const questionsSelector = createSelector(
-  (state: RootState) => state.questionsState.questions,
-  questions => [...questions].sort((q1, q2) => q1.order - q2.order)
+const questionsSelector = (state: RootState) => state.questionsState.questions;
+
+const questionsOrderedSelector = createSelector(questionsSelector, questions =>
+  [...questions].sort((q1, q2) => q1.order - q2.order)
+);
+
+const questionsIdsSelector = createSelector(questionsSelector, questions =>
+  questions.map(q => q.id)
 );
 
 // prettier-ignore
@@ -85,10 +90,18 @@ const currentQuestionIdSelector = createSelector(
   (index, questions) => questions[index].id
 );
 
+const questionByIdSelector = (questionId: string) =>
+  createSelector(questionsSelector, questions =>
+    questions.filter(q => q.id === questionId)
+  );
+
 export const selectors = {
   currentIndex: currentIndexSelector,
   currentQuestion: currentQuestionSelector,
   currentQuestionId: currentQuestionIdSelector,
   questionsLength: questionsLengthSelector,
   questions: questionsSelector,
+  questionsOrdered: questionsOrderedSelector,
+  questionsIds: questionsIdsSelector,
+  questionById: questionByIdSelector,
 };
