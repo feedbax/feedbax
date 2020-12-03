@@ -77,9 +77,8 @@ const stylesEventLogin = css`
     font-weight: normal;
     font-size: 26px;
 
-    display: flex;
-    align-items: center;
     text-indent: 36px;
+    text-align: left;
   }
 
   & .text {
