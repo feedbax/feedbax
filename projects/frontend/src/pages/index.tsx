@@ -1,6 +1,6 @@
 /** @jsx jsx */
 
-import { useState } from "react";
+import React, { useState, useCallback } from "react";
 
 import Background from "~components/frontpage/Background";
 import Title from "~components/frontpage/Title";
@@ -16,7 +16,6 @@ import Footer from "~components/Footer";
 import { jsx, css } from "@emotion/react";
 import { colors } from "~theme";
 
-import { useCallback } from "react";
 import { navigate } from "gatsby";
 
 export default function Home() {

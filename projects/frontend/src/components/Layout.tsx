@@ -1,7 +1,7 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 
-import React from "react";
+import React, { useEffect } from "react";
 
 import { jsx, css, Global } from "@emotion/react";
 import { colors } from "~theme";
@@ -22,7 +22,6 @@ import RobotoSlabRegular_woff2 from "~assets/fonts/RobotoSlab-Regular.woff2";
 import RobotoSlabRegular_woff from "~assets/fonts/RobotoSlab-Regular.woff";
 
 import "normalize.css";
-import { useEffect } from "react";
 
 type Props = {
   color?: keyof typeof colors;

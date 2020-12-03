@@ -6,6 +6,7 @@ import { generateAnswer } from "./seed";
 
 import type { RootState } from "~store";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import memoize from "lodash.memoize";
 
 export type AnswerState = {
   id: string;
@@ -39,7 +40,7 @@ export const answersSlice = createSlice({
 
   initialState: {
     currentFilter: AnswersFilter.Recent,
-    answers: new Array(100).fill(0).map((_, i) => generateAnswer(i)),
+    answers: new Array(1000).fill(0).map((_, i) => generateAnswer(i)),
   } as AnswersState,
 
   reducers: {
@@ -55,6 +56,17 @@ export const actions = answersSlice.actions;
 // prettier-ignore
 const currentFilterSelector = (state: RootState) => state.answersState.currentFilter;
 const answersSelector = (state: RootState) => state.answersState.answers;
+const answersMapSelector = (state: RootState) => {
+  const answers = state.answersState.answers;
+  const answersMap = new Map<string, AnswerState>();
+
+  for (let i = 0; i < answers.length; i += 1) {
+    const answer = answers[i];
+    answersMap.set(answer.id, answer);
+  }
+
+  return answersMap;
+};
 
 type FilterAnswers = (
   answers: AnswerState[],
@@ -99,14 +111,19 @@ const currentAnswersIdsSelector = createSelector(
   answers => answers.map(a => a.id)
 );
 
-const answerByIdSelector = (answerId: string) =>
-  createSelector(answersSelector, answers =>
-    answers.filter(a => a.id === answerId)
-  );
+const answerByIdSelector = createSelector(answersMapSelector, answersMap =>
+  memoize((answerId: string) => answersMap.get(answerId))
+);
+
+const getCurrentAnswersIdsSelector = createSelector(
+  currentAnswersIdsSelector,
+  answers => memoize((count: number) => answers.slice(0, count))
+);
 
 export const selectors = {
   currentFilter: currentFilterSelector,
   currentAnswers: currentAnswersSelector,
   currentAnswersIds: currentAnswersIdsSelector,
   answerById: answerByIdSelector,
+  getCurrentAnswersIds: getCurrentAnswersIdsSelector,
 };

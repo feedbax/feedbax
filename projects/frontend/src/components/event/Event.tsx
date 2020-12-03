@@ -1,7 +1,7 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 
-import React from "react";
+import React, { useRef, useEffect } from "react";
 
 import { jsx, css } from "@emotion/react";
 import { colors } from "~theme";
@@ -15,10 +15,22 @@ import Navigation from "~components/event/Navigation";
 import Filters from "~components/event/Filters";
 import Answers from "./Answers";
 
+import { selectors } from "~store/modules/questions";
+import { useSelector } from "react-redux";
+
 const Event = React.memo(() => {
+  const currentIndex = useSelector(selectors.currentIndex);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTop = 0;
+    }
+  }, [currentIndex, scrollContainerRef]);
+
   return (
     <div css={stylesEvent}>
-      <div className="scroll-container">
+      <div className="scroll-container" ref={scrollContainerRef}>
         <div css={stylesEventHeader}>
           <div className="content">
             <IconButton

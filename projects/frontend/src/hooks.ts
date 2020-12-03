@@ -87,12 +87,67 @@ export const useHorizontalSwipe = () => {
   return pointerEvent;
 };
 
-export const useTwemoji = () => {
-  const injectEmojis = useCallback((element: HTMLElement | null) => {
-    if (element) {
-      twemoji.parse(element);
+let __observer: IntersectionObserver | undefined;
+const parsedSet = new Set<Element>();
+
+const useIntersectionObserver = () => {
+  const [observer, setObserver] = useState(__observer);
+
+  useEffect(() => {
+    if (!observer) {
+      __observer = new IntersectionObserver(
+        function (entries) {
+          for (let i = 0; i < entries.length; i++) {
+            const entry = entries[i];
+
+            if (entry.isIntersecting && !parsedSet.has(entry.target)) {
+              parsedSet.add(entry.target);
+              twemoji.parse(entry.target as HTMLElement);
+            }
+          }
+        },
+        { threshold: [0] }
+      );
+
+      setObserver(__observer);
     }
-  }, []);
+  }, [setObserver]);
+
+  return {
+    ready: typeof observer !== "undefined",
+
+    observe: (element: HTMLElement) => {
+      observer?.observe(element);
+    },
+
+    unobserve: (element: HTMLElement) => {
+      parsedSet.delete(element);
+      observer?.unobserve(element);
+    },
+  };
+};
+
+export const useTwemoji = () => {
+  const { ready, observe, unobserve } = useIntersectionObserver();
+  const elementRef = useRef<HTMLElement>();
+
+  const injectEmojis = useCallback(
+    (element: HTMLElement | null) => {
+      if (ready && element && !elementRef.current) {
+        observe(element);
+        elementRef.current = element;
+      }
+    },
+    [ready, observe, elementRef.current]
+  );
+
+  useEffect(() => {
+    return () => {
+      if (ready && elementRef.current) {
+        unobserve(elementRef.current);
+      }
+    };
+  }, [ready, unobserve, elementRef.current]);
 
   return { injectEmojis };
 };

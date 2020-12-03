@@ -1,7 +1,7 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 
-import React from "react";
+import React, { useCallback } from "react";
 
 import { jsx, css } from "@emotion/react";
 import { between } from "polished";
@@ -9,7 +9,6 @@ import { colors } from "~theme";
 
 import Img, { FluidObject } from "gatsby-image";
 import { useStaticQuery, graphql } from "gatsby";
-import { useCallback } from "react";
 
 const benefits = [
   {

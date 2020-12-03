@@ -1,7 +1,7 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 
-import React from "react";
+import React, { useCallback } from "react";
 
 import { jsx, css } from "@emotion/react";
 import { between } from "polished";
@@ -11,9 +11,6 @@ import { useSelector } from "react-redux";
 import { selectors } from "~store/modules/questions";
 
 import { useTwemoji } from "~hooks";
-
-import type { QuestionState } from "~store/modules/questions";
-import { useCallback } from "react";
 
 type QuestionProps = {
   questionId: string;

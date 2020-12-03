@@ -23,21 +23,22 @@ const Answer = React.memo(({ answerId, first }: Props) => {
   const { injectEmojis } = useTwemoji();
 
   const stylesFirst = first ? stylesAnswerFirst : null;
-  const selector = useCallback(selectors.answerById(answerId), [answerId]);
-  const [answer] = useSelector(selector);
+
+  const getAnswer = useSelector(selectors.answerById);
+  const answer = getAnswer(answerId);
 
   return (
     <div css={[stylesAnswer, stylesFirst]}>
       <div className="text" ref={injectEmojis}>
-        {answer.text}
+        {answer?.text}
       </div>
 
       <div className="like">
-        <span className="count">{answer.likesCount}</span>
+        <span className="count">{answer?.likesCount}</span>
 
         <IconButton
           icon="heart"
-          variant={answer.hasLiked ? "filled" : "outline"}
+          variant={answer?.hasLiked ? "filled" : "outline"}
           color={{ icon: "first", background: "third" }}
         />
       </div>
