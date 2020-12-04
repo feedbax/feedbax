@@ -64,7 +64,7 @@ export default Answers;
 
 const stylesLoadMore = css`
   position: absolute;
-  bottom: 100vw;
+  bottom: 100vh;
   height: 1px;
   width: 1px;
 `;

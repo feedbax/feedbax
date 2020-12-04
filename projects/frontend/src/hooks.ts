@@ -2,7 +2,7 @@ import { useEffect, useLayoutEffect } from "react";
 import { useState, useRef } from "react";
 import { useCallback } from "react";
 
-import twemoji from "twemoji";
+import twemoji, { ParseObject } from "twemoji";
 import ResizeObserver from "resize-observer-polyfill";
 
 export const useSize = (type: "w" | "h" | "wh" = "wh") => {
@@ -90,6 +90,10 @@ export const useHorizontalSwipe = () => {
 let __observer: IntersectionObserver | undefined;
 const parsedSet = new Set<Element>();
 
+const imageSourceGenerator = (icon: string) => `/twemoji/72x72/${icon}.png`;
+const props = { callback: imageSourceGenerator };
+const twemojiParse = (el: HTMLElement) => twemoji.parse(el, props);
+
 const useIntersectionObserver = () => {
   const [observer, setObserver] = useState(__observer);
 
@@ -102,7 +106,7 @@ const useIntersectionObserver = () => {
 
             if (entry.isIntersecting && !parsedSet.has(entry.target)) {
               parsedSet.add(entry.target);
-              twemoji.parse(entry.target as HTMLElement);
+              twemojiParse(entry.target as HTMLElement);
             }
           }
         },

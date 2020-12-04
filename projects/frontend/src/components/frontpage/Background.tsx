@@ -5,6 +5,7 @@ import { jsx, css } from "@emotion/react";
 
 import top from "~assets/images/top.svg";
 import bot from "~assets/images/bot.svg";
+import { colors } from "~theme";
 
 export default function Background() {
   return (
@@ -23,6 +24,12 @@ const stylesBackround = css`
 
   width: 100%;
   height: 100%;
+
+  max-height: 100vh;
+  max-height: calc(100vh + 0.25 * 100vw);
+  max-height: calc((var(--vh, 1vh) * 100) + 0.25 * 100vw);
+
+  background-color: ${colors.third};
 
   z-index: 0 !important;
 

@@ -1,14 +1,17 @@
 /** @jsx jsx */
 
 import "react";
+import { useTranslation } from "react-i18next";
 
 import { jsx, css } from "@emotion/react";
 import { colors } from "~theme";
 
 export default function SeeMore() {
+  const { t } = useTranslation();
+
   return (
     <div css={stylesSeeMore}>
-      <span>Mehr über feedb.ax</span>
+      <span>{t("frontpage:see-more")}</span>
       <div />
     </div>
   );

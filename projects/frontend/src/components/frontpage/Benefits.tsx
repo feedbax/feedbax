@@ -2,6 +2,7 @@
 /** @jsxFrag React.Fragment */
 
 import React, { useCallback } from "react";
+import { Translation } from "react-i18next";
 
 import { jsx, css } from "@emotion/react";
 import { between } from "polished";
@@ -15,7 +16,12 @@ const benefits = [
     image: "benefit_1",
     text: {
       align: "center",
-      content: <>Finde heraus, was Teilnehmer bewegt.</>,
+      // prettier-ignore
+      content: (
+        <Translation>{
+          t => <>{t("frontpage:benefit-1")}</>
+        }</Translation>
+      ),
     },
   },
 
@@ -23,7 +29,12 @@ const benefits = [
     image: "benefit_2",
     text: {
       align: "center",
-      content: <>Fragen, Antworten, Stimmungsbilder.</>,
+      // prettier-ignore
+      content: (
+        <Translation>{
+          t => <>{t("frontpage:benefit-2")}</>
+        }</Translation>
+      ),
     },
   },
 
@@ -31,7 +42,12 @@ const benefits = [
     image: "benefit_3",
     text: {
       align: "center",
-      content: <>Kostenlos, übersichtlich, einfach, schnell.</>,
+      // prettier-ignore
+      content: (
+        <Translation>{
+          t => <>{t("frontpage:benefit-3")}</>
+        }</Translation>
+      ),
     },
   },
 
@@ -40,15 +56,20 @@ const benefits = [
     text: {
       align: "left",
       content: (
-        <>
-          Vorteile
-          <small>
-            <ul>
-              <li>komplett spendenbasiert</li>
-              <li>kein Limit bei Events &amp; Fragen</li>
-            </ul>
-          </small>
-        </>
+        <Translation>
+          {t => (
+            <>
+              {t("frontpage:benefit-4:title")}
+
+              <small>
+                <ul>
+                  <li>{t("frontpage:benefit-4:content-1")}</li>
+                  <li>{t("frontpage:benefit-4:content-2")}</li>
+                </ul>
+              </small>
+            </>
+          )}
+        </Translation>
       ),
     },
   },
@@ -58,13 +79,15 @@ const benefits = [
     text: {
       align: "left",
       content: (
-        <>
-          Du planst eine große Veranstaltung?
-          <small>
-            Meld dich bei unserem Entwickler für detaillierte Absprachen.
-          </small>
-          <code>silas[at]sat-dillenburg.de</code>
-        </>
+        <Translation>
+          {t => (
+            <>
+              {t("frontpage:benefit-5:title")}
+              <small>{t("frontpage:benefit-5:content-1")}</small>
+              <code>{t("frontpage:benefit-5:content-2")}</code>
+            </>
+          )}
+        </Translation>
       ),
     },
   },
@@ -74,13 +97,14 @@ const benefits = [
     text: {
       align: "left",
       content: (
-        <>
-          Spende
-          <small>
-            Wenn du feedb.ax gut findest, kannst du die CJ und unseren
-            Entwickler mit einem Beitrag deiner Wahl supporten.
-          </small>
-        </>
+        <Translation>
+          {t => (
+            <>
+              {t("frontpage:benefit-6:title")}
+              <small>{t("frontpage:benefit-6:content-1")}</small>
+            </>
+          )}
+        </Translation>
       ),
     },
   },

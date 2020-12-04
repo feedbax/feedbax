@@ -1,6 +1,7 @@
 /** @jsx jsx */
 
 import "react";
+import { useTranslation } from "react-i18next";
 
 import { jsx, css } from "@emotion/react";
 import { between } from "polished";
@@ -9,12 +10,14 @@ import { colors } from "~theme";
 import { Link } from "gatsby";
 
 export default function Footer() {
+  const { t } = useTranslation();
+
   return (
     <div css={stylesFooter}>
       <div className="title">feedb.ax</div>
       <div className="copy">&copy; 2019 - 2020 feedb.ax by 365STEPS</div>
       <Link to="/legal/privacy-policy" className="links">
-        Datenschutz &amp; Impressum
+        {t("generic:footer")}
       </Link>
     </div>
   );

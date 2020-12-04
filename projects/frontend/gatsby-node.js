@@ -1,9 +1,10 @@
 const path = require("path");
 
-exports.onCreateWebpackConfig = ({ actions }) => {
+exports.onCreateWebpackConfig = ({ actions, rules }) => {
   actions.setWebpackConfig({
     resolve: {
       alias: {
+        "~i18n": path.resolve(__dirname, "src/i18n"),
         "~components": path.resolve(__dirname, "src/components"),
         "~store": path.resolve(__dirname, "src/store"),
         "~assets": path.resolve(__dirname, "src/assets"),

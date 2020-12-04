@@ -152,8 +152,8 @@ const getStyles = (props: Props) => {
       align-items: center;
       transition: opacity 0.3s ease 0s;
 
-      width: ${size - 14}px;
-      height: ${size - 14}px;
+      width: ${size - 12}px;
+      height: ${size - 12}px;
     }
   `;
 };

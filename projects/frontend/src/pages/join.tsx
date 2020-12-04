@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 
 import { jsx } from "@emotion/react";
 
-import Layout from "~components/Layout";
+import GlobalStyles from "~components/GlobalStyles";
 import Loading from "~components/join/Loading";
 import Event from "~components/event/Event";
 
@@ -43,13 +43,13 @@ function JoinRoute({ eventSlug, questionIndex }: Props) {
 export default function Join() {
   return (
     <Provider store={store}>
-      <Layout color="third">
-        <Router>
-          <JoinRoute path="/@/:eventSlug/:questionIndex" />
-          <JoinRoute path="/@/:eventSlug" />
-          <JoinRoute path="/@" />
-        </Router>
-      </Layout>
+      <GlobalStyles color="third" />
+
+      <Router>
+        <JoinRoute path="/@/:eventSlug/:questionIndex" />
+        <JoinRoute path="/@/:eventSlug" />
+        <JoinRoute path="/@" />
+      </Router>
     </Provider>
   );
 }

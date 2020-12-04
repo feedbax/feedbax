@@ -1,6 +1,7 @@
 /** @jsx jsx */
 
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 import { jsx, css } from "@emotion/react";
 import { between } from "polished";
@@ -8,6 +9,7 @@ import { colors } from "~theme";
 
 export default function EventLogin({ eventCodeState, onLogin }: Props) {
   const [eventCode, setEventCode] = eventCodeState;
+  const { t } = useTranslation();
 
   return (
     <div css={stylesEventLogin}>
@@ -22,7 +24,7 @@ export default function EventLogin({ eventCodeState, onLogin }: Props) {
       <input
         className="button"
         type="submit"
-        value="Los geht’s"
+        value={t<string>("frontpage:lets-go")}
         onClick={onLogin}
       />
     </div>

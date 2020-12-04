@@ -1,0 +1,39 @@
+{
+  "frontpage": {
+    "lets-go": "Let's go",
+    "see-more": "More about feedb.ax",
+    "your-tool": "The survey tool for your event.",
+    "benefit-1": "Find out what moves participants.",
+    "benefit-2": "Questions, answers, moods.",
+    "benefit-3": "Free of charge, clear, simple, fast.",
+
+    "benefit-4": {
+      "title": "Benefits",
+      "content-1": "fully donation-based",
+      "content-2": "no limit for events & questions"
+    },
+
+    "benefit-5": {
+      "title": "You're planning a big event?",
+      "content-1": "Contact our developer for detailed arrangements.",
+      "content-2": "silas[at]sat-dillenburg.de"
+    },
+
+    "benefit-6": {
+      "title": "Donation",
+      "content-1": "If you like feedb.ax, you can support the CJ and our developer with a contribution of your choice."
+    }
+  },
+
+  "privacy-policy": {
+    "open-source-licenses": "open-source licenses",
+    "privacy": {
+      "title": "privacy",
+      "content": "We are very pleased that you are using feedb.ax, powered by 365 STEPS. feedb.ax is a survey tool that was conceived and realized within the STEPS project of the Christliche Jugendpflege e. V. As a team, it is important to us that the protection and security of your personal data is maintained."
+    }
+  },
+
+  "generic": {
+    "footer": "Privacy Policy & Imprint"
+  }
+}

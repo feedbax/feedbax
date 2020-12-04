@@ -1,6 +1,7 @@
 /** @jsx jsx */
 
 import "react";
+import { useTranslation } from "react-i18next";
 
 import { jsx, css } from "@emotion/react";
 import { between } from "polished";
@@ -11,10 +12,11 @@ import { useStaticQuery, graphql } from "gatsby";
 
 export default function YourTool() {
   const data = useStaticQuery(query);
+  const { t } = useTranslation();
 
   return (
     <div css={stylesTool}>
-      <div className="text">Das Umfrage-Tool für deine Veranstaltung.</div>
+      <div className="text">{t("frontpage:your-tool")}</div>
 
       <Img
         className="image"
@@ -41,9 +43,10 @@ const query = graphql`
 const stylesTool = css`
   position: relative;
   width: 100%;
-  max-width: 1400px;
+  max-width: 1000px;
   margin: 0 auto;
   margin-top: 50px;
+  margin-top: ${between("50px", "100px", "300px", "1400px")};
 
   display: flex;
   flex-direction: row;
@@ -51,7 +54,7 @@ const stylesTool = css`
   align-items: center;
 
   .text {
-    flex: 0 0 0;
+    flex: 1 0 0;
     position: relative;
 
     font-family: "Klinic Slab";

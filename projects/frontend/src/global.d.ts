@@ -22,3 +22,8 @@ declare module "*.woff2" {
   const path: string;
   export default path;
 }
+
+declare module "*.mdx" {
+  const mdx: React.FC<unknown>;
+  export default mdx;
+}

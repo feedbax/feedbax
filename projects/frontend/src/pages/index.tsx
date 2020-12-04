@@ -9,7 +9,9 @@ import SeeMore from "~components/frontpage/SeeMore";
 import YourTool from "~components/frontpage/YourTool";
 import Benefits from "~components/frontpage/Benefits";
 
-import Layout from "~components/Layout";
+import GlobalStyles from "~components/GlobalStyles";
+import I18n from "~components/I18n";
+
 import Logo from "~components/Logo";
 import Footer from "~components/Footer";
 
@@ -25,30 +27,31 @@ export default function Home() {
   const onLogin = useCallback(() => navigate(`/@/${eventCode}`), [eventCode]);
 
   return (
-    <Layout>
-      <div css={stylesFront}>
-        <Background />
+    <div css={stylesFront}>
+      <I18n />
+      <GlobalStyles />
 
-        <div className="content">
-          <Logo styles={{ marginTop: "30px" }} />
+      <Background />
 
-          <div>
-            <Title />
+      <div className="content">
+        <Logo styles={{ marginTop: "30px" }} />
 
-            <EventLogin onLogin={onLogin} eventCodeState={eventCodeState} />
-          </div>
+        <div>
+          <Title />
 
-          <SeeMore />
+          <EventLogin onLogin={onLogin} eventCodeState={eventCodeState} />
         </div>
 
-        <div css={stylesMore}>
-          <YourTool />
-          <Benefits />
-        </div>
-
-        <Footer />
+        <SeeMore />
       </div>
-    </Layout>
+
+      <div css={stylesMore}>
+        <YourTool />
+        <Benefits />
+      </div>
+
+      <Footer />
+    </div>
   );
 }
 
@@ -62,12 +65,11 @@ const stylesMore = css`
 const stylesFront = css`
   position: relative;
 
-  height: 80vw;
   min-height: 100vh;
   min-height: calc(100vh + 0.25 * 100vw);
   min-height: calc((var(--vh, 1vh) * 100) + 0.25 * 100vw);
 
-  background-color: ${colors.third};
+  background-color: ${colors.first};
 
   & * {
     z-index: 1;
