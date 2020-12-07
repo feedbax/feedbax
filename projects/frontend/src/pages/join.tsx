@@ -46,6 +46,9 @@ export default function Join() {
       <GlobalStyles color="third" />
 
       <Router>
+        <JoinRoute path=":locale/@/:eventSlug/:questionIndex" />
+        <JoinRoute path=":locale/@/:eventSlug" />
+        <JoinRoute path=":locale/@" />
         <JoinRoute path="/@/:eventSlug/:questionIndex" />
         <JoinRoute path="/@/:eventSlug" />
         <JoinRoute path="/@" />

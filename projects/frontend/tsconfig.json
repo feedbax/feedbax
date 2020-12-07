@@ -27,6 +27,8 @@
       "~pages/*": ["src/pages/*"],
       "~hooks": ["src/hooks"],
       "~theme": ["src/theme"]
-    }
+    },
+
+    "plugins": [{ "transform": "@zerollup/ts-transform-paths" }]
   }
 }

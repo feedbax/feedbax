@@ -1,7 +1,7 @@
 /** @jsx jsx */
 
 import "react";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "~i18n/hook";
 
 import { jsx, css } from "@emotion/react";
 import { colors } from "~theme";
@@ -11,7 +11,7 @@ export default function SeeMore() {
 
   return (
     <div css={stylesSeeMore}>
-      <span>{t("frontpage:see-more")}</span>
+      <span>{t("frontpage", "see-more")}</span>
       <div />
     </div>
   );

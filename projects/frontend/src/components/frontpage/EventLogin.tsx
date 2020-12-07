@@ -1,7 +1,7 @@
 /** @jsx jsx */
 
 import React from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "~i18n/hook";
 
 import { jsx, css } from "@emotion/react";
 import { between } from "polished";
@@ -24,7 +24,7 @@ export default function EventLogin({ eventCodeState, onLogin }: Props) {
       <input
         className="button"
         type="submit"
-        value={t<string>("frontpage:lets-go")}
+        value={t("frontpage", "lets-go")}
         onClick={onLogin}
       />
     </div>

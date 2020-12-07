@@ -1,35 +1,19 @@
-/**
- * Configure your Gatsby site with this file.
- *
- * See: https://www.gatsbyjs.com/docs/gatsby-config/
- */
+const config = require("./tsconfig.json");
 
-const path = require(`path`);
+const noop = () => undefined;
+require.extensions[".mdx"] = noop;
 
-module.exports = {
-  /* Your site config here */
-  plugins: [
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `images`,
-        path: path.join(__dirname, `src/assets/images`),
-      },
-    },
+require("source-map-support").install();
+require("ts-node").register({
+  ...config,
 
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
-    `gatsby-plugin-emotion`,
+  compiler: "ttypescript",
+  compilerOptions: {
+    ...config.compilerOptions,
 
-    {
-      resolve: "gatsby-plugin-react-svg",
-      options: {
-        rule: {
-          include: /\.inline\.svg$/,
-        },
-      },
-    },
+    module: "commonjs",
+    target: "es2017",
+  },
+});
 
-    `gatsby-plugin-mdx`,
-  ],
-};
+module.exports = require("./gatsby-config.ts");

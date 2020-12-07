@@ -1,3 +1,5 @@
+/// <reference path="../../../global.d.ts" />
+
 import translations from "./translations.json";
 import PrivacyPolicy from "./privacy-policy.mdx";
 

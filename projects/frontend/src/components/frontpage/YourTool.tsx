@@ -1,7 +1,7 @@
 /** @jsx jsx */
 
 import "react";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "~i18n/hook";
 
 import { jsx, css } from "@emotion/react";
 import { between } from "polished";
@@ -16,7 +16,7 @@ export default function YourTool() {
 
   return (
     <div css={stylesTool}>
-      <div className="text">{t("frontpage:your-tool")}</div>
+      <div className="text">{t("frontpage", "your-tool")}</div>
 
       <Img
         className="image"

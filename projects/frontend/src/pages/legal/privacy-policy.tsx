@@ -1,25 +1,25 @@
 /** @jsx jsx */
 
 import "react";
+import { useTranslation } from "~i18n/hook";
 
 import { jsx, css } from "@emotion/react";
 import { colors } from "~theme";
 
 import GlobalStyles from "~components/GlobalStyles";
-import I18n from "~components/I18n";
+import { Languages } from "~components/I18n";
 
 import Footer from "~components/Footer";
 import Logo from "~components/Logo";
-import { useTranslation } from "react-i18next";
 
 export default function PrivacyPolicy() {
   const { t } = useTranslation();
-  const Content = t("privacy-policy:content");
+  const Content = t("privacy-policy", "content");
 
   return (
     <div css={stylesLegal}>
       <GlobalStyles />
-      <I18n />
+      <Languages />
 
       <Logo />
 

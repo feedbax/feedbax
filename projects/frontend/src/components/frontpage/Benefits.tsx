@@ -2,7 +2,7 @@
 /** @jsxFrag React.Fragment */
 
 import React, { useCallback } from "react";
-import { Translation } from "react-i18next";
+import { Translation } from "~i18n/hook";
 
 import { jsx, css } from "@emotion/react";
 import { between } from "polished";
@@ -19,7 +19,7 @@ const benefits = [
       // prettier-ignore
       content: (
         <Translation>{
-          t => <>{t("frontpage:benefit-1")}</>
+          t => <>{t("frontpage", "benefit-1")}</>
         }</Translation>
       ),
     },
@@ -32,7 +32,7 @@ const benefits = [
       // prettier-ignore
       content: (
         <Translation>{
-          t => <>{t("frontpage:benefit-2")}</>
+          t => <>{t("frontpage", "benefit-2")}</>
         }</Translation>
       ),
     },
@@ -45,7 +45,7 @@ const benefits = [
       // prettier-ignore
       content: (
         <Translation>{
-          t => <>{t("frontpage:benefit-3")}</>
+          t => <>{t("frontpage", "benefit-3")}</>
         }</Translation>
       ),
     },
@@ -59,12 +59,12 @@ const benefits = [
         <Translation>
           {t => (
             <>
-              {t("frontpage:benefit-4:title")}
+              {t("frontpage", "benefit-4", "title")}
 
               <small>
                 <ul>
-                  <li>{t("frontpage:benefit-4:content-1")}</li>
-                  <li>{t("frontpage:benefit-4:content-2")}</li>
+                  <li>{t("frontpage", "benefit-4", "content-1")}</li>
+                  <li>{t("frontpage", "benefit-4", "content-2")}</li>
                 </ul>
               </small>
             </>
@@ -82,9 +82,9 @@ const benefits = [
         <Translation>
           {t => (
             <>
-              {t("frontpage:benefit-5:title")}
-              <small>{t("frontpage:benefit-5:content-1")}</small>
-              <code>{t("frontpage:benefit-5:content-2")}</code>
+              {t("frontpage", "benefit-5", "title")}
+              <small>{t("frontpage", "benefit-5", "content-1")}</small>
+              <code>{t("frontpage", "benefit-5", "content-2")}</code>
             </>
           )}
         </Translation>
@@ -100,8 +100,8 @@ const benefits = [
         <Translation>
           {t => (
             <>
-              {t("frontpage:benefit-6:title")}
-              <small>{t("frontpage:benefit-6:content-1")}</small>
+              {t("frontpage", "benefit-6", "title")}
+              <small>{t("frontpage", "benefit-6", "content-1")}</small>
             </>
           )}
         </Translation>

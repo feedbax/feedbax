@@ -1,7 +1,7 @@
 /** @jsx jsx */
 
 import "react";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "~i18n/hook";
 
 import { jsx, css } from "@emotion/react";
 import { between } from "polished";
@@ -17,7 +17,7 @@ export default function Footer() {
       <div className="title">feedb.ax</div>
       <div className="copy">&copy; 2019 - 2020 feedb.ax by 365STEPS</div>
       <Link to="/legal/privacy-policy" className="links">
-        {t("generic:footer")}
+        {t("generic", "footer")}
       </Link>
     </div>
   );

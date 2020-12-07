@@ -2,7 +2,7 @@ import { useEffect, useLayoutEffect } from "react";
 import { useState, useRef } from "react";
 import { useCallback } from "react";
 
-import twemoji, { ParseObject } from "twemoji";
+import twemoji from "twemoji";
 import ResizeObserver from "resize-observer-polyfill";
 
 export const useSize = (type: "w" | "h" | "wh" = "wh") => {
@@ -87,20 +87,17 @@ export const useHorizontalSwipe = () => {
   return pointerEvent;
 };
 
-let __observer: IntersectionObserver | undefined;
 const parsedSet = new Set<Element>();
 
 const imageSourceGenerator = (icon: string) => `/twemoji/72x72/${icon}.png`;
 const props = { callback: imageSourceGenerator };
 const twemojiParse = (el: HTMLElement) => twemoji.parse(el, props);
 
-const useIntersectionObserver = () => {
-  const [observer, setObserver] = useState(__observer);
-
-  useEffect(() => {
-    if (!observer) {
-      __observer = new IntersectionObserver(
-        function (entries) {
+const twemojiRenderer =
+  typeof window === "undefined"
+    ? undefined
+    : new IntersectionObserver(
+        entries => {
           for (let i = 0; i < entries.length; i++) {
             const entry = entries[i];
 
@@ -113,45 +110,23 @@ const useIntersectionObserver = () => {
         { threshold: [0] }
       );
 
-      setObserver(__observer);
-    }
-  }, [setObserver]);
-
-  return {
-    ready: typeof observer !== "undefined",
-
-    observe: (element: HTMLElement) => {
-      observer?.observe(element);
-    },
-
-    unobserve: (element: HTMLElement) => {
-      parsedSet.delete(element);
-      observer?.unobserve(element);
-    },
-  };
-};
-
 export const useTwemoji = () => {
-  const { ready, observe, unobserve } = useIntersectionObserver();
   const elementRef = useRef<HTMLElement>();
 
-  const injectEmojis = useCallback(
-    (element: HTMLElement | null) => {
-      if (ready && element && !elementRef.current) {
-        observe(element);
-        elementRef.current = element;
-      }
-    },
-    [ready, observe, elementRef.current]
-  );
+  const injectEmojis = useCallback((element: HTMLElement | null) => {
+    if (element && twemojiRenderer) {
+      elementRef.current = element;
+      twemojiRenderer.observe(element);
+    }
+  }, []);
 
   useEffect(() => {
     return () => {
-      if (ready && elementRef.current) {
-        unobserve(elementRef.current);
+      if (elementRef.current && twemojiRenderer) {
+        twemojiRenderer.unobserve(elementRef.current);
       }
     };
-  }, [ready, unobserve, elementRef.current]);
+  }, []);
 
   return { injectEmojis };
 };

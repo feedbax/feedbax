@@ -10,7 +10,7 @@ import YourTool from "~components/frontpage/YourTool";
 import Benefits from "~components/frontpage/Benefits";
 
 import GlobalStyles from "~components/GlobalStyles";
-import I18n from "~components/I18n";
+import { Languages } from "~components/I18n";
 
 import Logo from "~components/Logo";
 import Footer from "~components/Footer";
@@ -28,8 +28,8 @@ export default function Home() {
 
   return (
     <div css={stylesFront}>
-      <I18n />
       <GlobalStyles />
+      <Languages />
 
       <Background />
 

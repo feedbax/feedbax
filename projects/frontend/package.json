@@ -40,12 +40,18 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
+    "@types/react-redux": "^7.1.11",
+    "@types/twemoji": "^12.1.1",
+    "@zerollup/ts-transform-paths": "^1.7.18",
     "gatsby-plugin-emotion": "5.1.0-next.0",
     "gatsby-plugin-react-svg": "^3.0.0",
     "gatsby-plugin-sharp": "^2.9.1",
     "gatsby-source-filesystem": "^2.6.1",
     "gatsby-transformer-sharp": "^2.7.0",
     "prettier": "2.1.2",
+    "source-map-support": "^0.5.19",
+    "ts-node": "^9.1.0",
+    "ttypescript": "^1.5.12",
     "typescript": "^4.1.2"
   },
   "repository": {

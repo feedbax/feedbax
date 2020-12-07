@@ -1,24 +1,39 @@
-import i18n from "i18next";
-import LanguageDetector from "i18next-browser-languagedetector";
+// import i18n from "i18next";
+// import LanguageDetector from "i18next-browser-languagedetector";
 
-import { initReactI18next } from "react-i18next";
+import { createContext } from "react";
+// import { initReactI18next } from "react-i18next";
 
-import de from "~i18n/locales/de";
-import en from "~i18n/locales/en";
+import { locales, translations } from "~i18n/locales";
+export { locales, translations } from "~i18n/locales";
 
-export const languages = ["de", "en"];
+import type { Locales, Translations } from "~i18n/locales";
 
-i18n
-  .use(LanguageDetector)
-  .use(initReactI18next)
-  .init({
-    resources: { de, en },
+export const languages = locales;
 
-    fallbackLng: languages,
+type Context = {
+  locale: Locales;
+  originalPath: string;
+  translation: Translations;
+};
 
-    interpolation: {
-      escapeValue: false,
-    },
-  });
+export const TranslationContext = createContext<Context>({
+  locale: "de",
+  originalPath: "/",
+  translation: translations.de,
+});
 
-export default i18n;
+// i18n
+//   .use(LanguageDetector)
+//   .use(initReactI18next)
+//   .init({
+//     resources: { ...translations },
+
+//     fallbackLng: [...locales],
+
+//     interpolation: {
+//       escapeValue: false,
+//     },
+//   });
+
+// export default i18n;
