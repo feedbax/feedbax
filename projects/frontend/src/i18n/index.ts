@@ -1,15 +1,9 @@
-// import i18n from "i18next";
-// import LanguageDetector from "i18next-browser-languagedetector";
-
 import { createContext } from "react";
-// import { initReactI18next } from "react-i18next";
-
-import { locales, translations } from "~i18n/locales";
-export { locales, translations } from "~i18n/locales";
+import { translations, defaultLocale } from "~i18n/locales";
 
 import type { Locales, Translations } from "~i18n/locales";
-
-export const languages = locales;
+import { useContext } from "react";
+import React from "react";
 
 type Context = {
   locale: Locales;
@@ -18,22 +12,49 @@ type Context = {
 };
 
 export const TranslationContext = createContext<Context>({
-  locale: "de",
+  locale: defaultLocale,
   originalPath: "/",
   translation: translations.de,
 });
 
-// i18n
-//   .use(LanguageDetector)
-//   .use(initReactI18next)
-//   .init({
-//     resources: { ...translations },
+// prettier-ignore
+interface Translate {
+  <P extends keyof Translations>(prop: P): Translations[P];
 
-//     fallbackLng: [...locales],
+  <
+    P1 extends keyof Translations,
+    P2 extends keyof Translations[P1]
+  >(prop1: P1, prop2: P2): Translations[P1][P2];
 
-//     interpolation: {
-//       escapeValue: false,
-//     },
-//   });
+  <
+    P1 extends keyof Translations,
+    P2 extends keyof Translations[P1],
+    P3 extends keyof Translations[P1][P2]
+  >(prop1: P1, prop2: P2, prop3: P3): Translations[P1][P2][P3];
+}
 
-// export default i18n;
+export const useTranslation = () => {
+  const { originalPath, locale, translation } = useContext(TranslationContext);
+
+  const t: Translate = (p1: any, p2?: any, p3?: any) => {
+    if (p1 && p2 && p3) {
+      return (translation as any)[p1][p2][p3];
+    }
+
+    if (p1 && p2) {
+      return (translation as any)[p1][p2];
+    }
+
+    if (p1) {
+      return (translation as any)[p1];
+    }
+  };
+
+  return { originalPath, locale, t };
+};
+
+type Props = { children: (t: Translate) => JSX.Element };
+export const Translation = React.memo(({ children }: Props) => {
+  const { t } = useTranslation();
+  return children(t);
+});

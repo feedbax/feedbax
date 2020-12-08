@@ -1,6 +1,7 @@
 import React from "react";
 
-import { TranslationContext, translations } from "~i18n";
+import { TranslationContext } from "~i18n";
+import { translations } from "~i18n/locales";
 
 import type { Locales } from "~i18n/locales";
 import type { WrapPageElementNodeArgs } from "gatsby";

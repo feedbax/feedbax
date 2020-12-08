@@ -1,5 +1,5 @@
 import path from "path";
-import { locales } from "~i18n/locales";
+import { locales, defaultLocale } from "~i18n/locales";
 
 import type { CreateWebpackConfigArgs } from "gatsby";
 import type { CreatePageArgs } from "gatsby";
@@ -48,7 +48,7 @@ const createEventPage = (props: CreatePageArgs) => {
 
     context: {
       originalPath: "/@",
-      locale: "de",
+      locale: defaultLocale,
     },
   });
 
@@ -67,7 +67,7 @@ const createEventPage = (props: CreatePageArgs) => {
       },
     });
   }
-}
+};
 
 const createOtherPages = (props: CreatePageArgs) => {
   const { page, actions } = props;
@@ -80,7 +80,7 @@ const createOtherPages = (props: CreatePageArgs) => {
 
     context: {
       originalPath: page.path,
-      locale: "de",
+      locale: defaultLocale,
     },
   });
 
@@ -99,4 +99,4 @@ const createOtherPages = (props: CreatePageArgs) => {
       },
     });
   }
-}
+};

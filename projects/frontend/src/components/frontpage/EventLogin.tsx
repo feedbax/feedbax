@@ -1,7 +1,7 @@
 /** @jsx jsx */
 
 import React from "react";
-import { useTranslation } from "~i18n/hook";
+import { useTranslation } from "~i18n";
 
 import { jsx, css } from "@emotion/react";
 import { between } from "polished";

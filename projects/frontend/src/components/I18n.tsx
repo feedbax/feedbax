@@ -4,8 +4,8 @@
 import React from "react";
 import { jsx, css } from "@emotion/react";
 
-import { languages } from "~i18n";
-import { useTranslation } from "~i18n/hook";
+import { useTranslation } from "~i18n";
+import { locales } from "~i18n/locales";
 
 import { Link } from "gatsby";
 
@@ -31,17 +31,17 @@ const Language = React.memo((props: Props) => {
 });
 
 export const Languages = React.memo(() => {
-  const { originalPath, locale, t } = useTranslation();
+  const { originalPath, locale } = useTranslation();
 
   return (
     <div css={stylesLanguages}>
-      {languages.map(language => (
+      {locales.map(_locale => (
         <Language
-          key={language}
-          isCurrent={locale === language}
-          to={`/${language}${originalPath}`}
+          key={_locale}
+          isCurrent={_locale === locale}
+          to={`/${_locale}${originalPath}`}
         >
-          {language}
+          {_locale}
         </Language>
       ))}
     </div>

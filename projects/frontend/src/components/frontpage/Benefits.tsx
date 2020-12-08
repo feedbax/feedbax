@@ -2,7 +2,7 @@
 /** @jsxFrag React.Fragment */
 
 import React, { useCallback } from "react";
-import { Translation } from "~i18n/hook";
+import { Translation } from "~i18n";
 
 import { jsx, css } from "@emotion/react";
 import { between } from "polished";
