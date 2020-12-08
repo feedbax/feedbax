@@ -20,69 +20,83 @@ export const onCreateWebpackConfig = ({ actions }: CreateWebpackConfigArgs) => {
   });
 };
 
-export const onCreatePage = async ({ page, actions }: CreatePageArgs) => {
-  const { createPage, deletePage } = actions;
+export const onCreatePage = async (props: CreatePageArgs) => {
+  const { page } = props;
 
   if (/^\/dev-404-page\/?$/.test(page.path)) {
     return;
   }
 
-  if (page.path.match(/\/join/)) {
-    deletePage(page);
+  if (/^\/join\/?$/.test(page.path)) {
+    return createEventPage(props);
+  }
+
+  return createOtherPages(props);
+};
+
+const createEventPage = (props: CreatePageArgs) => {
+  const { page, actions } = props;
+  const { createPage, deletePage } = actions;
+
+  deletePage(page);
+
+  createPage({
+    ...page,
+
+    path: "/@",
+    matchPath: "/@/*",
+
+    context: {
+      originalPath: "/@",
+      locale: "de",
+    },
+  });
+
+  for (let i = 0; i < locales.length; i += 1) {
+    const locale = locales[i];
 
     createPage({
       ...page,
 
-      path: "/@",
-      matchPath: "/@/*",
+      path: `/${locale}/@`,
+      matchPath: `/${locale}/@/*`,
 
       context: {
         originalPath: "/@",
-        locale: "de",
+        locale,
       },
     });
+  }
+}
 
-    for (let i = 0; i < locales.length; i += 1) {
-      const locale = locales[i];
+const createOtherPages = (props: CreatePageArgs) => {
+  const { page, actions } = props;
+  const { createPage, deletePage } = actions;
 
-      createPage({
-        ...page,
+  deletePage(page);
 
-        path: `/${locale}/@`,
-        matchPath: `/${locale}/@/*`,
+  createPage({
+    ...page,
 
-        context: {
-          originalPath: "/@",
-          locale,
-        },
-      });
-    }
-  } else {
-    deletePage(page);
+    context: {
+      originalPath: page.path,
+      locale: "de",
+    },
+  });
+
+  for (let i = 0; i < locales.length; i += 1) {
+    const locale = locales[i];
 
     createPage({
       ...page,
 
+      path: path.join(`/${locale}/`, page.path),
+      matchPath: path.join(`/${locale}/`, page.path),
+
       context: {
         originalPath: page.path,
-        locale: "de",
+        locale,
       },
     });
-
-    for (let i = 0; i < locales.length; i += 1) {
-      const locale = locales[i];
-
-      createPage({
-        ...page,
-
-        path: path.join(`/${locale}/`, page.path),
-        matchPath: path.join(`/${locale}/`, page.path),
-
-        context: {
-          originalPath: page.path,
-          locale,
-        },
-      });
-    }
   }
-};
+}
