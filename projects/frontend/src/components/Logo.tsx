@@ -1,8 +1,6 @@
 /** @jsx jsx */
 
 import React from "react";
-import LocaleLink from "~i18n/LocaleLink";
-
 import isEqual from "lodash.isequal";
 
 import { jsx, css } from "@emotion/react";
@@ -12,6 +10,8 @@ import { between } from "polished";
 import logo from "~assets/images/logo.svg";
 import logoNoText from "~assets/images/logo_no_text.svg";
 import logoNoShadowAndText from "~assets/images/logo_no_shadow_no_text.svg";
+
+import LocaleLink from "~components/i18n/LocaleLink";
 
 type Variant = "text" | "no-text" | "no-shadow-and-text";
 

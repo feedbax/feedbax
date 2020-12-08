@@ -2,13 +2,14 @@
 /** @jsxFrag React.Fragment */
 
 import React from "react";
+
 import { jsx, css } from "@emotion/react";
+import { colors } from "~theme";
 
 import { useTranslation } from "~i18n";
 import { locales } from "~i18n/locales";
 
-import LocaleLink from "~i18n/LocaleLink";
-import { colors } from "~theme";
+import LocaleLink from "~components/i18n/LocaleLink";
 
 type Props = {
   children: string;
@@ -30,7 +31,7 @@ const Language = React.memo((props: Props) => {
   );
 });
 
-export const Languages = React.memo(() => {
+export const LanguageSelector = React.memo(() => {
   const { originalPath, locale } = useTranslation();
 
   return (

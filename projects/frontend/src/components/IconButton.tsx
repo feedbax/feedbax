@@ -4,7 +4,7 @@
 import React from "react";
 import isEqual from "lodash.isequal";
 
-import LocaleLink from "~i18n/LocaleLink";
+import LocaleLink from "~components/i18n/LocaleLink";
 
 import { jsx, css } from "@emotion/react";
 import { colors } from "~theme";

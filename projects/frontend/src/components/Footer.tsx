@@ -7,7 +7,7 @@ import { jsx, css } from "@emotion/react";
 import { between } from "polished";
 import { colors } from "~theme";
 
-import LocaleLink from "~i18n/LocaleLink";
+import LocaleLink from "~components/i18n/LocaleLink";
 
 export default function Footer() {
   const { t } = useTranslation();
