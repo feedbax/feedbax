@@ -1,14 +1,15 @@
 /** @jsx jsx */
 
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "~i18n";
 
 import { jsx, css } from "@emotion/react";
 import { between } from "polished";
 import { colors } from "~theme";
+import LocaleLink from "~i18n/LocaleLink";
 
-export default function EventLogin({ eventCodeState, onLogin }: Props) {
-  const [eventCode, setEventCode] = eventCodeState;
+export default function EventLogin() {
+  const [eventCode, setEventCode] = useState<string>();
   const { t } = useTranslation();
 
   return (
@@ -21,12 +22,9 @@ export default function EventLogin({ eventCodeState, onLogin }: Props) {
         onChange={e => setEventCode(e.target.value)}
       />
 
-      <input
-        className="button"
-        type="submit"
-        value={t("frontpage", "lets-go")}
-        onClick={onLogin}
-      />
+      <LocaleLink className="button" to={`/@/${eventCode}`}>
+        {t("frontpage", "lets-go")}
+      </LocaleLink>
     </div>
   );
 }
@@ -81,6 +79,10 @@ const stylesEventLogin = css`
 
     text-indent: 36px;
     text-align: left;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
   }
 
   & .text {
@@ -114,10 +116,3 @@ const stylesEventLogin = css`
     }
   }
 `;
-
-type UseState<S> = [S, React.Dispatch<React.SetStateAction<S>>];
-
-type Props = {
-  onLogin: () => void;
-  eventCodeState: UseState<string>;
-};

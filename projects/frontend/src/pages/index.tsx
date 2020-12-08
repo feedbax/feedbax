@@ -38,8 +38,7 @@ export default function Home() {
 
         <div>
           <Title />
-
-          <EventLogin onLogin={onLogin} eventCodeState={eventCodeState} />
+          <EventLogin />
         </div>
 
         <SeeMore />
