@@ -11,8 +11,8 @@ export default function LocaleLink<T>(props: Props<T>) {
   const { locale: currentLocale } = useTranslation();
   const locale = localeProp ?? currentLocale ?? defaultLocale;
 
-  const linkLocale = locale === defaultLocale ? '' : `/${locale}`;
-  const newTo = `${linkLocale}/${to.replace(/^\//g, '')}`;
+  const linkLocale = locale === defaultLocale ? "" : `/${locale}`;
+  const newTo = `${linkLocale}/${to.replace(/^\//g, "")}`;
 
   return <Link to={newTo} {...rest} />;
 }
