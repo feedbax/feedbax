@@ -1,7 +1,7 @@
 /** @jsx jsx */
 
 import React from "react";
-import { Link } from "gatsby";
+import LocaleLink from "~i18n/LocaleLink";
 
 import isEqual from "lodash.isequal";
 
@@ -27,11 +27,11 @@ const Logo = React.memo((props: Props) => {
   const { link = "/" } = props;
 
   return (
-    <Link to={link}>
+    <LocaleLink to={link}>
       <div css={[stylesImageWrapper(variant), styles]}>
         <img css={stylesImage} src={getSrc(variant)} />
       </div>
-    </Link>
+    </LocaleLink>
   );
 }, isEqual);
 

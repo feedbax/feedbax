@@ -1,9 +1,8 @@
-import { createContext } from "react";
+import React, { createContext, useContext } from "react";
+import { Link as $Link, GatsbyLinkProps } from "gatsby";
 import { translations, defaultLocale } from "~i18n/locales";
 
 import type { Locales, Translations } from "~i18n/locales";
-import { useContext } from "react";
-import React from "react";
 
 type Context = {
   locale: Locales;

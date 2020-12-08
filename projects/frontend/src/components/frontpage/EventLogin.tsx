@@ -38,10 +38,10 @@ const createShadow = (min: number, max: number) => {
   const px2n = between(`${-(min + 1)}px`, `${-(max + 1)}px`, "300px", "1400px");
 
   return `
-    ${px1n} ${px1n} 0px #FF7D65, 
-    ${px1p} ${px1p} 0px #3A5568,
-    ${px2n} ${px2n} 0px #FFFFFF,
-    ${px2p} ${px2p} 0px #FFFFFF
+    ${px1n} ${px1n} 0px ${colors.second}, 
+    ${px1p} ${px1p} 0px ${colors.first},
+    ${px2n} ${px2n} 0px ${colors.third},
+    ${px2p} ${px2p} 0px ${colors.third}
   `;
 };
 

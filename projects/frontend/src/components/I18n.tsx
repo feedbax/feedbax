@@ -7,7 +7,8 @@ import { jsx, css } from "@emotion/react";
 import { useTranslation } from "~i18n";
 import { locales } from "~i18n/locales";
 
-import { Link } from "gatsby";
+import LocaleLink from "~i18n/LocaleLink";
+import { colors } from "~theme";
 
 type Props = {
   children: string;
@@ -19,14 +20,13 @@ const Language = React.memo((props: Props) => {
   const { children: language } = props;
   const { isCurrent, to } = props;
 
-  const styles = isCurrent ? [stylesLanguageCurrent] : [];
+  const styles = isCurrent ? [stylesLanguageLinkCurrent] : [];
 
   return (
-    <Link to={to}>
-      <div css={[stylesLanguage, ...styles]}>{language}</div>
-
-      <i css={stylesSeperator} />
-    </Link>
+    <LocaleLink to={to} locale={language} css={[stylesLanguageLink, ...styles]}>
+      <div className="text">{language}</div>
+      <i className="seperator" />
+    </LocaleLink>
   );
 });
 
@@ -39,7 +39,7 @@ export const Languages = React.memo(() => {
         <Language
           key={_locale}
           isCurrent={_locale === locale}
-          to={`/${_locale}${originalPath}`}
+          to={originalPath}
         >
           {_locale}
         </Language>
@@ -63,33 +63,44 @@ const stylesLanguages = css`
   box-sizing: border-box;
 `;
 
-const stylesLanguage = css`
+const stylesLanguageLink = css`
+  color: ${colors.third};
+
   flex: 0 0 auto;
   position: relative;
 
-  display: block;
   font-family: "Roboto Slab";
   font-size: 16px;
   font-weight: normal;
 
   cursor: pointer;
-  color: #fff;
+  color: ${colors.third};
   padding: 10px 5px;
   box-sizing: border-box;
-`;
 
-const stylesLanguageCurrent = css`
-  font-weight: bold;
-`;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 
-const stylesSeperator = css`
-  flex: 0 0 auto;
-  display: block;
-  width: 1px;
-  height: 16px;
-  background: #fff;
+  .text {
+    flex: 0 0 auto;
+  }
 
-  &:last-of-type {
+  .seperator {
+    flex: 0 0 auto;
+    display: block;
+    width: 1px;
+    height: 16px;
+    background: ${colors.third};
+    margin-left: 10px;
+  }
+
+  &:last-of-type .seperator {
     display: none;
   }
+`;
+
+const stylesLanguageLinkCurrent = css`
+  font-weight: bold;
 `;

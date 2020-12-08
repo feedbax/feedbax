@@ -9,6 +9,7 @@ import Pagination from "~components/event/Pagination";
 
 import { actions } from "~store/modules/questions";
 import { store } from "~store";
+import { colors } from "~theme";
 
 const Navigation = React.memo(() => {
   const navigateLeft = () => {
@@ -54,7 +55,7 @@ const stylesNavigation = css`
     b {
       display: block;
       position: relative;
-      border: 2px solid #ffffff;
+      border: 2px solid ${colors.third};
       border-top: 0;
       border-left: 0;
       padding: 4px;

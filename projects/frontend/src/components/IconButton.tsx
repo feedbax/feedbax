@@ -2,9 +2,9 @@
 /** @jsxFrag React.Fragment */
 
 import React from "react";
-import { Link } from "gatsby";
-
 import isEqual from "lodash.isequal";
+
+import LocaleLink from "~i18n/LocaleLink";
 
 import { jsx, css } from "@emotion/react";
 import { colors } from "~theme";
@@ -55,9 +55,9 @@ const IconButton = React.memo((props: Props) => {
 
   if (to) {
     return (
-      <Link to={to} css={$styles}>
+      <LocaleLink to={to} css={$styles}>
         <Icon fill={colors[color.icon]} />
-      </Link>
+      </LocaleLink>
     );
   } else {
     return (

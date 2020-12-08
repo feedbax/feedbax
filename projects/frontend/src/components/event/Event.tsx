@@ -106,6 +106,6 @@ const stylesEvent = css`
     flex: 0 0 auto;
     width: 100%;
     height: 60px;
-    background: #3a5568;
+    background: ${colors.first};
   }
 `;

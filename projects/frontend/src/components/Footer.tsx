@@ -7,7 +7,7 @@ import { jsx, css } from "@emotion/react";
 import { between } from "polished";
 import { colors } from "~theme";
 
-import { Link } from "gatsby";
+import LocaleLink from "~i18n/LocaleLink";
 
 export default function Footer() {
   const { t } = useTranslation();
@@ -16,9 +16,9 @@ export default function Footer() {
     <div css={stylesFooter}>
       <div className="title">feedb.ax</div>
       <div className="copy">&copy; 2019 - 2020 feedb.ax by 365STEPS</div>
-      <Link to="/legal/privacy-policy" className="links">
+      <LocaleLink to="/legal/privacy-policy" className="links">
         {t("generic", "footer")}
-      </Link>
+      </LocaleLink>
     </div>
   );
 }
