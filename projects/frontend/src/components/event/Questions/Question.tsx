@@ -19,8 +19,8 @@ type QuestionProps = {
 
 const Question = React.memo(({ questionId, index }: QuestionProps) => {
   // prettier-ignore
-  const selector = useCallback(selectors.questionById(questionId), [questionId,]);
-  const [question] = useSelector(selector);
+  const getQuestion = useSelector(selectors.questionById);
+  const question = getQuestion(questionId);
 
   const { injectEmojis } = useTwemoji();
 
@@ -33,11 +33,11 @@ const Question = React.memo(({ questionId, index }: QuestionProps) => {
     <div
       css={[stylesQuestion, stylesCurrent]}
       style={{ transform: `translate(${deltaIndex * 100}%, 0)` }}
-      key={question.order}
+      key={question?.order}
     >
       <div className="number">{`${index + 1}`.padStart(2, "0")}</div>
       <div ref={injectEmojis} className="text">
-        {question.text}
+        {question?.text}
       </div>
     </div>
   );

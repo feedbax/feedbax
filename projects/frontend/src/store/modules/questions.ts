@@ -5,6 +5,7 @@ import { createSelector } from "./selector";
 
 import type { RootState } from "~store";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import memoize from "lodash.memoize";
 
 export type QuestionState = {
   id: string;
@@ -65,12 +66,16 @@ export const actions = questionsSlice.actions;
 
 const questionsSelector = (state: RootState) => state.questionsState.questions;
 
-const questionsOrderedSelector = createSelector(questionsSelector, questions =>
-  [...questions].sort((q1, q2) => q1.order - q2.order)
+// prettier-ignore
+const questionsOrderedSelector = createSelector(
+  questionsSelector,
+  questions => [...questions].sort((q1, q2) => q1.order - q2.order)
 );
 
-const questionsIdsSelector = createSelector(questionsSelector, questions =>
-  questions.map(q => q.id)
+// prettier-ignore
+const questionsIdsSelector = createSelector(
+  questionsSelector,
+  questions => questions.map(q => q.id)
 );
 
 // prettier-ignore
@@ -90,10 +95,23 @@ const currentQuestionIdSelector = createSelector(
   (index, questions) => questions[index].id
 );
 
-const questionByIdSelector = (questionId: string) =>
-  createSelector(questionsSelector, questions =>
-    questions.filter(q => q.id === questionId)
-  );
+const questionsMapSelector = (state: RootState) => {
+  const questions = state.questionsState.questions;
+  const questionsMap = new Map<string, QuestionState>();
+
+  for (let i = 0; i < questions.length; i += 1) {
+    const question = questions[i];
+    questionsMap.set(question.id, question);
+  }
+
+  return questionsMap;
+};
+
+// prettier-ignore
+const questionByIdSelector = createSelector(
+  questionsMapSelector,
+  questions => memoize((questionId: string) => questions.get(questionId))
+);
 
 export const selectors = {
   currentIndex: currentIndexSelector,

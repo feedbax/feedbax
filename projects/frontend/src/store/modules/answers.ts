@@ -68,10 +68,9 @@ const answersMapSelector = (state: RootState) => {
   return answersMap;
 };
 
-type FilterAnswers = (
-  answers: AnswerState[],
-  filter: AnswersFilter
-) => AnswerState[];
+// prettier-ignore
+type FilterAnswers = (answers: AnswerState[], filter: AnswersFilter) => AnswerState[];
+
 const filterAnswers: FilterAnswers = (answers, filter) => {
   switch (filter) {
     default:
@@ -111,8 +110,10 @@ const currentAnswersIdsSelector = createSelector(
   answers => answers.map(a => a.id)
 );
 
-const answerByIdSelector = createSelector(answersMapSelector, answersMap =>
-  memoize((answerId: string) => answersMap.get(answerId))
+// prettier-ignore
+const answerByIdSelector = createSelector(
+  answersMapSelector,
+  answersMap => memoize((answerId: string) => answersMap.get(answerId))
 );
 
 const getCurrentAnswersIdsSelector = createSelector(
