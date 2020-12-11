@@ -39,6 +39,7 @@
     "@babel/core": "^7.12.9",
     "@types/lodash.isequal": "^4.5.5",
     "@types/lodash.memoize": "^4.1.6",
+    "@types/react-dom": "^17.0.0",
     "@types/react-redux": "^7.1.11",
     "@types/twemoji": "^12.1.1",
     "@zerollup/ts-transform-paths": "^1.7.18",

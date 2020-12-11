@@ -1,122 +1,173 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import isEqual from "lodash.isequal";
 
-import LocaleLink from "~components/i18n/LocaleLink";
+import LocaleLink from "~components/I18n/LocaleLink";
 
 import { jsx, css } from "@emotion/react";
 import { colors } from "~theme";
 
-import IconExitApp from "~assets/images/icons/exit_app.inline.svg";
-
-import IconHeartFilled from "~assets/images/icons/favorite_filled.inline.svg";
-import IconHeartOutline from "~assets/images/icons/favorite_outline.inline.svg";
-
-import IconClockFilled from "~assets/images/icons/clock_filled.inline.svg";
-import IconClockOutline from "~assets/images/icons/clock_outline.inline.svg";
-
-import IconPersonFilled from "~assets/images/icons/person_filled.inline.svg";
-import IconPersonOutline from "~assets/images/icons/person_outline.inline.svg";
-
 import type { CSSInterpolation } from "@emotion/serialize";
 import type { Colors } from "~theme";
 
-export type Icons = "heart" | "exit" | "clock" | "person";
-export type Variants = "none" | "filled" | "outline";
+export enum Icons {
+  Heart,
+  Exit,
+  Clock,
+  Person,
+  Menu,
+  Close,
+  ArrowBack,
+}
+
+export enum Variants {
+  None,
+  Filled,
+  Outline,
+}
 
 type IconButtonColors = {
-  icon: Colors;
-  background: Colors;
+  icon?: Colors;
+  background?: Colors;
 };
 
 type Props = {
-  color?: IconButtonColors;
   icon: Icons;
   variant?: Variants;
+
   size?: number;
-  to?: string;
+  neumorphism?: boolean;
+  color?: IconButtonColors;
+
   styles?: CSSInterpolation;
+
+  to?: string;
+  onClick?: (...args: any[]) => any;
 };
 
-const defaultColors: IconButtonColors = {
+type SVGIcon = React.FC<React.SVGProps<SVGSVGElement>>;
+type IconState = { Component: SVGIcon };
+
+const defaultColors = {
   icon: "third",
   background: "second",
-};
+} as const;
+
+const NoSvg: SVGIcon = () => <svg />;
 
 const IconButton = React.memo((props: Props) => {
-  const { icon, variant, to } = props;
+  const { icon, variant } = props;
   const { styles = {} } = props;
-  const { color = defaultColors } = props;
+  const { color = {} } = props;
 
-  const Icon = getIcon(icon, variant);
+  const { to, onClick } = props;
   const $styles = [getStyles(props), css(styles)];
+
+  const [IconLazy, setIconLazy] = useState<IconState>({ Component: NoSvg });
+  const Icon = (
+    <IconLazy.Component fill={colors[color.icon ?? defaultColors.icon]} />
+  );
+
+  useEffect(() => {
+    getIcon(icon, variant).then(icon =>
+      setIconLazy({ Component: icon.default })
+    );
+  }, [icon, variant]);
 
   if (to) {
     return (
       <LocaleLink to={to} css={$styles}>
-        <Icon fill={colors[color.icon]} />
+        {Icon}
       </LocaleLink>
     );
-  } else {
+  }
+
+  if (onClick) {
     return (
-      <button css={$styles}>
-        <Icon fill={colors[color.icon]} />
+      <button onClick={onClick} css={$styles}>
+        {Icon}
       </button>
     );
   }
+
+  return <button css={$styles}>{Icon}</button>;
 }, isEqual);
 
 export default IconButton;
 
-const getIcon = (icon: Icons, variant: Variants = "none") => {
+const getIcon = (icon: Icons, variant: Variants = Variants.None) => {
   switch (`${icon}_${variant}`) {
-    case "exit_none":
-    case "exit_filled":
-    case "exit_outline": {
-      return IconExitApp;
+    case `${Icons.Exit}_${Variants.None}`:
+    case `${Icons.Exit}_${Variants.Filled}`:
+    case `${Icons.Exit}_${Variants.Outline}`: {
+      return import("~assets/images/icons/exit_app.inline.svg");
     }
 
-    case "heart_none":
-    case "heart_filled": {
-      return IconHeartFilled;
+    case `${Icons.ArrowBack}_${Variants.None}`:
+    case `${Icons.ArrowBack}_${Variants.Filled}`:
+    case `${Icons.ArrowBack}_${Variants.Outline}`: {
+      return import("~assets/images/icons/arrow_back.inline.svg");
     }
 
-    case "heart_outline": {
-      return IconHeartOutline;
+    case `${Icons.Close}_${Variants.None}`:
+    case `${Icons.Close}_${Variants.Filled}`:
+    case `${Icons.Close}_${Variants.Outline}`: {
+      return import("~assets/images/icons/close.inline.svg");
     }
 
-    case "clock_none":
-    case "clock_filled": {
-      return IconClockFilled;
+    case `${Icons.Menu}_${Variants.None}`:
+    case `${Icons.Menu}_${Variants.Filled}`:
+    case `${Icons.Menu}_${Variants.Outline}`: {
+      return import("~assets/images/icons/menu.inline.svg");
     }
 
-    case "clock_outline": {
-      return IconClockOutline;
+    case `${Icons.Heart}_${Variants.None}`:
+    case `${Icons.Heart}_${Variants.Filled}`: {
+      return import("~assets/images/icons/favorite_filled.inline.svg");
     }
 
-    case "person_none":
-    case "person_filled": {
-      return IconPersonFilled;
+    case `${Icons.Heart}_${Variants.Outline}`: {
+      return import("~assets/images/icons/favorite_outline.inline.svg");
     }
 
-    case "person_outline": {
-      return IconPersonOutline;
+    case `${Icons.Clock}_${Variants.None}`:
+    case `${Icons.Clock}_${Variants.Filled}`: {
+      return import("~assets/images/icons/clock_filled.inline.svg");
+    }
+
+    case `${Icons.Clock}_${Variants.Outline}`: {
+      return import("~assets/images/icons/clock_outline.inline.svg");
+    }
+
+    case `${Icons.Person}_${Variants.None}`:
+    case `${Icons.Person}_${Variants.Filled}`: {
+      return import("~assets/images/icons/person_filled.inline.svg");
+    }
+
+    case `${Icons.Person}_${Variants.Outline}`: {
+      return import("~assets/images/icons/person_outline.inline.svg");
     }
 
     default: {
-      return IconHeartFilled;
+      return import("~assets/images/icons/close.inline.svg");
     }
   }
 };
 
 const getStyles = (props: Props) => {
   const { size = 28 } = props;
-  const { color = defaultColors } = props;
+  const { color = {} } = props;
+  const { neumorphism = true } = props;
 
   const shadowXY = Math.round(size * 0.1);
   const shadowBlur = Math.round(size * 0.2);
+
+  const shadow = css({
+    boxShadow: ` ${shadowXY}px  ${shadowXY}px ${shadowBlur}px rgba(0, 0, 0, 0.18),
+                -${shadowXY}px -${shadowXY}px ${shadowBlur}px rgba(255, 255, 255, 0.18)`,
+  });
 
   return css`
     position: relative;
@@ -136,9 +187,8 @@ const getStyles = (props: Props) => {
     width: ${size}px;
     height: ${size}px;
 
-    background-color: ${colors[color.background]};
-    box-shadow: ${shadowXY}px ${shadowXY}px ${shadowBlur}px rgba(0, 0, 0, 0.18),
-      -${shadowXY}px -${shadowXY}px ${shadowBlur}px rgba(255, 255, 255, 0.18);
+    background-color: ${colors[color.background ?? defaultColors.background]};
+    ${neumorphism ? shadow : null}
 
     svg {
       padding: 0px;

@@ -12,7 +12,7 @@ import { selectors } from "~store/modules/answers";
 
 import { useTwemoji } from "~hooks";
 
-import IconButton from "~components/IconButton";
+import IconButton, { Icons, Variants } from "~components/IconButton";
 
 type Props = {
   answerId: string;
@@ -37,8 +37,8 @@ const Answer = React.memo(({ answerId, first }: Props) => {
         <span className="count">{answer?.likesCount}</span>
 
         <IconButton
-          icon="heart"
-          variant={answer?.hasLiked ? "filled" : "outline"}
+          icon={Icons.Heart}
+          variant={answer?.hasLiked ? Variants.Filled : Variants.Outline}
           color={{ icon: "first", background: "third" }}
         />
       </div>

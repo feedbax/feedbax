@@ -11,7 +11,7 @@ import logo from "~assets/images/logo.svg";
 import logoNoText from "~assets/images/logo_no_text.svg";
 import logoNoShadowAndText from "~assets/images/logo_no_shadow_no_text.svg";
 
-import LocaleLink from "~components/i18n/LocaleLink";
+import LocaleLink from "~components/I18n/LocaleLink";
 
 type Variant = "text" | "no-text" | "no-shadow-and-text";
 
@@ -27,11 +27,11 @@ const Logo = React.memo((props: Props) => {
   const { link = "/" } = props;
 
   return (
-    <LocaleLink to={link}>
-      <div css={[stylesImageWrapper(variant), styles]}>
+    <div css={[stylesImageWrapper(variant), styles]}>
+      <LocaleLink to={link}>
         <img css={stylesImage} src={getSrc(variant)} />
-      </div>
-    </LocaleLink>
+      </LocaleLink>
+    </div>
   );
 }, isEqual);
 

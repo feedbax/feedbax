@@ -10,21 +10,28 @@ type Props = WrapPageElementNodeArgs & {
   props: {
     pageContext: {
       originalPath: string;
+      originalMatchPath?: string;
       locale: Locales;
     };
   };
 };
 
 export const wrapPageElement = ({ element, props }: Props) => {
-  const { locale, originalPath } = props.pageContext;
+  const { params, pageContext } = props;
+  const { locale, originalPath, originalMatchPath } = pageContext;
   const translation = translations[locale];
 
   return (
     <TranslationContext.Provider
       value={{
-        originalPath,
         translation,
         locale,
+
+        location: {
+          params,
+          path: originalPath,
+          matchPath: originalMatchPath,
+        },
       }}
     >
       {element}

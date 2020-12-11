@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 
 import { jsx, css } from "@emotion/react";
 
-import IconButton, { Icons } from "~components/IconButton";
+import IconButton, { Icons, Variants } from "~components/IconButton";
 
 import { AnswersFilter, selectors, actions } from "~store/modules/answers";
 import { store } from "~store";
@@ -20,7 +20,7 @@ const Filter = React.memo(({ filter }: FilterProps) => {
 
   const isCurrent = filter === currentFilter;
   const stylesCurrent = isCurrent ? stylesFilterCurrent : null;
-  const variant = isCurrent ? "filled" : "outline";
+  const variant = isCurrent ? Variants.Filled : Variants.Outline;
   const icon = getIcon(filter);
 
   const action = actions.setCurrentFilter(filter);
@@ -38,15 +38,15 @@ export default Filter;
 const getIcon = (filter: AnswersFilter): Icons => {
   switch (filter) {
     case AnswersFilter.Liked: {
-      return "heart";
+      return Icons.Heart;
     }
 
     case AnswersFilter.Mine: {
-      return "person";
+      return Icons.Person;
     }
 
     case AnswersFilter.Recent: {
-      return "clock";
+      return Icons.Clock;
     }
   }
 };

@@ -74,7 +74,7 @@ const stylesLoading = css`
   height: calc(var(--vh, 1vh) * 100);
   width: 100vw;
   overflow: hidden;
-  z-index: 999;
+  z-index: 1000;
   background-color: ${colors.second};
 
   .logo-loading {

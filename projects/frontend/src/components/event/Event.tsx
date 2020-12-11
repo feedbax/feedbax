@@ -7,13 +7,14 @@ import { jsx, css } from "@emotion/react";
 import { colors } from "~theme";
 
 import Logo from "~components/Logo";
-import IconButton from "~components/IconButton";
+import IconButton, { Icons } from "~components/IconButton";
 
 import Questions from "~components/event/Questions";
 import Slider from "~components/event/Questions/Slider";
 import Navigation from "~components/event/Navigation";
 import Filters from "~components/event/Filters";
-import Answers from "./Answers";
+import Answers from "~components/event/Answers";
+import MenuButton from "~components/Menu";
 
 import { selectors } from "~store/modules/questions";
 import { useSelector } from "react-redux";
@@ -33,15 +34,7 @@ const Event = React.memo(() => {
       <div className="scroll-container" ref={scrollContainerRef}>
         <div css={stylesEventHeader}>
           <div className="content">
-            <IconButton
-              to="/"
-              icon="exit"
-              styles={{
-                position: "absolute",
-                top: 25,
-                right: 25,
-              }}
-            />
+            <MenuButton />
 
             <Logo
               variant="no-shadow-and-text"

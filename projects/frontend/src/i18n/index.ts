@@ -1,19 +1,28 @@
 import React, { createContext, useContext } from "react";
-import { Link as $Link, GatsbyLinkProps } from "gatsby";
 import { translations, defaultLocale } from "~i18n/locales";
 
 import type { Locales, Translations } from "~i18n/locales";
 
-type Context = {
-  locale: Locales;
-  originalPath: string;
+export type Location = {
+  path: string;
+  matchPath?: string;
+  params: Record<string, string | undefined>;
+};
+
+export type Context = {
   translation: Translations;
+  locale: Locales;
+  location: Location;
 };
 
 export const TranslationContext = createContext<Context>({
-  locale: defaultLocale,
-  originalPath: "/",
   translation: translations.de,
+  locale: defaultLocale,
+
+  location: {
+    path: "/",
+    params: {},
+  },
 });
 
 // prettier-ignore
@@ -33,7 +42,7 @@ interface Translate {
 }
 
 export const useTranslation = () => {
-  const { originalPath, locale, translation } = useContext(TranslationContext);
+  const { locale, location, translation } = useContext(TranslationContext);
 
   const t: Translate = (p1: any, p2?: any, p3?: any) => {
     if (p1 && p2 && p3) {
@@ -49,7 +58,7 @@ export const useTranslation = () => {
     }
   };
 
-  return { originalPath, locale, t };
+  return { locale, location, t };
 };
 
 type Props = { children: (t: Translate) => JSX.Element };

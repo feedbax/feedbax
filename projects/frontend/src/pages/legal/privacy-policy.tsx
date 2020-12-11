@@ -7,10 +7,10 @@ import { jsx, css } from "@emotion/react";
 import { colors } from "~theme";
 
 import GlobalStyles from "~components/GlobalStyles";
-import { LanguageSelector } from "~components/i18n/LanguageSelector";
 
 import Footer from "~components/Footer";
 import Logo from "~components/Logo";
+import MenuButton from "~components/Menu";
 
 export default function PrivacyPolicy() {
   const { t } = useTranslation();
@@ -19,7 +19,7 @@ export default function PrivacyPolicy() {
   return (
     <div css={stylesLegal}>
       <GlobalStyles />
-      <LanguageSelector />
+      <MenuButton color={{ background: "first" }} />
 
       <Logo />
 

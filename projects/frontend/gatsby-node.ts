@@ -44,10 +44,11 @@ const createEventPage = (props: CreatePageArgs) => {
     ...page,
 
     path: "/@",
-    matchPath: "/@/*",
+    matchPath: "/@/:eventId",
 
     context: {
       originalPath: "/@",
+      originalMatchPath: "/@/:eventId",
       locale: defaultLocale,
     },
   });
@@ -59,10 +60,11 @@ const createEventPage = (props: CreatePageArgs) => {
       ...page,
 
       path: `/${locale}/@`,
-      matchPath: `/${locale}/@/*`,
+      matchPath: `/${locale}/@/:eventId`,
 
       context: {
         originalPath: "/@",
+        originalMatchPath: "/@/:eventId",
         locale,
       },
     });

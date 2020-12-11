@@ -7,10 +7,10 @@ import { jsx, css } from "@emotion/react";
 import { between } from "polished";
 import { colors } from "~theme";
 
-import LocaleLink from "~components/i18n/LocaleLink";
+import LocaleLink from "~components/I18n/LocaleLink";
 
 export default function EventLogin() {
-  const [eventCode, setEventCode] = useState<string>();
+  const [eventCode, setEventCode] = useState("");
   const { t } = useTranslation();
 
   return (
