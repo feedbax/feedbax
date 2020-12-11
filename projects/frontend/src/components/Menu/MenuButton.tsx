@@ -5,11 +5,11 @@ import React, { useState } from "react";
 
 import { jsx, css } from "@emotion/react";
 
-import IconButton, { Icons } from "~components/IconButton";
+import IconButton, { Icons, IconButtonProps } from "~components/IconButton";
 import MenuPortal from "./MenuPortal";
 
 type MenuButtonProps = {
-  color?: React.ComponentProps<typeof IconButton>['color'];
+  color?: IconButtonProps["color"];
 };
 
 const MenuButton = React.memo((props: MenuButtonProps) => {

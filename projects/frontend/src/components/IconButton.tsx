@@ -33,7 +33,7 @@ type IconButtonColors = {
   background?: Colors;
 };
 
-type Props = {
+export type IconButtonProps = {
   icon: Icons;
   variant?: Variants;
 
@@ -57,7 +57,7 @@ const defaultColors = {
 
 const NoSvg: SVGIcon = () => <svg />;
 
-const IconButton = React.memo((props: Props) => {
+const IconButton = React.memo((props: IconButtonProps) => {
   const { icon, variant } = props;
   const { styles = {} } = props;
   const { color = {} } = props;
@@ -156,7 +156,7 @@ const getIcon = (icon: Icons, variant: Variants = Variants.None) => {
   }
 };
 
-const getStyles = (props: Props) => {
+const getStyles = (props: IconButtonProps) => {
   const { size = 28 } = props;
   const { color = {} } = props;
   const { neumorphism = true } = props;

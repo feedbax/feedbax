@@ -2,6 +2,7 @@ import de from "~i18n/locales/de";
 import en from "~i18n/locales/en";
 import _locales from "~i18n/locales/locales.json";
 
+// prettier-ignore
 type ObjectKeys<T> = 
   T extends object ? (keyof T)[]:
   T extends number ? [] :
@@ -11,7 +12,7 @@ type ObjectKeys<T> =
 declare global {
   namespace globalThis {
     interface ObjectConstructor {
-      keys<T>(o: T): ObjectKeys<T>
+      keys<T>(o: T): ObjectKeys<T>;
     }
   }
 }
@@ -19,13 +20,13 @@ declare global {
 export const translations = {
   de: {
     ...de,
-    locales: _locales
+    locales: _locales,
   },
 
   en: {
     ...en,
-    locales: _locales
-  }
+    locales: _locales,
+  },
 };
 
 export const locales = Object.keys(translations);

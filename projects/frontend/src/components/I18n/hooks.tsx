@@ -58,7 +58,7 @@ const Language = React.memo((props: Props) => {
 
 export const useLanguageMenu = (): MenuItem[] => {
   const { locale, location, t } = useTranslation();
-  const _locales = locales.filter((_locale) => _locale !== locale);
+  const _locales = locales.filter(_locale => _locale !== locale);
 
   const menuItems = useMemo(
     () => [
@@ -69,11 +69,7 @@ export const useLanguageMenu = (): MenuItem[] => {
         items: _locales.map(_locale => ({
           key: `change-locale-${_locale}`,
           content: (
-            <Language
-              key={_locale}
-              locale={_locale}
-              location={location}
-            >
+            <Language key={_locale} locale={_locale} location={location}>
               {t("locales", _locale)}
             </Language>
           ),
