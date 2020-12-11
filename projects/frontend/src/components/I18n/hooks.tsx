@@ -35,22 +35,19 @@ const parameterizedPath = (location: Location) => {
 
 type Props = {
   children: string;
-  isCurrent: boolean;
   location: Location;
   locale: Locales;
 };
 
 const Language = React.memo((props: Props) => {
   const { locale, children } = props;
-  const { isCurrent, location } = props;
+  const { location } = props;
 
   const path = parameterizedPath(location);
-  const styles = isCurrent ? stylesLanguageLinkCurrent : null;
-
   const { injectEmojis } = useTwemoji();
 
   return (
-    <LocaleLink to={path} locale={locale} css={styles}>
+    <LocaleLink to={path} locale={locale} css={stylesEmojis}>
       <div className="text" ref={injectEmojis}>
         {children}
       </div>
@@ -61,6 +58,7 @@ const Language = React.memo((props: Props) => {
 
 export const useLanguageMenu = (): MenuItem[] => {
   const { locale, location, t } = useTranslation();
+  const _locales = locales.filter((_locale) => _locale !== locale);
 
   const menuItems = useMemo(
     () => [
@@ -68,12 +66,11 @@ export const useLanguageMenu = (): MenuItem[] => {
         key: "change-locale",
         content: t("menu", "change-locale"),
 
-        items: locales.map(_locale => ({
+        items: _locales.map(_locale => ({
           key: `change-locale-${_locale}`,
           content: (
             <Language
               key={_locale}
-              isCurrent={_locale === locale}
               locale={_locale}
               location={location}
             >
@@ -89,6 +86,8 @@ export const useLanguageMenu = (): MenuItem[] => {
   return menuItems;
 };
 
-const stylesLanguageLinkCurrent = css`
-  font-weight: bold;
+const stylesEmojis = css`
+  img.emoji {
+    vertical-align: middle;
+  }
 `;

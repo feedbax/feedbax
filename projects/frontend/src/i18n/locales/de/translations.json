@@ -6,11 +6,6 @@
     "register": "Registrieren"
   },
 
-  "locales": {
-    "de": "🇩🇪 deutsch",
-    "en": "🇬🇧 englisch"
-  },
-
   "frontpage": {
     "lets-go": "Los geht's",
     "see-more": "Mehr über feedb.ax",
