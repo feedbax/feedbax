@@ -67,7 +67,6 @@ const MenuPortal = React.memo((props: MenuPortalProps) => {
           ref={backdropRef}
           onClick={_toggleOpen}
         >
-          { /* prettier-ignore */ }
           <IconButton
             size={38}
             neumorphism={false}
@@ -85,7 +84,7 @@ const MenuPortal = React.memo((props: MenuPortalProps) => {
           />
 
           <div css={stylesItems}>
-            {items.map(item => (
+            {items.map((item) => (
               <div
                 key={item.key}
                 css={stylesItem}
@@ -101,7 +100,6 @@ const MenuPortal = React.memo((props: MenuPortalProps) => {
             ))}
           </div>
 
-          { /* prettier-ignore */ }
           <IconButton
             size={38}
             neumorphism={false}
@@ -115,7 +113,7 @@ const MenuPortal = React.memo((props: MenuPortalProps) => {
         </motion.div>
       )}
     </AnimatePresence>,
-    document.body
+    document.body,
   );
 });
 

@@ -29,7 +29,11 @@ const Logo = React.memo((props: Props) => {
   return (
     <div css={[stylesImageWrapper(variant), styles]}>
       <LocaleLink to={link}>
-        <img css={stylesImage} src={getSrc(variant)} />
+        <img
+          css={stylesImage}
+          src={getSrc(variant)}
+          alt="This is the feedb.ax logo"
+        />
       </LocaleLink>
     </div>
   );

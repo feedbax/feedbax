@@ -4,9 +4,9 @@
 import React, { useEffect, useState } from "react";
 import isEqual from "lodash.isequal";
 
+import { jsx, css } from "@emotion/react";
 import LocaleLink from "~components/I18n/LocaleLink";
 
-import { jsx, css } from "@emotion/react";
 import { colors } from "~theme";
 
 import type { CSSInterpolation } from "@emotion/serialize";
@@ -44,7 +44,7 @@ export type IconButtonProps = {
   styles?: CSSInterpolation;
 
   to?: string;
-  onClick?: (...args: any[]) => any;
+  onClick?: (event: React.MouseEvent<unknown, MouseEvent>) => void;
 };
 
 type SVGIcon = React.FC<React.SVGProps<SVGSVGElement>>;
@@ -66,13 +66,11 @@ const IconButton = React.memo((props: IconButtonProps) => {
   const $styles = [getStyles(props), css(styles)];
 
   const [IconLazy, setIconLazy] = useState<IconState>({ Component: NoSvg });
-  const Icon = (
-    <IconLazy.Component fill={colors[color.icon ?? defaultColors.icon]} />
-  );
+  const Icon = <IconLazy.Component fill={colors[color.icon ?? defaultColors.icon]} />;
 
   useEffect(() => {
-    getIcon(icon, variant).then(icon =>
-      setIconLazy({ Component: icon.default })
+    getIcon(icon, variant).then((icon) =>
+      setIconLazy({ Component: icon.default }),
     );
   }, [icon, variant]);
 

@@ -5,8 +5,14 @@ import React, { useState } from "react";
 
 import { jsx, css } from "@emotion/react";
 
-import IconButton, { Icons, IconButtonProps } from "~components/IconButton";
+import IconButton, { Icons } from "~components/IconButton";
 import MenuPortal from "./MenuPortal";
+
+import { feedbax } from "@feedbax/api";
+
+import type { IconButtonProps } from "~components/IconButton";
+
+console.log({ feedbax });
 
 type MenuButtonProps = {
   color?: IconButtonProps["color"];

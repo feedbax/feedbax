@@ -28,10 +28,10 @@ const useAnswersLazyLoad = () => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setCount(count => count + 10);
+          setCount((count) => count + 10);
         }
       },
-      { threshold: [0] }
+      { threshold: [0] },
     );
 
     if (element) {

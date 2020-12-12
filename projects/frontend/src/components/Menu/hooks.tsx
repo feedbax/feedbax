@@ -14,7 +14,7 @@ export const useMenuItems = () => {
 
   const items = useMemo(
     () => [...menuFrontPage, ...menuLanguage, ...menuEvent],
-    [menuLanguage, menuFrontPage, menuEvent]
+    [menuLanguage, menuFrontPage, menuEvent],
   );
 
   return items;

@@ -16,25 +16,29 @@ type Props = WrapPageElementNodeArgs & {
   };
 };
 
-export const wrapPageElement = ({ element, props }: Props) => {
-  const { params, pageContext } = props;
-  const { locale, originalPath, originalMatchPath } = pageContext;
-  const translation = translations[locale];
+export const wrapPageElement = (
+  (props: Props): JSX.Element => {
+    const { element, props: pros2 } = props;
+    const { params, pageContext } = pros2;
+    const { locale, originalPath, originalMatchPath } = pageContext;
 
-  return (
-    <TranslationContext.Provider
-      value={{
-        translation,
-        locale,
-
-        location: {
-          params,
-          path: originalPath,
-          matchPath: originalMatchPath,
-        },
-      }}
-    >
-      {element}
-    </TranslationContext.Provider>
-  );
-};
+    const translation = translations[locale];
+  
+    return (
+      <TranslationContext.Provider
+        value={{
+          translation,
+          locale,
+  
+          location: {
+            params,
+            path: originalPath,
+            matchPath: originalMatchPath,
+          },
+        }}
+      >
+        {element}
+      </TranslationContext.Provider>
+    );
+  }
+);

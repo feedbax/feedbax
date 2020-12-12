@@ -1,29 +1,29 @@
 /** @jsx jsx */
 
-import React, { useMemo } from "react";
+import React, { useMemo } from 'react';
 
-import { useTranslation } from "~i18n";
+import { jsx, css } from '@emotion/react';
+import { useTranslation } from '~i18n';
 
-import { jsx, css } from "@emotion/react";
-import { colors } from "~theme";
+import { colors } from '~theme';
 
-import Background from "~components/frontpage/Background";
-import Title from "~components/frontpage/Title";
-import EventLogin from "~components/frontpage/EventLogin";
-import SeeMore from "~components/frontpage/SeeMore";
-import YourTool from "~components/frontpage/YourTool";
-import Benefits from "~components/frontpage/Benefits";
+import Background from '~components/frontpage/Background';
+import Title from '~components/frontpage/Title';
+import EventLogin from '~components/frontpage/EventLogin';
+import SeeMore from '~components/frontpage/SeeMore';
+import YourTool from '~components/frontpage/YourTool';
+import Benefits from '~components/frontpage/Benefits';
 
-import LocaleLink from "~components/I18n/LocaleLink";
+import LocaleLink from '~components/I18n/LocaleLink';
 
-import GlobalStyles from "~components/GlobalStyles";
-import MenuButton from "~components/Menu";
-import Logo from "~components/Logo";
-import Footer from "~components/Footer";
+import GlobalStyles from '~components/GlobalStyles';
+import MenuButton from '~components/Menu';
+import Logo from '~components/Logo';
+import Footer from '~components/Footer';
 
-import type { MenuItem } from "~components/Menu";
+import type { MenuItem } from '~components/Menu';
 
-export default function Home() {
+export default function Home(): JSX.Element {
   return (
     <div css={stylesFront}>
       <GlobalStyles />
@@ -32,7 +32,7 @@ export default function Home() {
       <Background />
 
       <div css={stylesFrontContent}>
-        <Logo styles={{ marginTop: "30px" }} />
+        <Logo styles={{ marginTop: '30px' }} />
 
         <div>
           <Title />
@@ -58,20 +58,20 @@ export const useFrontPageMenu = (): MenuItem[] => {
   const menuItems = useMemo(
     () => [
       {
-        key: "login",
-        content: <LocaleLink to="/login">{t("menu", "login")}</LocaleLink>,
+        key: 'login',
+        content: <LocaleLink to="/login">{t('menu', 'login')}</LocaleLink>,
       },
       {
-        key: "register",
+        key: 'register',
         content: (
-          <LocaleLink to="/register">{t("menu", "register")}</LocaleLink>
+          <LocaleLink to="/register">{t('menu', 'register')}</LocaleLink>
         ),
       },
     ],
-    [t]
+    [t],
   );
 
-  if (location.path === "/") {
+  if (location.path === '/') {
     return menuItems;
   }
 

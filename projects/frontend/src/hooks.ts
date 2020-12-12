@@ -1,45 +1,49 @@
-import { useEffect, useLayoutEffect } from "react";
-import { useState, useRef } from "react";
-import { useCallback } from "react";
+import { useEffect, useLayoutEffect } from 'react';
+import { useState, useRef, useCallback } from 'react';
 
-import twemoji from "twemoji";
-import ResizeObserver from "resize-observer-polyfill";
+import twemoji from 'twemoji';
+import ResizeObserver from 'resize-observer-polyfill';
 
-export const useSize = (type: "w" | "h" | "wh" = "wh") => {
-  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
-  const [element, setElement] = useState<Element | null>(null);
+type Ref = (node: Element | null) => void;
+type Dimensions = { width: number; height: number };
 
-  const ref = useCallback((node: Element | null) => setElement(node), []);
+export const useSize = (
+  (type: 'w' | 'h' | 'wh' = 'wh'): readonly [Ref, Dimensions] => {
+    const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+    const [element, setElement] = useState<Element | null>(null);
 
-  useLayoutEffect(() => {
-    const observer = new ResizeObserver(([sizes]) => {
-      const { width, height } = sizes.contentRect;
+    const ref = useCallback((node: Element | null) => setElement(node), []);
 
-      const xChanged = dimensions.width !== width;
-      const yChanged = dimensions.height !== height;
-      const bothChanged = xChanged && yChanged;
+    useLayoutEffect(() => {
+      const observer = new ResizeObserver(([sizes]) => {
+        const { width, height } = sizes.contentRect;
 
-      if (type === "w" && xChanged) {
-        setDimensions({ width, height: 0 });
-      }
+        const xChanged = dimensions.width !== width;
+        const yChanged = dimensions.height !== height;
+        const bothChanged = xChanged && yChanged;
 
-      if (type === "h" && yChanged) {
-        setDimensions({ height, width: 0 });
-      }
+        if (type === 'w' && xChanged) {
+          setDimensions({ width, height: 0 });
+        }
 
-      if (type === "wh" && bothChanged) {
-        setDimensions({ width, height });
-      }
-    });
+        if (type === 'h' && yChanged) {
+          setDimensions({ height, width: 0 });
+        }
 
-    if (element) observer.observe(element);
-    return () => observer.disconnect();
-  }, [element]);
+        if (type === 'wh' && bothChanged) {
+          setDimensions({ width, height });
+        }
+      });
 
-  return [ref, dimensions] as const;
-};
+      if (element) observer.observe(element);
+      return () => observer.disconnect();
+    }, [dimensions.height, dimensions.width, element, type]);
 
-export const useHorizontalSwipe = () => {
+    return [ref, dimensions] as const;
+  }
+);
+
+export const useHorizontalSwipe = (): TouchEvent | undefined => {
   const [pointerEvent, setPointerEvent] = useState<TouchEvent>();
 
   useEffect(() => {
@@ -63,24 +67,24 @@ export const useHorizontalSwipe = () => {
 
         if (deltaXSquared > deltaYSquared && distance >= 20) {
           setPointerEvent(eventB);
-          window.removeEventListener("touchmove", onTouchMove);
+          window.removeEventListener('touchmove', onTouchMove);
         }
       };
 
       const onTouchEnd = () => {
         setPointerEvent(undefined);
-        window.removeEventListener("touchmove", onTouchMove);
-        window.removeEventListener("touchend", onTouchEnd);
+        window.removeEventListener('touchmove', onTouchMove);
+        window.removeEventListener('touchend', onTouchEnd);
       };
 
-      window.addEventListener("touchmove", onTouchMove);
-      window.addEventListener("touchend", onTouchEnd);
+      window.addEventListener('touchmove', onTouchMove);
+      window.addEventListener('touchend', onTouchEnd);
     };
 
-    window.addEventListener("touchstart", onTouchStart);
+    window.addEventListener('touchstart', onTouchStart);
 
     return () => {
-      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener('touchstart', onTouchStart);
     };
   }, []);
 
@@ -93,24 +97,25 @@ const imageSourceGenerator = (icon: string) => `/twemoji/72x72/${icon}.png`;
 const props = { callback: imageSourceGenerator };
 const twemojiParse = (el: HTMLElement) => twemoji.parse(el, props);
 
-const twemojiRenderer =
-  typeof window === "undefined"
-    ? undefined
-    : new IntersectionObserver(
-        entries => {
-          for (let i = 0; i < entries.length; i++) {
-            const entry = entries[i];
+const twemojiRenderer = typeof window === 'undefined'
+  ? undefined
+  : new IntersectionObserver(
+    (entries) => {
+      for (let i = 0; i < entries.length; i += 1) {
+        const entry = entries[i];
 
-            if (entry.isIntersecting && !parsedSet.has(entry.target)) {
-              parsedSet.add(entry.target);
-              twemojiParse(entry.target as HTMLElement);
-            }
-          }
-        },
-        { threshold: [0] }
-      );
+        if (entry.isIntersecting && !parsedSet.has(entry.target)) {
+          parsedSet.add(entry.target);
+          twemojiParse(entry.target as HTMLElement);
+        }
+      }
+    },
+    { threshold: [0] },
+  );
 
-export const useTwemoji = () => {
+type InjectEmojis = { injectEmojis: (element: HTMLElement | null) => void };
+
+export const useTwemoji = (): InjectEmojis => {
   const elementRef = useRef<HTMLElement>();
 
   const injectEmojis = useCallback((element: HTMLElement | null) => {
@@ -120,12 +125,10 @@ export const useTwemoji = () => {
     }
   }, []);
 
-  useEffect(() => {
-    return () => {
-      if (elementRef.current && twemojiRenderer) {
-        twemojiRenderer.unobserve(elementRef.current);
-      }
-    };
+  useEffect(() => () => {
+    if (elementRef.current && twemojiRenderer) {
+      twemojiRenderer.unobserve(elementRef.current);
+    }
   }, []);
 
   return { injectEmojis };

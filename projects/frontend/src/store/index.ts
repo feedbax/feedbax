@@ -1,9 +1,10 @@
-import { combineReducers, createStore, Reducer } from "redux";
+import { combineReducers, createStore } from 'redux';
+import type { Action, Reducer } from 'redux';
 
-import { questionsSlice } from "./modules/questions";
-import { answersSlice } from "./modules/answers";
+import { questionsSlice } from './modules/questions';
+import { answersSlice } from './modules/answers';
 
-type extractState<T> = T extends Reducer<infer X, any> ? X : never;
+type extractState<T> = T extends Reducer<infer X, Action<unknown>> ? X : never;
 
 export const gameReducer = combineReducers({
   questionsState: questionsSlice.reducer,

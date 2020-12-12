@@ -1,25 +1,25 @@
 /** @jsx jsx */
 
-import "react";
-import { useTranslation } from "~i18n";
+import React from 'react';
+import { jsx, css } from '@emotion/react';
+import { useTranslation } from '~i18n';
 
-import { jsx, css } from "@emotion/react";
-import { colors } from "~theme";
+import { colors } from '~theme';
 
-import GlobalStyles from "~components/GlobalStyles";
+import GlobalStyles from '~components/GlobalStyles';
 
-import Footer from "~components/Footer";
-import Logo from "~components/Logo";
-import MenuButton from "~components/Menu";
+import Footer from '~components/Footer';
+import Logo from '~components/Logo';
+import MenuButton from '~components/Menu';
 
-export default function PrivacyPolicy() {
+export default function PrivacyPolicy(): JSX.Element {
   const { t } = useTranslation();
-  const Content = t("privacy-policy", "content");
+  const Content = t('privacy-policy', 'content');
 
   return (
     <div css={stylesLegal}>
       <GlobalStyles />
-      <MenuButton color={{ background: "first" }} />
+      <MenuButton color={{ background: 'first' }} />
 
       <Logo />
 

@@ -10,7 +10,7 @@ type Props = {
   color?: keyof typeof colors;
 };
 
-export default function GlobalStyles({ color = "first" }: Props) {
+export default function GlobalStyles({ color = "first" }: Props): JSX.Element {
   return (
     <Global
       styles={css`

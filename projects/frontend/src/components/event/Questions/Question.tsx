@@ -18,7 +18,6 @@ type QuestionProps = {
 };
 
 const Question = React.memo(({ questionId, index }: QuestionProps) => {
-  // prettier-ignore
   const getQuestion = useSelector(selectors.questionById);
   const question = getQuestion(questionId);
 
@@ -32,7 +31,9 @@ const Question = React.memo(({ questionId, index }: QuestionProps) => {
   return (
     <div
       css={[stylesQuestion, stylesCurrent]}
-      style={{ transform: `translate(${deltaIndex * 100}%, 0)` }}
+      style={{
+        transform: `translate(${deltaIndex * 100}%, 0)`,
+      }}
       key={question?.order}
     >
       <div className="number">{`${index + 1}`.padStart(2, "0")}</div>

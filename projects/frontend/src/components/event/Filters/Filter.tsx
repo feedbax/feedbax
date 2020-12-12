@@ -1,15 +1,15 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 
-import React from "react";
-import { useSelector } from "react-redux";
+import React from 'react';
+import { useSelector } from 'react-redux';
 
-import { jsx, css } from "@emotion/react";
+import { jsx, css } from '@emotion/react';
 
-import IconButton, { Icons, Variants } from "~components/IconButton";
+import IconButton, { Icons, Variants } from '~components/IconButton';
 
-import { AnswersFilter, selectors, actions } from "~store/modules/answers";
-import { store } from "~store";
+import { AnswersFilter, selectors, actions } from '~store/modules/answers';
+import { store } from '~store';
 
 type FilterProps = {
   filter: AnswersFilter;

@@ -25,7 +25,6 @@ export const TranslationContext = createContext<Context>({
   },
 });
 
-// prettier-ignore
 interface Translate {
   <P extends keyof Translations>(prop: P): Translations[P];
 
@@ -41,25 +40,35 @@ interface Translate {
   >(prop1: P1, prop2: P2, prop3: P3): Translations[P1][P2][P3];
 }
 
-export const useTranslation = () => {
-  const { locale, location, translation } = useContext(TranslationContext);
-
-  const t: Translate = (p1: any, p2?: any, p3?: any) => {
-    if (p1 && p2 && p3) {
-      return (translation as any)[p1][p2][p3];
-    }
-
-    if (p1 && p2) {
-      return (translation as any)[p1][p2];
-    }
-
-    if (p1) {
-      return (translation as any)[p1];
-    }
-  };
-
-  return { locale, location, t };
+type TranslationHook = () => {
+  locale: Locales;
+  location: Location;
+  t: Translate;
 };
+
+export const useTranslation: TranslationHook = (
+  () => {
+    const { locale, location, translation } = useContext(TranslationContext);
+  
+    /* eslint-disable @typescript-eslint/no-explicit-any */
+    const t: Translate = (p1: any, p2?: any, p3?: any) => {
+      if (p1 && p2 && p3) {
+        return (translation as any)[p1][p2][p3];
+      }
+  
+      if (p1 && p2) {
+        return (translation as any)[p1][p2];
+      }
+  
+      if (p1) {
+        return (translation as any)[p1];
+      }
+    };
+    /* eslint-enable @typescript-eslint/no-explicit-any */
+
+    return { locale, location, t };
+  }
+);
 
 type Props = { children: (t: Translate) => JSX.Element };
 export const Translation = React.memo(({ children }: Props) => {

@@ -20,7 +20,7 @@ export default function EventLogin() {
         type="text"
         placeholder="Event-Code"
         value={eventCode}
-        onChange={e => setEventCode(e.target.value)}
+        onChange={(e) => setEventCode(e.target.value)}
       />
 
       <LocaleLink className="button" to={`/@/${eventCode}`}>

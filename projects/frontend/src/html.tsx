@@ -1,89 +1,88 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 
-import React, { useEffect } from "react";
-import PropTypes from "prop-types";
+import React, { useEffect } from 'react';
+import { jsx, css, Global } from '@emotion/react';
 
-import { jsx, css, Global } from "@emotion/react";
+import { useTranslation } from '~i18n';
 
-import KlinicSlabBold_woff2 from "~assets/fonts/KlinicSlab-Bold.woff2";
-import KlinicSlabBold_woff from "~assets/fonts/KlinicSlab-Bold.woff";
+import KlinicSlabBoldWoff2 from '~assets/fonts/KlinicSlab-Bold.woff2';
+import KlinicSlabBoldWoff from '~assets/fonts/KlinicSlab-Bold.woff';
 
-import KlinicSlabBook_woff2 from "~assets/fonts/KlinicSlab-Book.woff2";
-import KlinicSlabBook_woff from "~assets/fonts/KlinicSlab-Book.woff";
+import KlinicSlabBookWoff2 from '~assets/fonts/KlinicSlab-Book.woff2';
+import KlinicSlabBookWoff from '~assets/fonts/KlinicSlab-Book.woff';
 
-import KlinicSlabBookItalic_woff2 from "~assets/fonts/KlinicSlab-BookItalic.woff2";
-import KlinicSlabBookItalic_woff from "~assets/fonts/KlinicSlab-BookItalic.woff";
+import KlinicSlabBookItalicWoff2 from '~assets/fonts/KlinicSlab-BookItalic.woff2';
+import KlinicSlabBookItalicWoff from '~assets/fonts/KlinicSlab-BookItalic.woff';
 
-import RobotoSlabBold_woff2 from "~assets/fonts/RobotoSlab-Bold.woff2";
-import RobotoSlabBold_woff from "~assets/fonts/RobotoSlab-Bold.woff";
+import RobotoSlabBoldWoff2 from '~assets/fonts/RobotoSlab-Bold.woff2';
+import RobotoSlabBoldWoff from '~assets/fonts/RobotoSlab-Bold.woff';
 
-import RobotoSlabRegular_woff2 from "~assets/fonts/RobotoSlab-Regular.woff2";
-import RobotoSlabRegular_woff from "~assets/fonts/RobotoSlab-Regular.woff";
+import RobotoSlabRegularWoff2 from '~assets/fonts/RobotoSlab-Regular.woff2';
+import RobotoSlabRegularWoff from '~assets/fonts/RobotoSlab-Regular.woff';
 
-import "normalize.css";
+import 'normalize.css';
 
 const fixVhUnit = () => {
-  let vh = window.innerHeight * 0.01;
-  document.documentElement.style.setProperty("--vh", `${vh}px`);
+  const vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
 };
 
-export default function HTML(props: Props) {
+export default function HTML(props: Props): JSX.Element {
+  const { locale } = useTranslation();
+
+  const { htmlAttributes, bodyAttributes } = props;
+  const { headComponents, preBodyComponents, postBodyComponents } = props;
+  const { body } = props;
+
   useEffect(() => {
-    window.addEventListener("resize", fixVhUnit);
+    window.addEventListener('resize', fixVhUnit);
     fixVhUnit();
 
     return () => {
-      window.removeEventListener("resize", fixVhUnit);
+      window.removeEventListener('resize', fixVhUnit);
     };
   }, []);
 
   return (
-    <html {...props.htmlAttributes}>
+    /* eslint-disable react/jsx-props-no-spreading */
+    /* eslint-disable react/no-danger */
+    <html {...htmlAttributes} lang={locale}>
       <head>
         <meta charSet="utf-8" />
         <meta httpEquiv="x-ua-compatible" content="ie=edge" />
 
-        { /* prettier-ignore */ }
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, shrink-to-fit=no" />
 
-        { /* prettier-ignore */ }
-        <link rel="preload" href={KlinicSlabBold_woff2} as="font" type="font/woff2" crossOrigin="anonymous" />
-        { /* prettier-ignore */ }
-        <link rel="preload" href={KlinicSlabBold_woff} as="font" type="font/woff" crossOrigin="anonymous" />
+        <link rel="preload" href={KlinicSlabBoldWoff2} as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href={KlinicSlabBoldWoff} as="font" type="font/woff" crossOrigin="anonymous" />
 
-        { /* prettier-ignore */ }
-        <link rel="preload" href={KlinicSlabBook_woff2} as="font" type="font/woff2" crossOrigin="anonymous" />
-        { /* prettier-ignore */ }
-        <link rel="preload" href={KlinicSlabBook_woff} as="font" type="font/woff" crossOrigin="anonymous" />
+        <link rel="preload" href={KlinicSlabBookWoff2} as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href={KlinicSlabBookWoff} as="font" type="font/woff" crossOrigin="anonymous" />
 
-        { /* prettier-ignore */ }
-        <link rel="preload" href={KlinicSlabBookItalic_woff2} as="font" type="font/woff2" crossOrigin="anonymous" />
-        { /* prettier-ignore */ }
-        <link rel="preload" href={KlinicSlabBookItalic_woff} as="font" type="font/woff" crossOrigin="anonymous" />
+        <link rel="preload" href={KlinicSlabBookItalicWoff2} as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href={KlinicSlabBookItalicWoff} as="font" type="font/woff" crossOrigin="anonymous" />
 
-        { /* prettier-ignore */ }
-        <link rel="preload" href={RobotoSlabBold_woff2} as="font" type="font/woff2" crossOrigin="anonymous" />
-        { /* prettier-ignore */ }
-        <link rel="preload" href={RobotoSlabBold_woff} as="font" type="font/woff" crossOrigin="anonymous" />
+        <link rel="preload" href={RobotoSlabBoldWoff2} as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href={RobotoSlabBoldWoff} as="font" type="font/woff" crossOrigin="anonymous" />
 
-        { /* prettier-ignore */ }
-        <link rel="preload" href={RobotoSlabRegular_woff2} as="font" type="font/woff2" crossOrigin="anonymous" />
-        { /* prettier-ignore */ }
-        <link rel="preload" href={RobotoSlabRegular_woff} as="font" type="font/woff" crossOrigin="anonymous" />
+        <link rel="preload" href={RobotoSlabRegularWoff2} as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href={RobotoSlabRegularWoff} as="font" type="font/woff" crossOrigin="anonymous" />
 
-        {props.headComponents}
+        {headComponents}
       </head>
-      <body {...props.bodyAttributes}>
-        {props.preBodyComponents}
-
-        { /* prettier-ignore */ }
-        <div key={`body`} id="___gatsby" dangerouslySetInnerHTML={{ __html: props.body }} />
+      <body {...bodyAttributes}>
         <Global styles={stylesGlobal} />
 
-        {props.postBodyComponents}
+        {preBodyComponents}
+
+        <div key="body" id="___gatsby" dangerouslySetInnerHTML={{ __html: body }} />
+
+        {postBodyComponents}
       </body>
     </html>
+    /* eslint-enable react/jsx-props-no-spreading */
+    /* eslint-enable react/no-danger */
   );
 }
 
@@ -94,15 +93,6 @@ type Props = {
   preBodyComponents: Array<unknown>;
   body: string;
   postBodyComponents: Array<unknown>;
-};
-
-HTML.propTypes = {
-  htmlAttributes: PropTypes.object,
-  headComponents: PropTypes.array,
-  bodyAttributes: PropTypes.object,
-  preBodyComponents: PropTypes.array,
-  body: PropTypes.string,
-  postBodyComponents: PropTypes.array,
 };
 
 const stylesGlobal = css`
@@ -132,10 +122,9 @@ const stylesGlobal = css`
   @font-face {
     font-family: "Klinic Slab";
 
-    // prettier-ignore
     src:  local("Georgia"),
-          url(${KlinicSlabBold_woff2}) format("woff2"),
-          url(${KlinicSlabBold_woff}) format("woff");
+          url(${KlinicSlabBoldWoff2}) format("woff2"),
+          url(${KlinicSlabBoldWoff}) format("woff");
 
     font-weight: bold;
     font-style: normal;
@@ -145,10 +134,9 @@ const stylesGlobal = css`
   @font-face {
     font-family: "Klinic Slab Book";
 
-    // prettier-ignore
     src:  local("Georgia"),
-          url(${KlinicSlabBook_woff2}) format("woff2"),
-          url(${KlinicSlabBook_woff}) format("woff");
+          url(${KlinicSlabBookWoff2}) format("woff2"),
+          url(${KlinicSlabBookWoff}) format("woff");
 
     font-display: swap;
     font-weight: normal;
@@ -158,10 +146,9 @@ const stylesGlobal = css`
   @font-face {
     font-family: "Klinic Slab Book";
 
-    // prettier-ignore
     src:  local("Georgia"),
-          url(${KlinicSlabBookItalic_woff2}) format("woff2"),
-          url(${KlinicSlabBookItalic_woff}) format("woff");
+          url(${KlinicSlabBookItalicWoff2}) format("woff2"),
+          url(${KlinicSlabBookItalicWoff}) format("woff");
 
     font-display: swap;
     font-weight: normal;
@@ -171,10 +158,9 @@ const stylesGlobal = css`
   @font-face {
     font-family: "Roboto Slab";
 
-    // prettier-ignore
     src:  local("Georgia"),
-          url(${RobotoSlabBold_woff2}) format("woff2"),
-          url(${RobotoSlabBold_woff}) format("woff");
+          url(${RobotoSlabBoldWoff2}) format("woff2"),
+          url(${RobotoSlabBoldWoff}) format("woff");
 
     font-display: swap;
     font-weight: bold;
@@ -184,10 +170,9 @@ const stylesGlobal = css`
   @font-face {
     font-family: "Roboto Slab";
 
-    // prettier-ignore
     src:  local("Georgia"),
-          url(${RobotoSlabRegular_woff2}) format("woff2"),
-          url(${RobotoSlabRegular_woff}) format("woff");
+          url(${RobotoSlabRegularWoff2}) format("woff2"),
+          url(${RobotoSlabRegularWoff}) format("woff");
 
     font-display: swap;
     font-weight: normal;

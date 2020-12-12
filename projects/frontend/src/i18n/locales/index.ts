@@ -2,18 +2,15 @@ import de from "~i18n/locales/de";
 import en from "~i18n/locales/en";
 import _locales from "~i18n/locales/locales.json";
 
-// prettier-ignore
 type ObjectKeys<T> = 
-  T extends object ? (keyof T)[]:
+  T extends Record<string, unknown> ? (keyof T)[]:
   T extends number ? [] :
-  T extends Array<any> | string ? string[] :
+  T extends Array<unknown> | string ? string[] :
   never;
 
 declare global {
-  namespace globalThis {
-    interface ObjectConstructor {
-      keys<T>(o: T): ObjectKeys<T>;
-    }
+  interface ObjectConstructor {
+    keys<T>(o: T): ObjectKeys<T>;
   }
 }
 

@@ -4,27 +4,36 @@
  * See: https://www.gatsbyjs.com/docs/gatsby-config/
  */
 
-import path from "path";
+import path from 'path';
 
 export default {
   /* Your site config here */
   plugins: [
-    `gatsby-plugin-typescript`,
+    'gatsby-plugin-typescript',
 
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: 'gatsby-source-filesystem',
       options: {
-        name: `images`,
-        path: path.join(__dirname, `src/assets/images`),
+        name: 'images',
+        path: path.join(__dirname, 'src/assets/images'),
       },
     },
 
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
-    `gatsby-plugin-emotion`,
+    'gatsby-transformer-sharp',
+    'gatsby-plugin-sharp',
 
     {
-      resolve: "gatsby-plugin-react-svg",
+      resolve: 'gatsby-plugin-emotion',
+      options: {
+        sourceMap: true,
+        autoLabel: 'dev-only',
+        labelFormat: '[local]',
+        cssPropOptimization: true,
+      },
+    },
+
+    {
+      resolve: 'gatsby-plugin-react-svg',
       options: {
         rule: {
           include: /\.inline\.svg$/,
@@ -32,6 +41,6 @@ export default {
       },
     },
 
-    `gatsby-plugin-mdx`,
+    'gatsby-plugin-mdx',
   ],
 };

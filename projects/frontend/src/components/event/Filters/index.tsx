@@ -10,7 +10,7 @@ import Filter from "./Filter";
 
 const Filters = React.memo(() => (
   <div css={stylesFilters}>
-    {answerFilters.map(filter => {
+    {answerFilters.map((filter) => {
       return <Filter key={filter} filter={filter} />;
     })}
   </div>

@@ -16,7 +16,6 @@ const benefits = [
     image: "benefit_1",
     text: {
       align: "center",
-      // prettier-ignore
       content: (
         <Translation>{
           t => <>{t("frontpage", "benefit-1")}</>
@@ -29,7 +28,6 @@ const benefits = [
     image: "benefit_2",
     text: {
       align: "center",
-      // prettier-ignore
       content: (
         <Translation>{
           t => <>{t("frontpage", "benefit-2")}</>
@@ -42,7 +40,6 @@ const benefits = [
     image: "benefit_3",
     text: {
       align: "center",
-      // prettier-ignore
       content: (
         <Translation>{
           t => <>{t("frontpage", "benefit-3")}</>
@@ -57,7 +54,7 @@ const benefits = [
       align: "left",
       content: (
         <Translation>
-          {t => (
+          {(t) => (
             <>
               {t("frontpage", "benefit-4", "title")}
 
@@ -80,7 +77,7 @@ const benefits = [
       align: "left",
       content: (
         <Translation>
-          {t => (
+          {(t) => (
             <>
               {t("frontpage", "benefit-5", "title")}
               <small>{t("frontpage", "benefit-5", "content-1")}</small>
@@ -98,7 +95,7 @@ const benefits = [
       align: "left",
       content: (
         <Translation>
-          {t => (
+          {(t) => (
             <>
               {t("frontpage", "benefit-6", "title")}
               <small>{t("frontpage", "benefit-6", "content-1")}</small>

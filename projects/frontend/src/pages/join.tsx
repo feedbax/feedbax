@@ -1,23 +1,23 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo } from 'react';
 
-import { Router } from "@reach/router";
-import { Provider } from "react-redux";
+import { Router } from '@reach/router';
+import { Provider } from 'react-redux';
 
-import { jsx } from "@emotion/react";
-import { useTranslation } from "~i18n";
+import { jsx } from '@emotion/react';
+import { useTranslation } from '~i18n';
 
-import GlobalStyles from "~components/GlobalStyles";
-import Loading from "~components/join/Loading";
-import Event from "~components/event/Event";
-import LocaleLink from "~components/I18n/LocaleLink";
+import GlobalStyles from '~components/GlobalStyles';
+import Loading from '~components/join/Loading';
+import Event from '~components/event/Event';
+import LocaleLink from '~components/I18n/LocaleLink';
 
-import { store } from "~store";
-import { actions } from "~store/modules/questions";
+import { store } from '~store';
+import { actions } from '~store/modules/questions';
 
-import type { MenuItem } from "~components/Menu";
+import type { MenuItem } from '~components/Menu';
 
 type Props = {
   path: string;
@@ -25,13 +25,13 @@ type Props = {
   questionIndex?: string;
 };
 
-function JoinRoute({ eventSlug, questionIndex }: Props) {
+function JoinRoute({ questionIndex }: Props) {
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
     const timeout = setTimeout(() => setLoading(false), 2000);
 
-    if (typeof questionIndex !== "undefined") {
+    if (typeof questionIndex !== 'undefined') {
       const $questionIndex = parseInt(questionIndex, 10) - 1;
       store.dispatch(actions.setCurrentIndex($questionIndex));
     }
@@ -39,17 +39,18 @@ function JoinRoute({ eventSlug, questionIndex }: Props) {
     return () => {
       clearTimeout(timeout);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <>
-      <Loading state={isLoading ? "visible" : "hidden"} />
+      <Loading state={isLoading ? 'visible' : 'hidden'} />
       <Event />
     </>
   );
 }
 
-export default function Join() {
+export default function Join(): JSX.Element {
   return (
     <Provider store={store}>
       <GlobalStyles color="third" />
@@ -72,14 +73,14 @@ export const useEventMenu = (): MenuItem[] => {
   const menuItems = useMemo(
     () => [
       {
-        key: "logout",
-        content: <LocaleLink to="/">{t("menu", "logout")}</LocaleLink>,
+        key: 'logout',
+        content: <LocaleLink to="/">{t('menu', 'logout')}</LocaleLink>,
       },
     ],
-    [t]
+    [t],
   );
 
-  if (location.path === "/@") {
+  if (location.path === '/@') {
     return menuItems;
   }
 
