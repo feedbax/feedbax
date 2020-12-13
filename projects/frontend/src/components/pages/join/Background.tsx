@@ -81,32 +81,37 @@ const query = graphql`
   }
 `;
 
-export default function Background() {
-  const data = useStaticQuery<Data>(query);
+const Background = React.memo(
+  () => {
+    const data = useStaticQuery<Data>(query);
 
-  return (
-    <ClassNames>
-      {({ css }) => (
-        <Img
-          fluid={[
-            {
-              ...data.backgroundLandscape.childImageSharp.fluid,
-              media: '(orientation: landscape)',
-            },
-            {
-              ...data.backgroundPortrait.childImageSharp.fluid,
-              media: '(orientation: portrait)',
-            },
-          ]}
-          className={css`
-            position: absolute !important;
-            width: 100vw;
-            height: 100vh;
-            height: calc(var(--vh, 1vh) * 100);
-            z-index: -2;
-          `}
-        />
-      )}
-    </ClassNames>
-  );
-}
+    return (
+      <ClassNames>
+        {({ css }) => (
+          <Img
+            fluid={[
+              {
+                ...data.backgroundLandscape.childImageSharp.fluid,
+                media: '(orientation: landscape)',
+              },
+              {
+                ...data.backgroundPortrait.childImageSharp.fluid,
+                media: '(orientation: portrait)',
+              },
+            ]}
+
+            className={css`
+              position: absolute !important;
+              width: 100vw;
+              height: 100vh;
+              height: calc(var(--vh, 1vh) * 100);
+              z-index: -2;
+            `}
+          />
+        )}
+      </ClassNames>
+    );
+  },
+);
+
+export default Background;

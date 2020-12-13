@@ -18,24 +18,26 @@ type MenuButtonProps = {
   color?: IconButtonProps['color'];
 };
 
-const MenuButton = React.memo((props: MenuButtonProps) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const toggleOpen = () => setIsOpen(!isOpen);
+const MenuButton = React.memo(
+  (props: MenuButtonProps) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const toggleOpen = () => setIsOpen(!isOpen);
 
-  const { color } = props;
+    const { color } = props;
 
-  return (
-    <>
-      <MenuPortal isOpen={isOpen} toggleOpen={toggleOpen} />
-      <IconButton
-        color={color}
-        styles={stylesMenuButton}
-        icon={Icons.Menu}
-        onClick={toggleOpen}
-      />
-    </>
-  );
-});
+    return (
+      <>
+        <MenuPortal isOpen={isOpen} toggleOpen={toggleOpen} />
+        <IconButton
+          color={color}
+          styles={stylesMenuButton}
+          icon={Icons.Menu}
+          onClick={toggleOpen}
+        />
+      </>
+    );
+  },
+);
 
 export default MenuButton;
 

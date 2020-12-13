@@ -6,9 +6,15 @@ import { jsx, css } from '@emotion/react';
 import { between } from 'polished';
 import { colors } from '~theme';
 
-export default function Title() {
-  return <div css={stylesTitle}>feedb.ax</div>;
-}
+const Title = React.memo(
+  () => (
+    <div css={stylesTitle}>
+      feedb.ax
+    </div>
+  ),
+);
+
+export default Title;
 
 const fontSize = between('82px', '210px', '300px', '1400px');
 

@@ -30,34 +30,35 @@ const variants: Variants = {
   exit: { opacity: 0, backdropFilter: 'blur(0px)' },
 };
 
-const MenuPortal = React.memo((props: MenuPortalProps) => {
-  const { isOpen, toggleOpen } = props;
-  const backdropRef = useRef<HTMLDivElement>(null);
+const MenuPortal = React.memo(
+  (props: MenuPortalProps) => {
+    const { isOpen, toggleOpen } = props;
+    const backdropRef = useRef<HTMLDivElement>(null);
 
-  const menu = useMenuItems();
+    const menu = useMenuItems();
 
-  const [items, setItems] = useState(menu);
-  const [hasHistory, setHasHistory] = useState(false);
-  const itemsHistory = useRef<MenuItem[][]>([]);
+    const [items, setItems] = useState(menu);
+    const [hasHistory, setHasHistory] = useState(false);
+    const itemsHistory = useRef<MenuItem[][]>([]);
 
-  const $toggleOpen = (e: MouseEvent) => {
-    if (backdropRef.current !== e.target) return;
+    const $toggleOpen = (e: MouseEvent) => {
+      if (backdropRef.current !== e.target) return;
 
-    if (isOpen) {
-      setItems(menu);
-      itemsHistory.current = [];
-    }
+      if (isOpen) {
+        setItems(menu);
+        itemsHistory.current = [];
+      }
 
-    toggleOpen();
-  };
+      toggleOpen();
+    };
 
-  useEffect(() => {
-    setHasHistory(itemsHistory.current.length > 0);
-  }, [itemsHistory.current.length]);
+    useEffect(() => {
+      setHasHistory(itemsHistory.current.length > 0);
+    }, [itemsHistory.current.length]);
 
-  return createPortal(
-    <AnimatePresence>
-      {isOpen && (
+    return createPortal(
+      <AnimatePresence>
+        {isOpen && (
         <motion.div
           css={stylesPortal}
           variants={variants}
@@ -122,11 +123,12 @@ const MenuPortal = React.memo((props: MenuPortalProps) => {
             onClick={toggleOpen}
           />
         </motion.div>
-      )}
-    </AnimatePresence>,
-    document.body,
-  );
-});
+        )}
+      </AnimatePresence>,
+      document.body,
+    );
+  },
+);
 
 export default MenuPortal;
 

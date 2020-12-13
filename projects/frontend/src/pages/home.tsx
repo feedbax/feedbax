@@ -5,12 +5,12 @@ import { jsx, css } from '@emotion/react';
 
 import { colors } from '~theme';
 
-import Background from '~components/frontpage/Background';
-import Title from '~components/frontpage/Title';
-import EventLogin from '~components/frontpage/EventLogin';
-import SeeMore from '~components/frontpage/SeeMore';
-import YourTool from '~components/frontpage/YourTool';
-import Benefits from '~components/frontpage/Benefits';
+import Background from '~components/pages/home/Background';
+import Title from '~components/pages/home/Title';
+import EventLogin from '~components/pages/home/EventLogin';
+import SeeMore from '~components/pages/home/SeeMore';
+import YourTool from '~components/pages/home/YourTool';
+import Benefits from '~components/pages/home/Benefits';
 
 import GlobalStyles from '~components/GlobalStyles';
 import MenuButton from '~components/Menu';

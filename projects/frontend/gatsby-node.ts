@@ -158,7 +158,6 @@ const createCustomEslintConfiguration = (
     ];
 
     fs.writeFileSync('.eslintrc', JSON.stringify(baseConfig, null, 2));
-    throw new Error('stop');
   }
 );
 
@@ -174,7 +173,45 @@ export const onCreatePage = async (props: CreatePageArgs): Promise<void> => {
     return;
   }
 
+  if (/^\/home\/?$/.test(page.path)) {
+    createHomePage(props);
+    return;
+  }
+
   createOtherPages(props);
+};
+
+const createHomePage = (props: CreatePageArgs) => {
+  const { page, actions } = props;
+  const { createPage, deletePage } = actions;
+
+  deletePage(page);
+
+  createPage({
+    ...page,
+
+    path: '/',
+
+    context: {
+      originalPath: '/',
+      locale: defaultLocale,
+    },
+  });
+
+  for (let i = 0; i < locales.length; i += 1) {
+    const locale = locales[i];
+
+    createPage({
+      ...page,
+
+      path: `/${locale}/`,
+
+      context: {
+        originalPath: '/',
+        locale,
+      },
+    });
+  }
 };
 
 const createEventPage = (props: CreatePageArgs) => {

@@ -6,16 +6,23 @@ import useTranslation from '~hooks/i18n/use-translation';
 import { jsx, css } from '@emotion/react';
 import { colors } from '~theme';
 
-export default function SeeMore() {
-  const { t } = useTranslation();
+const SeeMore = React.memo(
+  () => {
+    const { t } = useTranslation();
 
-  return (
-    <div css={stylesSeeMore}>
-      <span>{t('frontpage', 'see-more')}</span>
-      <div />
-    </div>
-  );
-}
+    return (
+      <div css={stylesSeeMore}>
+        <span>
+          {t('home', 'see-more')}
+        </span>
+
+        <div />
+      </div>
+    );
+  },
+);
+
+export default SeeMore;
 
 const stylesSeeMore = css`
   position: relative;

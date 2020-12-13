@@ -8,12 +8,12 @@ import type { MenuItem } from '~components/Menu';
 
 const useMenuItems = (): MenuItem[] => {
   const menuLanguage = useLanguageMenu();
-  const menuFrontPage = useHomeMenu();
+  const menuHome = useHomeMenu();
   const menuEvent = useEventMenu();
 
   const items = useMemo(
-    () => [...menuFrontPage, ...menuLanguage, ...menuEvent],
-    [menuLanguage, menuFrontPage, menuEvent],
+    () => [...menuHome, ...menuLanguage, ...menuEvent],
+    [menuLanguage, menuHome, menuEvent],
   );
 
   return items;

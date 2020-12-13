@@ -5,13 +5,11 @@ import type { Translate } from './types';
 
 type Props = { children: (t: Translate) => JSX.Element };
 
-const Translation = (
-  React.memo(
-    ({ children }: Props) => {
-      const { t } = useTranslation();
-      return children(t);
-    },
-  )
+const Translation = React.memo(
+  ({ children }: Props) => {
+    const { t } = useTranslation();
+    return children(t);
+  },
 );
 
 export default Translation;

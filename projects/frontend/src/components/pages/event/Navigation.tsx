@@ -5,7 +5,7 @@ import React from 'react';
 
 import { jsx, css } from '@emotion/react';
 
-import Pagination from '~components/event/Pagination';
+import Pagination from '~components/pages/event/Pagination';
 
 import { actions } from '~store/modules/questions';
 import { store } from '~store';

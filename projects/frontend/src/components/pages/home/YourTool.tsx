@@ -10,23 +10,29 @@ import { colors } from '~theme';
 import Img from 'gatsby-image';
 import { useStaticQuery, graphql } from 'gatsby';
 
-export default function YourTool() {
-  const data = useStaticQuery(query);
-  const { t } = useTranslation();
+const YourTool = React.memo(
+  () => {
+    const data = useStaticQuery(query);
+    const { t } = useTranslation();
 
-  return (
-    <div css={stylesTool}>
-      <div className="text">{t('frontpage', 'your-tool')}</div>
+    return (
+      <div css={stylesTool}>
+        <div className="text">
+          {t('home', 'your-tool')}
+        </div>
 
-      <Img
-        className="image"
-        fluid={data.file.childImageSharp.fluid}
-        imgStyle={{ objectFit: 'contain' }}
-        alt="tool preview"
-      />
-    </div>
-  );
-}
+        <Img
+          className="image"
+          fluid={data.file.childImageSharp.fluid}
+          imgStyle={{ objectFit: 'contain' }}
+          alt="tool preview"
+        />
+      </div>
+    );
+  },
+);
+
+export default YourTool;
 
 const query = graphql`
   {

@@ -9,26 +9,30 @@ import { colors } from '~theme';
 
 import LocaleLink from '~components/I18n/LocaleLink';
 
-export default function EventLogin() {
-  const [eventCode, setEventCode] = useState('');
-  const { t } = useTranslation();
+const EventLogin = React.memo(
+  () => {
+    const [eventCode, setEventCode] = useState('');
+    const { t } = useTranslation();
 
-  return (
-    <div css={stylesEventLogin}>
-      <input
-        className="text"
-        type="text"
-        placeholder="Event-Code"
-        value={eventCode}
-        onChange={(e) => setEventCode(e.target.value)}
-      />
+    return (
+      <div css={stylesEventLogin}>
+        <input
+          className="text"
+          type="text"
+          placeholder="Event-Code"
+          value={eventCode}
+          onChange={(e) => setEventCode(e.target.value)}
+        />
 
-      <LocaleLink className="button" to={`/@/${eventCode}`}>
-        {t('frontpage', 'lets-go')}
-      </LocaleLink>
-    </div>
-  );
-}
+        <LocaleLink className="button" to={`/@/${eventCode}`}>
+          {t('home', 'lets-go')}
+        </LocaleLink>
+      </div>
+    );
+  },
+);
+
+export default EventLogin;
 
 const createShadow = (min: number, max: number) => {
   const px1p = between(`${min}px`, `${max}px`, '300px', '1400px');

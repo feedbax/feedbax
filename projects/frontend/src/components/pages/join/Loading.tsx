@@ -32,26 +32,30 @@ const variants = {
   },
 };
 
-export default function Loading(props: Props) {
-  const { styles = {} } = props;
-  const { state = 'visible' } = props;
+const Loading = React.memo(
+  (props: Props) => {
+    const { styles = {} } = props;
+    const { state = 'visible' } = props;
 
-  return (
-    <motion.div
-      css={[stylesLoading, styles]}
-      initial="visible"
-      animate={state}
-      variants={variants}
-    >
-      <Background />
+    return (
+      <motion.div
+        css={[stylesLoading, styles]}
+        initial="visible"
+        animate={state}
+        variants={variants}
+      >
+        <Background />
 
-      <div className="logo-loading">
-        <div className="pulse" />
-        <Logo />
-      </div>
-    </motion.div>
-  );
-}
+        <div className="logo-loading">
+          <div className="pulse" />
+          <Logo />
+        </div>
+      </motion.div>
+    );
+  },
+);
+
+export default Loading;
 
 const pulse = keyframes`
   from {

@@ -19,7 +19,7 @@ const benefits = [
       content: (
         <Translation>
           {
-          (t) => <>{t('frontpage', 'benefit-1')}</>
+          (t) => <>{t('home', 'benefit-1')}</>
         }
         </Translation>
       ),
@@ -33,7 +33,7 @@ const benefits = [
       content: (
         <Translation>
           {
-          (t) => <>{t('frontpage', 'benefit-2')}</>
+          (t) => <>{t('home', 'benefit-2')}</>
         }
         </Translation>
       ),
@@ -47,7 +47,7 @@ const benefits = [
       content: (
         <Translation>
           {
-          (t) => <>{t('frontpage', 'benefit-3')}</>
+          (t) => <>{t('home', 'benefit-3')}</>
         }
         </Translation>
       ),
@@ -62,12 +62,12 @@ const benefits = [
         <Translation>
           {(t) => (
             <>
-              {t('frontpage', 'benefit-4', 'title')}
+              {t('home', 'benefit-4', 'title')}
 
               <small>
                 <ul>
-                  <li>{t('frontpage', 'benefit-4', 'content-1')}</li>
-                  <li>{t('frontpage', 'benefit-4', 'content-2')}</li>
+                  <li>{t('home', 'benefit-4', 'content-1')}</li>
+                  <li>{t('home', 'benefit-4', 'content-2')}</li>
                 </ul>
               </small>
             </>
@@ -85,9 +85,9 @@ const benefits = [
         <Translation>
           {(t) => (
             <>
-              {t('frontpage', 'benefit-5', 'title')}
-              <small>{t('frontpage', 'benefit-5', 'content-1')}</small>
-              <code>{t('frontpage', 'benefit-5', 'content-2')}</code>
+              {t('home', 'benefit-5', 'title')}
+              <small>{t('home', 'benefit-5', 'content-1')}</small>
+              <code>{t('home', 'benefit-5', 'content-2')}</code>
             </>
           )}
         </Translation>
@@ -103,8 +103,8 @@ const benefits = [
         <Translation>
           {(t) => (
             <>
-              {t('frontpage', 'benefit-6', 'title')}
-              <small>{t('frontpage', 'benefit-6', 'content-1')}</small>
+              {t('home', 'benefit-6', 'title')}
+              <small>{t('home', 'benefit-6', 'content-1')}</small>
             </>
           )}
         </Translation>
@@ -123,19 +123,27 @@ type Data = {
   };
 };
 
-const createRenderBenefit = (data: Data) => ({ image, text }: Benefit) => (
-  <div css={stylesBenefit} key={image}>
-    <Img className="image" fluid={data[image].childImageSharp.fluid} />
-    <div className={`text ${text.align}`}>{text.content}</div>
-  </div>
+const Benefits = React.memo(
+  () => {
+    const data = useStaticQuery<Data>(query);
+    const renderBenefit = useCallback(
+      ({ image, text }: Benefit) => (
+        <div css={stylesBenefit} key={image}>
+          <Img className="image" fluid={data[image].childImageSharp.fluid} />
+          <div className={`text ${text.align}`}>{text.content}</div>
+        </div>
+      ), [data],
+    );
+
+    return (
+      <div css={stylesBenefits}>
+        {benefits.map(renderBenefit)}
+      </div>
+    );
+  },
 );
 
-export default function Benefits() {
-  const data = useStaticQuery(query);
-  const renderBenefit = useCallback(createRenderBenefit(data), [data]);
-
-  return <div css={stylesBenefits}>{benefits.map(renderBenefit)}</div>;
-}
+export default Benefits;
 
 const query = graphql`
   {

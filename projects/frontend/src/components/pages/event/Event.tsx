@@ -10,11 +10,11 @@ import { colors } from '~theme';
 import Logo from '~components/Logo';
 import MenuButton from '~components/Menu';
 
-import Questions from '~components/event/Questions';
-import Slider from '~components/event/Questions/Slider';
-import Navigation from '~components/event/Navigation';
-import Filters from '~components/event/Filters';
-import Answers from '~components/event/Answers';
+import Questions from '~components/pages/event/Questions';
+import Slider from '~components/pages/event/Questions/Slider';
+import Navigation from '~components/pages/event/Navigation';
+import Filters from '~components/pages/event/Filters';
+import Answers from '~components/pages/event/Answers';
 
 import { selectors } from '~store/modules/questions';
 

@@ -9,8 +9,8 @@ import { Provider } from 'react-redux';
 import { jsx } from '@emotion/react';
 
 import GlobalStyles from '~components/GlobalStyles';
-import Loading from '~components/join/Loading';
-import Event from '~components/event/Event';
+import Loading from '~components/pages/join/Loading';
+import Event from '~components/pages/event/Event';
 
 import { store } from '~store';
 import { actions } from '~store/modules/questions';
