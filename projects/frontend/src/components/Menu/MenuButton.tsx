@@ -1,21 +1,21 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import { jsx, css } from "@emotion/react";
+import { jsx, css } from '@emotion/react';
 
-import IconButton, { Icons } from "~components/IconButton";
-import MenuPortal from "./MenuPortal";
+import IconButton, { Icons } from '~components/IconButton';
+import MenuPortal from './MenuPortal';
 
-import { feedbax } from "@feedbax/api";
+import { feedbax } from '@feedbax/api';
 
-import type { IconButtonProps } from "~components/IconButton";
+import type { IconButtonProps } from '~components/IconButton';
 
 console.log({ feedbax });
 
 type MenuButtonProps = {
-  color?: IconButtonProps["color"];
+  color?: IconButtonProps['color'];
 };
 
 const MenuButton = React.memo((props: MenuButtonProps) => {

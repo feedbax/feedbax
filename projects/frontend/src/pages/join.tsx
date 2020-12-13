@@ -1,23 +1,19 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Router } from '@reach/router';
 import { Provider } from 'react-redux';
 
 import { jsx } from '@emotion/react';
-import { useTranslation } from '~i18n';
 
 import GlobalStyles from '~components/GlobalStyles';
 import Loading from '~components/join/Loading';
 import Event from '~components/event/Event';
-import LocaleLink from '~components/I18n/LocaleLink';
 
 import { store } from '~store';
 import { actions } from '~store/modules/questions';
-
-import type { MenuItem } from '~components/Menu';
 
 type Props = {
   path: string;
@@ -66,23 +62,3 @@ export default function Join(): JSX.Element {
     </Provider>
   );
 }
-
-export const useEventMenu = (): MenuItem[] => {
-  const { location, t } = useTranslation();
-
-  const menuItems = useMemo(
-    () => [
-      {
-        key: 'logout',
-        content: <LocaleLink to="/">{t('menu', 'logout')}</LocaleLink>,
-      },
-    ],
-    [t],
-  );
-
-  if (location.path === '/@') {
-    return menuItems;
-  }
-
-  return [];
-};

@@ -1,16 +1,16 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 
-import React, { useEffect, useState } from "react";
-import isEqual from "lodash.isequal";
+import React, { useEffect, useState } from 'react';
+import isEqual from 'lodash.isequal';
 
-import { jsx, css } from "@emotion/react";
-import LocaleLink from "~components/I18n/LocaleLink";
+import { jsx, css } from '@emotion/react';
+import LocaleLink from '~components/I18n/LocaleLink';
 
-import { colors } from "~theme";
+import { colors } from '~theme';
 
-import type { CSSInterpolation } from "@emotion/serialize";
-import type { Colors } from "~theme";
+import type { CSSInterpolation } from '@emotion/serialize';
+import type { Colors } from '~theme';
 
 export enum Icons {
   Heart,
@@ -51,47 +51,56 @@ type SVGIcon = React.FC<React.SVGProps<SVGSVGElement>>;
 type IconState = { Component: SVGIcon };
 
 const defaultColors = {
-  icon: "third",
-  background: "second",
+  icon: 'third',
+  background: 'second',
 } as const;
 
 const NoSvg: SVGIcon = () => <svg />;
 
-const IconButton = React.memo((props: IconButtonProps) => {
-  const { icon, variant } = props;
-  const { styles = {} } = props;
-  const { color = {} } = props;
+const IconButton = React.memo(
+  (props: IconButtonProps) => {
+    const { icon, variant } = props;
+    const { styles = {} } = props;
+    const { color = {} } = props;
 
-  const { to, onClick } = props;
-  const $styles = [getStyles(props), css(styles)];
+    const { to, onClick } = props;
+    const $styles = [getStyles(props), css(styles)];
 
-  const [IconLazy, setIconLazy] = useState<IconState>({ Component: NoSvg });
-  const Icon = <IconLazy.Component fill={colors[color.icon ?? defaultColors.icon]} />;
+    const [IconLazy, setIconLazy] = useState<IconState>({ Component: NoSvg });
+    const Icon = <IconLazy.Component fill={colors[color.icon ?? defaultColors.icon]} />;
 
-  useEffect(() => {
-    getIcon(icon, variant).then((icon) =>
-      setIconLazy({ Component: icon.default }),
-    );
-  }, [icon, variant]);
+    useEffect(() => {
+      getIcon(icon, variant)
+        .then(($icon) => setIconLazy({ Component: $icon.default }));
+    }, [icon, variant]);
 
-  if (to) {
+    if (to) {
+      return (
+        <LocaleLink to={to} css={$styles}>
+          {Icon}
+        </LocaleLink>
+      );
+    }
+
+    if (onClick) {
+      return (
+        <button
+          type="button"
+          onClick={onClick}
+          css={$styles}
+        >
+          {Icon}
+        </button>
+      );
+    }
+
     return (
-      <LocaleLink to={to} css={$styles}>
-        {Icon}
-      </LocaleLink>
-    );
-  }
-
-  if (onClick) {
-    return (
-      <button onClick={onClick} css={$styles}>
+      <button type="button" css={$styles}>
         {Icon}
       </button>
     );
-  }
-
-  return <button css={$styles}>{Icon}</button>;
-}, isEqual);
+  }, isEqual,
+);
 
 export default IconButton;
 
@@ -100,56 +109,56 @@ const getIcon = (icon: Icons, variant: Variants = Variants.None) => {
     case `${Icons.Exit}_${Variants.None}`:
     case `${Icons.Exit}_${Variants.Filled}`:
     case `${Icons.Exit}_${Variants.Outline}`: {
-      return import("~assets/images/icons/exit_app.inline.svg");
+      return import('~assets/images/icons/exit_app.inline.svg');
     }
 
     case `${Icons.ArrowBack}_${Variants.None}`:
     case `${Icons.ArrowBack}_${Variants.Filled}`:
     case `${Icons.ArrowBack}_${Variants.Outline}`: {
-      return import("~assets/images/icons/arrow_back.inline.svg");
+      return import('~assets/images/icons/arrow_back.inline.svg');
     }
 
     case `${Icons.Close}_${Variants.None}`:
     case `${Icons.Close}_${Variants.Filled}`:
     case `${Icons.Close}_${Variants.Outline}`: {
-      return import("~assets/images/icons/close.inline.svg");
+      return import('~assets/images/icons/close.inline.svg');
     }
 
     case `${Icons.Menu}_${Variants.None}`:
     case `${Icons.Menu}_${Variants.Filled}`:
     case `${Icons.Menu}_${Variants.Outline}`: {
-      return import("~assets/images/icons/menu.inline.svg");
+      return import('~assets/images/icons/menu.inline.svg');
     }
 
     case `${Icons.Heart}_${Variants.None}`:
     case `${Icons.Heart}_${Variants.Filled}`: {
-      return import("~assets/images/icons/favorite_filled.inline.svg");
+      return import('~assets/images/icons/favorite_filled.inline.svg');
     }
 
     case `${Icons.Heart}_${Variants.Outline}`: {
-      return import("~assets/images/icons/favorite_outline.inline.svg");
+      return import('~assets/images/icons/favorite_outline.inline.svg');
     }
 
     case `${Icons.Clock}_${Variants.None}`:
     case `${Icons.Clock}_${Variants.Filled}`: {
-      return import("~assets/images/icons/clock_filled.inline.svg");
+      return import('~assets/images/icons/clock_filled.inline.svg');
     }
 
     case `${Icons.Clock}_${Variants.Outline}`: {
-      return import("~assets/images/icons/clock_outline.inline.svg");
+      return import('~assets/images/icons/clock_outline.inline.svg');
     }
 
     case `${Icons.Person}_${Variants.None}`:
     case `${Icons.Person}_${Variants.Filled}`: {
-      return import("~assets/images/icons/person_filled.inline.svg");
+      return import('~assets/images/icons/person_filled.inline.svg');
     }
 
     case `${Icons.Person}_${Variants.Outline}`: {
-      return import("~assets/images/icons/person_outline.inline.svg");
+      return import('~assets/images/icons/person_outline.inline.svg');
     }
 
     default: {
-      return import("~assets/images/icons/close.inline.svg");
+      return import('~assets/images/icons/close.inline.svg');
     }
   }
 };

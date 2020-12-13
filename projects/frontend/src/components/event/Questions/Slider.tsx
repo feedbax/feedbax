@@ -1,17 +1,20 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
+import { jsx, css } from '@emotion/react';
 
-import { jsx, css } from "@emotion/react";
+import { motion, useAnimation, useDragControls } from 'framer-motion';
 
-import { motion, useAnimation, PanInfo, useDragControls } from "framer-motion";
-import { useSize, useHorizontalSwipe } from "~hooks";
+import useSize from '~hooks/dom/use-size';
+import useHorizontalSwipe from '~hooks/dom/use-horizontal-swipe';
 
-import { useSelector } from "react-redux";
+import { useSelector } from 'react-redux';
 
-import { store } from "~store";
-import { actions, selectors } from "~store/modules/questions";
+import { store } from '~store';
+import { actions, selectors } from '~store/modules/questions';
+
+import type { PanInfo } from 'framer-motion';
 
 type DragEvent = MouseEvent | TouchEvent | PointerEvent;
 type OnDragEnd = (event: DragEvent, info: PanInfo) => Promise<void>;
@@ -23,7 +26,7 @@ const Slider = React.memo(({ children }: Props) => {
   const questionsLength = useSelector(selectors.questionsLength);
 
   const pointerEvent = useHorizontalSwipe();
-  const [ref, { width }] = useSize("w");
+  const [ref, { width }] = useSize('w');
 
   const [lockAnimation, setLockAnimation] = useState(false);
   const [lockDrag, setLockDrag] = useState(true);
@@ -37,24 +40,23 @@ const Slider = React.memo(({ children }: Props) => {
     setLockDrag(true);
 
     const isSwipeLeft = info.offset.x >= 1 && currentIndex >= 1;
-    const isSwipeRight =
-      info.offset.x <= -1 && currentIndex < questionsLength - 1;
+    const isSwipeRight = info.offset.x <= -1 && currentIndex < questionsLength - 1;
 
     if (isSwipeLeft) {
-      await controls.start("right");
+      await controls.start('right');
       store.dispatch(actions.addToCurrentIndex(-1));
     }
 
     if (isSwipeRight) {
-      await controls.start("left");
+      await controls.start('left');
       store.dispatch(actions.addToCurrentIndex(1));
     }
 
     if (!isSwipeLeft && !isSwipeRight) {
-      await controls.start("none");
+      await controls.start('none');
     }
 
-    controls.set("none");
+    controls.set('none');
     setLockAnimation(false);
   };
 
@@ -63,7 +65,7 @@ const Slider = React.memo(({ children }: Props) => {
       setLockDrag(false);
       dragControls.start(pointerEvent);
     }
-  }, [pointerEvent, lockAnimation, setLockDrag]);
+  }, [pointerEvent, lockAnimation, setLockDrag, dragControls]);
 
   return (
     <div css={stylesWrapper}>
@@ -71,7 +73,7 @@ const Slider = React.memo(({ children }: Props) => {
         ref={ref}
         css={stylesSlider}
         dragControls={dragControls}
-        drag={lockDrag ? false : "x"}
+        drag={lockDrag ? false : 'x'}
         dragConstraints={{ left: 0, right: 0 }}
         onDragEnd={onDragEnd}
         animate={controls}

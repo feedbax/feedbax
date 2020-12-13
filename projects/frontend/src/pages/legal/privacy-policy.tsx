@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { jsx, css } from '@emotion/react';
-import { useTranslation } from '~i18n';
+import useTranslation from '~hooks/i18n/use-translation';
 
 import { colors } from '~theme';
 

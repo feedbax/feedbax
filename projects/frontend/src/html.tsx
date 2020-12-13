@@ -4,7 +4,7 @@
 import React, { useEffect } from 'react';
 import { jsx, css, Global } from '@emotion/react';
 
-import { useTranslation } from '~i18n';
+import useTranslation from '~hooks/i18n/use-translation';
 
 import KlinicSlabBoldWoff2 from '~assets/fonts/KlinicSlab-Bold.woff2';
 import KlinicSlabBoldWoff from '~assets/fonts/KlinicSlab-Bold.woff';

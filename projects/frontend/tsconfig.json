@@ -20,14 +20,14 @@
     "lib": ["dom", "dom.iterable", "esnext"],
 
     "paths": {
-      "~i18n": ["src/i18n"],
-      "~i18n/*": ["src/i18n/*"],
+      "~locales": ["src/locales"],
+      "~locales/*": ["src/locales/*"],
       "~components/*": ["src/components/*"],
       "~store/*": ["src/store/*"],
       "~store": ["src/store"],
       "~assets/*": ["src/assets/*"],
       "~pages/*": ["src/pages/*"],
-      "~hooks": ["src/hooks"],
+      "~hooks/*": ["src/hooks/*"],
       "~theme": ["src/theme"]
     },
 

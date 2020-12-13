@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
-import { TranslationContext } from "~i18n";
-import { translations } from "~i18n/locales";
+import TranslationContext from '~components/I18n/Context';
+import { translations } from '~locales';
 
-import type { Locales } from "~i18n/locales";
-import type { WrapPageElementBrowserArgs } from "gatsby";
+import type { Locales } from '~locales';
+import type { WrapPageElementBrowserArgs } from 'gatsby';
 
 type Props = WrapPageElementBrowserArgs & {
   props: {
@@ -17,25 +17,28 @@ type Props = WrapPageElementBrowserArgs & {
   };
 };
 
-export const wrapPageElement = ({ element, props, ...rest }: Props) => {
-  const { params, pageContext } = props;
-  const { locale, originalPath, originalMatchPath } = pageContext;
-  const translation = translations[locale];
+// eslint-disable-next-line import/prefer-default-export
+export const wrapPageElement = (
+  ({ element, props }: Props): JSX.Element => {
+    const { params, pageContext } = props;
+    const { locale, originalPath, originalMatchPath } = pageContext;
+    const translation = translations[locale];
 
-  return (
-    <TranslationContext.Provider
-      value={{
-        translation,
-        locale,
+    return (
+      <TranslationContext.Provider
+        value={{
+          translation,
+          locale,
 
-        location: {
-          params,
-          path: originalPath,
-          matchPath: originalMatchPath,
-        },
-      }}
-    >
-      {element}
-    </TranslationContext.Provider>
-  );
-};
+          location: {
+            params,
+            path: originalPath,
+            matchPath: originalMatchPath,
+          },
+        }}
+      >
+        {element}
+      </TranslationContext.Provider>
+    );
+  }
+);

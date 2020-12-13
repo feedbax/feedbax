@@ -3,7 +3,7 @@ import fs from 'fs';
 
 import type { CreateWebpackConfigArgs, CreatePageArgs } from 'gatsby';
 
-import { locales, defaultLocale } from '~i18n/locales';
+import { locales, defaultLocale } from '~locales';
 
 export const onCreateWebpackConfig = (
   (props: CreateWebpackConfigArgs): void => {
@@ -14,7 +14,7 @@ export const onCreateWebpackConfig = (
     actions.setWebpackConfig({
       resolve: {
         alias: {
-          '~i18n': path.resolve(__dirname, 'src/i18n'),
+          '~locales': path.resolve(__dirname, 'src/locales'),
           '~components': path.resolve(__dirname, 'src/components'),
           '~store': path.resolve(__dirname, 'src/store'),
           '~assets': path.resolve(__dirname, 'src/assets'),
@@ -76,16 +76,16 @@ const createCustomEslintConfiguration = (
       'no-unused-vars': [
         'error',
         {
-          varsIgnorePattern: '^_',
-          argsIgnorePattern: '^_',
+          varsIgnorePattern: '(^_)|(^React$)',
+          argsIgnorePattern: '(^_)|(^React$)',
         },
       ],
 
       '@typescript-eslint/no-unused-vars': [
         'error',
         {
-          varsIgnorePattern: '^_',
-          argsIgnorePattern: '^_',
+          varsIgnorePattern: '(^_)|(^React$)',
+          argsIgnorePattern: '(^_)|(^React$)',
         },
       ],
 
@@ -118,11 +118,13 @@ const createCustomEslintConfiguration = (
       ],
 
       'import/no-duplicates': 'off',
-
+      'import/order': 'off',
       'import/no-cycle': [
         'error',
         { maxDepth: 10 },
       ],
+
+      'react/jsx-props-no-multi-spaces': 'off',
     };
 
     baseConfig.settings = {
@@ -146,7 +148,7 @@ const createCustomEslintConfiguration = (
       },
 
       {
-        files: ['**/*.tsx'],
+        files: ['**/*.{ts,tsx}'],
         rules: {
           'react/prop-types': 'off',
           'react/no-unused-prop-types': 'off',
@@ -156,6 +158,7 @@ const createCustomEslintConfiguration = (
     ];
 
     fs.writeFileSync('.eslintrc', JSON.stringify(baseConfig, null, 2));
+    throw new Error('stop');
   }
 );
 

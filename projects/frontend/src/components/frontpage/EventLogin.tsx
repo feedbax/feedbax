@@ -1,16 +1,16 @@
 /** @jsx jsx */
 
-import React, { useState } from "react";
-import { useTranslation } from "~i18n";
+import React, { useState } from 'react';
+import useTranslation from '~hooks/i18n/use-translation';
 
-import { jsx, css } from "@emotion/react";
-import { between } from "polished";
-import { colors } from "~theme";
+import { jsx, css } from '@emotion/react';
+import { between } from 'polished';
+import { colors } from '~theme';
 
-import LocaleLink from "~components/I18n/LocaleLink";
+import LocaleLink from '~components/I18n/LocaleLink';
 
 export default function EventLogin() {
-  const [eventCode, setEventCode] = useState("");
+  const [eventCode, setEventCode] = useState('');
   const { t } = useTranslation();
 
   return (
@@ -24,17 +24,17 @@ export default function EventLogin() {
       />
 
       <LocaleLink className="button" to={`/@/${eventCode}`}>
-        {t("frontpage", "lets-go")}
+        {t('frontpage', 'lets-go')}
       </LocaleLink>
     </div>
   );
 }
 
 const createShadow = (min: number, max: number) => {
-  const px1p = between(`${min}px`, `${max}px`, "300px", "1400px");
-  const px1n = between(`${-min}px`, `${-max}px`, "300px", "1400px");
-  const px2p = between(`${min + 1}px`, `${max + 1}px`, "300px", "1400px");
-  const px2n = between(`${-(min + 1)}px`, `${-(max + 1)}px`, "300px", "1400px");
+  const px1p = between(`${min}px`, `${max}px`, '300px', '1400px');
+  const px1n = between(`${-min}px`, `${-max}px`, '300px', '1400px');
+  const px2p = between(`${min + 1}px`, `${max + 1}px`, '300px', '1400px');
+  const px2n = between(`${-(min + 1)}px`, `${-(max + 1)}px`, '300px', '1400px');
 
   return `
     ${px1n} ${px1n} 0px ${colors.second}, 

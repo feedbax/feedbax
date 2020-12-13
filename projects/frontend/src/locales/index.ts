@@ -1,8 +1,8 @@
-import de from "~i18n/locales/de";
-import en from "~i18n/locales/en";
-import _locales from "~i18n/locales/locales.json";
+import de from './de';
+import en from './en';
+import _locales from './locales.json';
 
-type ObjectKeys<T> = 
+type ObjectKeys<T> =
   T extends Record<string, unknown> ? (keyof T)[]:
   T extends number ? [] :
   T extends Array<unknown> | string ? string[] :
@@ -27,7 +27,7 @@ export const translations = {
 };
 
 export const locales = Object.keys(translations);
-export const defaultLocale = "de";
+export const defaultLocale = 'de';
 
 export type Locales = typeof locales[number];
 export type Translations = typeof translations[Locales];

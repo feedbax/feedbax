@@ -1,18 +1,18 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 
-import React, { useCallback } from "react";
+import React, { useCallback } from 'react';
 
-import { jsx, css } from "@emotion/react";
-import { between } from "polished";
-import { colors } from "~theme";
+import { jsx, css } from '@emotion/react';
+import { between } from 'polished';
+import { colors } from '~theme';
 
-import { useSelector } from "react-redux";
-import { selectors } from "~store/modules/answers";
+import { useSelector } from 'react-redux';
+import { selectors } from '~store/modules/answers';
 
-import { useTwemoji } from "~hooks";
+import useTwemoji from '~hooks/dom/use-twemoji';
 
-import IconButton, { Icons, Variants } from "~components/IconButton";
+import IconButton, { Icons, Variants } from '~components/IconButton';
 
 type Props = {
   answerId: string;
@@ -39,7 +39,7 @@ const Answer = React.memo(({ answerId, first }: Props) => {
         <IconButton
           icon={Icons.Heart}
           variant={answer?.hasLiked ? Variants.Filled : Variants.Outline}
-          color={{ icon: "first", background: "third" }}
+          color={{ icon: 'first', background: 'third' }}
         />
       </div>
     </div>
@@ -75,7 +75,7 @@ const stylesAnswer = css`
   .text {
     flex: 1 1 auto;
     color: ${colors.first};
-    font-size: ${between("14px", "16px", "300px", "1400px")};
+    font-size: ${between('14px', '16px', '300px', '1400px')};
     padding-right: 15px;
   }
 
@@ -92,7 +92,7 @@ const stylesAnswer = css`
       padding-right: 8px;
       color: ${colors.first};
       text-align: right;
-      font-size: ${between("12px", "14px", "300px", "1400px")};
+      font-size: ${between('12px', '14px', '300px', '1400px')};
     }
   }
 `;

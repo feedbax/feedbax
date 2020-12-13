@@ -1,20 +1,21 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 
-import React, { useEffect, useRef, useState } from "react";
-import { createPortal } from "react-dom";
+import React, { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 
-import { motion, AnimatePresence } from "framer-motion";
+import useMenuItems from '~hooks/menu/use-menu-items';
 
-import { jsx, css } from "@emotion/react";
-import { transparentize } from "polished";
-import { colors } from "~theme";
+import { motion, AnimatePresence } from 'framer-motion';
 
-import IconButton, { Icons } from "~components/IconButton";
-import { useMenuItems } from "./hooks";
+import { transparentize } from 'polished';
+import { jsx, css } from '@emotion/react';
+import { colors } from '~theme';
 
-import type { Variants } from "framer-motion";
-import type { MenuItem } from "./types";
+import IconButton, { Icons } from '~components/IconButton';
+
+import type { Variants } from 'framer-motion';
+import type { MenuItem } from './types';
 
 type MenuPortalProps = {
   isOpen: boolean;
@@ -24,9 +25,9 @@ type MenuPortalProps = {
 type MouseEvent = React.MouseEvent<HTMLDivElement, globalThis.MouseEvent>;
 
 const variants: Variants = {
-  initial: { opacity: 0, backdropFilter: "blur(0px)" },
-  animate: { opacity: 1, backdropFilter: "blur(5px)" },
-  exit: { opacity: 0, backdropFilter: "blur(0px)" },
+  initial: { opacity: 0, backdropFilter: 'blur(0px)' },
+  animate: { opacity: 1, backdropFilter: 'blur(5px)' },
+  exit: { opacity: 0, backdropFilter: 'blur(0px)' },
 };
 
 const MenuPortal = React.memo((props: MenuPortalProps) => {
@@ -39,7 +40,7 @@ const MenuPortal = React.memo((props: MenuPortalProps) => {
   const [hasHistory, setHasHistory] = useState(false);
   const itemsHistory = useRef<MenuItem[][]>([]);
 
-  const _toggleOpen = (e: MouseEvent) => {
+  const $toggleOpen = (e: MouseEvent) => {
     if (backdropRef.current !== e.target) return;
 
     if (isOpen) {
@@ -65,7 +66,7 @@ const MenuPortal = React.memo((props: MenuPortalProps) => {
           exit="exit"
           transition={{ duration: 0.4 }}
           ref={backdropRef}
-          onClick={_toggleOpen}
+          onClick={$toggleOpen}
         >
           <IconButton
             size={38}
@@ -73,12 +74,12 @@ const MenuPortal = React.memo((props: MenuPortalProps) => {
             styles={[stylesIconButtonBack, hasHistory ? stylesShow : stylesHide]}
 
             icon={Icons.ArrowBack}
-            color={{ background: "transparent" }}
+            color={{ background: 'transparent' }}
 
             onClick={() => {
               if (hasHistory) {
-                const _items = itemsHistory.current.pop();
-                setItems(_items ?? []);
+                const $items = itemsHistory.current.pop();
+                setItems($items ?? []);
               }
             }}
           />
@@ -88,7 +89,17 @@ const MenuPortal = React.memo((props: MenuPortalProps) => {
               <div
                 key={item.key}
                 css={stylesItem}
+                role="button"
+                tabIndex={0}
+
                 onClick={() => {
+                  if (item.items) {
+                    itemsHistory.current.push(items);
+                    setItems(item.items);
+                  }
+                }}
+
+                onKeyDown={() => {
                   if (item.items) {
                     itemsHistory.current.push(items);
                     setItems(item.items);
@@ -106,7 +117,7 @@ const MenuPortal = React.memo((props: MenuPortalProps) => {
             styles={stylesIconButtonClose}
 
             icon={Icons.Close}
-            color={{ background: "transparent" }}
+            color={{ background: 'transparent' }}
 
             onClick={toggleOpen}
           />

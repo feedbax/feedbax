@@ -1,27 +1,31 @@
 /** @jsx jsx */
 
-import "react";
-import { useTranslation } from "~i18n";
+import React from 'react';
+import useTranslation from '~hooks/i18n/use-translation';
 
-import { jsx, css } from "@emotion/react";
-import { between } from "polished";
-import { colors } from "~theme";
+import { jsx, css } from '@emotion/react';
+import { between } from 'polished';
+import { colors } from '~theme';
 
-import LocaleLink from "~components/I18n/LocaleLink";
+import LocaleLink from '~components/I18n/LocaleLink';
 
-export default function Footer() {
-  const { t } = useTranslation();
+const Footer = React.memo(
+  () => {
+    const { t } = useTranslation();
 
-  return (
-    <div css={stylesFooter}>
-      <div className="title">feedb.ax</div>
-      <div className="copy">&copy; 2019 - 2020 feedb.ax by 365STEPS</div>
-      <LocaleLink to="/legal/privacy-policy" className="links">
-        {t("generic", "footer")}
-      </LocaleLink>
-    </div>
-  );
-}
+    return (
+      <div css={stylesFooter}>
+        <div className="title">feedb.ax</div>
+        <div className="copy">&copy; 2019 - 2020 feedb.ax by 365STEPS</div>
+        <LocaleLink to="/legal/privacy-policy" className="links">
+          {t('generic', 'footer')}
+        </LocaleLink>
+      </div>
+    );
+  },
+);
+
+export default Footer;
 
 const stylesFooter = css`
   position: relative;
@@ -36,14 +40,14 @@ const stylesFooter = css`
 
   .title {
     font-weight: bold;
-    font-size: ${between("36px", "60px", "300px", "1400px")};
+    font-size: ${between('36px', '60px', '300px', '1400px')};
     margin-bottom: 10px;
   }
 
   .copy,
   .links {
     font-weight: normal;
-    font-size: ${between("12px", "20px", "300px", "1400px")};
+    font-size: ${between('12px', '20px', '300px', '1400px')};
     color: ${colors.third};
 
     &:visited {

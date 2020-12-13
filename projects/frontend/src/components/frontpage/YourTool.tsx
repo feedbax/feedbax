@@ -1,14 +1,14 @@
 /** @jsx jsx */
 
-import "react";
-import { useTranslation } from "~i18n";
+import React from 'react';
+import useTranslation from '~hooks/i18n/use-translation';
 
-import { jsx, css } from "@emotion/react";
-import { between } from "polished";
-import { colors } from "~theme";
+import { jsx, css } from '@emotion/react';
+import { between } from 'polished';
+import { colors } from '~theme';
 
-import Img from "gatsby-image";
-import { useStaticQuery, graphql } from "gatsby";
+import Img from 'gatsby-image';
+import { useStaticQuery, graphql } from 'gatsby';
 
 export default function YourTool() {
   const data = useStaticQuery(query);
@@ -16,12 +16,12 @@ export default function YourTool() {
 
   return (
     <div css={stylesTool}>
-      <div className="text">{t("frontpage", "your-tool")}</div>
+      <div className="text">{t('frontpage', 'your-tool')}</div>
 
       <Img
         className="image"
         fluid={data.file.childImageSharp.fluid}
-        imgStyle={{ objectFit: "contain" }}
+        imgStyle={{ objectFit: 'contain' }}
         alt="tool preview"
       />
     </div>
@@ -46,7 +46,7 @@ const stylesTool = css`
   max-width: 1000px;
   margin: 0 auto;
   margin-top: 50px;
-  margin-top: ${between("50px", "100px", "300px", "1400px")};
+  margin-top: ${between('50px', '100px', '300px', '1400px')};
 
   display: flex;
   flex-direction: row;
@@ -60,7 +60,7 @@ const stylesTool = css`
     font-family: "Klinic Slab";
     font-style: normal;
     font-weight: normal;
-    font-size: ${between("32px", "58px", "300px", "1400px")};
+    font-size: ${between('32px', '58px', '300px', '1400px')};
 
     color: ${colors.third};
 

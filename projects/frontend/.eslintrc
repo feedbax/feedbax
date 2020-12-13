@@ -135,15 +135,15 @@
     "no-unused-vars": [
       "error",
       {
-        "varsIgnorePattern": "^_",
-        "argsIgnorePattern": "^_"
+        "varsIgnorePattern": "(^_)|(^React$)",
+        "argsIgnorePattern": "(^_)|(^React$)"
       }
     ],
     "@typescript-eslint/no-unused-vars": [
       "error",
       {
-        "varsIgnorePattern": "^_",
-        "argsIgnorePattern": "^_"
+        "varsIgnorePattern": "(^_)|(^React$)",
+        "argsIgnorePattern": "(^_)|(^React$)"
       }
     ],
     "prefer-arrow-callback": "error",
@@ -178,12 +178,14 @@
       }
     ],
     "import/no-duplicates": "off",
+    "import/order": "off",
     "import/no-cycle": [
       "error",
       {
         "maxDepth": 10
       }
-    ]
+    ],
+    "react/jsx-props-no-multi-spaces": "off"
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -208,7 +210,7 @@
     },
     {
       "files": [
-        "**/*.tsx"
+        "**/*.{ts,tsx}"
       ],
       "rules": {
         "react/prop-types": "off",

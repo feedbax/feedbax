@@ -1,67 +1,73 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 
-import React, { useCallback } from "react";
-import { Translation } from "~i18n";
+import React, { useCallback } from 'react';
+import Translation from '~components/I18n/Translation';
 
-import { jsx, css } from "@emotion/react";
-import { between } from "polished";
-import { colors } from "~theme";
+import { jsx, css } from '@emotion/react';
+import { between } from 'polished';
+import { colors } from '~theme';
 
-import Img, { FluidObject } from "gatsby-image";
-import { useStaticQuery, graphql } from "gatsby";
+import Img, { FluidObject } from 'gatsby-image';
+import { useStaticQuery, graphql } from 'gatsby';
 
 const benefits = [
   {
-    image: "benefit_1",
+    image: 'benefit_1',
     text: {
-      align: "center",
+      align: 'center',
       content: (
-        <Translation>{
-          t => <>{t("frontpage", "benefit-1")}</>
-        }</Translation>
+        <Translation>
+          {
+          (t) => <>{t('frontpage', 'benefit-1')}</>
+        }
+        </Translation>
       ),
     },
   },
 
   {
-    image: "benefit_2",
+    image: 'benefit_2',
     text: {
-      align: "center",
+      align: 'center',
       content: (
-        <Translation>{
-          t => <>{t("frontpage", "benefit-2")}</>
-        }</Translation>
+        <Translation>
+          {
+          (t) => <>{t('frontpage', 'benefit-2')}</>
+        }
+        </Translation>
       ),
     },
   },
 
   {
-    image: "benefit_3",
+    image: 'benefit_3',
     text: {
-      align: "center",
+      align: 'center',
       content: (
-        <Translation>{
-          t => <>{t("frontpage", "benefit-3")}</>
-        }</Translation>
+        <Translation>
+          {
+          (t) => <>{t('frontpage', 'benefit-3')}</>
+        }
+        </Translation>
       ),
     },
   },
 
   {
-    image: "benefit_4",
+    image: 'benefit_4',
     text: {
-      align: "left",
+      align: 'left',
       content: (
         <Translation>
           {(t) => (
             <>
-              {t("frontpage", "benefit-4", "title")}
+              {t('frontpage', 'benefit-4', 'title')}
 
               <small>
                 <ul>
-                  <li>{t("frontpage", "benefit-4", "content-1")}</li>
-                  <li>{t("frontpage", "benefit-4", "content-2")}</li>
+                  <li>{t('frontpage', 'benefit-4', 'content-1')}</li>
+                  <li>{t('frontpage', 'benefit-4', 'content-2')}</li>
                 </ul>
               </small>
             </>
@@ -72,16 +78,16 @@ const benefits = [
   },
 
   {
-    image: "benefit_5",
+    image: 'benefit_5',
     text: {
-      align: "left",
+      align: 'left',
       content: (
         <Translation>
           {(t) => (
             <>
-              {t("frontpage", "benefit-5", "title")}
-              <small>{t("frontpage", "benefit-5", "content-1")}</small>
-              <code>{t("frontpage", "benefit-5", "content-2")}</code>
+              {t('frontpage', 'benefit-5', 'title')}
+              <small>{t('frontpage', 'benefit-5', 'content-1')}</small>
+              <code>{t('frontpage', 'benefit-5', 'content-2')}</code>
             </>
           )}
         </Translation>
@@ -90,15 +96,15 @@ const benefits = [
   },
 
   {
-    image: "benefit_6",
+    image: 'benefit_6',
     text: {
-      align: "left",
+      align: 'left',
       content: (
         <Translation>
           {(t) => (
             <>
-              {t("frontpage", "benefit-6", "title")}
-              <small>{t("frontpage", "benefit-6", "content-1")}</small>
+              {t('frontpage', 'benefit-6', 'title')}
+              <small>{t('frontpage', 'benefit-6', 'content-1')}</small>
             </>
           )}
         </Translation>
@@ -110,7 +116,7 @@ const benefits = [
 type Benefit = typeof benefits[number];
 
 type Data = {
-  [P in typeof benefits[number]["image"]]: {
+  [P in typeof benefits[number]['image']]: {
     childImageSharp: {
       fluid: FluidObject;
     };
@@ -190,8 +196,8 @@ const stylesBenefit = css`
   max-width: 33.33%;
 
   box-sizing: border-box;
-  padding: ${between("25px", "50px", "300px", "1400px")};
-  margin-top: ${between("10px", "20px", "300px", "1400px")};
+  padding: ${between('25px', '50px', '300px', '1400px')};
+  margin-top: ${between('10px', '20px', '300px', '1400px')};
 
   @media (max-width: 1000px) {
     max-width: 50%;
@@ -205,7 +211,7 @@ const stylesBenefit = css`
     font-family: "Klinic Slab";
     font-style: normal;
     font-weight: normal;
-    font-size: ${between("20px", "28px", "300px", "1400px")};
+    font-size: ${between('20px', '28px', '300px', '1400px')};
     color: ${colors.third};
 
     margin-top: 20px;
@@ -229,7 +235,7 @@ const stylesBenefit = css`
       margin-top: 20px;
 
       font-family: "Klinic Slab Book";
-      font-size: ${between("18px", "20px", "300px", "1400px")};
+      font-size: ${between('18px', '20px', '300px', '1400px')};
       text-align: left;
 
       ul {

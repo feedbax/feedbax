@@ -1,17 +1,17 @@
 /** @jsx jsx */
 
-import "react";
-import { useTranslation } from "~i18n";
+import 'react';
+import useTranslation from '~hooks/i18n/use-translation';
 
-import { jsx, css } from "@emotion/react";
-import { colors } from "~theme";
+import { jsx, css } from '@emotion/react';
+import { colors } from '~theme';
 
 export default function SeeMore() {
   const { t } = useTranslation();
 
   return (
     <div css={stylesSeeMore}>
-      <span>{t("frontpage", "see-more")}</span>
+      <span>{t('frontpage', 'see-more')}</span>
       <div />
     </div>
   );

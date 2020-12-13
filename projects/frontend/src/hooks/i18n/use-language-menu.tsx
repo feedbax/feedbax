@@ -1,36 +1,35 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 
-import React, { useMemo } from "react";
+import React, { useMemo } from 'react';
+import { jsx, css } from '@emotion/react';
 
-import { jsx, css } from "@emotion/react";
-import { useTwemoji } from "~hooks";
+import useTwemoji from '~hooks/dom/use-twemoji';
+import useTranslation from '~hooks/i18n/use-translation';
 
-import { useTranslation } from "~i18n";
-import { locales } from "~i18n/locales";
+import { locales } from '~locales';
+import LocaleLink from '~components/I18n/LocaleLink';
 
-import LocaleLink from "~components/I18n/LocaleLink";
+import type { Location } from '~components/I18n/types';
+import type { Locales } from '~locales';
 
-import type { Location } from "~i18n";
-import type { Locales } from "~i18n/locales";
-
-import type { MenuItem } from "~components/Menu";
+import type { MenuItem } from '~components/Menu';
 
 const parameterizedPath = (location: Location) => {
   const params = Object.entries(location.params);
   const path = location.matchPath ?? location.path;
 
-  let _path = path;
+  let $path = path;
 
   for (let i = 0; i < params.length; i += 1) {
     const [key, value] = params[i];
 
-    if (typeof value === "string") {
-      _path = _path.replaceAll(new RegExp(`:${key}`, "gm"), value);
+    if (typeof value === 'string') {
+      $path = $path.replaceAll(new RegExp(`:${key}`, 'gm'), value);
     }
   }
 
-  return _path;
+  return $path;
 };
 
 type Props = {
@@ -56,31 +55,33 @@ const Language = React.memo((props: Props) => {
   );
 });
 
-export const useLanguageMenu = (): MenuItem[] => {
+const useLanguageMenu = (): MenuItem[] => {
   const { locale, location, t } = useTranslation();
-  const _locales = locales.filter((_locale) => _locale !== locale);
+  const $locales = locales.filter(($locale) => $locale !== locale);
 
   const menuItems = useMemo(
     () => [
       {
-        key: "change-locale",
-        content: t("menu", "change-locale"),
+        key: 'change-locale',
+        content: t('menu', 'change-locale'),
 
-        items: _locales.map((_locale) => ({
+        items: $locales.map((_locale) => ({
           key: `change-locale-${_locale}`,
           content: (
             <Language key={_locale} locale={_locale} location={location}>
-              {t("locales", _locale)}
+              {t('locales', _locale)}
             </Language>
           ),
         })),
       },
     ],
-    [locale, location, t],
+    [$locales, location, t],
   );
 
   return menuItems;
 };
+
+export default useLanguageMenu;
 
 const stylesEmojis = css`
   img.emoji {
