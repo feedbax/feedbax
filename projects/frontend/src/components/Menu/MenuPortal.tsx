@@ -22,7 +22,9 @@ type MenuPortalProps = {
   toggleOpen: () => void;
 };
 
-type MouseEvent = React.MouseEvent<HTMLDivElement, globalThis.MouseEvent>;
+type _MouseEvent = React.MouseEvent<HTMLDivElement, MouseEvent>;
+type _KeyboardEvent = React.KeyboardEvent<HTMLDivElement>;
+type Event = _MouseEvent | _KeyboardEvent;
 
 const variants: Variants = {
   initial: { opacity: 0, backdropFilter: 'blur(0px)' },
@@ -41,7 +43,7 @@ const MenuPortal = React.memo(
     const [hasHistory, setHasHistory] = useState(false);
     const itemsHistory = useRef<MenuItem[][]>([]);
 
-    const $toggleOpen = (e: MouseEvent) => {
+    const $toggleOpen = (e: _MouseEvent) => {
       if (backdropRef.current !== e.target) return;
 
       if (isOpen) {
@@ -51,6 +53,31 @@ const MenuPortal = React.memo(
 
       toggleOpen();
     };
+
+    const openItem = (
+      (item: MenuItem) => (
+        (e: Event) => {
+          if ('key' in e && e.key !== 'Enter') return;
+
+          if (item.items) {
+            itemsHistory.current.push(items);
+            setItems(item.items);
+          }
+        }
+      )
+    );
+
+    const getItemProps = (
+      (item: MenuItem) => ({
+        css: item.items ? [stylesItem, stylesTabable] : stylesItem,
+
+        role: item.items ? 'button' : undefined,
+        tabIndex: item.items ? 0 : undefined,
+
+        onClick: item.items ? openItem(item) : undefined,
+        onKeyPress: item.items ? openItem(item) : undefined,
+      })
+    );
 
     useEffect(() => {
       setHasHistory(itemsHistory.current.length > 0);
@@ -73,6 +100,7 @@ const MenuPortal = React.memo(
             size={38}
             neumorphism={false}
             styles={[stylesIconButtonBack, hasHistory ? stylesShow : stylesHide]}
+            setFocus
 
             icon={Icons.ArrowBack}
             color={{ background: 'transparent' }}
@@ -89,23 +117,9 @@ const MenuPortal = React.memo(
             {items.map((item) => (
               <div
                 key={item.key}
-                css={stylesItem}
-                role="button"
-                tabIndex={0}
 
-                onClick={() => {
-                  if (item.items) {
-                    itemsHistory.current.push(items);
-                    setItems(item.items);
-                  }
-                }}
-
-                onKeyDown={() => {
-                  if (item.items) {
-                    itemsHistory.current.push(items);
-                    setItems(item.items);
-                  }
-                }}
+                // eslint-disable-next-line react/jsx-props-no-spreading
+                {...getItemProps(item)}
               >
                 {item.content}
               </div>
@@ -173,12 +187,27 @@ const stylesItem = css`
   font-family: "Roboto Slab";
   text-decoration: none;
 
+  a {
+    &:hover, &:focus {
+      outline: 0;
+      opacity: 0.6;
+    }
+  }
+
   * {
+    display: inline-block;
     color: #fff;
     font-size: 24px;
     line-height: 24px;
     font-family: "Roboto Slab";
     text-decoration: none;
+  }
+`;
+
+const stylesTabable = css`
+  &:hover, &:focus {
+    outline: 0;
+    opacity: 0.6;
   }
 `;
 
@@ -199,7 +228,7 @@ const stylesIconButtonClose = css`
 `;
 
 const stylesHide = css`
-  opacity: 0;
+  opacity: 0 !important;
 `;
 
 const stylesShow = css`

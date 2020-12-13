@@ -11,30 +11,53 @@ import { actions } from '~store/modules/questions';
 import { store } from '~store';
 import { colors } from '~theme';
 
-const Navigation = React.memo(() => {
-  const navigateLeft = () => {
-    const action = actions.addToCurrentIndex(-1);
-    store.dispatch(action);
-  };
+type _MouseEvent = React.MouseEvent<HTMLDivElement, MouseEvent>;
+type _KeyboardEvent = React.KeyboardEvent<HTMLDivElement>;
+type Event = _MouseEvent | _KeyboardEvent;
 
-  const navigateRight = () => {
-    const action = actions.addToCurrentIndex(1);
-    store.dispatch(action);
-  };
+const Navigation = React.memo(
+  () => {
+    const navigateLeft = (e: Event) => {
+      if ('key' in e && e.key !== 'Enter') return;
 
-  return (
-    <div css={stylesNavigation}>
-      <div className="nav left" onClick={navigateLeft}>
-        <b />
+      const action = actions.addToCurrentIndex(-1);
+      store.dispatch(action);
+    };
+
+    const navigateRight = (e: Event) => {
+      if ('key' in e && e.key !== 'Enter') return;
+
+      const action = actions.addToCurrentIndex(1);
+      store.dispatch(action);
+    };
+
+    return (
+      <div css={stylesNavigation}>
+        <div
+          role="button"
+          tabIndex={0}
+          className="nav left"
+          onClick={navigateLeft}
+          onKeyPress={navigateLeft}
+        >
+          <b />
+        </div>
+
+        <div
+          role="button"
+          tabIndex={0}
+          className="nav right"
+          onClick={navigateRight}
+          onKeyPress={navigateRight}
+        >
+          <b />
+        </div>
+
+        <Pagination />
       </div>
-      <div className="nav right" onClick={navigateRight}>
-        <b />
-      </div>
-
-      <Pagination />
-    </div>
-  );
-});
+    );
+  },
+);
 
 export default Navigation;
 
@@ -61,7 +84,8 @@ const stylesNavigation = css`
       padding: 4px;
     }
 
-    &:hover {
+    &:focus, &:hover {
+      outline: 0;
       opacity: 0.6;
     }
 

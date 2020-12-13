@@ -7,14 +7,16 @@ import top from '~assets/images/top.svg';
 import bot from '~assets/images/bot.svg';
 import { colors } from '~theme';
 
-export default function Background() {
-  return (
+const Background = React.memo(
+  () => (
     <div css={stylesBackround}>
       <div className="img top" />
       <div className="img bot" />
     </div>
-  );
-}
+  ),
+);
+
+export default Background;
 
 const stylesBackround = css`
   position: absolute;

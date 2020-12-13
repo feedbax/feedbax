@@ -45,6 +45,8 @@ export type IconButtonProps = {
 
   to?: string;
   onClick?: (event: React.MouseEvent<unknown, MouseEvent>) => void;
+
+  setFocus?: boolean;
 };
 
 type SVGIcon = React.FC<React.SVGProps<SVGSVGElement>>;
@@ -66,6 +68,9 @@ const IconButton = React.memo(
     const { to, onClick } = props;
     const $styles = [getStyles(props), css(styles)];
 
+    const { setFocus = false } = props;
+    const $setFocus = (el: HTMLElement | null) => setFocus && el?.focus();
+
     const [IconLazy, setIconLazy] = useState<IconState>({ Component: NoSvg });
     const Icon = <IconLazy.Component fill={colors[color.icon ?? defaultColors.icon]} />;
 
@@ -76,7 +81,11 @@ const IconButton = React.memo(
 
     if (to) {
       return (
-        <LocaleLink to={to} css={$styles}>
+        <LocaleLink
+          to={to}
+          css={$styles}
+          ref={$setFocus}
+        >
           {Icon}
         </LocaleLink>
       );
@@ -88,6 +97,7 @@ const IconButton = React.memo(
           type="button"
           onClick={onClick}
           css={$styles}
+          ref={$setFocus}
         >
           {Icon}
         </button>
@@ -95,7 +105,11 @@ const IconButton = React.memo(
     }
 
     return (
-      <button type="button" css={$styles}>
+      <button
+        type="button"
+        css={$styles}
+        ref={$setFocus}
+      >
         {Icon}
       </button>
     );
@@ -196,6 +210,11 @@ const getStyles = (props: IconButtonProps) => {
 
     background-color: ${colors[color.background ?? defaultColors.background]};
     ${neumorphism ? shadow : null}
+
+    &:hover, &:focus {
+      outline: 0;
+      opacity: 0.6;
+    }
 
     svg {
       padding: 0px;
