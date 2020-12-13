@@ -1,7 +1,7 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 
-import React, { useCallback } from 'react';
+import React from 'react';
 
 import { jsx, css } from '@emotion/react';
 import { between } from 'polished';

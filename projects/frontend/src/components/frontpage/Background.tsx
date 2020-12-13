@@ -1,11 +1,11 @@
 /** @jsx jsx */
 
-import "react";
-import { jsx, css } from "@emotion/react";
+import React from 'react';
+import { jsx, css } from '@emotion/react';
 
-import top from "~assets/images/top.svg";
-import bot from "~assets/images/bot.svg";
-import { colors } from "~theme";
+import top from '~assets/images/top.svg';
+import bot from '~assets/images/bot.svg';
+import { colors } from '~theme';
 
 export default function Background() {
   return (

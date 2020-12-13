@@ -1,14 +1,14 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 
-import React, { useCallback } from "react";
+import React from 'react';
 
-import { jsx, css } from "@emotion/react";
-import { between } from "polished";
-import { colors } from "~theme";
+import { jsx, css } from '@emotion/react';
+import { between } from 'polished';
+import { colors } from '~theme';
 
-import { useSelector } from "react-redux";
-import { selectors } from "~store/modules/questions";
+import { useSelector } from 'react-redux';
+import { selectors } from '~store/modules/questions';
 
 import useTwemoji from '~hooks/dom/use-twemoji';
 
@@ -36,7 +36,7 @@ const Question = React.memo(({ questionId, index }: QuestionProps) => {
       }}
       key={question?.order}
     >
-      <div className="number">{`${index + 1}`.padStart(2, "0")}</div>
+      <div className="number">{`${index + 1}`.padStart(2, '0')}</div>
       <div ref={injectEmojis} className="text">
         {question?.text}
       </div>
@@ -62,8 +62,8 @@ const stylesQuestion = css`
 
   user-select: none;
 
-  font-size: ${between("20px", "24px", "300px", "1400px")};
-  line-height: ${between("20px", "24px", "300px", "1400px")};
+  font-size: ${between('20px', '24px', '300px', '1400px')};
+  line-height: ${between('20px', '24px', '300px', '1400px')};
 
   .number {
     display: block;

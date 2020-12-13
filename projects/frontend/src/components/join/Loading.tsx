@@ -1,40 +1,40 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 
-import React from "react";
+import React from 'react';
 
-import { jsx, css, keyframes } from "@emotion/react";
-import { CSSInterpolation } from "@emotion/serialize";
-import { between } from "polished";
-import { colors } from "~theme";
+import { jsx, css, keyframes } from '@emotion/react';
+import { CSSInterpolation } from '@emotion/serialize';
+import { between } from 'polished';
+import { colors } from '~theme';
 
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
 
-import Logo from "~components/Logo";
-import Background from "./Background";
+import Logo from '~components/Logo';
+import Background from './Background';
 
 type Props = {
-  state?: "visible" | "hidden";
+  state?: 'visible' | 'hidden';
   styles?: CSSInterpolation;
 };
 
 const variants = {
   visible: {
     opacity: 1,
-    display: "flex",
+    display: 'flex',
   },
 
   hidden: {
     opacity: 0,
     transitionEnd: {
-      display: "none",
+      display: 'none',
     },
   },
 };
 
 export default function Loading(props: Props) {
   const { styles = {} } = props;
-  const { state = "visible" } = props;
+  const { state = 'visible' } = props;
 
   return (
     <motion.div
@@ -55,14 +55,14 @@ export default function Loading(props: Props) {
 
 const pulse = keyframes`
   from {
-		transform: scale(0);
-		opacity: 1;
-	}
+    transform: scale(0);
+    opacity: 1;
+  }
 
-	to {
-		transform: scale(1);
+  to {
+    transform: scale(1);
     opacity: 0;
-	}
+  }
 `;
 
 const stylesLoading = css`
@@ -86,7 +86,7 @@ const stylesLoading = css`
     justify-content: center;
     align-items: center;
 
-    padding: ${between("0px", "30px", "300px", "1400px")};
+    padding: ${between('0px', '30px', '300px', '1400px')};
     border-radius: 50%;
 
     .pulse {

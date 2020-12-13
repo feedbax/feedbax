@@ -1,17 +1,17 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 
-import React from "react";
-import { useCallback, useState, useEffect } from "react";
+import React from 'react';
+import { useCallback, useState, useEffect } from 'react';
 
-import { jsx, css } from "@emotion/react";
+import { jsx, css } from '@emotion/react';
 
-import { useSelector } from "react-redux";
-import { selectors as answersSelectors } from "~store/modules/answers";
-import { selectors as questionsSelectors } from "~store/modules/questions";
+import { useSelector } from 'react-redux';
+import { selectors as answersSelectors } from '~store/modules/answers';
+import { selectors as questionsSelectors } from '~store/modules/questions';
 
-import Answer from "./Answer";
-import { colors } from "~theme";
+import Answer from './Answer';
+import { colors } from '~theme';
 
 const useAnswersLazyLoad = () => {
   const [count, setCount] = useState(10);
@@ -28,7 +28,7 @@ const useAnswersLazyLoad = () => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setCount((count) => count + 10);
+          setCount(($count) => $count + 10);
         }
       },
       { threshold: [0] },

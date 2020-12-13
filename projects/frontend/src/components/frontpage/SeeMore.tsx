@@ -1,6 +1,6 @@
 /** @jsx jsx */
 
-import 'react';
+import React from 'react';
 import useTranslation from '~hooks/i18n/use-translation';
 
 import { jsx, css } from '@emotion/react';

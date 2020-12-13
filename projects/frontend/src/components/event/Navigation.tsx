@@ -1,15 +1,15 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 
-import React from "react";
+import React from 'react';
 
-import { jsx, css } from "@emotion/react";
+import { jsx, css } from '@emotion/react';
 
-import Pagination from "~components/event/Pagination";
+import Pagination from '~components/event/Pagination';
 
-import { actions } from "~store/modules/questions";
-import { store } from "~store";
-import { colors } from "~theme";
+import { actions } from '~store/modules/questions';
+import { store } from '~store';
+import { colors } from '~theme';
 
 const Navigation = React.memo(() => {
   const navigateLeft = () => {

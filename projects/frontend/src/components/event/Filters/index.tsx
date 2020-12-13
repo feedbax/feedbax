@@ -1,18 +1,16 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 
-import React from "react";
-import { jsx, css } from "@emotion/react";
+import React from 'react';
+import { jsx, css } from '@emotion/react';
 
-import { answerFilters } from "~store/modules/answers";
+import { answerFilters } from '~store/modules/answers';
 
-import Filter from "./Filter";
+import Filter from './Filter';
 
 const Filters = React.memo(() => (
   <div css={stylesFilters}>
-    {answerFilters.map((filter) => {
-      return <Filter key={filter} filter={filter} />;
-    })}
+    {answerFilters.map((filter) => <Filter key={filter} filter={filter} />)}
   </div>
 ));
 

@@ -1,13 +1,13 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 
-import React from "react";
+import React from 'react';
 
-import { jsx, css } from "@emotion/react";
-import { colors } from "~theme";
+import { jsx, css } from '@emotion/react';
+import { colors } from '~theme';
 
-import { useSelector } from "react-redux";
-import { selectors } from "~store/modules/questions";
+import { useSelector } from 'react-redux';
+import { selectors } from '~store/modules/questions';
 
 type Props = { index: number };
 

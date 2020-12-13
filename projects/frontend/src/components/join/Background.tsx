@@ -1,20 +1,20 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 
-import React from "react";
-import { jsx, ClassNames } from "@emotion/react";
+import React from 'react';
+import { jsx, ClassNames } from '@emotion/react';
 
-import { graphql, useStaticQuery } from "gatsby";
-import Img, { FluidObject } from "gatsby-image";
+import { graphql, useStaticQuery } from 'gatsby';
+import Img, { FluidObject } from 'gatsby-image';
 
 type Data = {
-  background_landscape: {
+  backgroundLandscape: {
     childImageSharp: {
       fluid: FluidObject;
     };
   };
 
-  background_portrait: {
+  backgroundPortrait: {
     childImageSharp: {
       fluid: FluidObject;
     };
@@ -23,7 +23,7 @@ type Data = {
 
 const query = graphql`
   {
-    background_landscape: file(
+    backgroundLandscape: file(
       relativePath: { eq: "background_landscape.jpg" }
     ) {
       childImageSharp {
@@ -31,6 +31,7 @@ const query = graphql`
           traceSVG: { color: "#957b82" }
           maxWidth: 1920
           quality: 100
+
           srcSetBreakpoints: [
             320
             420
@@ -51,12 +52,13 @@ const query = graphql`
       }
     }
 
-    background_portrait: file(relativePath: { eq: "background_portrait.jpg" }) {
+    backgroundPortrait: file(relativePath: { eq: "background_portrait.jpg" }) {
       childImageSharp {
         fluid(
           traceSVG: { color: "#957b82" }
           maxHeight: 1920
           quality: 100
+
           srcSetBreakpoints: [
             320
             420
@@ -88,12 +90,12 @@ export default function Background() {
         <Img
           fluid={[
             {
-              ...data.background_landscape.childImageSharp.fluid,
-              media: "(orientation: landscape)",
+              ...data.backgroundLandscape.childImageSharp.fluid,
+              media: '(orientation: landscape)',
             },
             {
-              ...data.background_portrait.childImageSharp.fluid,
-              media: "(orientation: portrait)",
+              ...data.backgroundPortrait.childImageSharp.fluid,
+              media: '(orientation: portrait)',
             },
           ]}
           className={css`

@@ -45,6 +45,7 @@ const getIcon = (filter: AnswersFilter): Icons => {
       return Icons.Person;
     }
 
+    default:
     case AnswersFilter.Recent: {
       return Icons.Clock;
     }
