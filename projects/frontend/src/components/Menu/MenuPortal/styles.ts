@@ -50,6 +50,10 @@ export const stylesItem = css`
     line-height: 24px;
     font-family: "Roboto Slab";
     text-decoration: none;
+
+    &:focus {
+      outline: 0;
+    }
   }
 `;
 
@@ -69,7 +73,7 @@ export const stylesTabable = css`
 
   &:focus:not(.focus-visible) {
     outline: 0;
-  }   
+  }
 `;
 
 export const stylesIconButtonBack = css`
