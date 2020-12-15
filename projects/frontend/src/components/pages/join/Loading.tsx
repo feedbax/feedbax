@@ -90,7 +90,7 @@ const stylesLoading = css`
     justify-content: center;
     align-items: center;
 
-    padding: ${between('0px', '30px', '300px', '1400px')};
+    padding: ${between('0px', '30px', '320px', '1170px')};
     border-radius: 50%;
 
     .pulse {

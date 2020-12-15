@@ -1,13 +1,8 @@
-/** @jsx jsx */
-/** @jsxFrag React.Fragment */
-
 import React, { useMemo } from 'react';
-import { jsx, css } from '@emotion/react';
 
-import useTwemoji from '~hooks/dom/use-twemoji';
 import useTranslation from '~hooks/i18n/use-translation';
-
 import { locales } from '~locales';
+
 import LocaleLink from '~components/I18n/LocaleLink';
 
 import type { Location } from '~components/I18n/types';
@@ -43,14 +38,14 @@ const Language = React.memo((props: Props) => {
   const { location } = props;
 
   const path = parameterizedPath(location);
-  const { injectEmojis } = useTwemoji();
 
   return (
-    <LocaleLink to={path} locale={locale} css={stylesEmojis}>
-      <div className="text" ref={injectEmojis}>
-        {children}
-      </div>
-      <i className="seperator" />
+    <LocaleLink
+      to={path}
+      locale={locale}
+      tabIndex={-1}
+    >
+      {children}
     </LocaleLink>
   );
 });
@@ -82,9 +77,3 @@ const useLanguageMenu = (): MenuItem[] => {
 };
 
 export default useLanguageMenu;
-
-const stylesEmojis = css`
-  img.emoji {
-    vertical-align: middle;
-  }
-`;

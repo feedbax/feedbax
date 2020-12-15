@@ -12,7 +12,7 @@ import Footer from '~components/Footer';
 import Logo from '~components/Logo';
 import MenuButton from '~components/Menu';
 
-export default function PrivacyPolicy(): JSX.Element {
+export default function PrivacyPolicy (): JSX.Element {
   const { t } = useTranslation();
   const Content = t('privacy-policy', 'content');
 

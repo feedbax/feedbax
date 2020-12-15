@@ -18,48 +18,50 @@ import Answers from '~components/pages/event/Answers';
 
 import { selectors } from '~store/modules/questions';
 
-const Event = React.memo(() => {
-  const currentIndex = useSelector(selectors.currentIndex);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
+const Event = React.memo(
+  () => {
+    const currentIndex = useSelector(selectors.currentIndex);
+    const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollTop = 0;
-    }
-  }, [currentIndex, scrollContainerRef]);
+    useEffect(() => {
+      if (scrollContainerRef.current) {
+        scrollContainerRef.current.scrollTop = 0;
+      }
+    }, [currentIndex, scrollContainerRef]);
 
-  return (
-    <div css={stylesEvent}>
-      <div className="scroll-container" ref={scrollContainerRef}>
-        <div css={stylesEventHeader}>
-          <div className="content">
-            <MenuButton />
+    return (
+      <div css={stylesEvent}>
+        <div className="scroll-container" ref={scrollContainerRef}>
+          <div css={stylesEventHeader}>
+            <div className="content">
+              <MenuButton />
 
-            <Logo
-              variant="no-shadow-and-text"
-              styles={{
-                height: 60,
-                width: 60,
-              }}
-            />
+              <Logo
+                variant="no-shadow-and-text"
+                styles={{
+                  height: 60,
+                  width: 60,
+                }}
+              />
 
-            <Navigation />
+              <Navigation />
 
-            <Slider>
-              <Questions />
-            </Slider>
+              <Slider>
+                <Questions />
+              </Slider>
 
-            <Filters />
+              <Filters />
+            </div>
           </div>
+
+          <Answers />
         </div>
 
-        <Answers />
+        <div className="toolbar" />
       </div>
-
-      <div className="toolbar" />
-    </div>
-  );
-});
+    );
+  },
+);
 
 export default Event;
 

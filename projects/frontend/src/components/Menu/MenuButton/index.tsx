@@ -3,14 +3,15 @@
 
 import React, { useState } from 'react';
 
-import { jsx, css } from '@emotion/react';
+import { jsx } from '@emotion/react';
+import { stylesMenuButton } from './styles';
 
 import IconButton, { Icons } from '~components/IconButton';
-import MenuPortal from './MenuPortal';
-
-import { feedbax } from '@feedbax/api';
+import MenuPortal from '../MenuPortal';
 
 import type { IconButtonProps } from '~components/IconButton';
+
+import { feedbax } from '@feedbax/api';
 
 console.log({ feedbax });
 
@@ -28,11 +29,13 @@ const MenuButton = React.memo(
     return (
       <>
         <MenuPortal isOpen={isOpen} toggleOpen={toggleOpen} />
+
         <IconButton
           color={color}
           styles={stylesMenuButton}
           icon={Icons.Menu}
           onClick={toggleOpen}
+          ariaLabel="Open menu"
         />
       </>
     );
@@ -40,10 +43,3 @@ const MenuButton = React.memo(
 );
 
 export default MenuButton;
-
-const stylesMenuButton = css`
-  position: absolute;
-  top: 25px;
-  right: 25px;
-  z-index: 999 !important;
-`;

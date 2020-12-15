@@ -62,8 +62,8 @@ const stylesQuestion = css`
 
   user-select: none;
 
-  font-size: ${between('20px', '24px', '300px', '1400px')};
-  line-height: ${between('20px', '24px', '300px', '1400px')};
+  font-size: ${between('20px', '24px', '320px', '1170px')};
+  line-height: ${between('20px', '24px', '320px', '1170px')};
 
   .number {
     display: block;

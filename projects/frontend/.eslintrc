@@ -132,6 +132,15 @@
     "@typescript-eslint/no-use-before-define": [
       "error"
     ],
+    "space-before-function-paren": "off",
+    "@typescript-eslint/space-before-function-paren": [
+      "error"
+    ],
+    "indent": "off",
+    "@typescript-eslint/indent": [
+      "error",
+      2
+    ],
     "no-unused-vars": [
       "error",
       {
@@ -216,6 +225,15 @@
         "react/prop-types": "off",
         "react/no-unused-prop-types": "off",
         "react/require-default-props": "off"
+      }
+    },
+    {
+      "files": [
+        "**/styles.ts"
+      ],
+      "rules": {
+        "import/prefer-default-export": "off",
+        "@typescript-eslint/indent": "off"
       }
     }
   ]

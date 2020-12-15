@@ -6,7 +6,7 @@ import { defaultLocale } from '~locales';
 
 type Props<T> = GatsbyLinkProps<T> & { locale?: string };
 
-function $LocaleLink<T>(props: Props<T>) {
+function $LocaleLink<T> (props: Props<T>) {
   const { ref: _ref, to, ..._rest } = props;
 
   const { locale: localeProp, ...rest } = _rest;

@@ -17,7 +17,9 @@ import MenuButton from '~components/Menu';
 import Logo from '~components/Logo';
 import Footer from '~components/Footer';
 
-export default function Home(): JSX.Element {
+import 'focus-visible';
+
+export default function Home (): JSX.Element {
   return (
     <div css={stylesFront}>
       <GlobalStyles />
@@ -28,7 +30,7 @@ export default function Home(): JSX.Element {
       <div css={stylesFrontContent}>
         <Logo styles={{ marginTop: '30px' }} />
 
-        <div>
+        <div css={stylesTitleAndLogin}>
           <Title />
           <EventLogin />
         </div>
@@ -74,4 +76,9 @@ const stylesFrontContent = css`
 
   min-height: 100vh;
   min-height: calc(var(--vh, 1vh) * 100);
+`;
+
+const stylesTitleAndLogin = css`
+  box-sizing: border-box;
+  padding: 0 25px;
 `;

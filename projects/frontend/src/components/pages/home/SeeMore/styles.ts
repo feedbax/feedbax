@@ -1,30 +1,7 @@
-/** @jsx jsx */
-
-import React from 'react';
-import useTranslation from '~hooks/i18n/use-translation';
-
-import { jsx, css } from '@emotion/react';
+import { css } from '@emotion/react';
 import { colors } from '~theme';
 
-const SeeMore = React.memo(
-  () => {
-    const { t } = useTranslation();
-
-    return (
-      <div css={stylesSeeMore}>
-        <span>
-          {t('home', 'see-more')}
-        </span>
-
-        <div />
-      </div>
-    );
-  },
-);
-
-export default SeeMore;
-
-const stylesSeeMore = css`
+export const stylesSeeMore = css`
   position: relative;
 
   margin-top: 80px;

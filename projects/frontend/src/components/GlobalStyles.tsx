@@ -13,13 +13,15 @@ type Props = {
 const GlobalStyles = React.memo(
   ({ color = 'first' }: Props) => (
     <Global
-      styles={css`
+      styles={
+        css`
           html,
           body,
           #___gatsby {
             background-color: ${colors[color]};
           }
-        `}
+        `
+      }
     />
   ),
 );

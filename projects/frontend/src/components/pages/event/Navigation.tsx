@@ -17,19 +17,22 @@ type Event = _MouseEvent | _KeyboardEvent;
 
 const Navigation = React.memo(
   () => {
-    const navigateLeft = (e: Event) => {
-      if ('key' in e && e.key !== 'Enter') return;
+    const navigate = (
+      (direction: number) => (
+        (e: Event) => {
+          e.preventDefault();
+          e.stopPropagation();
 
-      const action = actions.addToCurrentIndex(-1);
-      store.dispatch(action);
-    };
+          if ('key' in e) {
+            const isSubmit = e.key === 'Enter' || e.key === ' ';
+            if (!isSubmit) return;
+          }
 
-    const navigateRight = (e: Event) => {
-      if ('key' in e && e.key !== 'Enter') return;
-
-      const action = actions.addToCurrentIndex(1);
-      store.dispatch(action);
-    };
+          const action = actions.addToCurrentIndex(direction);
+          store.dispatch(action);
+        }
+      )
+    );
 
     return (
       <div css={stylesNavigation}>
@@ -37,21 +40,17 @@ const Navigation = React.memo(
           role="button"
           tabIndex={0}
           className="nav left"
-          onClick={navigateLeft}
-          onKeyPress={navigateLeft}
-        >
-          <b />
-        </div>
+          onClick={navigate(-1)}
+          onKeyPress={navigate(-1)}
+        />
 
         <div
           role="button"
           tabIndex={0}
           className="nav right"
-          onClick={navigateRight}
-          onKeyPress={navigateRight}
-        >
-          <b />
-        </div>
+          onClick={navigate(1)}
+          onKeyPress={navigate(1)}
+        />
 
         <Pagination />
       </div>
@@ -75,7 +74,8 @@ const stylesNavigation = css`
 
     cursor: pointer;
 
-    b {
+    &::after {
+      content: '';
       display: block;
       position: relative;
       border: 2px solid ${colors.third};
@@ -84,16 +84,24 @@ const stylesNavigation = css`
       padding: 4px;
     }
 
-    &:focus, &:hover {
-      outline: 0;
+    &:hover {
       opacity: 0.6;
+    }
+
+    &:focus {
+      outline: #ffda73 auto 2px;
+      outline-offset: 8px;
+    }
+
+    &:focus:not(.focus-visible) {
+      outline: 0;
     }
 
     &.left {
       left: 0;
       transform: translateX(-65px);
 
-      b {
+      &::after {
         transform: rotate(135deg);
       }
     }
@@ -102,7 +110,7 @@ const stylesNavigation = css`
       right: 0;
       transform: translateX(65px);
 
-      b {
+      &::after {
         transform: rotate(-45deg);
       }
     }

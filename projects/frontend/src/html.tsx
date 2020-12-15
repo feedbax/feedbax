@@ -4,8 +4,6 @@
 import React, { useEffect } from 'react';
 import { jsx, css, Global } from '@emotion/react';
 
-import useTranslation from '~hooks/i18n/use-translation';
-
 import KlinicSlabBoldWoff2 from '~assets/fonts/KlinicSlab-Bold.woff2';
 import KlinicSlabBoldWoff from '~assets/fonts/KlinicSlab-Bold.woff';
 
@@ -28,9 +26,7 @@ const fixVhUnit = () => {
   document.documentElement.style.setProperty('--vh', `${vh}px`);
 };
 
-export default function HTML(props: Props): JSX.Element {
-  const { locale } = useTranslation();
-
+export default function HTML (props: Props): JSX.Element {
   const { htmlAttributes, bodyAttributes } = props;
   const { headComponents, preBodyComponents, postBodyComponents } = props;
   const { body } = props;
@@ -47,7 +43,8 @@ export default function HTML(props: Props): JSX.Element {
   return (
     /* eslint-disable react/jsx-props-no-spreading */
     /* eslint-disable react/no-danger */
-    <html {...htmlAttributes} lang={locale}>
+    // eslint-disable-next-line jsx-a11y/html-has-lang
+    <html {...htmlAttributes}>
       <head>
         <meta charSet="utf-8" />
         <meta httpEquiv="x-ua-compatible" content="ie=edge" />

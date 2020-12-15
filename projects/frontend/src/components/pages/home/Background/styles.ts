@@ -1,24 +1,10 @@
-/** @jsx jsx */
-
-import React from 'react';
-import { jsx, css } from '@emotion/react';
+import { css } from '@emotion/react';
+import { colors } from '~theme';
 
 import top from '~assets/images/top.svg';
 import bot from '~assets/images/bot.svg';
-import { colors } from '~theme';
 
-const Background = React.memo(
-  () => (
-    <div css={stylesBackround}>
-      <div className="img top" />
-      <div className="img bot" />
-    </div>
-  ),
-);
-
-export default Background;
-
-const stylesBackround = css`
+export const stylesBackround = css`
   position: absolute;
 
   top: 0;
@@ -32,6 +18,7 @@ const stylesBackround = css`
   max-height: calc((var(--vh, 1vh) * 100) + 0.25 * 100vw);
 
   background-color: ${colors.third};
+  padding-bottom: 12vw;
 
   z-index: 0 !important;
 

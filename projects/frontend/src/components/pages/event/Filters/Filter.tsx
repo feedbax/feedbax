@@ -28,7 +28,7 @@ const Filter = React.memo(({ filter }: FilterProps) => {
 
   return (
     <div css={[stylesFilter, stylesCurrent]} onClick={setFilter}>
-      <IconButton icon={icon} variant={variant} />
+      <IconButton icon={icon} variant={variant} ariaLabel="Set Filter" />
     </div>
   );
 });

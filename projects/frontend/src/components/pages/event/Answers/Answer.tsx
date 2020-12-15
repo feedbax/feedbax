@@ -13,6 +13,7 @@ import { selectors } from '~store/modules/answers';
 import useTwemoji from '~hooks/dom/use-twemoji';
 
 import IconButton, { Icons, Variants } from '~components/IconButton';
+import { fluidRange } from '~lib/css-helper';
 
 type Props = {
   answerId: string;
@@ -40,6 +41,7 @@ const Answer = React.memo(({ answerId, first }: Props) => {
           icon={Icons.Heart}
           variant={answer?.hasLiked ? Variants.Filled : Variants.Outline}
           color={{ icon: 'first', background: 'third' }}
+          ariaLabel="Like answer"
         />
       </div>
     </div>
@@ -48,6 +50,7 @@ const Answer = React.memo(({ answerId, first }: Props) => {
 
 export default Answer;
 
+/* eslint-disable @typescript-eslint/indent */
 const stylesAnswer = css`
   position: relative;
   z-index: 1;
@@ -75,8 +78,13 @@ const stylesAnswer = css`
   .text {
     flex: 1 1 auto;
     color: ${colors.first};
-    font-size: ${between('14px', '16px', '300px', '1400px')};
     padding-right: 15px;
+
+    ${fluidRange({
+      prop: (px) => ({ fontSize: px }),
+      size: { from: '14px', to: '16px' },
+      screen: { min: '320px', max: '1170px' },
+    })}
   }
 
   .like {
@@ -92,7 +100,7 @@ const stylesAnswer = css`
       padding-right: 8px;
       color: ${colors.first};
       text-align: right;
-      font-size: ${between('12px', '14px', '300px', '1400px')};
+      font-size: ${between('12px', '14px', '320px', '1170px')};
     }
   }
 `;

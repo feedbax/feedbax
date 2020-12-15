@@ -21,7 +21,7 @@ type Props = {
   questionIndex?: string;
 };
 
-function JoinRoute({ questionIndex }: Props) {
+function JoinRoute ({ questionIndex }: Props) {
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -46,7 +46,7 @@ function JoinRoute({ questionIndex }: Props) {
   );
 }
 
-export default function Join(): JSX.Element {
+export default function Join (): JSX.Element {
   return (
     <Provider store={store}>
       <GlobalStyles color="third" />

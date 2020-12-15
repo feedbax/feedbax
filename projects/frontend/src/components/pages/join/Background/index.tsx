@@ -2,24 +2,43 @@
 /** @jsxFrag React.Fragment */
 
 import React from 'react';
+
 import { jsx, ClassNames } from '@emotion/react';
+import { stylesBackground } from './styles';
 
 import { graphql, useStaticQuery } from 'gatsby';
-import Img, { FluidObject } from 'gatsby-image';
+import Img from 'gatsby-image';
 
-type Data = {
-  backgroundLandscape: {
-    childImageSharp: {
-      fluid: FluidObject;
-    };
-  };
+import type { QueryData } from './types';
 
-  backgroundPortrait: {
-    childImageSharp: {
-      fluid: FluidObject;
-    };
-  };
-};
+const Background = React.memo(
+  () => {
+    const data = useStaticQuery<QueryData>(query);
+
+    return (
+      <ClassNames>
+        {({ css }) => (
+          <Img
+            className={css`${stylesBackground}`}
+
+            fluid={[
+              {
+                ...data.backgroundLandscape.childImageSharp.fluid,
+                media: '(orientation: landscape)',
+              },
+              {
+                ...data.backgroundPortrait.childImageSharp.fluid,
+                media: '(orientation: portrait)',
+              },
+            ]}
+          />
+        )}
+      </ClassNames>
+    );
+  },
+);
+
+export default Background;
 
 const query = graphql`
   {
@@ -80,38 +99,3 @@ const query = graphql`
     }
   }
 `;
-
-const Background = React.memo(
-  () => {
-    const data = useStaticQuery<Data>(query);
-
-    return (
-      <ClassNames>
-        {({ css }) => (
-          <Img
-            fluid={[
-              {
-                ...data.backgroundLandscape.childImageSharp.fluid,
-                media: '(orientation: landscape)',
-              },
-              {
-                ...data.backgroundPortrait.childImageSharp.fluid,
-                media: '(orientation: portrait)',
-              },
-            ]}
-
-            className={css`
-              position: absolute !important;
-              width: 100vw;
-              height: 100vh;
-              height: calc(var(--vh, 1vh) * 100);
-              z-index: -2;
-            `}
-          />
-        )}
-      </ClassNames>
-    );
-  },
-);
-
-export default Background;

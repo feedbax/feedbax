@@ -15,6 +15,7 @@ export const onCreateWebpackConfig = (
       resolve: {
         alias: {
           '~locales': path.resolve(__dirname, 'src/locales'),
+          '~lib': path.resolve(__dirname, 'src/lib'),
           '~components': path.resolve(__dirname, 'src/components'),
           '~store': path.resolve(__dirname, 'src/store'),
           '~assets': path.resolve(__dirname, 'src/assets'),
@@ -69,9 +70,13 @@ const createCustomEslintConfiguration = (
       '@typescript-eslint/no-shadow': ['error'],
 
       'no-use-before-define': 'off',
-      '@typescript-eslint/no-use-before-define': [
-        'error',
-      ],
+      '@typescript-eslint/no-use-before-define': ['error'],
+
+      'space-before-function-paren': 'off',
+      '@typescript-eslint/space-before-function-paren': ['error'],
+
+      indent: 'off',
+      '@typescript-eslint/indent': ['error', 2],
 
       'no-unused-vars': [
         'error',
@@ -153,6 +158,14 @@ const createCustomEslintConfiguration = (
           'react/prop-types': 'off',
           'react/no-unused-prop-types': 'off',
           'react/require-default-props': 'off',
+        },
+      },
+
+      {
+        files: ['**/styles.ts'],
+        rules: {
+          'import/prefer-default-export': 'off',
+          '@typescript-eslint/indent': 'off',
         },
       },
     ];

@@ -11,7 +11,11 @@ const useEventMenu = (): MenuItem[] => {
     () => ([
       {
         key: 'logout',
-        content: <LocaleLink to="/">{t('menu', 'logout')}</LocaleLink>,
+        content: (
+          <LocaleLink to="/" tabIndex={-1}>
+            {t('menu', 'logout')}
+          </LocaleLink>
+        ),
       },
     ]),
     [t],
