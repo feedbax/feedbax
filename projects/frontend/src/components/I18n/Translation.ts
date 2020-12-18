@@ -1,5 +1,5 @@
 import React from 'react';
-import useTranslation from '~hooks/i18n/use-translation';
+import useTranslation from '~hooks/components/I18n/use-translation';
 
 import type { Translate } from './types';
 

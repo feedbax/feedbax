@@ -1,19 +1,17 @@
 import { css } from '@emotion/react';
 import { colors } from '~theme';
-import { fluidRange } from '~lib/css-helper';
+import { between } from 'polished';
 
 export const stylesTool = css`
   position: relative;
   width: 100%;
-  max-width: 1170px;
+
   margin: 0 auto;
   margin-top: 50px;
 
-  ${fluidRange({
-    prop: (px) => ({ marginTop: px }),
-    size: { from: '50px', to: '100px' },
-    screen: { min: '320px', max: '1170px' },
-  })}
+  font-size: ${between('2rem', '4.875rem', '20rem', '160rem')};
+  margin-top: ${between('3.125rem', '6.25rem', '20rem', '160rem')};
+  max-width: ${between('20rem', '97.5rem', '20rem', '160rem')};
 
   display: flex;
   flex-direction: row;
@@ -27,12 +25,7 @@ export const stylesTool = css`
     font-family: "Klinic Slab";
     font-style: normal;
     font-weight: normal;
-
-    ${fluidRange({
-      prop: (px) => ({ fontSize: px }),
-      size: { from: '32px', to: '58px' },
-      screen: { min: '320px', max: '1170px' },
-    })}
+    font-size: ${between('2rem', '4.875rem', '20rem', '160rem')};
 
     color: ${colors.third};
 
@@ -46,8 +39,8 @@ export const stylesTool = css`
 
     position: relative;
     display: block;
-    width: 50%;
-    max-width: 585px;
+    width: 100%;
+    max-width: 50%;
   }
 
   @media (max-width: 800px) {
@@ -63,7 +56,7 @@ export const stylesTool = css`
     }
 
     .image {
-      width: 100%;
+      max-width: 560px;
     }
   }
 `;

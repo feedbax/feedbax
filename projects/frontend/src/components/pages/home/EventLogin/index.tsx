@@ -1,7 +1,7 @@
 /** @jsx jsx */
 
 import React, { useState } from 'react';
-import useTranslation from '~hooks/i18n/use-translation';
+import useTranslation from '~hooks/components/I18n/use-translation';
 
 import { jsx } from '@emotion/react';
 import { stylesEventLogin } from './styles';
@@ -24,7 +24,7 @@ const EventLogin = React.memo(
         />
 
         <LocaleLink className="button" to={`/@/${eventCode}`}>
-          {t('home', 'lets-go')}
+          {t('home', 'lets_go')}
         </LocaleLink>
       </div>
     );

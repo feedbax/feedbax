@@ -6,8 +6,8 @@ import { jsx, css } from '@emotion/react';
 
 import { motion, useAnimation, useDragControls } from 'framer-motion';
 
-import useSize from '~hooks/dom/use-size';
-import useHorizontalSwipe from '~hooks/dom/use-horizontal-swipe';
+import useSize from '~hooks/other/dom/use-size';
+import useHorizontalSwipe from '~hooks/other/dom/use-horizontal-swipe';
 
 import { useSelector } from 'react-redux';
 

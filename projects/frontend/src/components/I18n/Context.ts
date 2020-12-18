@@ -1,10 +1,12 @@
 import { createContext } from 'react';
-import { translations, defaultLocale } from '~locales';
+import { defaultLocale } from '~locales/const';
+
 import type { Context } from './types';
 
 const TranslationContext = createContext<Context>({
-  translation: translations.de,
+  translation: {},
   locale: defaultLocale,
+  locales: [defaultLocale],
 
   location: {
     path: '/',

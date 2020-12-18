@@ -9,7 +9,7 @@ export const benefits = [
       align: 'center',
       content: (
         <Translation>
-          {(t) => <>{t('home', 'benefit-1')}</>}
+          {(t) => <>{t('home', 'benefit_1')}</>}
         </Translation>
       ),
     },
@@ -21,7 +21,7 @@ export const benefits = [
       align: 'center',
       content: (
         <Translation>
-          {(t) => <>{t('home', 'benefit-2')}</>}
+          {(t) => <>{t('home', 'benefit_2')}</>}
         </Translation>
       ),
     },
@@ -33,7 +33,7 @@ export const benefits = [
       align: 'center',
       content: (
         <Translation>
-          {(t) => <>{t('home', 'benefit-3')}</>}
+          {(t) => <>{t('home', 'benefit_3')}</>}
         </Translation>
       ),
     },
@@ -47,12 +47,12 @@ export const benefits = [
         <Translation>
           {(t) => (
             <>
-              {t('home', 'benefit-4', 'title')}
+              {t('home', 'benefit_4', 'title')}
 
               <small>
                 <ul>
-                  <li>{t('home', 'benefit-4', 'content-1')}</li>
-                  <li>{t('home', 'benefit-4', 'content-2')}</li>
+                  <li>{t('home', 'benefit_4', 'content_1')}</li>
+                  <li>{t('home', 'benefit_4', 'content_2')}</li>
                 </ul>
               </small>
             </>
@@ -70,9 +70,9 @@ export const benefits = [
         <Translation>
           {(t) => (
             <>
-              {t('home', 'benefit-5', 'title')}
-              <small>{t('home', 'benefit-5', 'content-1')}</small>
-              <code>{t('home', 'benefit-5', 'content-2')}</code>
+              {t('home', 'benefit_5', 'title')}
+              <small>{t('home', 'benefit_5', 'content_1')}</small>
+              <code>{t('home', 'benefit_5', 'content_2')}</code>
             </>
           )}
         </Translation>
@@ -88,8 +88,8 @@ export const benefits = [
         <Translation>
           {(t) => (
             <>
-              {t('home', 'benefit-6', 'title')}
-              <small>{t('home', 'benefit-6', 'content-1')}</small>
+              {t('home', 'benefit_6', 'title')}
+              <small>{t('home', 'benefit_6', 'content_1')}</small>
             </>
           )}
         </Translation>

@@ -1,32 +1,11 @@
 import { css } from '@emotion/react';
 import { colors } from '~theme';
-import { fluidRange } from '~lib/css-helper';
+import { between } from 'polished';
 
-const fontSize = fluidRange({
-  size: { from: '64px', to: '210px' },
-  screen: { min: '320px', max: '1170px' },
-  prop: (px) => ({ fontSize: px }),
-});
-
-const textShadow = fluidRange({
-  screen: { min: '320px', max: '1170px' },
-
-  sizes: [
-    { from: '-2px', to: '-4px' },
-    { from: '2px', to: '4px' },
-    { from: '-3px', to: '-5px' },
-    { from: '3px', to: '5px' },
-  ],
-
-  prop: (pxs) => ({
-    textShadow: `
-      ${pxs[0]} ${pxs[0]} 0px ${colors.second}, 
-      ${pxs[1]} ${pxs[1]} 0px ${colors.first},
-      ${pxs[2]} ${pxs[2]} 0px ${colors.third},
-      ${pxs[3]} ${pxs[3]} 0px ${colors.third}
-    `,
-  }),
-});
+const sa = between('-0.125rem', '-0.3125rem', '20rem', '160rem');
+const sb = between('0.125rem', '0.3125rem', '20rem', '160rem');
+const sc = between('-0.1875rem', '-0.375rem', '20rem', '160rem');
+const sd = between('0.1875rem', '0.375rem', '20rem', '160rem');
 
 export const stylesTitle = css`
   position: relative;
@@ -40,6 +19,11 @@ export const stylesTitle = css`
 
   margin-top: 50px;
 
-  ${fontSize}
-  ${textShadow}
+  font-size: ${between('4.375rem', '17.5rem', '20rem', '160rem')};
+
+  text-shadow:
+    ${sa} ${sa} 0px ${colors.second}, 
+    ${sb} ${sb} 0px ${colors.first}, 
+    ${sc} ${sc} 0px ${colors.third}, 
+    ${sd} ${sd} 0px ${colors.third};
 `;

@@ -1,10 +1,8 @@
 import React from 'react';
-
 import TranslationContext from '~components/I18n/Context';
-import { translations } from '~locales';
 
-import type { Locales } from '~locales';
 import type { WrapPageElementBrowserArgs } from 'gatsby';
+import type { TranslationData } from '~graphql-types';
 
 type Props = WrapPageElementBrowserArgs & {
   props: {
@@ -12,7 +10,9 @@ type Props = WrapPageElementBrowserArgs & {
       originalPath: string;
       originalMatchPath?: string;
 
-      locale: Locales;
+      locale: string;
+      locales: string[];
+      translation: TranslationData;
     };
   };
 };
@@ -21,13 +21,15 @@ type Props = WrapPageElementBrowserArgs & {
 export const wrapPageElement = (
   ({ element, props }: Props): JSX.Element => {
     const { params, pageContext } = props;
-    const { locale, originalPath, originalMatchPath } = pageContext;
-    const translation = translations[locale];
+
+    const { originalPath, originalMatchPath } = pageContext;
+    const { locale, locales, translation } = pageContext;
 
     return (
       <TranslationContext.Provider
         value={{
           translation,
+          locales,
           locale,
 
           location: {

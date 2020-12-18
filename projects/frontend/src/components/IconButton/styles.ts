@@ -4,12 +4,16 @@ import { defaultColors } from './const';
 
 import type { SerializedStyles } from '@emotion/react';
 import type { IconButtonProps } from './types';
+import { fluidRange } from '~lib/css-helper';
 
 export const getStyles = (
   (props: IconButtonProps): SerializedStyles => {
     const { size = 28 } = props;
     const { color = {} } = props;
     const { neumorphism = true } = props;
+
+    const sizeMin = size;
+    const sizeMax = (4 / 3) * size;
 
     const bgColor = colors[color.background ?? defaultColors.background];
 
@@ -38,6 +42,15 @@ export const getStyles = (
   
       width: ${size}px;
       height: ${size}px;
+
+      /* ${fluidRange({
+        size: { from: `${sizeMin}px`, to: `${sizeMax}px` },
+        screen: { min: '320px', max: '2560px' },
+        css: (px) => ({
+          height: px,
+          width: px,
+        }),
+      })} */
   
       background-color: ${bgColor};
       ${neumorphism ? shadow : null}
@@ -73,6 +86,15 @@ export const getStyles = (
   
         width: ${size - 12}px;
         height: ${size - 12}px;
+
+        /* ${fluidRange({
+          size: { from: `${sizeMin - 12}px`, to: `${sizeMax - 12}px` },
+          screen: { min: '320px', max: '2560px' },
+          css: (px) => ({
+            height: px,
+            width: px,
+          }),
+        })} */
       }
     `;
   }

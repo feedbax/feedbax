@@ -20,16 +20,18 @@
     "lib": ["dom", "dom.iterable", "esnext"],
 
     "paths": {
+      "~graphql-types": ["src/graphql-types.d"],
       "~locales": ["src/locales"],
-      "~locales/*": ["src/locales/*"],
-      "~lib/*": ["src/lib/*"],
-      "~components/*": ["src/components/*"],
-      "~store/*": ["src/store/*"],
       "~store": ["src/store"],
+      "~theme": ["src/theme"],
+
       "~assets/*": ["src/assets/*"],
-      "~pages/*": ["src/pages/*"],
+      "~components/*": ["src/components/*"],
       "~hooks/*": ["src/hooks/*"],
-      "~theme": ["src/theme"]
+      "~lib/*": ["src/lib/*"],
+      "~locales/*": ["src/locales/*"],
+      "~pages/*": ["src/_pages/*"],
+      "~store/*": ["src/store/*"]
     },
 
     "plugins": [{ "transform": "@zerollup/ts-transform-paths" }]

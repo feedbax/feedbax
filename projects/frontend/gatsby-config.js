@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const config = require("./tsconfig.json");
 
-const noop = () => undefined;
-require.extensions[".mdx"] = noop;
-
 require("source-map-support").install();
 require("ts-node").register({
+  files: true,
+
   ...config,
 
   compiler: "ttypescript",

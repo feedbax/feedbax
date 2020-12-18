@@ -27,3 +27,9 @@ declare module '*.mdx' {
   const mdx: React.FC<unknown>;
   export default mdx;
 }
+
+declare namespace NodeJS {
+  interface Global {
+    rootDir: string;
+  }
+}

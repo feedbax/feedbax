@@ -1,8 +1,7 @@
 /** @jsx jsx */
-/** @jsxFrag React.Fragment */
 
-import React, { useEffect } from 'react';
 import { jsx, css, Global } from '@emotion/react';
+import { normalize } from 'polished';
 
 import KlinicSlabBoldWoff2 from '~assets/fonts/KlinicSlab-Bold.woff2';
 import KlinicSlabBoldWoff from '~assets/fonts/KlinicSlab-Bold.woff';
@@ -19,26 +18,10 @@ import RobotoSlabBoldWoff from '~assets/fonts/RobotoSlab-Bold.woff';
 import RobotoSlabRegularWoff2 from '~assets/fonts/RobotoSlab-Regular.woff2';
 import RobotoSlabRegularWoff from '~assets/fonts/RobotoSlab-Regular.woff';
 
-import 'normalize.css';
-
-const fixVhUnit = () => {
-  const vh = window.innerHeight * 0.01;
-  document.documentElement.style.setProperty('--vh', `${vh}px`);
-};
-
 export default function HTML (props: Props): JSX.Element {
   const { htmlAttributes, bodyAttributes } = props;
   const { headComponents, preBodyComponents, postBodyComponents } = props;
   const { body } = props;
-
-  useEffect(() => {
-    window.addEventListener('resize', fixVhUnit);
-    fixVhUnit();
-
-    return () => {
-      window.removeEventListener('resize', fixVhUnit);
-    };
-  }, []);
 
   return (
     /* eslint-disable react/jsx-props-no-spreading */
@@ -92,7 +75,10 @@ type Props = {
   postBodyComponents: Array<unknown>;
 };
 
+/* eslint-disable @typescript-eslint/indent */
 const stylesGlobal = css`
+  ${normalize()}
+
   html,
   body,
   #___gatsby {
@@ -102,6 +88,7 @@ const stylesGlobal = css`
     min-height: 100vh;
     min-height: calc(var(--vh, 1vh) * 100);
     touch-action: pan-y;
+    font-size: 100.01%;
   }
 
   img.emoji {

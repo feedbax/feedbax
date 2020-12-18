@@ -1,38 +1,26 @@
 import { css } from '@emotion/react';
-import { fluidRange } from '~lib/css-helper';
+import { between } from 'polished';
 import { colors } from '~theme';
 
-const boxShadow = fluidRange({
-  screen: { min: '320px', max: '1170px' },
-
-  sizes: [
-    { from: '-2px', to: '-4px' },
-    { from: '2px', to: '4px' },
-    { from: '-3px', to: '-5px' },
-    { from: '3px', to: '5px' },
-  ],
-
-  prop: (pxs) => ({
-    boxShadow: `
-      ${pxs[0]} ${pxs[0]} 0px ${colors.second}, 
-      ${pxs[1]} ${pxs[1]} 0px ${colors.first},
-      ${pxs[2]} ${pxs[2]} 0px ${colors.third},
-      ${pxs[3]} ${pxs[3]} 0px ${colors.third}
-    `,
-  }),
-});
+const sa = between('-0.125rem', '-0.3125rem', '20rem', '160rem');
+const sb = between('0.125rem', '0.3125rem', '20rem', '160rem');
+const sc = between('-0.1875rem', '-0.375rem', '20rem', '160rem');
+const sd = between('0.1875rem', '0.375rem', '20rem', '160rem');
 
 export const stylesEventLogin = css`
   position: relative;
   display: block;
 
-  max-width: 320px;
   width: 100%;
 
+  max-width: ${between('18.75rem', '25rem', '20rem', '160rem')};
   margin: 0 auto;
-  margin-top: 20px;
 
-  ${boxShadow}
+  box-shadow:
+    ${sa} ${sa} 0px ${colors.second}, 
+    ${sb} ${sb} 0px ${colors.first}, 
+    ${sc} ${sc} 0px ${colors.third}, 
+    ${sd} ${sd} 0px ${colors.third};
 
   & .text,
   & .button {
@@ -44,7 +32,7 @@ export const stylesEventLogin = css`
     box-sizing: border-box;
 
     width: 100%;
-    height: 56px;
+    height: ${between('3.5rem', '4.75rem', '20rem', '160rem')};
 
     border: 0;
     outline: 0;
@@ -55,9 +43,9 @@ export const stylesEventLogin = css`
     font-family: "Klinic Slab";
     font-style: normal;
     font-weight: normal;
-    font-size: 26px;
+    font-size: ${between('1.5rem', '2.25rem', '20rem', '160rem')};
 
-    text-indent: 36px;
+    text-indent: 1em;
     text-align: left;
 
     display: flex;

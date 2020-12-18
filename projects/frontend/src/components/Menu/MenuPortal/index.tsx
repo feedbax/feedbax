@@ -4,7 +4,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
-import useMenuItems from '~hooks/menu/use-menu-items';
+import useMenuItems from '~hooks/other/menu/use-menu-items';
 
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -28,6 +28,8 @@ type MenuPortalProps = {
 type _MouseEvent = React.MouseEvent<HTMLDivElement, MouseEvent>;
 type _KeyboardEvent = React.KeyboardEvent<HTMLDivElement>;
 type Event = _MouseEvent | _KeyboardEvent;
+
+const isSSR = typeof window === 'undefined';
 
 const variants: Variants = {
   initial: { opacity: 0, backdropFilter: 'blur(0px)' },
@@ -115,6 +117,8 @@ const MenuPortal = React.memo(
     useEffect(() => {
       setHasHistory(itemsHistory.current.length > 0);
     }, [itemsHistory.current.length]);
+
+    if (isSSR) return <></>;
 
     return createPortal(
       <AnimatePresence>

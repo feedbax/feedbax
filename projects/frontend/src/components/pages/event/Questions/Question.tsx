@@ -10,7 +10,7 @@ import { colors } from '~theme';
 import { useSelector } from 'react-redux';
 import { selectors } from '~store/modules/questions';
 
-import useTwemoji from '~hooks/dom/use-twemoji';
+import useTwemoji from '~hooks/other/dom/use-twemoji';
 
 type QuestionProps = {
   questionId: string;

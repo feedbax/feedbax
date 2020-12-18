@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link, GatsbyLinkProps } from 'gatsby';
 
-import useTranslation from '~hooks/i18n/use-translation';
-import { defaultLocale } from '~locales';
+import useTranslation from '~hooks/components/I18n/use-translation';
+import { defaultLocale } from '~locales/const';
 
 type Props<T> = GatsbyLinkProps<T> & { locale?: string };
 

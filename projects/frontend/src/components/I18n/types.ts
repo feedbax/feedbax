@@ -1,4 +1,4 @@
-import type { Locales, Translations } from '~locales';
+import type { TranslationData } from '~graphql-types';
 
 export type Location = {
   path: string;
@@ -7,22 +7,40 @@ export type Location = {
 };
 
 export type Context = {
-  translation: Translations;
-  locale: Locales;
+  translation: TranslationData;
+  locale: string;
+  locales: string[];
   location: Location;
 };
 
 export interface Translate {
-  <P extends keyof Translations>(prop: P): Translations[P];
-
   <
-    P1 extends keyof Translations,
-    P2 extends keyof Translations[P1]
-  >(prop1: P1, prop2: P2): Translations[P1][P2];
-
-  <
-    P1 extends keyof Translations,
-    P2 extends keyof Translations[P1],
-    P3 extends keyof Translations[P1][P2]
-  >(prop1: P1, prop2: P2, prop3: P3): Translations[P1][P2][P3];
+    K1 extends keyof NN1<TranslationData>,
+    K2 extends keyof (NN1<NN1<TranslationData>[K1]>) = never,
+    K3 extends keyof (NN1<NN1<NN1<TranslationData>[K1]>[K2]>) = never,
+  >(prop1: K1, prop2?: K2, prop3?: K3): TranslationDataClean<K1, K2, K3>;
 }
+
+type NN2<T> = Required<Omit<NonNullable<T>, '__typename'>>;
+
+type NN1<T> = (
+  NonNullable<T> extends string
+    ? string
+    : {
+      [K in keyof NN2<T>]-?: (
+        NonNullable<NN2<T>[K]>
+      )
+    }
+);
+
+type TranslationDataClean<
+  K1 extends keyof NN1<TranslationData>,
+  K2 extends keyof (NN1<NN1<TranslationData>[K1]>) = never,
+  K3 extends keyof (NN1<NN1<NN1<TranslationData>[K1]>[K2]>) = never,
+> = (
+  [K2] extends [never]
+    ? NN1<NN1<TranslationData>[K1]>
+    : [K3] extends [never]
+      ? NN1<NN1<NN1<TranslationData>[K1]>[K2]>
+      : NN1<NN1<NN1<NN1<TranslationData>[K1]>[K2]>[K3]>
+);

@@ -16,13 +16,13 @@ import { colors } from '~theme';
 const useAnswersLazyLoad = () => {
   const [count, setCount] = useState(10);
 
-  const currentIndex = useSelector(questionsSelectors.currentIndex);
+  const questionChnage = useSelector(questionsSelectors.currentIndex);
   const getAnswersIds = useSelector(answersSelectors.getCurrentAnswersIds);
   const answersIds = getAnswersIds(count);
 
   useEffect(() => {
     setCount(10);
-  }, [currentIndex]);
+  }, [questionChnage]);
 
   const loadMoreRef = useCallback((element: HTMLElement | null) => {
     const observer = new IntersectionObserver(

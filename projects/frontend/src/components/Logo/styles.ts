@@ -1,24 +1,18 @@
 import { css } from '@emotion/react';
-import { fluidRange } from '~lib/css-helper';
+import { mediaRange } from '~lib/css-helper';
 
 import type { SerializedStyles } from '@emotion/react';
 import type { Variant } from './types';
 
 export const stylesText = css`
-  ${fluidRange({
-    prop: (px) => ({ height: px }),
-    size: { from: '116px', to: '155px' },
-    screen: { min: '320px', max: '1170px' },
+  ${mediaRange({
+    screen: [320, 2560],
+    size: [75, 160],
+    css: (unit) => ({
+      width: `${unit}px`,
+      height: `${1.29 * unit}px`,
+    }),
   })}
-
-  ${fluidRange({
-    prop: (px) => ({ width: px }),
-    size: { from: '90px', to: '120px' },
-    screen: { min: '320px', max: '1170px' },
-  })}
-
-  max-height: 155px;
-  max-width: 120px;
 `;
 
 export const stylesSquare = css`

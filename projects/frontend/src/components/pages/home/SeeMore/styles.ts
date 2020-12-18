@@ -1,11 +1,14 @@
 import { css } from '@emotion/react';
+import { between } from 'polished';
 import { colors } from '~theme';
 
 export const stylesSeeMore = css`
   position: relative;
 
-  margin-top: 80px;
-  height: 124px;
+  font-size: ${between('1.125rem', '2.25rem', '20rem', '160rem')};
+
+  margin-top: 50px;
+  height: 6.8em;
 
   display: flex;
   flex-direction: column;
@@ -16,13 +19,12 @@ export const stylesSeeMore = css`
     flex: 0 1 auto;
 
     background: ${colors.third};
-    padding: 2px 6px;
-    border-radius: 20px;
+    padding: 0.11em 0.33em;
+    border-radius: 1em;
 
     font-family: "Klinic Slab";
     font-style: normal;
     font-weight: normal;
-    font-size: 18px;
     text-align: center;
 
     color: ${colors.first};
@@ -32,10 +34,10 @@ export const stylesSeeMore = css`
     display: block;
     position: absolute;
 
-    top: 38px;
+    top: 2.1em;
     left: calc(50% - 2px);
 
-    height: 180px;
+    height: 10em;
     width: 2px;
 
     background: ${colors.first};

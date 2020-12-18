@@ -1,7 +1,7 @@
 /** @jsx jsx */
 
 import React from 'react';
-import useTranslation from '~hooks/i18n/use-translation';
+import useTranslation from '~hooks/components/I18n/use-translation';
 
 import { jsx } from '@emotion/react';
 import { stylesFooter } from './styles';

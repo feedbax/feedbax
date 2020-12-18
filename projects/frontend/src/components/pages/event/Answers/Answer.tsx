@@ -10,7 +10,7 @@ import { colors } from '~theme';
 import { useSelector } from 'react-redux';
 import { selectors } from '~store/modules/answers';
 
-import useTwemoji from '~hooks/dom/use-twemoji';
+import useTwemoji from '~hooks/other/dom/use-twemoji';
 
 import IconButton, { Icons, Variants } from '~components/IconButton';
 import { fluidRange } from '~lib/css-helper';
@@ -80,11 +80,11 @@ const stylesAnswer = css`
     color: ${colors.first};
     padding-right: 15px;
 
-    ${fluidRange({
-      prop: (px) => ({ fontSize: px }),
+    /* ${fluidRange({
+      css: (px) => ({ fontSize: px }),
       size: { from: '14px', to: '16px' },
       screen: { min: '320px', max: '1170px' },
-    })}
+    })} */
   }
 
   .like {

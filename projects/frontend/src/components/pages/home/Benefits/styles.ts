@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { fluidRange } from '~lib/css-helper';
+import { between } from 'polished';
 import { colors } from '~theme';
 
 export const stylesBenefit = css`
@@ -9,19 +9,10 @@ export const stylesBenefit = css`
   max-width: 33.33%;
   box-sizing: border-box;
 
-  ${fluidRange({
-    prop: (px) => ({ padding: px }),
-    size: { from: '25px', to: '50px' },
-    screen: { min: '320px', max: '1170px' },
-  })}
+  padding: ${between('1.5625rem', '4.125rem', '20rem', '160rem')};
+  margin-top: ${between('0.625rem', '1.625rem', '20rem', '160rem')};
 
-  ${fluidRange({
-    prop: (px) => ({ marginTop: px }),
-    size: { from: '10px', to: '20px' },
-    screen: { min: '320px', max: '1170px' },
-  })}
-
-  @media (max-width: 1000px) {
+  @media (max-width: 1377px) {
     max-width: 50%;
   }
 
@@ -35,13 +26,8 @@ export const stylesBenefit = css`
     font-weight: normal;
     color: ${colors.third};
 
-    ${fluidRange({
-      prop: (px) => ({ fontSize: px }),
-      size: { from: '20px', to: '28px' },
-      screen: { min: '320px', max: '1170px' },
-    })}
-
-    margin-top: 20px;
+    font-size: ${between('1.25rem', '2.375rem', '20rem', '160rem')};
+    margin-top: ${between('1.125rem', '1.625rem', '20rem', '160rem')};
 
     &.left {
       text-align: left;
@@ -54,7 +40,8 @@ export const stylesBenefit = css`
     code {
       display: block;
       margin-top: 20px;
-      font-size: 14px;
+
+      font-size: ${between('0.75rem', '1.125rem', '20rem', '160rem')};
     }
 
     small {
@@ -64,11 +51,7 @@ export const stylesBenefit = css`
       font-family: "Klinic Slab Book";
       text-align: left;
 
-      ${fluidRange({
-        prop: (px) => ({ fontSize: px }),
-        size: { from: '18px', to: '20px' },
-        screen: { min: '320px', max: '1170px' },
-      })}
+      font-size: ${between('1.125rem', '1.625rem', '20rem', '160rem')};
 
       ul {
         margin: 0;
@@ -82,9 +65,9 @@ export const stylesBenefit = css`
 export const stylesBenefits = css`
   position: relative;
   width: 100%;
-  max-width: 1170px;
 
-  margin: 60px auto;
+  margin: ${between('3rem', '5rem', '20rem', '160rem')} auto;
+  max-width: ${between('20rem', '97.5rem', '20rem', '160rem')};
 
   display: flex;
   flex-direction: row;

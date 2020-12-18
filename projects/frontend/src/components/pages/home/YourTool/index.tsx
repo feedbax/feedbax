@@ -1,7 +1,7 @@
 /** @jsx jsx */
 
 import React from 'react';
-import useTranslation from '~hooks/i18n/use-translation';
+import useTranslation from '~hooks/components/I18n/use-translation';
 
 import { jsx } from '@emotion/react';
 import { stylesTool } from './styles';
@@ -20,7 +20,7 @@ const YourTool = React.memo(
     return (
       <div css={stylesTool}>
         <div className="text">
-          {t('home', 'your-tool')}
+          {t('home', 'your_tool')}
         </div>
 
         <Img
