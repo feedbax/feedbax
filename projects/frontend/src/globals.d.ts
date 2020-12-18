@@ -28,6 +28,8 @@ declare module '*.mdx' {
   export default mdx;
 }
 
+declare module 'focus-visible';
+
 declare namespace NodeJS {
   interface Global {
     rootDir: string;

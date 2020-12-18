@@ -97,7 +97,7 @@ const getPages = (
 
           .map((f) => ({
             filePath: f.absolutePath,
-            path: path.join('/', f.relativeDirectory, f.name),
+            path: path.join('/', f.relativeDirectory, f.name === 'index' ? '' : f.name),
           }))
 
           .filter(

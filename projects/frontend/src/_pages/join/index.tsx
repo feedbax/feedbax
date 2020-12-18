@@ -21,33 +21,35 @@ type Props = {
   questionIndex?: string;
 };
 
-function JoinRoute ({ questionIndex }: Props) {
-  const [isLoading, setLoading] = useState(true);
+const JoinRoute = React.memo(
+  ({ questionIndex }: Props) => {
+    const [isLoading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const timeout = setTimeout(() => setLoading(false), 2000);
+    useEffect(() => {
+      const timeout = setTimeout(() => setLoading(false), 2000);
 
-    if (typeof questionIndex !== 'undefined') {
-      const $questionIndex = parseInt(questionIndex, 10) - 1;
-      store.dispatch(actions.setCurrentIndex($questionIndex));
-    }
+      if (typeof questionIndex !== 'undefined') {
+        const $questionIndex = parseInt(questionIndex, 10) - 1;
+        store.dispatch(actions.setCurrentIndex($questionIndex));
+      }
 
-    return () => {
-      clearTimeout(timeout);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+      return () => {
+        clearTimeout(timeout);
+      };
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
-  return (
-    <>
-      <Loading state={isLoading ? 'visible' : 'hidden'} />
-      <Event />
-    </>
-  );
-}
+    return (
+      <>
+        <Loading state={isLoading ? 'visible' : 'hidden'} />
+        <Event />
+      </>
+    );
+  },
+);
 
-export default function Join (): JSX.Element {
-  return (
+const Join = React.memo(
+  (): JSX.Element => (
     <Provider store={store}>
       <GlobalStyles color="third" />
 
@@ -60,5 +62,7 @@ export default function Join (): JSX.Element {
         <JoinRoute path="/@" />
       </Router>
     </Provider>
-  );
-}
+  ),
+);
+
+export default Join;
