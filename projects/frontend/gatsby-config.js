@@ -1,19 +1,22 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable @typescript-eslint/no-var-requires */
-const config = require("./tsconfig.json");
 
-require("source-map-support").install();
-require("ts-node").register({
+const config = require('./tsconfig.json');
+
+require('source-map-support').install();
+require('ts-node').register({
   files: true,
 
   ...config,
 
-  compiler: "ttypescript",
+  compiler: 'ttypescript',
   compilerOptions: {
     ...config.compilerOptions,
 
-    module: "commonjs",
-    target: "es2017",
+    module: 'commonjs',
+    target: 'es2017',
   },
 });
 
-module.exports = require("./gatsby-config.ts");
+global.rootDir = __dirname;
+module.exports = require('./config/gatsby-config');

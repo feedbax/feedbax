@@ -6,15 +6,13 @@
 
 import path from 'path';
 
-global.rootDir = __dirname;
-
 export default {
   plugins: [
     {
       // automatically generate typings from graphql schema
       resolve: 'gatsby-plugin-generate-typings',
       options: {
-        dest: 'src/graphql-types.d.ts',
+        dest: path.join(global.rootDir, 'src/graphql-types.d.ts'),
       },
     },
 
@@ -23,7 +21,7 @@ export default {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'pages',
-        path: path.join(__dirname, 'src/_pages'),
+        path: path.join(global.rootDir, 'src/_pages'),
       },
     },
 
@@ -32,7 +30,7 @@ export default {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'images',
-        path: path.join(__dirname, 'src/assets/images'),
+        path: path.join(global.rootDir, 'src/assets/images'),
       },
     },
 
@@ -41,7 +39,7 @@ export default {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'locales',
-        path: path.join(__dirname, 'src/locales'),
+        path: path.join(global.rootDir, 'src/locales'),
       },
     },
 

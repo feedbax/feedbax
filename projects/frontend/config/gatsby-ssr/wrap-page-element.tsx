@@ -1,10 +1,10 @@
 import React from 'react';
 import TranslationContext from '~components/I18n/Context';
 
-import type { WrapPageElementBrowserArgs } from 'gatsby';
+import type { WrapPageElementNodeArgs } from 'gatsby';
 import type { TranslationData } from '~graphql-types';
 
-type Props = WrapPageElementBrowserArgs & {
+type Props = WrapPageElementNodeArgs & {
   props: {
     pageContext: {
       originalPath: string;
@@ -17,10 +17,10 @@ type Props = WrapPageElementBrowserArgs & {
   };
 };
 
-// eslint-disable-next-line import/prefer-default-export
-export const wrapPageElement = (
-  ({ element, props }: Props): JSX.Element => {
-    const { params, pageContext } = props;
+const wrapPageElement = (
+  (props: Props): JSX.Element => {
+    const { element, props: props2 } = props;
+    const { params, pageContext } = props2;
 
     const { originalPath, originalMatchPath } = pageContext;
     const { locale, locales, translation } = pageContext;
@@ -44,3 +44,5 @@ export const wrapPageElement = (
     );
   }
 );
+
+export default wrapPageElement;
