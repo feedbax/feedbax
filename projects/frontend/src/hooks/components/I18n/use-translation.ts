@@ -18,7 +18,7 @@ const useTranslation: TranslationHook = (
     const { location, translation } = contextData;
 
     /* eslint-disable @typescript-eslint/no-explicit-any */
-    const t: Translate = (p1: any, p2?: any, p3?: any) => {
+    const t: Translate = (p1?: any, p2?: any, p3?: any) => {
       if (p1 && p2 && p3) {
         return (translation as any)[p1][p2][p3];
       }
