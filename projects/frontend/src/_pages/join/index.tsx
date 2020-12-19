@@ -21,7 +21,7 @@ type Props = {
   questionIndex?: string;
 };
 
-const JoinRoute = React.memo(
+const EventRoute = React.memo(
   ({ questionIndex }: Props) => {
     const [isLoading, setLoading] = useState(true);
 
@@ -54,12 +54,12 @@ const Join = React.memo(
       <GlobalStyles color="third" />
 
       <Router>
-        <JoinRoute path=":locale/@/:eventSlug/:questionIndex" />
-        <JoinRoute path=":locale/@/:eventSlug" />
-        <JoinRoute path=":locale/@" />
-        <JoinRoute path="/@/:eventSlug/:questionIndex" />
-        <JoinRoute path="/@/:eventSlug" />
-        <JoinRoute path="/@" />
+        <EventRoute path=":locale/@/:eventSlug/:questionIndex" />
+        <EventRoute path=":locale/@/:eventSlug" />
+        <EventRoute path=":locale/@" />
+        <EventRoute path="/@/:eventSlug/:questionIndex" />
+        <EventRoute path="/@/:eventSlug" />
+        <EventRoute path="/@" />
       </Router>
     </Provider>
   ),
