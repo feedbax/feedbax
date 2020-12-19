@@ -11,7 +11,7 @@ import GlobalStyles from '~components/GlobalStyles';
 import Footer from '~components/Footer';
 import Logo from '~components/Logo';
 import MenuButton from '~components/Menu';
-import { allowHyphens } from '~components/Hyphen';
+import allowHyphens from '~components/AllowHyphens';
 
 import type { PrivacyPolicyProps } from './types';
 

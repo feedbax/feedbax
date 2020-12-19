@@ -10,7 +10,7 @@ type Hyphen = {
 const target = {} as Hyphen;
 
 // eslint-disable-next-line import/prefer-default-export
-export const allowHyphens = new Proxy(target, {
+const allowHyphens = new Proxy(target, {
   get (_, Element: keyof React.ReactHTML) {
     return (props: React.HTMLProps<unknown>) => (
       <Element
@@ -24,3 +24,5 @@ export const allowHyphens = new Proxy(target, {
     );
   },
 });
+
+export default allowHyphens;
