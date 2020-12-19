@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { transparentize } from 'polished';
+import { between, transparentize } from 'polished';
 import { colors } from '~theme';
 
 export const stylesPortal = css`
@@ -38,18 +38,20 @@ export const stylesItem = css`
   padding: 8px 5px;
 
   color: #fff;
-  font-size: 24px;
-  line-height: 24px;
   font-family: "Roboto Slab";
   text-decoration: none;
+
+  font-size: ${between('24px', '32px', '320px', '2560px')};
+  line-height: ${between('24px', '32px', '320px', '2560px')};
 
   * {
     display: inline-block;
     color: #fff;
-    font-size: 24px;
-    line-height: 24px;
     font-family: "Roboto Slab";
     text-decoration: none;
+
+    font-size: ${between('24px', '32px', '320px', '2560px')};
+    line-height: ${between('24px', '32px', '320px', '2560px')};
 
     &:focus {
       outline: 0;

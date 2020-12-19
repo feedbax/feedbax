@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
+import { between } from 'polished';
 import { colors } from '~theme';
 import { defaultColors } from './const';
 
 import type { SerializedStyles } from '@emotion/react';
 import type { IconButtonProps } from './types';
-import { fluidRange } from '~lib/css-helper';
 
 export const getStyles = (
   (props: IconButtonProps): SerializedStyles => {
@@ -40,17 +40,8 @@ export const getStyles = (
       cursor: pointer;
       padding: 0;
   
-      width: ${size}px;
-      height: ${size}px;
-
-      /* ${fluidRange({
-        size: { from: `${sizeMin}px`, to: `${sizeMax}px` },
-        screen: { min: '320px', max: '2560px' },
-        css: (px) => ({
-          height: px,
-          width: px,
-        }),
-      })} */
+      width: ${between(`${sizeMin}px`, `${sizeMax}px`, '320px', '2560px')};
+      height: ${between(`${sizeMin}px`, `${sizeMax}px`, '320px', '2560px')};
   
       background-color: ${bgColor};
       ${neumorphism ? shadow : null}
@@ -83,18 +74,9 @@ export const getStyles = (
         -webkit-box-align: center;
         align-items: center;
         transition: opacity .3s ease 0s, transform .3s ease;
-  
-        width: ${size - 12}px;
-        height: ${size - 12}px;
 
-        /* ${fluidRange({
-          size: { from: `${sizeMin - 12}px`, to: `${sizeMax - 12}px` },
-          screen: { min: '320px', max: '2560px' },
-          css: (px) => ({
-            height: px,
-            width: px,
-          }),
-        })} */
+        width: ${between(`${sizeMin - 12}px`, `${sizeMax - 12}px`, '320px', '2560px')};
+        height: ${between(`${sizeMin}px`, `${sizeMax}px`, '320px', '2560px')};
       }
     `;
   }
