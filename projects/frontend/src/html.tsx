@@ -56,7 +56,11 @@ export default function HTML (props: Props): JSX.Element {
 
         {preBodyComponents}
 
-        <div key="body" id="___gatsby" dangerouslySetInnerHTML={{ __html: body }} />
+        <div
+          key="body"
+          id="___gatsby"
+          dangerouslySetInnerHTML={{ __html: body }}
+        />
 
         {postBodyComponents}
       </body>
@@ -89,6 +93,7 @@ const stylesGlobal = css`
     min-height: calc(var(--vh, 1vh) * 100);
     touch-action: pan-y;
     font-size: 100.01%;
+    hyphens: none;
   }
 
   img.emoji {
