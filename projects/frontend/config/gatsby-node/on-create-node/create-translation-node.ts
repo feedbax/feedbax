@@ -1,5 +1,27 @@
 import { dereference } from 'json-schema-ref-parser';
+
 import type { CreateNodeArgs } from 'gatsby';
+import type { JSONSchema } from 'json-schema-ref-parser';
+
+const hyphenateJSONSchema = (
+  async (schema: JSONSchema, locale: string) => {
+    type Hyphen = typeof import('hyphen/en');
+    const { hyphenateSync }: Hyphen = await import(`hyphen/${locale}`);
+
+    return (
+      JSON.parse(
+        JSON.stringify(schema),
+        (_key, value) => {
+          if (typeof value === 'string') {
+            return hyphenateSync(value);
+          }
+
+          return value;
+        },
+      )
+    );
+  }
+);
 
 const createTranslationNode = (
   async (props: CreateNodeArgs): Promise<void> => {
@@ -11,8 +33,10 @@ const createTranslationNode = (
     if (node.base !== 'translations.json') return;
     if (node.relativeDirectory === 'generic') return;
 
-    const locale = node.relativeDirectory;
-    const data = await dereference(node.absolutePath as string);
+    const locale = node.relativeDirectory as string;
+
+    const _data = await dereference(node.absolutePath as string);
+    const data = await hyphenateJSONSchema(_data, locale);
 
     createNode({
       id: `translation_${locale}`,
