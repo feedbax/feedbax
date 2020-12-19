@@ -1378,7 +1378,6 @@ export type Locales = Node & {
   parent?: Maybe<Node>;
   children: Array<Node>;
   internal: Internal;
-  locale?: Maybe<Scalars['String']>;
   data?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
@@ -1498,7 +1497,6 @@ export type LocalesFieldsEnum =
   | 'internal___mediaType'
   | 'internal___owner'
   | 'internal___type'
-  | 'locale'
   | 'data';
 
 export type LocalesFilterInput = {
@@ -1506,7 +1504,6 @@ export type LocalesFilterInput = {
   parent?: Maybe<NodeFilterInput>;
   children?: Maybe<NodeFilterListInput>;
   internal?: Maybe<InternalFilterInput>;
-  locale?: Maybe<StringQueryOperatorInput>;
   data?: Maybe<StringQueryOperatorInput>;
 };
 
@@ -1818,7 +1815,6 @@ export type QueryLocalesArgs = {
   parent?: Maybe<NodeFilterInput>;
   children?: Maybe<NodeFilterListInput>;
   internal?: Maybe<InternalFilterInput>;
-  locale?: Maybe<StringQueryOperatorInput>;
   data?: Maybe<StringQueryOperatorInput>;
 };
 
