@@ -14,7 +14,7 @@ type RequiredGraphql<T> = (
         }
 )
 
-type TranslationDataClean = (
+export type TranslationDataClean = (
   RequiredGraphql<TranslationData>
 );
 
@@ -25,7 +25,7 @@ export type Location = {
 };
 
 export type Context = {
-  translation: TranslationData;
+  translation: TranslationDataClean;
   locale: string;
   locales: string[];
   location: Location;

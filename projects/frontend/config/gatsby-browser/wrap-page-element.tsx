@@ -2,7 +2,7 @@ import React from 'react';
 import TranslationContext from '~components/I18n/Context';
 
 import type { WrapPageElementBrowserArgs } from 'gatsby';
-import type { TranslationData } from '~graphql-types';
+import type { TranslationDataClean } from '~components/I18n/types';
 
 type Props = WrapPageElementBrowserArgs & {
   props: {
@@ -12,7 +12,7 @@ type Props = WrapPageElementBrowserArgs & {
 
       locale: string;
       locales: string[];
-      translation: TranslationData;
+      translation: TranslationDataClean;
     };
   };
 };
