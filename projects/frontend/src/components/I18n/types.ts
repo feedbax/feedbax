@@ -1,5 +1,23 @@
 import type { TranslationData } from '~graphql-types';
 
+type RequiredGraphql<T> = (
+  T extends string
+    ? string
+    : T extends number
+      ? number
+      : T extends boolean
+        ? boolean
+        : {
+          [K in keyof Omit<T, '__typename'>]-?: (
+            RequiredGraphql<NonNullable<T[K]>>
+          )
+        }
+)
+
+type TranslationDataClean = (
+  RequiredGraphql<TranslationData>
+);
+
 export type Location = {
   path: string;
   matchPath?: string;
@@ -14,33 +32,20 @@ export type Context = {
 };
 
 export interface Translate {
+  (): TranslationDataClean;
+
   <
-    K1 extends keyof NN1<TranslationData>,
-    K2 extends keyof (NN1<NN1<TranslationData>[K1]>) = never,
-    K3 extends keyof (NN1<NN1<NN1<TranslationData>[K1]>[K2]>) = never,
-  >(prop1: K1, prop2?: K2, prop3?: K3): TranslationDataClean<K1, K2, K3>;
+    K1 extends keyof (TranslationDataClean),
+  >(prop1: K1): TranslationDataClean[K1];
+
+  <
+    K1 extends keyof (TranslationDataClean),
+    K2 extends keyof (TranslationDataClean[K1]),
+  >(prop1: K1, prop2: K2): TranslationDataClean[K1][K2];
+
+  <
+    K1 extends keyof (TranslationDataClean),
+    K2 extends keyof (TranslationDataClean[K1]),
+    K3 extends keyof (TranslationDataClean[K1][K2]),
+  >(prop1: K1, prop2: K2, prop3: K3): TranslationDataClean[K1][K2][K3];
 }
-
-type NN2<T> = Required<Omit<NonNullable<T>, '__typename'>>;
-
-type NN1<T> = (
-  NonNullable<T> extends string
-    ? string
-    : {
-      [K in keyof NN2<T>]-?: (
-        NonNullable<NN2<T>[K]>
-      )
-    }
-);
-
-type TranslationDataClean<
-  K1 extends keyof NN1<TranslationData>,
-  K2 extends keyof (NN1<NN1<TranslationData>[K1]>) = never,
-  K3 extends keyof (NN1<NN1<NN1<TranslationData>[K1]>[K2]>) = never,
-> = (
-  [K2] extends [never]
-    ? NN1<NN1<TranslationData>[K1]>
-    : [K3] extends [never]
-      ? NN1<NN1<NN1<TranslationData>[K1]>[K2]>
-      : NN1<NN1<NN1<NN1<TranslationData>[K1]>[K2]>[K3]>
-);
