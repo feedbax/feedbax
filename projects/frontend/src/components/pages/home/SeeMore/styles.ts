@@ -11,7 +11,12 @@ export const stylesSeeMore = css`
     css: ([fontSize]) => ({ fontSize }),
   })}
 
-  margin-top: 50px;
+  ${fluidRange({
+    screen: ['20rem', '120rem', '240rem'] as const,
+    sizes: [['2.725rem', '3.125rem', '6.25rem']] as const,
+    css: ([marginTop]) => ({ marginTop }),
+  })}
+
   height: 6.8em;
 
   display: flex;

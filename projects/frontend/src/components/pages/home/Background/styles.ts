@@ -1,8 +1,9 @@
 import { css } from '@emotion/react';
 import { colors } from '~theme';
+import { fluidRange } from '~lib/css-helper';
 
-import top from '~assets/images/top.svg';
-import bot from '~assets/images/bot.svg';
+import bgTop from '~assets/images/top.svg';
+import bgBot from '~assets/images/bot.svg';
 
 export const stylesBackround = css`
   position: absolute;
@@ -11,14 +12,35 @@ export const stylesBackround = css`
   left: 0;
 
   width: 100%;
-  height: 100%;
 
-  max-height: 100vh;
-  max-height: calc(100vh + 0.25 * 100vw);
-  max-height: calc((var(--vh, 1vh) * 100) + 0.25 * 100vw);
+  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
 
   background-color: ${colors.third};
-  padding-bottom: 12vw;
+  padding-bottom: 30vw;
+
+  ${fluidRange({
+    screen: ['20rem', '120rem', '240rem'] as const,
+    sizes: [['6rem', '45rem', '90rem']] as const,
+    css: ([paddingBottom]) => ({ paddingBottom }),
+  })}
+
+  ${fluidRange({
+    screen: ['20rem', '67.5rem', '135rem'] as const,
+    sizes: [['64rem', '64rem', '128rem']] as const,
+
+    css: ([maxHeight]) => ({
+      '@media (orientation: portrait)': {
+        maxHeight,
+      },
+    }),
+  })}
+
+  ${fluidRange({
+    screen: ['20rem', '120rem', '240rem'] as const,
+    sizes: [['31.0625rem', '52.09375rem', '104.1875rem']] as const,
+    css: ([minHeight]) => ({ minHeight }),
+  })}
 
   z-index: 0 !important;
 
@@ -32,20 +54,25 @@ export const stylesBackround = css`
   }
 
   & .top {
-    background-image: url(${top});
+    background-image: url(${bgTop});
     background-position: top right;
 
     right: 0;
-    top: 0;
+
+    ${fluidRange({
+      screen: ['20rem', '120rem', '240rem'] as const,
+      sizes: [['0rem', '-12.5rem', '-25rem']] as const,
+      css: ([top]) => ({ top }),
+    })}
 
     max-width: 70%;
   }
 
   & .bot {
-    background-image: url(${bot});
+    background-image: url(${bgBot});
     background-position: bottom;
 
-    padding-bottom: 1px;
+    padding-bottom: 4px;
   }
 
   @media (orientation: portrait) {

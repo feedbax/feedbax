@@ -89,8 +89,8 @@ const stylesGlobal = css`
     position: relative;
     margin: 0;
     width: 100%;
-    min-height: 100vh;
-    min-height: calc(var(--vh, 1vh) * 100);
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     touch-action: pan-y;
     font-size: 100%;
     hyphens: none;

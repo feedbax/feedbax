@@ -25,7 +25,11 @@ type SizesType<T extends ScreenType> = (
     ? readonly (Tuples[0])[]
     : T extends Tuples[1]
       ? readonly (Tuples[1])[]
-      : never
+      : T extends Tuples[2]
+        ? readonly (Tuples[2])[]
+        : T extends Tuples[3]
+          ? readonly (Tuples[3])[]
+          : never
 );
 
 type CSSPropFnType<N extends number> = (
@@ -39,8 +43,15 @@ type Props<
 > = {
   sizes: Sizes,
   screen: Screen,
+  screenProp?: string;
   css: CSSPropFn,
 };
+
+const mediaProp = (
+  (screenProp: string, size: string): string => (
+    `${screenProp}: ${size}`
+  )
+);
 
 const fluidRange = (
   <
@@ -49,24 +60,20 @@ const fluidRange = (
     CSSPropFn extends CSSPropFnType<Sizes['length']>,
   > (props: Props<Screen, Sizes, CSSPropFn>): SerializedStyles => {
     const { screen, css: _css, sizes } = props;
+    const { screenProp = 'min-width' } = props;
 
     const _screen = [...screen];
     const _sizes = [...sizes];
 
-    const maxScreen = _screen.pop() ?? '';
     const styles: SerializedStyles[] = [];
 
-    const froms = _sizes.map(([from]) => from) as ReadonlyStringTuple<Sizes['length']>;
-    const tos = _sizes.map(([_from, to]) => to) as ReadonlyStringTuple<Sizes['length']>;
+    const maxScreen = _screen.pop() ?? '';
+
+    const firsts = _sizes.map(([first]) => first) as ReadonlyStringTuple<Sizes['length']>;
+    const lasts = _sizes.map((size) => [...size].pop()) as ReadonlyStringTuple<Sizes['length']>;
 
     styles.push(
-      css`
-        ${_css(froms)}
-
-        @media (min-width: ${maxScreen}) {
-          ${_css(tos)}
-        }
-      `,
+      css`${_css(firsts)}`,
     );
 
     for (let i = 0; i < _screen.length; i += 1) {
@@ -79,12 +86,20 @@ const fluidRange = (
 
       styles.push(
         css`
-          @media (min-width: ${fluidScreen}) {
+          @media (${mediaProp(screenProp, fluidScreen)}) {
             ${_css(fluids)}
           }
         `,
       );
     }
+
+    styles.push(
+      css`
+        @media (${mediaProp(screenProp, maxScreen)}) {
+          ${_css(lasts)}
+        }
+      `,
+    );
 
     return css(styles);
   }

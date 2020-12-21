@@ -8,6 +8,7 @@ export const stylesBenefit = css`
   width: 100%;
   max-width: 33.33%;
   box-sizing: border-box;
+  text-align: center;
 
   ${fluidRange({
     screen: ['20rem', '120rem', '240rem'] as const,
@@ -55,6 +56,11 @@ export const stylesBenefit = css`
     font-weight: normal;
     color: ${colors.third};
     text-align: center;
+    display: inline-block;
+
+    ul {
+      text-align: left;
+    }
 
     code {
       display: block;

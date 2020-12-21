@@ -1,13 +1,19 @@
 import { css } from '@emotion/react';
 import { colors } from '~theme';
 import { between } from 'polished';
+import { fluidRange } from '~lib/css-helper';
 
 export const stylesTool = css`
   position: relative;
   width: 100%;
 
   margin: 0 auto;
-  margin-top: 50px;
+
+  ${fluidRange({
+    screen: ['20rem', '120rem', '240rem'] as const,
+    sizes: [['2.725rem', '3.125rem', '6.25rem']] as const,
+    css: ([marginTop]) => ({ marginTop }),
+  })}
 
   font-size: ${between('2rem', '4.875rem', '20rem', '160rem')};
   margin-top: ${between('3.125rem', '6.25rem', '20rem', '160rem')};
@@ -51,8 +57,13 @@ export const stylesTool = css`
     .text {
       max-width: 100%;
       padding-right: 0;
-      margin-top: 50px;
       text-align: center;
+
+      ${fluidRange({
+        screen: ['20rem', '120rem', '240rem'] as const,
+        sizes: [['2.725rem', '3.125rem', '6.25rem']] as const,
+        css: ([marginTop]) => ({ marginTop }),
+      })}
     }
 
     .image {

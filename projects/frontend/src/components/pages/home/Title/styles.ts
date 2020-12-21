@@ -12,7 +12,11 @@ export const stylesTitle = css`
   text-align: center;
   color: ${colors.third};
 
-  margin-top: 50px;
+  ${fluidRange({
+    screen: ['20rem', '120rem', '240rem'] as const,
+    sizes: [['2.725rem', '3.125rem', '6.25rem']] as const,
+    css: ([marginTop]) => ({ marginTop }),
+  })}
 
   ${fluidRange({
     screen: ['20rem', '120rem', '240rem'] as const,

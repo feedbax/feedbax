@@ -77,10 +77,13 @@ const stylesEventHeader = css`
 const stylesEvent = css`
   position: relative;
   display: block;
+
   max-height: 100vh;
   max-height: calc(var(--vh, 1vh) * 100);
+
   min-height: 100vh;
   min-height: calc(var(--vh, 1vh) * 100);
+
   overflow: hidden;
   display: flex;
   flex-direction: column;

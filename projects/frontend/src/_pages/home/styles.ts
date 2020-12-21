@@ -18,8 +18,7 @@ export const stylesFront = css`
   position: relative;
 
   min-height: 100vh;
-  min-height: calc(100vh + 0.25 * 100vw);
-  min-height: calc((var(--vh, 1vh) * 100) + 0.25 * 100vw);
+  min-height: calc(var(--vh, 1vh) * 100);
 
   background-color: ${colors.first};
 
@@ -33,8 +32,42 @@ export const stylesFrontContent = css`
   flex-direction: column;
   justify-content: space-between;
 
-  min-height: 100vh;
-  min-height: calc(var(--vh, 1vh) * 100);
+  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
+
+  ${fluidRange({
+    screen: ['20rem', '240rem'] as const,
+
+    sizes: [
+      ['31.8125rem',  '98rem'],
+      ['64rem',       '180rem'],
+    ] as const,
+
+    css: ([minHeight, maxHeight]) => ({
+      minHeight,
+
+      '@media (orientation: portrait)': {
+        maxHeight,
+      },
+    }),
+  })}
+
+  ${fluidRange({
+    screen: ['20rem', '67.5rem', '135rem'] as const,
+    sizes: [['64rem', '64rem', '128rem']] as const,
+
+    css: ([maxHeight]) => ({
+      '@media (orientation: portrait)': {
+        maxHeight,
+      },
+    }),
+  })}
+
+  ${fluidRange({
+    screen: ['20rem', '120rem', '240rem'] as const,
+    sizes: [['31.0625rem', '52.09375rem', '104.1875rem']] as const,
+    css: ([minHeight]) => ({ minHeight }),
+  })}
 
   box-sizing: border-box;
 
