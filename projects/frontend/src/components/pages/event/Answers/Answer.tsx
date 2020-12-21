@@ -4,7 +4,7 @@
 import React from 'react';
 
 import { jsx, css } from '@emotion/react';
-import { between } from 'polished';
+import { fluidRange } from '~lib/css-helper';
 import { colors } from '~theme';
 
 import { useSelector } from 'react-redux';
@@ -13,7 +13,6 @@ import { selectors } from '~store/modules/answers';
 import useTwemoji from '~hooks/other/dom/use-twemoji';
 
 import IconButton, { Icons, Variants } from '~components/IconButton';
-import { fluidRange } from '~lib/css-helper';
 
 type Props = {
   answerId: string;
@@ -55,7 +54,12 @@ const stylesAnswer = css`
   position: relative;
   z-index: 1;
 
-  max-width: 540px;
+  ${fluidRange({
+    screen: ['120rem', '160rem'] as const,
+    sizes: [['33.75rem', '45rem']] as const,
+    css: ([maxWidth]) => ({ maxWidth }),
+  })}
+
   margin: 15px auto;
   padding: 15px;
 
@@ -80,11 +84,11 @@ const stylesAnswer = css`
     color: ${colors.first};
     padding-right: 15px;
 
-    /* ${fluidRange({
-      css: (px) => ({ fontSize: px }),
-      size: { from: '14px', to: '16px' },
-      screen: { min: '320px', max: '1170px' },
-    })} */
+    ${fluidRange({
+      screen: ['120rem', '160rem'] as const,
+      sizes: [['1rem', '1.33rem']] as const,
+      css: ([fontSize]) => ({ fontSize }),
+    })}
   }
 
   .like {
@@ -100,7 +104,12 @@ const stylesAnswer = css`
       padding-right: 8px;
       color: ${colors.first};
       text-align: right;
-      font-size: ${between('12px', '14px', '320px', '1170px')};
+
+      ${fluidRange({
+        screen: ['120rem', '160rem'] as const,
+        sizes: [['0.8rem', '1.13rem']] as const,
+        css: ([fontSize]) => ({ fontSize }),
+      })}
     }
   }
 `;

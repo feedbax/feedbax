@@ -92,7 +92,7 @@ const stylesGlobal = css`
     min-height: 100vh;
     min-height: calc(var(--vh, 1vh) * 100);
     touch-action: pan-y;
-    font-size: 100.01%;
+    font-size: 100%;
     hyphens: none;
   }
 

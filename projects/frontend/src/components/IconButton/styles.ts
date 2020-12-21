@@ -1,19 +1,32 @@
 import { css } from '@emotion/react';
-import { between } from 'polished';
+import { fluidRange } from '~lib/css-helper';
 import { colors } from '~theme';
 import { defaultColors } from './const';
 
 import type { SerializedStyles } from '@emotion/react';
 import type { IconButtonProps } from './types';
 
+const DEFAULTS = {
+  size: 28,
+
+  get sizeBounds () {
+    return {
+      min: DEFAULTS.size,
+      max: (4 / 3) * DEFAULTS.size,
+    };
+  },
+};
+
 export const getStyles = (
   (props: IconButtonProps): SerializedStyles => {
-    const { size = 28 } = props;
+    const { size = DEFAULTS.size } = props;
+    const { sizeBounds = {} } = props;
+
     const { color = {} } = props;
     const { neumorphism = true } = props;
 
-    const sizeMin = size;
-    const sizeMax = (4 / 3) * size;
+    const sizeMin = (sizeBounds.min ?? size) / 16;
+    const sizeMax = (sizeBounds.max ?? 2 * size) / 16;
 
     const bgColor = colors[color.background ?? defaultColors.background];
 
@@ -40,8 +53,16 @@ export const getStyles = (
       cursor: pointer;
       padding: 0;
   
-      width: ${between(`${sizeMin}px`, `${sizeMax}px`, '320px', '2560px')};
-      height: ${between(`${sizeMin}px`, `${sizeMax}px`, '320px', '2560px')};
+      ${fluidRange({
+        screen: ['120rem', '240rem'] as const,
+        sizes: [[`${sizeMin}rem`, `${sizeMax}rem`]] as const,
+
+        css: ([unit]) => ({
+          fontSize: unit,
+          width: unit,
+          height: unit,
+        }),
+      })}
   
       background-color: ${bgColor};
       ${neumorphism ? shadow : null}
@@ -75,8 +96,8 @@ export const getStyles = (
         align-items: center;
         transition: opacity .3s ease 0s, transform .3s ease;
 
-        width: ${between(`${sizeMin - 12}px`, `${sizeMax - 12}px`, '320px', '2560px')};
-        height: ${between(`${sizeMin}px`, `${sizeMax}px`, '320px', '2560px')};
+        width: 0.571428em;
+        height: 0.571428em;
       }
     `;
   }

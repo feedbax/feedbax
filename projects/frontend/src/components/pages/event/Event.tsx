@@ -33,15 +33,11 @@ const Event = React.memo(
       <div css={stylesEvent}>
         <div className="scroll-container" ref={scrollContainerRef}>
           <div css={stylesEventHeader}>
-            <div className="content">
-              <MenuButton />
+            <MenuButton />
 
+            <div className="content">
               <Logo
                 variant="no-shadow-and-text"
-                styles={{
-                  height: 60,
-                  width: 60,
-                }}
               />
 
               <Navigation />

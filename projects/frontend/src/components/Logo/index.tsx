@@ -15,12 +15,11 @@ import LocaleLink from '~components/I18n/LocaleLink';
 import type { Variant, LogoProps } from './types';
 
 const Logo = React.memo((props: LogoProps) => {
-  const { styles = {} } = props;
   const { variant = 'text' } = props;
   const { link = '/' } = props;
 
   return (
-    <div css={[stylesImageWrapper(variant), styles]}>
+    <div css={stylesImageWrapper(variant)}>
       <LocaleLink to={link}>
         <img
           css={stylesImage}

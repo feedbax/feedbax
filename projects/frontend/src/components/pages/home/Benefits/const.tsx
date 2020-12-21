@@ -6,7 +6,6 @@ export const benefits = [
   {
     image: 'benefit_1',
     text: {
-      align: 'center',
       content: (
         <Translation>
           {(t) => <>{t('home', 'benefit_1')}</>}
@@ -18,7 +17,6 @@ export const benefits = [
   {
     image: 'benefit_2',
     text: {
-      align: 'center',
       content: (
         <Translation>
           {(t) => <>{t('home', 'benefit_2')}</>}
@@ -30,7 +28,6 @@ export const benefits = [
   {
     image: 'benefit_3',
     text: {
-      align: 'center',
       content: (
         <Translation>
           {(t) => <>{t('home', 'benefit_3')}</>}
@@ -42,7 +39,6 @@ export const benefits = [
   {
     image: 'benefit_4',
     text: {
-      align: 'left',
       content: (
         <Translation>
           {(t) => (
@@ -65,7 +61,6 @@ export const benefits = [
   {
     image: 'benefit_5',
     text: {
-      align: 'left',
       content: (
         <Translation>
           {(t) => (
@@ -83,7 +78,6 @@ export const benefits = [
   {
     image: 'benefit_6',
     text: {
-      align: 'left',
       content: (
         <Translation>
           {(t) => (

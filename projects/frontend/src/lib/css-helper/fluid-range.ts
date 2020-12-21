@@ -3,90 +3,91 @@ import { between } from 'polished';
 
 import type { CSSInterpolation, SerializedStyles } from '@emotion/serialize';
 
-type Type = 'single' | 'multiple';
-type Unit = [string, string];
-
-type CssProp<T extends Type> = (
-  T extends 'single'
-    ? (unit: string) => CSSInterpolation
-    : (units: Array<string>) => CSSInterpolation
-)
-
-type Size<T extends Type> = (
-  T extends 'single'
-    ? Unit
-    : Array<Unit>
+type ReadonlyTuple<T, N extends number, R extends unknown[]> = (
+  R['length'] extends N
+    ? Readonly<R>
+    : ReadonlyTuple<T, N, [T, ...R]>
 );
 
-type Screen = [string, string];
+type ReadonlyStringTuple<N extends number> = ReadonlyTuple<string, N, []>;
+type GetArrayType<T> = T extends Array<infer R> ? R : T;
 
-type FluidRangeProps<T extends Type> = (
-  T extends 'single'
-    ? {
-      css: CssProp<T>;
-      size: Size<T>;
-      screen: Screen;
-    }
-    : {
-      css: CssProp<T>;
-      sizes: Size<T>;
-      screen: Screen;
-    }
+type Tuples = [
+  ReadonlyStringTuple<2>,
+  ReadonlyStringTuple<3>,
+  ReadonlyStringTuple<4>,
+  ReadonlyStringTuple<5>,
+];
+
+type ScreenType = GetArrayType<Tuples>;
+type SizesType<T extends ScreenType> = (
+  T extends Tuples[0]
+    ? readonly (Tuples[0])[]
+    : T extends Tuples[1]
+      ? readonly (Tuples[1])[]
+      : never
 );
 
-type MediaProps = {
-  propMin: CSSInterpolation;
-  propFluid: CSSInterpolation;
-  propMax: CSSInterpolation;
+type CSSPropFnType<N extends number> = (
+  (units: ReadonlyStringTuple<N>) => CSSInterpolation
+);
+
+type Props<
+  Screen extends ScreenType,
+  Sizes extends SizesType<Screen>,
+  CSSPropFn extends CSSPropFnType<Sizes['length']>,
+> = {
+  sizes: Sizes,
+  screen: Screen,
+  css: CSSPropFn,
 };
 
-function calcProps (props: FluidRangeProps<'single'> | FluidRangeProps<'multiple'>): MediaProps {
-  const { screen } = props;
-  const [min, max] = screen;
+const fluidRange = (
+  <
+    Screen extends ScreenType,
+    Sizes extends SizesType<Screen>,
+    CSSPropFn extends CSSPropFnType<Sizes['length']>,
+  > (props: Props<Screen, Sizes, CSSPropFn>): SerializedStyles => {
+    const { screen, css: _css, sizes } = props;
 
-  let mediaProps: MediaProps;
+    const _screen = [...screen];
+    const _sizes = [...sizes];
 
-  if ('sizes' in props) {
-    const { css: _css, sizes } = props;
+    const maxScreen = _screen.pop() ?? '';
+    const styles: SerializedStyles[] = [];
 
-    mediaProps = {
-      propMin: _css(sizes.map(([from, _to]) => from)),
-      propFluid: _css(sizes.map(([from, to]) => between(from, to, min, max))),
-      propMax: _css(sizes.map(([_from, to]) => to)),
-    };
-  } else {
-    const { css: _css, size } = props;
-    const [from, to] = size;
+    const froms = _sizes.map(([from]) => from) as ReadonlyStringTuple<Sizes['length']>;
+    const tos = _sizes.map(([_from, to]) => to) as ReadonlyStringTuple<Sizes['length']>;
 
-    mediaProps = {
-      propMin: _css(from),
-      propFluid: _css(between(from, to, min, max)),
-      propMax: _css(to),
-    };
+    styles.push(
+      css`
+        ${_css(froms)}
+
+        @media (min-width: ${maxScreen}) {
+          ${_css(tos)}
+        }
+      `,
+    );
+
+    for (let i = 0; i < _screen.length; i += 1) {
+      const fluidScreen = screen[i];
+      const nextScreen = screen[i + 1];
+
+      const fluids = _sizes.map(
+        (size) => between(size[i], size[i + 1], fluidScreen, nextScreen),
+      ) as ReadonlyStringTuple<Sizes['length']>;
+
+      styles.push(
+        css`
+          @media (min-width: ${fluidScreen}) {
+            ${_css(fluids)}
+          }
+        `,
+      );
+    }
+
+    return css(styles);
   }
-
-  return mediaProps;
-}
-
-function fluidRange (props: FluidRangeProps<'single'>): SerializedStyles;
-function fluidRange (props: FluidRangeProps<'multiple'>): SerializedStyles;
-function fluidRange (props: FluidRangeProps<'single'> | FluidRangeProps<'multiple'>): SerializedStyles {
-  const { screen } = props;
-  const [min, max] = screen;
-
-  const { propMin, propMax, propFluid } = calcProps(props);
-
-  return css`
-    ${propMin}
-
-    @media (min-width: ${min}) {
-      ${propFluid}
-    }
-
-    @media (min-width: ${max}) {
-      ${propMax}
-    }
-  `;
-}
+);
 
 export default fluidRange;

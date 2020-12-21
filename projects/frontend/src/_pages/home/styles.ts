@@ -1,12 +1,17 @@
 import { css } from '@emotion/react';
 import { colors } from '~theme';
-import { between } from 'polished';
+import { fluidRange } from '~lib/css-helper';
 
 export const stylesMore = css`
   position: relative;
   padding: 20px;
   box-sizing: border-box;
-  padding-top: ${between('96px', '190px', '320px', '2560px')};
+
+  ${fluidRange({
+    screen: ['20rem', '120rem', '240rem'] as const,
+    sizes: [['6rem', '11.875rem', '23.75rem']] as const,
+    css: ([paddingTop]) => ({ paddingTop }),
+  })}
 `;
 
 export const stylesFront = css`
@@ -31,7 +36,13 @@ export const stylesFrontContent = css`
   min-height: 100vh;
   min-height: calc(var(--vh, 1vh) * 100);
 
-  padding-top: ${between('1.5rem', '2.5rem', '20rem', '160rem')};
+  box-sizing: border-box;
+
+  ${fluidRange({
+    screen: ['20rem', '120rem', '240rem'] as const,
+    sizes: [['1.5rem', '2.5rem', '5rem']] as const,
+    css: ([paddingTop]) => ({ paddingTop }),
+  })}
 `;
 
 export const stylesTitleAndLogin = css`

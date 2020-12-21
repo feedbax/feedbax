@@ -1,11 +1,6 @@
 import { css } from '@emotion/react';
 import { colors } from '~theme';
-import { between } from 'polished';
-
-const sa = between('-0.125rem', '-0.3125rem', '20rem', '160rem');
-const sb = between('0.125rem', '0.3125rem', '20rem', '160rem');
-const sc = between('-0.1875rem', '-0.375rem', '20rem', '160rem');
-const sd = between('0.1875rem', '0.375rem', '20rem', '160rem');
+import { fluidRange } from '~lib/css-helper';
 
 export const stylesTitle = css`
   position: relative;
@@ -19,11 +14,25 @@ export const stylesTitle = css`
 
   margin-top: 50px;
 
-  font-size: ${between('4.375rem', '17.5rem', '20rem', '160rem')};
+  ${fluidRange({
+    screen: ['20rem', '120rem', '240rem'] as const,
 
-  text-shadow:
-    ${sa} ${sa} 0px ${colors.second}, 
-    ${sb} ${sb} 0px ${colors.first}, 
-    ${sc} ${sc} 0px ${colors.third}, 
-    ${sd} ${sd} 0px ${colors.third};
+    sizes: [
+      [ '4.375rem',    '15rem',      '30rem'],
+      ['-0.125rem',   '-0.25rem',   '-0.5rem'],
+      [ '0.125rem',    '0.25rem',    '0.5rem'],
+      ['-0.1875rem',  '-0.375rem',  '-0.75rem'],
+      [ '0.1875rem',   '0.375rem',   '0.75rem'],
+    ] as const,
+
+    css: ([fontSize, sa, sb, sc, sd]) => ({
+      fontSize,
+      textShadow: `
+        ${sa} ${sa} 0px ${colors.second}, 
+        ${sb} ${sb} 0px ${colors.first}, 
+        ${sc} ${sc} 0px ${colors.third}, 
+        ${sd} ${sd} 0px ${colors.third}
+      `,
+    }),
+  })}
 `;

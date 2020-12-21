@@ -1,11 +1,15 @@
 import { css } from '@emotion/react';
-import { between } from 'polished';
+import { fluidRange } from '~lib/css-helper';
 import { colors } from '~theme';
 
 export const stylesSeeMore = css`
   position: relative;
 
-  font-size: ${between('1.125rem', '2.25rem', '20rem', '160rem')};
+  ${fluidRange({
+    screen: ['20rem', '120rem', '240rem'] as const,
+    sizes: [['1rem', '1.125rem', '2.25rem']] as const,
+    css: ([fontSize]) => ({ fontSize }),
+  })}
 
   margin-top: 50px;
   height: 6.8em;

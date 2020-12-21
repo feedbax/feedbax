@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
-import { between, transparentize } from 'polished';
+import { transparentize } from 'polished';
+import { fluidRange } from '~lib/css-helper';
 import { colors } from '~theme';
 
 export const stylesPortal = css`
@@ -30,28 +31,52 @@ export const stylesItems = css`
   align-items: center;
   flex-direction: column;
 
-  margin: 0 25px;
-  min-width: 320px;
+  ${fluidRange({
+    screen: ['20rem', '120rem', '240rem'] as const,
+
+    sizes: [
+      ['1.2rem',  '1.5625rem',  '3.125rem'],
+      ['15rem',   '20rem',      '40rem'],
+    ] as const,
+
+    css: ([marginY, minWidth]) => ({
+      margin: `0 ${marginY}`,
+      minWidth,
+    }),
+  })}
 `;
 
 export const stylesItem = css`
-  padding: 8px 5px;
-
   color: #fff;
   font-family: "Roboto Slab";
   text-decoration: none;
 
-  font-size: ${between('24px', '32px', '320px', '2560px')};
-  line-height: ${between('24px', '32px', '320px', '2560px')};
+  ${fluidRange({
+    screen: ['20rem', '120rem', '240rem'] as const,
+
+    sizes: [
+      ['1.5rem',    '2rem',       '4rem'],
+      ['0.4rem',    '0.5rem',     '1rem'],
+      ['0.2125rem', '0.3125rem',  '0.625rem'],
+    ] as const,
+
+    css: ([unit, paddingX, paddingY]) => ({
+      fontSize: unit,
+      lineHeight: unit,
+      padding: `${paddingX} ${paddingY}`,
+
+      '*': {
+        fontSize: unit,
+        lineHeight: unit,
+      },
+    }),
+  })}
 
   * {
     display: inline-block;
     color: #fff;
     font-family: "Roboto Slab";
     text-decoration: none;
-
-    font-size: ${between('24px', '32px', '320px', '2560px')};
-    line-height: ${between('24px', '32px', '320px', '2560px')};
 
     &:focus {
       outline: 0;
@@ -79,18 +104,18 @@ export const stylesTabable = css`
 `;
 
 export const stylesIconButtonBack = css`
-  @media (max-width: 600px) {
+  @media (max-width: 37.5rem) {
     position: absolute;
-    top: 25px;
-    left: 25px;
+    top: 1.5625rem;
+    left: 1.5625rem;
   }
 `;
 
 export const stylesIconButtonClose = css`
-  @media (max-width: 600px) {
+  @media (max-width: 37.5rem) {
     position: absolute;
-    top: 25px;
-    right: 25px;
+    top: 1.5625rem;
+    right: 1.5625rem;
   }
 `;
 

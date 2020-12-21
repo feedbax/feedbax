@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { between } from 'polished';
+import { fluidRange } from '~lib/css-helper';
 import { colors } from '~theme';
 
 export const stylesBenefit = css`
@@ -9,14 +9,43 @@ export const stylesBenefit = css`
   max-width: 33.33%;
   box-sizing: border-box;
 
-  padding: ${between('1.5625rem', '4.125rem', '20rem', '160rem')};
-  margin-top: ${between('0.625rem', '1.625rem', '20rem', '160rem')};
+  ${fluidRange({
+    screen: ['20rem', '120rem', '240rem'] as const,
 
-  @media (max-width: 1377px) {
+    sizes: [
+      ['1.5625rem', '4.125rem', '8.25rem'],
+      ['0.625rem',  '1.625rem', '3.25rem'],
+      ['1.5rem',    '2.375rem', '4.75rem'],
+      ['1.125rem',  '1.625rem', '3.25rem'],
+      ['1rem',      '1.25rem',  '2.5rem'],
+    ] as const,
+
+    css: ([
+      paddingBenefit,
+      marginTopBenefit,
+      fontSizeText,
+      marginTopText,
+      marginTopCodeAndSmall,
+    ]) => ({
+      padding: paddingBenefit,
+      marginTop: marginTopBenefit,
+
+      '.text': {
+        fontSize: fontSizeText,
+        marginTop: marginTopText,
+
+        'code, small': {
+          marginTop: marginTopCodeAndSmall,
+        },
+      },
+    }),
+  })}
+
+  @media (max-width: 86rem) {
     max-width: 50%;
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 37.5rem) {
     max-width: 100%;
   }
 
@@ -25,33 +54,18 @@ export const stylesBenefit = css`
     font-style: normal;
     font-weight: normal;
     color: ${colors.third};
-
-    font-size: ${between('1.25rem', '2.375rem', '20rem', '160rem')};
-    margin-top: ${between('1.125rem', '1.625rem', '20rem', '160rem')};
-
-    &.left {
-      text-align: left;
-    }
-
-    &.center {
-      text-align: center;
-    }
+    text-align: center;
 
     code {
       display: block;
-      margin-top: 20px;
-
-      font-size: ${between('0.75rem', '1.125rem', '20rem', '160rem')};
+      font-size: 0.45em;
     }
 
     small {
       display: block;
-      margin-top: 20px;
 
       font-family: "Klinic Slab Book";
-      text-align: left;
-
-      font-size: ${between('1.125rem', '1.625rem', '20rem', '160rem')};
+      font-size: 0.65em;
 
       ul {
         margin: 0;
@@ -66,8 +80,19 @@ export const stylesBenefits = css`
   position: relative;
   width: 100%;
 
-  margin: ${between('3rem', '5rem', '20rem', '160rem')} auto;
-  max-width: ${between('20rem', '97.5rem', '20rem', '160rem')};
+  ${fluidRange({
+    screen: ['20rem', '120rem', '240rem'] as const,
+
+    sizes: [
+      ['3rem',  '5rem',     '10rem'],
+      ['20rem', '97.5rem',  '195rem'],
+    ] as const,
+
+    css: ([margin, maxWidth]) => ({
+      margin: `${margin} auto`,
+      maxWidth,
+    }),
+  })}
 
   display: flex;
   flex-direction: row;

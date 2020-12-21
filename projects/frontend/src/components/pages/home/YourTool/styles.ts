@@ -43,7 +43,7 @@ export const stylesTool = css`
     max-width: 50%;
   }
 
-  @media (max-width: 800px) {
+  @media (max-width: 50rem) {
     flex-direction: column-reverse;
     justify-content: center;
     align-items: center;

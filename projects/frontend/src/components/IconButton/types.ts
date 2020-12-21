@@ -29,7 +29,9 @@ export type IconButtonProps = {
   icon: Icons;
   variant?: Variants;
 
-  size?: number;
+  size?: number
+  sizeBounds?: { min?: number, max?: number };
+
   neumorphism?: boolean;
   color?: IconButtonColors;
 

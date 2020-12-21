@@ -1,26 +1,43 @@
 import { css } from '@emotion/react';
-import { between } from 'polished';
+import { fluidRange } from '~lib/css-helper';
 import { colors } from '~theme';
-
-const sa = between('-0.125rem', '-0.3125rem', '20rem', '160rem');
-const sb = between('0.125rem', '0.3125rem', '20rem', '160rem');
-const sc = between('-0.1875rem', '-0.375rem', '20rem', '160rem');
-const sd = between('0.1875rem', '0.375rem', '20rem', '160rem');
 
 export const stylesEventLogin = css`
   position: relative;
   display: block;
 
   width: 100%;
-
-  max-width: ${between('18.75rem', '25rem', '20rem', '160rem')};
   margin: 0 auto;
 
-  box-shadow:
-    ${sa} ${sa} 0px ${colors.second}, 
-    ${sb} ${sb} 0px ${colors.first}, 
-    ${sc} ${sc} 0px ${colors.third}, 
-    ${sd} ${sd} 0px ${colors.third};
+  ${fluidRange({
+    screen: ['20rem', '120rem', '240rem'] as const,
+
+    sizes: [
+      [ '20rem',       '23.75rem',   '47.5rem'],
+      ['-0.125rem',   '-0.25rem',   '-0.5rem'],
+      [ '0.125rem',    '0.25rem',    '0.5rem'],
+      ['-0.1875rem',  '-0.375rem',  '-0.75rem'],
+      [ '0.1875rem',   '0.375rem',   '0.75rem'],
+      [ '3.125rem',    '4.375rem',   '8.75rem'],
+      [ '1.5rem',      '2rem',       '4rem'],
+    ] as const,
+
+    css: ([maxWidth, sa, sb, sc, sd, height, fontSize]) => ({
+      maxWidth,
+
+      boxShadow: `
+        ${sa} ${sa} 0px ${colors.second}, 
+        ${sb} ${sb} 0px ${colors.first}, 
+        ${sc} ${sc} 0px ${colors.third}, 
+        ${sd} ${sd} 0px ${colors.third}
+      `,
+
+      '& .text, & .button': {
+        height,
+        fontSize,
+      },
+    }),
+  })}
 
   & .text,
   & .button {
@@ -32,7 +49,6 @@ export const stylesEventLogin = css`
     box-sizing: border-box;
 
     width: 100%;
-    height: ${between('3.5rem', '4.75rem', '20rem', '160rem')};
 
     border: 0;
     outline: 0;
@@ -43,7 +59,6 @@ export const stylesEventLogin = css`
     font-family: "Klinic Slab";
     font-style: normal;
     font-weight: normal;
-    font-size: ${between('1.5rem', '2.25rem', '20rem', '160rem')};
 
     text-indent: 1em;
     text-align: left;

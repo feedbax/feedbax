@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { between } from 'polished';
+import { fluidRange } from '~lib/css-helper';
 import { colors } from '~theme';
 
 export const stylesFooter = css`
@@ -12,22 +13,38 @@ export const stylesFooter = css`
   color: ${colors.third};
   background-color: ${colors.fourth};
 
-  padding: ${between('1.5rem', '2.5rem', '20rem', '160rem')};
+
+  ${fluidRange({
+    screen: ['20rem', '120rem', '240rem'] as const,
+
+    sizes: [
+      ['1.5rem',  '2.5rem',   '5rem'],
+      ['0.5rem',  '0.875rem', '1.75rem'],
+      ['2.25rem', '5rem',     '10rem'],
+      ['0.75rem', '1.625rem', '3.25rem'],
+    ] as const,
+
+    css: ([padding, marginBottom, fontSizeTitle, fontSizeLinks]) => ({
+      padding,
+
+      '.title': {
+        marginBottom,
+        fontSize: fontSizeTitle,
+      },
+
+      '.copy, .links': {
+        fontSize: fontSizeLinks,
+      },
+    }),
+  })}
 
   .title {
     font-weight: bold;
-    margin-bottom: 10px;
-
-    margin-bottom: ${between('0.5rem', '0.875rem', '20rem', '160rem')};
-    font-size: ${between('2.25rem', '5rem', '20rem', '160rem')};
   }
 
-  .copy,
-  .links {
+  .copy, .links {
     font-weight: normal;
     color: ${colors.third};
-
-    font-size: ${between('0.75rem', '1.625rem', '20rem', '160rem')};
 
     &:visited {
       color: ${colors.third};
