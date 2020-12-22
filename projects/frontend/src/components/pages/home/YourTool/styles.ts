@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import { colors } from '~theme';
-import { between } from 'polished';
 import { fluidRange } from '~lib/css-helper';
 
 export const stylesTool = css`
@@ -11,13 +10,30 @@ export const stylesTool = css`
 
   ${fluidRange({
     screen: ['20rem', '120rem', '240rem'] as const,
-    sizes: [['2.725rem', '3.125rem', '6.25rem']] as const,
-    css: ([marginTop]) => ({ marginTop }),
-  })}
 
-  font-size: ${between('2rem', '4.875rem', '20rem', '160rem')};
-  margin-top: ${between('3.125rem', '6.25rem', '20rem', '160rem')};
-  max-width: ${between('20rem', '97.5rem', '20rem', '160rem')};
+    sizes: [
+      ['2.725rem',  '3.125rem', '6.25rem'],
+      ['20rem',     '58rem',    '116rem'],
+      ['2rem',      '3.6rem',   '7.2rem'],
+      ['3.35rem',   '3.75rem',  '7.5rem'],
+    ] as const,
+
+    css: ([marginTop, maxWidth, fontSize, paddingRight]) => ({
+      marginTop,
+      maxWidth,
+
+      '.text': {
+        fontSize,
+        paddingRight,
+      },
+
+      '@media (max-width: 50rem)': {
+        '.text': {
+          marginTop,
+        },
+      },
+    }),
+  })}
 
   display: flex;
   flex-direction: row;
@@ -31,12 +47,10 @@ export const stylesTool = css`
     font-family: "Klinic Slab";
     font-style: normal;
     font-weight: normal;
-    font-size: ${between('2rem', '4.875rem', '20rem', '160rem')};
 
     color: ${colors.third};
 
     text-align: right;
-    padding-right: 60px;
     box-sizing: border-box;
   }
 
@@ -58,16 +72,10 @@ export const stylesTool = css`
       max-width: 100%;
       padding-right: 0;
       text-align: center;
-
-      ${fluidRange({
-        screen: ['20rem', '120rem', '240rem'] as const,
-        sizes: [['2.725rem', '3.125rem', '6.25rem']] as const,
-        css: ([marginTop]) => ({ marginTop }),
-      })}
     }
 
     .image {
-      max-width: 560px;
+      max-width: 35rem;
     }
   }
 `;

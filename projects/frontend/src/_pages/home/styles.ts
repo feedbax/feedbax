@@ -36,23 +36,6 @@ export const stylesFrontContent = css`
   height: calc(var(--vh, 1vh) * 100);
 
   ${fluidRange({
-    screen: ['20rem', '240rem'] as const,
-
-    sizes: [
-      ['31.8125rem',  '98rem'],
-      ['64rem',       '180rem'],
-    ] as const,
-
-    css: ([minHeight, maxHeight]) => ({
-      minHeight,
-
-      '@media (orientation: portrait)': {
-        maxHeight,
-      },
-    }),
-  })}
-
-  ${fluidRange({
     screen: ['20rem', '67.5rem', '135rem'] as const,
     sizes: [['64rem', '64rem', '128rem']] as const,
 
@@ -65,17 +48,19 @@ export const stylesFrontContent = css`
 
   ${fluidRange({
     screen: ['20rem', '120rem', '240rem'] as const,
-    sizes: [['31.0625rem', '52.09375rem', '104.1875rem']] as const,
-    css: ([minHeight]) => ({ minHeight }),
+
+    sizes: [
+      ['31.0625rem',  '52.09375rem',  '104.1875rem'],
+      ['1.5rem',      '2.5rem',       '5rem'],
+    ] as const,
+
+    css: ([minHeight, paddingTop]) => ({
+      minHeight,
+      paddingTop,
+    }),
   })}
 
   box-sizing: border-box;
-
-  ${fluidRange({
-    screen: ['20rem', '120rem', '240rem'] as const,
-    sizes: [['1.5rem', '2.5rem', '5rem']] as const,
-    css: ([paddingTop]) => ({ paddingTop }),
-  })}
 `;
 
 export const stylesTitleAndLogin = css`

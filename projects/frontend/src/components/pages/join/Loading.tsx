@@ -4,14 +4,14 @@
 import React from 'react';
 
 import { jsx, css, keyframes } from '@emotion/react';
-import { CSSInterpolation } from '@emotion/serialize';
-import { between } from 'polished';
 import { colors } from '~theme';
 
 import { motion } from 'framer-motion';
 
 import Logo from '~components/Logo';
 import Background from './Background';
+
+import type { CSSInterpolation } from '@emotion/serialize';
 
 type Props = {
   state?: 'visible' | 'hidden';
@@ -90,7 +90,6 @@ const stylesLoading = css`
     justify-content: center;
     align-items: center;
 
-    padding: ${between('0px', '30px', '320px', '1170px')};
     border-radius: 50%;
 
     .pulse {

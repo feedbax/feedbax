@@ -91,7 +91,7 @@ export const stylesBenefits = css`
 
     sizes: [
       ['3rem',  '5rem',     '10rem'],
-      ['20rem', '97.5rem',  '195rem'],
+      ['20rem', '90rem',    '180rem'],
     ] as const,
 
     css: ([margin, maxWidth]) => ({

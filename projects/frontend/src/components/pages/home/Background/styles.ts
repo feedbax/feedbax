@@ -2,8 +2,8 @@ import { css } from '@emotion/react';
 import { colors } from '~theme';
 import { fluidRange } from '~lib/css-helper';
 
-import bgTop from '~assets/images/top.svg';
-import bgBot from '~assets/images/bot.svg';
+import backgroundTop from '~assets/images/top.svg';
+import backgroundBottom from '~assets/images/bot.svg';
 
 export const stylesBackround = css`
   position: absolute;
@@ -20,12 +20,6 @@ export const stylesBackround = css`
   padding-bottom: 30vw;
 
   ${fluidRange({
-    screen: ['20rem', '120rem', '240rem'] as const,
-    sizes: [['6rem', '45rem', '90rem']] as const,
-    css: ([paddingBottom]) => ({ paddingBottom }),
-  })}
-
-  ${fluidRange({
     screen: ['20rem', '67.5rem', '135rem'] as const,
     sizes: [['64rem', '64rem', '128rem']] as const,
 
@@ -38,8 +32,21 @@ export const stylesBackround = css`
 
   ${fluidRange({
     screen: ['20rem', '120rem', '240rem'] as const,
-    sizes: [['31.0625rem', '52.09375rem', '104.1875rem']] as const,
-    css: ([minHeight]) => ({ minHeight }),
+
+    sizes: [
+      ['31.0625rem',  '52.09375rem',  '104.1875rem'],
+      ['6rem',        '45rem',        '90rem'],
+      ['0rem',       '-12.5rem',     '-25rem'],
+    ] as const,
+
+    css: ([minHeight, paddingBottom, top]) => ({
+      minHeight,
+      paddingBottom,
+
+      '.top': {
+        top,
+      },
+    }),
   })}
 
   z-index: 0 !important;
@@ -54,22 +61,14 @@ export const stylesBackround = css`
   }
 
   & .top {
-    background-image: url(${bgTop});
+    background-image: url(${backgroundTop});
     background-position: top right;
-
-    right: 0;
-
-    ${fluidRange({
-      screen: ['20rem', '120rem', '240rem'] as const,
-      sizes: [['0rem', '-12.5rem', '-25rem']] as const,
-      css: ([top]) => ({ top }),
-    })}
-
     max-width: 70%;
+    right: 0;
   }
 
   & .bot {
-    background-image: url(${bgBot});
+    background-image: url(${backgroundBottom});
     background-position: bottom;
 
     padding-bottom: 4px;

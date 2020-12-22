@@ -14,23 +14,20 @@ export const stylesTitle = css`
 
   ${fluidRange({
     screen: ['20rem', '120rem', '240rem'] as const,
-    sizes: [['2.725rem', '3.125rem', '6.25rem']] as const,
-    css: ([marginTop]) => ({ marginTop }),
-  })}
-
-  ${fluidRange({
-    screen: ['20rem', '120rem', '240rem'] as const,
 
     sizes: [
       [ '4.375rem',    '15rem',      '30rem'],
+      [ '2.725rem',    '3.125rem',   '6.25rem'],
       ['-0.125rem',   '-0.25rem',   '-0.5rem'],
       [ '0.125rem',    '0.25rem',    '0.5rem'],
       ['-0.1875rem',  '-0.375rem',  '-0.75rem'],
       [ '0.1875rem',   '0.375rem',   '0.75rem'],
     ] as const,
 
-    css: ([fontSize, sa, sb, sc, sd]) => ({
+    css: ([fontSize, marginTop, sa, sb, sc, sd]) => ({
       fontSize,
+      marginTop,
+
       textShadow: `
         ${sa} ${sa} 0px ${colors.second}, 
         ${sb} ${sb} 0px ${colors.first}, 
