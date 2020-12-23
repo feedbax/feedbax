@@ -3,9 +3,8 @@
 
 import React, { useRef, useEffect } from 'react';
 
-import { jsx, css } from '@emotion/react';
-import { useSelector } from 'react-redux';
-import { colors } from '~theme';
+import { jsx } from '@emotion/react';
+import { stylesEvent, stylesEventHeader } from './styles';
 
 import Logo from '~components/Logo';
 import MenuButton from '~components/Menu';
@@ -16,6 +15,7 @@ import Navigation from '~components/pages/event/Navigation';
 import Filters from '~components/pages/event/Filters';
 import Answers from '~components/pages/event/Answers';
 
+import { useSelector } from 'react-redux';
 import { selectors } from '~store/modules/questions';
 
 const Event = React.memo(
@@ -38,6 +38,7 @@ const Event = React.memo(
             <div className="content">
               <Logo
                 variant="no-shadow-and-text"
+                sizeFactor={0.5}
               />
 
               <Navigation />
@@ -60,45 +61,3 @@ const Event = React.memo(
 );
 
 export default Event;
-
-const stylesEventHeader = css`
-  position: relative;
-  background-color: ${colors.second};
-
-  .content {
-    position: relative;
-    width: 100%;
-    max-width: 540px;
-    margin: 0 auto;
-    padding-top: 25px;
-  }
-`;
-
-const stylesEvent = css`
-  position: relative;
-  display: block;
-
-  max-height: 100vh;
-  max-height: calc(var(--vh, 1vh) * 100);
-
-  min-height: 100vh;
-  min-height: calc(var(--vh, 1vh) * 100);
-
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-
-  .scroll-container {
-    flex: 1 1 auto;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    touch-action: pan-y;
-  }
-
-  .toolbar {
-    flex: 0 0 auto;
-    width: 100%;
-    height: 60px;
-    background: ${colors.first};
-  }
-`;

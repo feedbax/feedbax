@@ -35,5 +35,11 @@
     },
 
     "plugins": [{ "transform": "@zerollup/ts-transform-paths" }]
-  }
+  },
+
+  "exclude": [
+    "node_modules",
+    "public",
+    ".cache"
+  ]
 }

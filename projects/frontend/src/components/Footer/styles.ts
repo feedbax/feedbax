@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { between } from 'polished';
 import { fluidRange } from '~lib/css-helper';
 import { colors } from '~theme';
 
@@ -19,9 +18,9 @@ export const stylesFooter = css`
 
     sizes: [
       ['1.5rem',  '2.5rem',   '5rem'],
-      ['0.5rem',  '0.875rem', '1.75rem'],
+      ['0.5rem',  '0.88rem',  '1.75rem'],
       ['2.25rem', '5rem',     '10rem'],
-      ['0.75rem', '1.625rem', '3.25rem'],
+      ['0.75rem', '1.63rem',  '3.25rem'],
     ] as const,
 
     css: ([padding, marginBottom, fontSizeTitle, fontSizeLinks]) => ({

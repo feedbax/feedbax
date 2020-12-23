@@ -14,11 +14,11 @@ export const stylesBenefit = css`
     screen: ['20rem', '120rem', '240rem'] as const,
 
     sizes: [
-      ['1.5625rem', '4.125rem', '8.25rem'],
-      ['0.625rem',  '1.625rem', '3.25rem'],
-      ['1.5rem',    '2.375rem', '4.75rem'],
-      ['1.125rem',  '1.625rem', '3.25rem'],
-      ['1rem',      '1.25rem',  '2.5rem'],
+      ['1.56rem', '4.13rem', '8.25rem'],
+      ['0.63rem', '1.63rem', '3.25rem'],
+      ['1.5rem',  '2.38rem', '4.75rem'],
+      ['1.13rem', '1.63rem', '3.25rem'],
+      ['1rem',    '1.25rem', '2.5rem'],
     ] as const,
 
     css: ([

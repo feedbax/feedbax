@@ -1,3 +1,4 @@
+import { hyphenateSync } from 'hyphen/de';
 import { LoremIpsum } from 'lorem-ipsum';
 
 import { WORDS } from 'lorem-ipsum/src/constants/words';
@@ -38,14 +39,14 @@ const randomInt = () => Math.round(Math.random() * 100);
 export const generateQuestion = (order: number): QuestionState => ({
   order,
   id: `question-${order}`,
-  text: loremQuestion.generateSentences(1),
+  text: hyphenateSync(loremQuestion.generateSentences(1)),
 });
 
 export const generateAnswer = (
   (initialState: QuestionsState, index: number): AnswerState => ({
     id: `answer-${index}`,
     questionId: `question-${randomIntBetween(0, initialState.questions.length - 1)}`,
-    text: loremAnswer.generateSentences(1),
+    text: hyphenateSync(loremAnswer.generateSentences(1)),
     isMine: randomBool(),
     hasLiked: randomBool(),
     likesCount: randomInt(),

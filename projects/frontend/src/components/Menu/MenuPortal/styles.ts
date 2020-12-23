@@ -35,7 +35,7 @@ export const stylesItems = css`
     screen: ['20rem', '120rem', '240rem'] as const,
 
     sizes: [
-      ['1.2rem',  '1.5625rem',  '3.125rem'],
+      ['1.2rem',  '1.56rem',    '3.13rem'],
       ['15rem',   '20rem',      '40rem'],
     ] as const,
 
@@ -57,7 +57,7 @@ export const stylesItem = css`
     sizes: [
       ['1.5rem',    '2rem',       '4rem'],
       ['0.4rem',    '0.5rem',     '1rem'],
-      ['0.2125rem', '0.3125rem',  '0.625rem'],
+      ['0.21rem',   '0.31rem',    '0.63rem'],
     ] as const,
 
     css: ([unit, paddingX, paddingY]) => ({

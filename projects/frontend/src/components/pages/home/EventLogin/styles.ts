@@ -13,13 +13,13 @@ export const stylesEventLogin = css`
     screen: ['20rem', '120rem', '240rem'] as const,
 
     sizes: [
-      [ '20rem',       '23.75rem',   '47.5rem'],
-      ['-0.125rem',   '-0.25rem',   '-0.5rem'],
-      [ '0.125rem',    '0.25rem',    '0.5rem'],
-      ['-0.1875rem',  '-0.375rem',  '-0.75rem'],
-      [ '0.1875rem',   '0.375rem',   '0.75rem'],
-      [ '3.125rem',    '4.375rem',   '8.75rem'],
-      [ '1.5rem',      '2rem',       '4rem'],
+      [ '20rem',    '23.75rem',  '47.5rem'],
+      ['-0.13rem', '-0.25rem',  '-0.5rem'],
+      [ '0.13rem',  '0.25rem',   '0.5rem'],
+      ['-0.19rem', '-0.38rem',  '-0.75rem'],
+      [ '0.19rem',  '0.38rem',   '0.75rem'],
+      [ '3.13rem',  '4.38rem',   '8.75rem'],
+      [ '1.5rem',   '2rem',      '4rem'],
     ] as const,
 
     css: ([maxWidth, sa, sb, sc, sd, height, fontSize]) => ({

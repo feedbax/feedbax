@@ -9,7 +9,7 @@ export const stylesMore = css`
 
   ${fluidRange({
     screen: ['20rem', '120rem', '240rem'] as const,
-    sizes: [['6rem', '11.875rem', '23.75rem']] as const,
+    sizes: [['6rem', '11.88rem', '23.75rem']] as const,
     css: ([paddingTop]) => ({ paddingTop }),
   })}
 `;
@@ -50,8 +50,8 @@ export const stylesFrontContent = css`
     screen: ['20rem', '120rem', '240rem'] as const,
 
     sizes: [
-      ['31.0625rem',  '52.09375rem',  '104.1875rem'],
-      ['1.5rem',      '2.5rem',       '5rem'],
+      ['31.06rem',  '52.09rem',  '104.19rem'],
+      ['1.5rem',    '2.5rem',    '5rem'],
     ] as const,
 
     css: ([minHeight, paddingTop]) => ({

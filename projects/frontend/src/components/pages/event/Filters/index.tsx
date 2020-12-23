@@ -2,7 +2,9 @@
 /** @jsxFrag React.Fragment */
 
 import React from 'react';
-import { jsx, css } from '@emotion/react';
+
+import { jsx } from '@emotion/react';
+import { stylesFilters } from './styles';
 
 import { answerFilters } from '~store/modules/answers';
 
@@ -15,11 +17,3 @@ const Filters = React.memo(() => (
 ));
 
 export default Filters;
-
-const stylesFilters = css`
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-bottom: 25px;
-`;

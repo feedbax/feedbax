@@ -7,14 +7,16 @@ export const stylesSeeMore = css`
 
   ${fluidRange({
     screen: ['20rem', '120rem', '240rem'] as const,
-    sizes: [['1rem', '1.125rem', '2.25rem']] as const,
-    css: ([fontSize]) => ({ fontSize }),
-  })}
 
-  ${fluidRange({
-    screen: ['20rem', '120rem', '240rem'] as const,
-    sizes: [['2.725rem', '3.125rem', '6.25rem']] as const,
-    css: ([marginTop]) => ({ marginTop }),
+    sizes: [
+      ['2.73rem', '3.13rem', '6.25rem'],
+      ['1rem',    '1.13rem', '2.25rem'],
+    ] as const,
+
+    css: ([marginTop, fontSize]) => ({
+      marginTop,
+      fontSize,
+    }),
   })}
 
   height: 6.8em;

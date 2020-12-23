@@ -12,10 +12,10 @@ export const stylesTool = css`
     screen: ['20rem', '120rem', '240rem'] as const,
 
     sizes: [
-      ['2.725rem',  '3.125rem', '6.25rem'],
-      ['20rem',     '58rem',    '116rem'],
-      ['2rem',      '3.6rem',   '7.2rem'],
-      ['3.35rem',   '3.75rem',  '7.5rem'],
+      ['2.73rem', '3.13rem',  '6.25rem'],
+      ['20rem',   '58rem',    '116rem'],
+      ['2rem',    '3.6rem',   '7.2rem'],
+      ['3.35rem', '3.75rem',  '7.5rem'],
     ] as const,
 
     css: ([marginTop, maxWidth, fontSize, paddingRight]) => ({

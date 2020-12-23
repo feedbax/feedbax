@@ -53,6 +53,16 @@ const mediaProp = (
   )
 );
 
+const cssMuted: typeof css = (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (...args: any[]) => {
+    const style = css(...args);
+    style.name = '';
+
+    return style;
+  }
+);
+
 const fluidRange = (
   <
     Screen extends ScreenType,
@@ -73,7 +83,9 @@ const fluidRange = (
     const lasts = _sizes.map((size) => [...size].pop()) as ReadonlyStringTuple<Sizes['length']>;
 
     styles.push(
-      css`${_css(firsts)}`,
+      cssMuted`
+        ${_css(firsts)}
+      `,
     );
 
     for (let i = 0; i < _screen.length; i += 1) {
@@ -85,7 +97,7 @@ const fluidRange = (
       ) as ReadonlyStringTuple<Sizes['length']>;
 
       styles.push(
-        css`
+        cssMuted`
           @media (${mediaProp(screenProp, fluidScreen)}) {
             ${_css(fluids)}
           }
@@ -94,14 +106,14 @@ const fluidRange = (
     }
 
     styles.push(
-      css`
+      cssMuted`
         @media (${mediaProp(screenProp, maxScreen)}) {
           ${_css(lasts)}
         }
       `,
     );
 
-    return css(styles);
+    return cssMuted(styles);
   }
 );
 

@@ -7,7 +7,7 @@ export const stylesMenuButton = css`
 
   ${fluidRange({
     screen: ['20rem', '120rem', '240rem'] as const,
-    sizes: [['1.5625rem', '1.5625rem', '3.125rem']] as const,
+    sizes: [['1.56rem', '1.56rem', '3.13rem']] as const,
 
     css: ([unit]) => ({
       top: unit,

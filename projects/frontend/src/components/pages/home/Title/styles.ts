@@ -16,12 +16,12 @@ export const stylesTitle = css`
     screen: ['20rem', '120rem', '240rem'] as const,
 
     sizes: [
-      [ '4.375rem',    '15rem',      '30rem'],
-      [ '2.725rem',    '3.125rem',   '6.25rem'],
-      ['-0.125rem',   '-0.25rem',   '-0.5rem'],
-      [ '0.125rem',    '0.25rem',    '0.5rem'],
-      ['-0.1875rem',  '-0.375rem',  '-0.75rem'],
-      [ '0.1875rem',   '0.375rem',   '0.75rem'],
+      [ '4.38rem',   '15rem',    '30rem'],
+      [ '2.73rem',   '3.13rem',  '6.25rem'],
+      ['-0.13rem',  '-0.25rem', '-0.5rem'],
+      [ '0.13rem',   '0.25rem',  '0.5rem'],
+      ['-0.19rem',  '-0.38rem', '-0.75rem'],
+      [ '0.19rem',   '0.38rem',  '0.75rem'],
     ] as const,
 
     css: ([fontSize, marginTop, sa, sb, sc, sd]) => ({

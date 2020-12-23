@@ -20,31 +20,30 @@ export const stylesBackround = css`
   padding-bottom: 30vw;
 
   ${fluidRange({
-    screen: ['20rem', '67.5rem', '135rem'] as const,
-    sizes: [['64rem', '64rem', '128rem']] as const,
-
-    css: ([maxHeight]) => ({
-      '@media (orientation: portrait)': {
-        maxHeight,
-      },
-    }),
-  })}
-
-  ${fluidRange({
     screen: ['20rem', '120rem', '240rem'] as const,
 
     sizes: [
-      ['31.0625rem',  '52.09375rem',  '104.1875rem'],
-      ['6rem',        '45rem',        '90rem'],
-      ['0rem',       '-12.5rem',     '-25rem'],
+      ['31.06rem',  '52.09rem',  '104.19rem'],
+      ['6rem',      '45rem',     '90rem'],
+      ['0rem',     '-12.5rem',  '-25rem'],
+      ['64rem',     '64rem',     '128rem'],
     ] as const,
 
-    css: ([minHeight, paddingBottom, top]) => ({
+    css: ([
+      minHeight,
+      paddingBottom,
+      top,
+      maxHeight,
+    ]) => ({
       minHeight,
       paddingBottom,
 
       '.top': {
         top,
+      },
+
+      '@media (orientation: portrait)': {
+        maxHeight,
       },
     }),
   })}

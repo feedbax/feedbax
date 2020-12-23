@@ -19,7 +19,7 @@ const Logo = React.memo((props: LogoProps) => {
   const { link = '/' } = props;
 
   return (
-    <div css={stylesImageWrapper(variant)}>
+    <div css={stylesImageWrapper(props)}>
       <LocaleLink to={link}>
         <img
           css={stylesImage}

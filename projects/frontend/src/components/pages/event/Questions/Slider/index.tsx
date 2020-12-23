@@ -2,7 +2,9 @@
 /** @jsxFrag React.Fragment */
 
 import React, { useState, useEffect } from 'react';
-import { jsx, css } from '@emotion/react';
+
+import { jsx } from '@emotion/react';
+import { stylesWrapper, stylesSlider } from './styles';
 
 import { motion, useAnimation, useDragControls } from 'framer-motion';
 
@@ -94,14 +96,3 @@ const Slider = React.memo(({ children }: Props) => {
 });
 
 export default Slider;
-
-const stylesWrapper = css`
-  position: relative;
-  overflow: hidden;
-
-  margin: 25px 0;
-`;
-
-const stylesSlider = css`
-  position: relative;
-`;

@@ -2,61 +2,88 @@ import { css } from '@emotion/react';
 import { fluidRange } from '~lib/css-helper';
 
 import type { SerializedStyles } from '@emotion/react';
-import type { Variant } from './types';
+import type { LogoProps } from './types';
 
-export const stylesText = css`
-  ${fluidRange({
-    screen: ['20rem', '120rem', '240rem'] as const,
+export const stylesText = (
+  (sizeFactor: number): SerializedStyles => css`
+    ${fluidRange({
+      screen: ['20rem', '120rem', '240rem'] as const,
 
-    sizes: [
-      ['4.6875rem', '7.5rem', '15rem'],
-      ['6.0469rem', '9.675rem', '19.35rem'],
-    ] as const,
+      sizes: [
+        [
+          `${4.6875 * sizeFactor}rem`,
+          `${7.5 * sizeFactor}rem`,
+          `${15 * sizeFactor}rem`,
+        ],
 
-    css: ([width, height]) => ({ width, height }),
-  })}
-`;
+        [
+          `${6.0469 * sizeFactor}rem`,
+          `${9.675 * sizeFactor}rem`,
+          `${19.35 * sizeFactor}rem`,
+        ],
+      ] as const,
 
-export const stylesSquare = css`
-  ${fluidRange({
-    screen: ['20rem', '120rem', '240rem'] as const,
-    sizes: [['7.5rem', '7.5rem', '15rem']] as const,
+      css: ([width, height]) => ({ width, height }),
+    })}
+  `
+);
 
-    css: ([unit]) => ({
-      width: unit,
-      maxWidth: unit,
-      height: unit,
-      maxHeight: unit,
-    }),
-  })}
-`;
+export const stylesSquare = (
+  (sizeFactor: number): SerializedStyles => css`
+    ${fluidRange({
+      screen: ['20rem', '120rem', '240rem'] as const,
+
+      sizes: [[
+        `${7.5 * sizeFactor}rem`,
+        `${7.5 * sizeFactor}rem`,
+        `${15 * sizeFactor}rem`,
+      ]] as const,
+
+      css: ([unit]) => ({
+        width: unit,
+        maxWidth: unit,
+        height: unit,
+        maxHeight: unit,
+      }),
+    })}
+  `
+);
 
 export const stylesImageWrapper = (
-  (variant: Variant = 'text'): SerializedStyles => (
-    css`
-      position: relative;
-      display: block;
-      margin: 0 auto;
+  (props: LogoProps): SerializedStyles => {
+    const { variant = 'text' } = props;
+    const { sizeFactor = 1 } = props;
 
-      ${variant === 'text' ? stylesText : stylesSquare}
-
-      a {
-        display: block;
+    return (
+      css`
         position: relative;
-        width: 100%;
-        height: 100%;
-
-        &:focus {
-          outline: #ffda73 auto 2px;
-          outline-offset: 8px;
+        display: block;
+        margin: 0 auto;
+  
+        ${
+          variant === 'text'
+            ? stylesText(sizeFactor)
+            : stylesSquare(sizeFactor)
         }
-
-        &:focus:not(.focus-visible) {
-          outline: 0;
+  
+        a {
+          display: block;
+          position: relative;
+          width: 100%;
+          height: 100%;
+  
+          &:focus {
+            outline: #ffda73 auto 2px;
+            outline-offset: 8px;
+          }
+  
+          &:focus:not(.focus-visible) {
+            outline: 0;
+          }
         }
-      }
-    `
-  )
+      `
+    );
+  }
 );
 
 export const stylesImage = css`
