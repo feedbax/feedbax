@@ -40,5 +40,10 @@ export const stylesLegal = css`
     text-align: justify;
     padding: 0 20px;
     box-sizing: border-box;
+
+    * {
+      white-space: normal;
+      overflow-wrap: break-word;
+    }
   }
 `;

@@ -32,7 +32,7 @@ export default function HTML (props: Props): JSX.Element {
         <meta charSet="utf-8" />
         <meta httpEquiv="x-ua-compatible" content="ie=edge" />
 
-        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, shrink-to-fit=no" />
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, shrink-to-fit=no" />
 
         <link rel="preload" href={KlinicSlabBoldWoff2} as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href={KlinicSlabBoldWoff} as="font" type="font/woff" crossOrigin="anonymous" />
@@ -88,9 +88,12 @@ const stylesGlobal = css`
   #___gatsby {
     position: relative;
     margin: 0;
+
     width: 100%;
+
     height: 100vh;
     height: calc(var(--vh, 1vh) * 100);
+
     touch-action: pan-y;
     font-size: 100%;
     hyphens: none;

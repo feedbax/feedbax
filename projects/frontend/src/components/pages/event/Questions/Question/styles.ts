@@ -52,6 +52,7 @@ export const stylesQuestion = css`
     display: block;
     font-family: "Klinic Slab";
     font-weight: bold;
+    text-align: justify;
   }
 `;
 
