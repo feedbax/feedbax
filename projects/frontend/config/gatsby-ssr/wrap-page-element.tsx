@@ -7,9 +7,6 @@ import type { TranslationDataClean } from '~components/I18n/types';
 type Props = WrapPageElementNodeArgs & {
   props: {
     pageContext: {
-      originalPath: string;
-      originalMatchPath?: string;
-
       locale: string;
       locales: string[];
       translation: TranslationDataClean;
@@ -20,9 +17,7 @@ type Props = WrapPageElementNodeArgs & {
 const wrapPageElement = (
   (props: Props): JSX.Element => {
     const { element, props: props2 } = props;
-    const { params, pageContext } = props2;
-
-    const { originalPath, originalMatchPath } = pageContext;
+    const { pageContext } = props2;
     const { locale, locales, translation } = pageContext;
 
     return (
@@ -31,12 +26,6 @@ const wrapPageElement = (
           translation,
           locales,
           locale,
-
-          location: {
-            params,
-            path: originalPath,
-            matchPath: originalMatchPath,
-          },
         }}
       >
         {element}

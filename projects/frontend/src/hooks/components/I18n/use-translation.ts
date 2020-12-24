@@ -1,12 +1,11 @@
 import { useContext } from 'react';
 import TranslationContext from '~components/I18n/Context';
 
-import type { Translate, Location } from '~components/I18n/types';
+import type { Translate } from '~components/I18n/types';
 
 type TranslationHook = () => {
   locale: string;
   locales: string[];
-  location: Location;
   t: Translate;
 };
 
@@ -15,7 +14,7 @@ const useTranslation: TranslationHook = (
     const contextData = useContext(TranslationContext);
 
     const { locale, locales } = contextData;
-    const { location, translation } = contextData;
+    const { translation } = contextData;
 
     /* eslint-disable @typescript-eslint/no-explicit-any */
     const t: Translate = (
@@ -44,7 +43,6 @@ const useTranslation: TranslationHook = (
     return {
       locale,
       locales,
-      location,
       t,
     };
   }

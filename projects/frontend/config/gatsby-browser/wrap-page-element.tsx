@@ -9,9 +9,6 @@ import '~polyfill';
 type Props = WrapPageElementBrowserArgs & {
   props: {
     pageContext: {
-      originalPath: string;
-      originalMatchPath?: string;
-
       locale: string;
       locales: string[];
       translation: TranslationDataClean;
@@ -21,9 +18,7 @@ type Props = WrapPageElementBrowserArgs & {
 
 const wrapPageElement = (
   ({ element, props }: Props): JSX.Element => {
-    const { params, pageContext } = props;
-
-    const { originalPath, originalMatchPath } = pageContext;
+    const { pageContext } = props;
     const { locale, locales, translation } = pageContext;
 
     return (
@@ -32,12 +27,6 @@ const wrapPageElement = (
           translation,
           locales,
           locale,
-
-          location: {
-            params,
-            path: originalPath,
-            matchPath: originalMatchPath,
-          },
         }}
       >
         {element}

@@ -6,11 +6,6 @@ const TranslationContext = createContext<Context>({
   translation: {} as unknown as TranslationDataClean,
   locale: defaultLocale,
   locales: [defaultLocale],
-
-  location: {
-    path: '/',
-    params: {},
-  },
 });
 
 export default TranslationContext;

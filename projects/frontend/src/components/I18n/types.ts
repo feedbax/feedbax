@@ -18,17 +18,10 @@ export type TranslationDataClean = (
   RequiredGraphql<TranslationData>
 );
 
-export type Location = {
-  path: string;
-  matchPath?: string;
-  params: Record<string, string | undefined>;
-};
-
 export type Context = {
   translation: TranslationDataClean;
   locale: string;
   locales: string[];
-  location: Location;
 };
 
 export interface Translate {

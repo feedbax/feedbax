@@ -115,11 +115,68 @@ const getPages = (
   }
 );
 
-const createTranslatedPages = (
-  async (props: CreatePagesArgs): Promise<void> => {
-    const { graphql, actions } = props;
+type CreatePageProps = {
+  props: CreatePagesArgs;
+  translations: TranslationsMap;
+  defaultLocale: string;
+  locales: string[];
+};
+
+const _createPage = (
+  (page: Page, props: CreatePageProps): void => {
+    const _page = { ...page };
+
+    const { defaultLocale, locales } = props;
+    const { translations } = props;
+
+    const { props: _props } = props;
+    const { actions } = _props;
     const { createPage } = actions;
 
+    if (_page.path === '/join') {
+      _page.path = '/@';
+      _page.matchPath = '/@/*';
+    }
+
+    if (_page.path === '/home') {
+      _page.path = '/';
+    }
+
+    createPage({
+      component: _page.filePath,
+      matchPath: _page.matchPath,
+      path: _page.path,
+
+      context: {
+        locale: defaultLocale,
+        locales,
+
+        translation: translations.get(defaultLocale),
+      },
+    });
+
+    for (let j = 0; j < locales.length; j += 1) {
+      const locale = locales[j];
+
+      createPage({
+        component: _page.filePath,
+        matchPath: _page.matchPath ? path.join('/', locale, _page.matchPath) : undefined,
+        path: path.join('/', locale, _page.path),
+
+        context: {
+          locale,
+          locales,
+
+          translation: translations.get(locale),
+        },
+      });
+    }
+  }
+);
+
+const createTranslatedPages = (
+  async (props: CreatePagesArgs): Promise<void> => {
+    const { graphql } = props;
     const { defaultLocale } = await import('~locales/const');
 
     const locales = await getLocales(graphql);
@@ -129,53 +186,13 @@ const createTranslatedPages = (
     for (let i = 0; i < allPages.length; i += 1) {
       const page = allPages[i];
 
-      if (page.path === '/join') {
-        page.path = '/@';
-        page.matchPath = '/@/:eventId';
-      }
-
-      if (page.path === '/home') {
-        page.path = '/';
-      }
-
-      createPage({
-        component: page.filePath,
-        matchPath: page.matchPath,
-        path: page.path,
-
-        context: {
-          locale: defaultLocale,
-          locales,
-
-          translation: translations.get(defaultLocale),
-          originalPath: page.path,
-          originalMatchPath: page.matchPath,
-        },
+      _createPage(page, {
+        props,
+        locales,
+        translations,
+        defaultLocale,
       });
-
-      for (let j = 0; j < locales.length; j += 1) {
-        const locale = locales[j];
-
-        createPage({
-          component: page.filePath,
-          matchPath: page.matchPath ? path.join('/', locale, page.matchPath) : undefined,
-          path: path.join('/', locale, page.path),
-
-          context: {
-            locale,
-            locales,
-
-            translation: translations.get(locale),
-            originalPath: page.path,
-            originalMatchPath: page.matchPath,
-          },
-        });
-      }
     }
-
-    // console.log('defaultLocale', defaultLocale);
-    // console.log('locales', JSON.stringify(locales, null, 2));
-    // console.log('_translations', JSON.stringify(_translations, null, 2));
   }
 );
 

@@ -1,11 +1,15 @@
 import React, { useMemo } from 'react';
-import LocaleLink from '~components/I18n/LocaleLink';
+
 import useTranslation from '~hooks/components/I18n/use-translation';
+import useLocation from '~hooks/components/I18n/use-location';
+
+import LocaleLink from '~components/I18n/LocaleLink';
 
 import type { MenuItem } from '~components/Menu';
 
 const useHomeMenu = (): MenuItem[] => {
-  const { location, t } = useTranslation();
+  const pathname = useLocation();
+  const { t } = useTranslation();
 
   const menuItems = useMemo(
     () => [
@@ -29,7 +33,7 @@ const useHomeMenu = (): MenuItem[] => {
     [t],
   );
 
-  if (location.path === '/') {
+  if (pathname === '/') {
     return menuItems;
   }
 
