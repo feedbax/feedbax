@@ -68,6 +68,7 @@ const getTranslations = (
 
 type Page = {
   filePath: string;
+  fileDir: string;
   path: string;
   matchPath?: string;
 };
@@ -81,6 +82,7 @@ const getPages = (
         allFile(filter: {sourceInstanceName: {eq: "pages"}, ext: {eq: ".tsx"}}) {
           nodes {
             name
+            dir
             relativeDirectory
             absolutePath
           }
@@ -97,12 +99,14 @@ const getPages = (
 
           .map((f) => ({
             filePath: f.absolutePath,
+            fileDir: f.dir,
             path: path.join('/', f.relativeDirectory, f.name === 'index' ? '' : f.name),
           }))
 
           .filter(
             (f): f is Page => (
               typeof f.filePath === 'string'
+              && typeof f.fileDir === 'string'
               && typeof f.path === 'string'
             ),
           )
@@ -123,7 +127,7 @@ type CreatePageProps = {
 };
 
 const _createPage = (
-  (page: Page, props: CreatePageProps): void => {
+  async (page: Page, props: CreatePageProps): Promise<void> => {
     const _page = { ...page };
 
     const { defaultLocale, locales } = props;
@@ -133,13 +137,20 @@ const _createPage = (
     const { actions } = _props;
     const { createPage } = actions;
 
-    if (_page.path === '/join') {
-      _page.path = '/@';
-      _page.matchPath = '/@/*';
-    }
+    const routeDir = path.join(_page.fileDir, 'route.ts');
 
-    if (_page.path === '/home') {
-      _page.path = '/';
+    try {
+      const { default: route } = await import(routeDir) as {
+        default: {
+          path?: string;
+          matchPath?: string;
+        }
+      };
+
+      _page.path = route.path ?? _page.path;
+      _page.matchPath = route.matchPath ?? _page.matchPath;
+    } catch (error) {
+      // nothing
     }
 
     createPage({
@@ -183,16 +194,22 @@ const createTranslatedPages = (
     const translations = await getTranslations(graphql, locales);
     const allPages = await getPages(graphql);
 
+    const promises: Promise<void>[] = [];
+
     for (let i = 0; i < allPages.length; i += 1) {
       const page = allPages[i];
 
-      _createPage(page, {
-        props,
-        locales,
-        translations,
-        defaultLocale,
-      });
+      promises.push(
+        _createPage(page, {
+          props,
+          locales,
+          translations,
+          defaultLocale,
+        }),
+      );
     }
+
+    await Promise.all(promises);
   }
 );
 
