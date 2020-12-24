@@ -25,7 +25,9 @@ const hyphenateJSONSchema = (
 
 const createTranslationNode = (
   async (props: CreateNodeArgs): Promise<void> => {
-    const { node, actions, createContentDigest } = props;
+    const { node, actions } = props;
+
+    const { createNodeId, createContentDigest } = props;
     const { createNode } = actions;
 
     if (node.internal.type !== 'File') return;
@@ -39,7 +41,7 @@ const createTranslationNode = (
     const data = await hyphenateJSONSchema(_data, locale);
 
     createNode({
-      id: `translation_${locale}`,
+      id: createNodeId(`translation_${locale}`),
       parent: node.id,
 
       internal: {

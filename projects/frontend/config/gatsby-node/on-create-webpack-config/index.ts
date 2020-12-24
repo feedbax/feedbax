@@ -1,4 +1,6 @@
 import path from 'path';
+import config from 'tsconfig.json';
+
 import createCustomEslintConfiguration from './create-custom-eslint-configuration';
 
 import type { CreateWebpackConfigArgs } from 'gatsby';
@@ -9,18 +11,21 @@ const onCreateWebpackConfig = (
 
     createCustomEslintConfiguration({ rules, store });
 
+    const webpackAliasEntries = Object.entries(config.compilerOptions.paths);
+    const webpackAlias: { [key: string]: string } = {};
+
+    for (let i = 0; i < webpackAliasEntries.length; i += 1) {
+      const [_pathSource, [_pathDestination]] = webpackAliasEntries[i];
+
+      const pathSource = _pathSource.replace('/*', '');
+      const pathDestination = _pathDestination.replace('/*', '');
+
+      webpackAlias[pathSource] = path.resolve(global.rootDir, pathDestination);
+    }
+
     actions.setWebpackConfig({
       resolve: {
-        alias: {
-          '~locales': path.resolve(global.rootDir, 'src/locales'),
-          '~lib': path.resolve(global.rootDir, 'src/lib'),
-          '~components': path.resolve(global.rootDir, 'src/components'),
-          '~store': path.resolve(global.rootDir, 'src/store'),
-          '~assets': path.resolve(global.rootDir, 'src/assets'),
-          '~pages': path.resolve(global.rootDir, 'src/pages'),
-          '~hooks': path.resolve(global.rootDir, 'src/hooks'),
-          '~theme': path.resolve(global.rootDir, 'src/theme'),
-        },
+        alias: webpackAlias,
       },
     });
   }

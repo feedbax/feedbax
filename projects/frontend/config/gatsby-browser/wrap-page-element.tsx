@@ -4,6 +4,8 @@ import TranslationContext from '~components/I18n/Context';
 import type { WrapPageElementBrowserArgs } from 'gatsby';
 import type { TranslationDataClean } from '~components/I18n/types';
 
+import '~polyfill';
+
 type Props = WrapPageElementBrowserArgs & {
   props: {
     pageContext: {

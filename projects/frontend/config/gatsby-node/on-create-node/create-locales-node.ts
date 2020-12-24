@@ -14,7 +14,9 @@ const getData = (
 
 const createLocalesNode = (
   async (props: CreateNodeArgs): Promise<void> => {
-    const { node, actions, createContentDigest } = props;
+    const { node, actions } = props;
+
+    const { createNodeId, createContentDigest } = props;
     const { createNode } = actions;
 
     if (node.internal.type !== 'File') return;
@@ -26,7 +28,7 @@ const createLocalesNode = (
     const data = getData(locale);
 
     localesNode = {
-      id: 'locales',
+      id: createNodeId('locales'),
       parent: node.id,
 
       internal: {

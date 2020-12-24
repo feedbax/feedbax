@@ -6,7 +6,9 @@ import type { CreateNodeArgs } from 'gatsby';
 const createTranslationMarkdownNode = (
   async (props: CreateNodeArgs): Promise<void> => {
     const { node, actions } = props;
-    const { loadNodeContent, createContentDigest } = props;
+
+    const { loadNodeContent } = props;
+    const { createNodeId, createContentDigest } = props;
     const { createNode } = actions;
 
     if (node.internal.type !== 'File') return;
@@ -25,7 +27,7 @@ const createTranslationMarkdownNode = (
     const hyphenatedHTML = hyphenateHTMLSync(sanitizedHTML);
 
     createNode({
-      id: `translation_markdown_${locale}`,
+      id: createNodeId(`translation_markdown_${locale}`),
       parent: node.id,
 
       internal: {
