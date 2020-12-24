@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import initialState from './initial';
 import reducers from './reducers';
+import seed from '~store/seed.json';
 
 export const questionsSlice = createSlice({
   name: 'questions',
-  initialState,
+  initialState: seed.questionsState,
   reducers,
 });
 

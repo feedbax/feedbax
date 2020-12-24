@@ -1,7 +1,7 @@
 {
-  "name": "gatsby-starter-hello-world",
+  "name": "@feedbax/frontend",
   "private": true,
-  "description": "A simplified bare-bones starter for Gatsby",
+  "description": "frontend user interface for feedb.ax",
   "version": "0.1.0",
   "license": "0BSD",
   "scripts": {
@@ -31,6 +31,7 @@
     "gatsby-transformer-sharp": "^2.7.0",
     "graphql": "15.4.0",
     "hyphen": "^1.6.2",
+    "intersection-observer": "^0.12.0",
     "json-schema-ref-parser": "^9.0.6",
     "lodash.isequal": "^4.5.0",
     "lodash.memoize": "^4.1.2",
@@ -42,6 +43,7 @@
     "react-redux": "^7.2.2",
     "redux": "^4.0.5",
     "reselect": "^4.0.0",
+    "resize-observer": "^1.0.0",
     "resize-observer-polyfill": "^1.5.1",
     "twemoji": "^13.0.1",
     "xss": "^1.0.8"
@@ -51,6 +53,7 @@
     "@types/lodash.isequal": "^4.5.5",
     "@types/lodash.memoize": "^4.1.6",
     "@types/marked": "^1.2.1",
+    "@types/preval.macro": "^3.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/react-redux": "^7.1.11",
     "@types/twemoji": "^12.1.1",
@@ -68,16 +71,18 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "4.2.0",
+    "preval.macro": "^5.0.0",
     "source-map-support": "^0.5.19",
     "ts-node": "^9.1.0",
     "ttypescript": "^1.5.12",
-    "typescript": "^4.1.2"
+    "typescript": "^4.1.2",
+    "typescript-transform-macros": "^1.1.1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-hello-world"
+    "url": "https://github.com/feedbax/feedbax"
   },
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "url": "https://github.com/feedbax/feedbax/issues"
   }
 }

@@ -1,15 +1,9 @@
-import { generateAnswer } from '~store/helper/seed';
-import { AnswersFilter, AnswersState } from './types';
+import { AnswersFilter } from './types';
+import type { AnswersState } from './types';
 
-import questionsInitialState from '~store/modules/questions/initial';
-
-const initialState = {
+const initialState: AnswersState = ({
   currentFilter: AnswersFilter.Recent,
-  answers: (
-    new Array(1000)
-      .fill(0)
-      .map((_, i) => generateAnswer(questionsInitialState, i))
-  ),
-} as AnswersState;
+  answers: [],
+});
 
 export default initialState;

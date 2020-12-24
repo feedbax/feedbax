@@ -1,11 +1,13 @@
 import { hyphenateSync } from 'hyphen/de';
 import { LoremIpsum } from 'lorem-ipsum';
 
-import { WORDS } from 'lorem-ipsum/src/constants/words';
 import emojis from '~assets/emoji-compact.json';
+import words from '~assets/words.json';
 
-import type { AnswerState } from '~store/modules/answers/types';
-import type { QuestionsState, QuestionState } from '~store/modules/questions/types';
+import { AnswersFilter } from '~store/modules/answers';
+
+import type { QuestionsState } from '~store/modules/questions';
+import type { AnswersState, AnswerState } from '~store/modules/answers';
 
 const loremAnswer = new LoremIpsum({
   wordsPerSentence: {
@@ -14,19 +16,7 @@ const loremAnswer = new LoremIpsum({
   },
 
   words: [
-    ...new Array(1000).fill(WORDS).flat(),
-    ...emojis,
-  ],
-});
-
-const loremQuestion = new LoremIpsum({
-  wordsPerSentence: {
-    max: 18,
-    min: 4,
-  },
-
-  words: [
-    ...new Array(400).fill(WORDS).flat(),
+    ...new Array(1000).fill(words).flat(),
     ...emojis,
   ],
 });
@@ -36,13 +26,7 @@ const randomIntBetween = (min: number, max: number) => Math.floor(Math.random() 
 const randomBool = () => Math.random() > 0.5;
 const randomInt = () => Math.round(Math.random() * 100);
 
-export const generateQuestion = (order: number): QuestionState => ({
-  order,
-  id: `question-${order}`,
-  text: hyphenateSync(loremQuestion.generateSentences(1)),
-});
-
-export const generateAnswer = (
+const generateAnswer = (
   (initialState: QuestionsState, index: number): AnswerState => ({
     id: `answer-${index}`,
     questionId: `question-${randomIntBetween(0, initialState.questions.length - 1)}`,
@@ -52,4 +36,17 @@ export const generateAnswer = (
     likesCount: randomInt(),
     created: Math.round(Date.now() * Math.random()),
   })
+);
+
+export default (
+  function seed (state: QuestionsState): AnswersState {
+    return {
+      currentFilter: AnswersFilter.Recent,
+      answers: (
+        new Array(1000)
+          .fill(0)
+          .map((_, i) => generateAnswer(state, i))
+      ),
+    };
+  }
 );

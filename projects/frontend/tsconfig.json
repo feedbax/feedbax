@@ -22,6 +22,7 @@
     "paths": {
       "~graphql-types": ["src/graphql-types.d"],
       "~locales": ["src/locales"],
+      "~polyfill": ["src/polyfill"],
       "~store": ["src/store"],
       "~theme": ["src/theme"],
 
@@ -34,7 +35,10 @@
       "~store/*": ["src/store/*"]
     },
 
-    "plugins": [{ "transform": "@zerollup/ts-transform-paths" }]
+    "plugins": [
+      { "transform": "@zerollup/ts-transform-paths" },
+      { "transform": "typescript-transform-macros" }
+    ]
   },
 
   "exclude": [

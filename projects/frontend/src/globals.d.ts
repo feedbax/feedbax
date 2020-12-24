@@ -29,9 +29,13 @@ declare module '*.mdx' {
 }
 
 declare module 'focus-visible';
+declare module 'intersection-observer';
 
-declare namespace NodeJS {
-  interface Global {
-    rootDir: string;
-  }
-}
+declare const ResizeObserver: typeof import('resize-observer').ResizeObserver;
+
+declare const global: {
+  window: Record<string, unknown>;
+  rootDir: string;
+};
+
+declare function MACRO<T> (t: T): T;

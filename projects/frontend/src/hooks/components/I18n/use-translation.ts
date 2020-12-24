@@ -20,16 +20,20 @@ const useTranslation: TranslationHook = (
     /* eslint-disable @typescript-eslint/no-explicit-any */
     const t: Translate = (
       (p1?: any, p2?: any, p3?: any) => {
-        if (p1 && p2 && p3) {
-          return (translation as any)[p1][p2][p3];
-        }
+        try {
+          if (p1 && p2 && p3) {
+            return (translation as any)[p1][p2][p3];
+          }
 
-        if (p1 && p2) {
-          return (translation as any)[p1][p2];
-        }
+          if (p1 && p2) {
+            return (translation as any)[p1][p2];
+          }
 
-        if (p1) {
-          return (translation as any)[p1];
+          if (p1) {
+            return (translation as any)[p1];
+          }
+        } catch (error) {
+          return 'error, translation not found.';
         }
 
         return translation;

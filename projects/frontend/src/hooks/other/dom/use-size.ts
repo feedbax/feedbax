@@ -1,8 +1,6 @@
 import { useLayoutEffect } from 'react';
 import { useState, useCallback } from 'react';
 
-import ResizeObserver from 'resize-observer-polyfill';
-
 type Ref = (node: Element | null) => void;
 type Dimensions = { width: number; height: number };
 

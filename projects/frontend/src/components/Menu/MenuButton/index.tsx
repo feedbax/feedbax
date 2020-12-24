@@ -11,10 +11,6 @@ import MenuPortal from '../MenuPortal';
 
 import type { IconButtonProps } from '~components/IconButton';
 
-import { feedbax } from '@feedbax/api';
-
-console.log({ feedbax });
-
 type MenuButtonProps = {
   color?: IconButtonProps['color'];
 };
