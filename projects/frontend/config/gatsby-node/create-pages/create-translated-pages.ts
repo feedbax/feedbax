@@ -166,8 +166,8 @@ const _createPage = (
       },
     });
 
-    for (let j = 0; j < locales.length; j += 1) {
-      const locale = locales[j];
+    for (let i = 0; i < locales.length; i += 1) {
+      const locale = locales[i];
 
       createPage({
         component: _page.filePath,
