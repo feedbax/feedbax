@@ -34,6 +34,11 @@
 
   "generic": {
     "$ref": "../generic/translations.json",
-    "footer": "Privacy Policy & Imprint"
+
+    "footer": {
+      "privacy_policy": "Privacy Policy",
+      "imprint": "Imprint",
+      "disclaimer": "Disclaimer"
+    }
   }
 }

@@ -27,7 +27,7 @@ const createTranslationMarkdownNode = (
     const hyphenatedHTML = hyphenateHTMLSync(sanitizedHTML);
 
     createNode({
-      id: createNodeId(`translation_markdown_${locale}`),
+      id: createNodeId(`translation_markdown_${node.base}_${locale}`),
       parent: node.id,
 
       internal: {

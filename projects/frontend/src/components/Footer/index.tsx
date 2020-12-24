@@ -17,8 +17,14 @@ const Footer = React.memo(
         <div className="title">feedb.ax</div>
         <div className="copy">&copy; 2019 - 2020 feedb.ax by 365STEPS</div>
 
-        <LocaleLink to="/legal/privacy-policy" className="links">
-          {t('generic', 'footer')}
+        <LocaleLink to="/legal/privacy-policy" className="link">
+          {t('generic', 'footer', 'privacy_policy')}
+          {' & '}
+          {t('generic', 'footer', 'imprint')}
+        </LocaleLink>
+
+        <LocaleLink to="/legal/disclaimer" className="link">
+          {t('generic', 'footer', 'disclaimer')}
         </LocaleLink>
       </div>
     );

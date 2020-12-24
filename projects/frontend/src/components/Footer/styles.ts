@@ -31,7 +31,7 @@ export const stylesFooter = css`
         fontSize: fontSizeTitle,
       },
 
-      '.copy, .links': {
+      '.copy, .link': {
         fontSize: fontSizeLinks,
       },
     }),
@@ -41,9 +41,10 @@ export const stylesFooter = css`
     font-weight: bold;
   }
 
-  .copy, .links {
+  .copy, .link {
     font-weight: normal;
     color: ${colors.third};
+    margin: 0 5px;
 
     &:visited {
       color: ${colors.third};

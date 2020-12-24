@@ -4,7 +4,12 @@ export const translationFragment = `
   fragment translationData on Translation {
     data {
       generic {
-        footer
+        footer {
+          privacy_policy
+          imprint
+          disclaimer
+        }
+
         locales {
           de
           en
