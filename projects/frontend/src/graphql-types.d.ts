@@ -2240,16 +2240,12 @@ export type SitePageContext = {
   locale?: Maybe<Scalars['String']>;
   locales?: Maybe<Array<Maybe<Scalars['String']>>>;
   translation?: Maybe<SitePageContextTranslation>;
-  originalPath?: Maybe<Scalars['String']>;
-  originalMatchPath?: Maybe<Scalars['String']>;
 };
 
 export type SitePageContextFilterInput = {
   locale?: Maybe<StringQueryOperatorInput>;
   locales?: Maybe<StringQueryOperatorInput>;
   translation?: Maybe<SitePageContextTranslationFilterInput>;
-  originalPath?: Maybe<StringQueryOperatorInput>;
-  originalMatchPath?: Maybe<StringQueryOperatorInput>;
 };
 
 export type SitePageContextTranslation = {
@@ -2495,8 +2491,6 @@ export type SitePageFieldsEnum =
   | 'context___translation___menu___login'
   | 'context___translation___menu___logout'
   | 'context___translation___menu___register'
-  | 'context___originalPath'
-  | 'context___originalMatchPath'
   | 'pluginCreator___id'
   | 'pluginCreator___parent___id'
   | 'pluginCreator___parent___parent___id'
