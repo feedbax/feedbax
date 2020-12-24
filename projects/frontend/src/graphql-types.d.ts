@@ -2267,13 +2267,26 @@ export type SitePageContextTranslationFilterInput = {
 
 export type SitePageContextTranslationGeneric = {
   __typename?: 'SitePageContextTranslationGeneric';
-  footer?: Maybe<Scalars['String']>;
+  footer?: Maybe<SitePageContextTranslationGenericFooter>;
   locales?: Maybe<SitePageContextTranslationGenericLocales>;
 };
 
 export type SitePageContextTranslationGenericFilterInput = {
-  footer?: Maybe<StringQueryOperatorInput>;
+  footer?: Maybe<SitePageContextTranslationGenericFooterFilterInput>;
   locales?: Maybe<SitePageContextTranslationGenericLocalesFilterInput>;
+};
+
+export type SitePageContextTranslationGenericFooter = {
+  __typename?: 'SitePageContextTranslationGenericFooter';
+  privacy_policy?: Maybe<Scalars['String']>;
+  imprint?: Maybe<Scalars['String']>;
+  disclaimer?: Maybe<Scalars['String']>;
+};
+
+export type SitePageContextTranslationGenericFooterFilterInput = {
+  privacy_policy?: Maybe<StringQueryOperatorInput>;
+  imprint?: Maybe<StringQueryOperatorInput>;
+  disclaimer?: Maybe<StringQueryOperatorInput>;
 };
 
 export type SitePageContextTranslationGenericLocales = {
@@ -2472,7 +2485,6 @@ export type SitePageFieldsEnum =
   | 'isCreatedByStatefulCreatePages'
   | 'context___locale'
   | 'context___locales'
-  | 'context___translation___generic___footer'
   | 'context___translation___home___lets_go'
   | 'context___translation___home___see_more'
   | 'context___translation___home___your_tool'
@@ -2993,13 +3005,26 @@ export type TranslationDataFilterInput = {
 
 export type TranslationDataGeneric = {
   __typename?: 'TranslationDataGeneric';
-  footer?: Maybe<Scalars['String']>;
+  footer?: Maybe<TranslationDataGenericFooter>;
   locales?: Maybe<TranslationDataGenericLocales>;
 };
 
 export type TranslationDataGenericFilterInput = {
-  footer?: Maybe<StringQueryOperatorInput>;
+  footer?: Maybe<TranslationDataGenericFooterFilterInput>;
   locales?: Maybe<TranslationDataGenericLocalesFilterInput>;
+};
+
+export type TranslationDataGenericFooter = {
+  __typename?: 'TranslationDataGenericFooter';
+  privacy_policy?: Maybe<Scalars['String']>;
+  imprint?: Maybe<Scalars['String']>;
+  disclaimer?: Maybe<Scalars['String']>;
+};
+
+export type TranslationDataGenericFooterFilterInput = {
+  privacy_policy?: Maybe<StringQueryOperatorInput>;
+  imprint?: Maybe<StringQueryOperatorInput>;
+  disclaimer?: Maybe<StringQueryOperatorInput>;
 };
 
 export type TranslationDataGenericLocales = {
@@ -3209,7 +3234,9 @@ export type TranslationFieldsEnum =
   | 'data___home___benefit_5___content_2'
   | 'data___home___benefit_6___title'
   | 'data___home___benefit_6___content_1'
-  | 'data___generic___footer'
+  | 'data___generic___footer___privacy_policy'
+  | 'data___generic___footer___imprint'
+  | 'data___generic___footer___disclaimer'
   | 'data___generic___locales___de'
   | 'data___generic___locales___en'
   | 'data___generic___locales___it'
