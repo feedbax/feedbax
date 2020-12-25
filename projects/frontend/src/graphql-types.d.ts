@@ -1589,10 +1589,10 @@ export type Query = {
   allSitePage: SitePageConnection;
   imageSharp?: Maybe<ImageSharp>;
   allImageSharp: ImageSharpConnection;
-  translation?: Maybe<Translation>;
-  allTranslation: TranslationConnection;
   translationMarkdown?: Maybe<TranslationMarkdown>;
   allTranslationMarkdown: TranslationMarkdownConnection;
+  translation?: Maybe<Translation>;
+  allTranslation: TranslationConnection;
   locales?: Maybe<Locales>;
   allLocales: LocalesConnection;
   siteBuildMetadata?: Maybe<SiteBuildMetadata>;
@@ -1773,24 +1773,6 @@ export type QueryAllImageSharpArgs = {
 };
 
 
-export type QueryTranslationArgs = {
-  id?: Maybe<StringQueryOperatorInput>;
-  parent?: Maybe<NodeFilterInput>;
-  children?: Maybe<NodeFilterListInput>;
-  internal?: Maybe<InternalFilterInput>;
-  locale?: Maybe<StringQueryOperatorInput>;
-  data?: Maybe<TranslationDataFilterInput>;
-};
-
-
-export type QueryAllTranslationArgs = {
-  filter?: Maybe<TranslationFilterInput>;
-  sort?: Maybe<TranslationSortInput>;
-  skip?: Maybe<Scalars['Int']>;
-  limit?: Maybe<Scalars['Int']>;
-};
-
-
 export type QueryTranslationMarkdownArgs = {
   id?: Maybe<StringQueryOperatorInput>;
   parent?: Maybe<NodeFilterInput>;
@@ -1805,6 +1787,24 @@ export type QueryTranslationMarkdownArgs = {
 export type QueryAllTranslationMarkdownArgs = {
   filter?: Maybe<TranslationMarkdownFilterInput>;
   sort?: Maybe<TranslationMarkdownSortInput>;
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryTranslationArgs = {
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+  locale?: Maybe<StringQueryOperatorInput>;
+  data?: Maybe<TranslationDataFilterInput>;
+};
+
+
+export type QueryAllTranslationArgs = {
+  filter?: Maybe<TranslationFilterInput>;
+  sort?: Maybe<TranslationSortInput>;
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
 };
@@ -2264,11 +2264,26 @@ export type SitePageContextTranslationFilterInput = {
 export type SitePageContextTranslationGeneric = {
   __typename?: 'SitePageContextTranslationGeneric';
   footer?: Maybe<SitePageContextTranslationGenericFooter>;
+  cookie_consent?: Maybe<SitePageContextTranslationGenericCookie_Consent>;
   locales?: Maybe<SitePageContextTranslationGenericLocales>;
+};
+
+export type SitePageContextTranslationGenericCookie_Consent = {
+  __typename?: 'SitePageContextTranslationGenericCookie_consent';
+  content?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  small?: Maybe<Scalars['String']>;
+};
+
+export type SitePageContextTranslationGenericCookie_ConsentFilterInput = {
+  content?: Maybe<StringQueryOperatorInput>;
+  title?: Maybe<StringQueryOperatorInput>;
+  small?: Maybe<StringQueryOperatorInput>;
 };
 
 export type SitePageContextTranslationGenericFilterInput = {
   footer?: Maybe<SitePageContextTranslationGenericFooterFilterInput>;
+  cookie_consent?: Maybe<SitePageContextTranslationGenericCookie_ConsentFilterInput>;
   locales?: Maybe<SitePageContextTranslationGenericLocalesFilterInput>;
 };
 
@@ -3000,11 +3015,26 @@ export type TranslationDataFilterInput = {
 export type TranslationDataGeneric = {
   __typename?: 'TranslationDataGeneric';
   footer?: Maybe<TranslationDataGenericFooter>;
+  cookie_consent?: Maybe<TranslationDataGenericCookie_Consent>;
   locales?: Maybe<TranslationDataGenericLocales>;
+};
+
+export type TranslationDataGenericCookie_Consent = {
+  __typename?: 'TranslationDataGenericCookie_consent';
+  title?: Maybe<Scalars['String']>;
+  content?: Maybe<Scalars['String']>;
+  small?: Maybe<Scalars['String']>;
+};
+
+export type TranslationDataGenericCookie_ConsentFilterInput = {
+  title?: Maybe<StringQueryOperatorInput>;
+  content?: Maybe<StringQueryOperatorInput>;
+  small?: Maybe<StringQueryOperatorInput>;
 };
 
 export type TranslationDataGenericFilterInput = {
   footer?: Maybe<TranslationDataGenericFooterFilterInput>;
+  cookie_consent?: Maybe<TranslationDataGenericCookie_ConsentFilterInput>;
   locales?: Maybe<TranslationDataGenericLocalesFilterInput>;
 };
 
@@ -3231,6 +3261,9 @@ export type TranslationFieldsEnum =
   | 'data___generic___footer___privacy_policy'
   | 'data___generic___footer___imprint'
   | 'data___generic___footer___disclaimer'
+  | 'data___generic___cookie_consent___title'
+  | 'data___generic___cookie_consent___content'
+  | 'data___generic___cookie_consent___small'
   | 'data___generic___locales___de'
   | 'data___generic___locales___en'
   | 'data___generic___locales___it'

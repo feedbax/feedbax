@@ -71,15 +71,6 @@ export const stylesImageWrapper = (
           position: relative;
           width: 100%;
           height: 100%;
-  
-          &:focus {
-            outline: #ffda73 auto 2px;
-            outline-offset: 8px;
-          }
-  
-          &:focus:not(.focus-visible) {
-            outline: 0;
-          }
         }
       `
     );

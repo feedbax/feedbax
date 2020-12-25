@@ -36,8 +36,7 @@
     },
 
     "plugins": [
-      { "transform": "@zerollup/ts-transform-paths" },
-      { "transform": "typescript-transform-macros" }
+      { "transform": "@zerollup/ts-transform-paths" }
     ]
   },
 

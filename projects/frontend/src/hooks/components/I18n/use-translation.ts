@@ -32,7 +32,10 @@ const useTranslation: TranslationHook = (
             return (translation as any)[p1];
           }
         } catch (error) {
-          return 'error, translation not found.';
+          console.error('translation not found for', p1, p2, p3);
+          console.error('translation data', translation);
+
+          return '';
         }
 
         return translation;

@@ -46,7 +46,6 @@ export const getStyles = (
       align-items: center;
   
       border: 0;
-      outline: 0;
   
       border-radius: 50%;
       transition: transform 0.3s ease 0s;
@@ -72,17 +71,8 @@ export const getStyles = (
       }
 
       &:active {
-        opacity: 1;
+        opacity: 0.8;
       }
-
-      &:focus {
-        outline: #ffda73 auto 2px;
-        outline-offset: 8px;
-      }
-
-      &:focus:not(.focus-visible) {
-        outline: 0;
-      } 
 
       svg {
         padding: 0px;

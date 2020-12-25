@@ -10,6 +10,12 @@ export const translationFragment = `
           disclaimer
         }
 
+        cookie_consent {
+          content
+          title
+          small
+        }
+
         locales {
           de
           en

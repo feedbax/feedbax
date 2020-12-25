@@ -79,7 +79,7 @@ export const stylesItem = css`
     text-decoration: none;
 
     &:focus {
-      outline: 0;
+      outline: none;
     }
   }
 `;
@@ -91,15 +91,6 @@ export const stylesTabable = css`
 
   &:active {
     opacity: 1;
-  }
-
-  &:focus {
-    outline: #ffda73 auto 2px;
-    outline-offset: 8px;
-  }
-
-  &:focus:not(.focus-visible) {
-    outline: 0;
   }
 `;
 

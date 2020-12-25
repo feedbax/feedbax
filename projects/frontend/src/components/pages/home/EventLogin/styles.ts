@@ -51,7 +51,6 @@ export const stylesEventLogin = css`
     width: 100%;
 
     border: 0;
-    outline: 0;
 
     padding: 0;
     margin: 0;
@@ -74,6 +73,7 @@ export const stylesEventLogin = css`
     background-color: ${colors.third};
 
     &:focus {
+      outline: none;
       border: 2px solid ${colors.second};
     }
 
@@ -95,6 +95,7 @@ export const stylesEventLogin = css`
     }
 
     &:focus {
+      outline: none;
       border: 2px solid ${colors.second};
     }
   }

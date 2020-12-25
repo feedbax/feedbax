@@ -120,7 +120,7 @@ const MenuPortal = React.memo(
 
     if (isSSR) return <></>;
 
-    return createPortal(
+    return createPortal((
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -177,9 +177,8 @@ const MenuPortal = React.memo(
             />
           </motion.div>
         )}
-      </AnimatePresence>,
-      document.body,
-    );
+      </AnimatePresence>
+    ), document.body);
   },
 );
 

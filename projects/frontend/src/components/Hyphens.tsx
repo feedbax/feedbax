@@ -3,26 +3,46 @@
 import React from 'react';
 import { jsx, css, PropsOf } from '@emotion/react';
 
-type HyphenCustom = { custom: <T>(component: T) => React.FC<PropsOf<T>> };
-type HyphenHTML = { [key in keyof React.ReactHTML]: React.ReactHTML[key] };
+import type { SerializedStyles } from '@emotion/react';
+
+type GetHTMLProps<T extends keyof React.ReactHTML> = (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  React.ReactHTML[T] extends React.DetailedHTMLFactory<infer R, any>
+    ? R
+    : never
+);
+
+type HyphensProps = { style?: SerializedStyles };
+
+type GetHyphensProps<T extends keyof React.ReactHTML> = (
+  GetHTMLProps<T> & HyphensProps
+);
+
+type HyphenCustom = { custom: <T>(component: T) => React.FC<PropsOf<T> & HyphensProps> };
+type HyphenHTML = { [key in keyof React.ReactHTML]: React.FC<GetHyphensProps<key>> };
 type Hyphen = HyphenCustom & HyphenHTML;
+
+type Component = React.FC<{
+  ref: React.ForwardedRef<unknown>;
+  css: SerializedStyles;
+}>;
 
 const target = {} as Hyphen;
 
 // eslint-disable-next-line import/prefer-default-export
 const hyphens = new Proxy(target, {
-  get (_, Element: keyof Hyphen) {
+  get <T extends keyof Hyphen>(_: unknown, Element: T) {
     if (Element === 'custom') {
       return (
-        (Component: React.FC) => (
+        (Component: Component) => (
           React.forwardRef(
-            (props: React.HTMLProps<unknown>, ref) => (
+            ({ style, ...rest }: GetHyphensProps<T>, ref) => (
               <Component
                 // eslint-disable-next-line react/jsx-props-no-spreading
-                {...props}
+                {...rest}
 
                 ref={ref}
-                css={css`hyphens: manual !important;`}
+                css={css([css`hyphens: manual !important;`, style])}
               />
             ),
           )
@@ -30,15 +50,17 @@ const hyphens = new Proxy(target, {
       );
     }
 
+    const _Element: keyof HyphenHTML = Element;
+
     return (
       React.forwardRef(
-        (props: React.HTMLProps<unknown>, ref) => (
-          <Element
+        ({ style, ...rest }: GetHyphensProps<T>, ref) => (
+          <_Element
             // eslint-disable-next-line react/jsx-props-no-spreading
-            {...props}
+            {...rest}
 
             ref={ref}
-            css={css`hyphens: manual !important;`}
+            css={css([css`hyphens: manual !important;`, style])}
           />
         ),
       )

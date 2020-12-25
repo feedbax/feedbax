@@ -21,7 +21,7 @@ const createLocalesNode = (
 
     if (node.internal.type !== 'File') return;
     if (node.sourceInstanceName !== 'locales') return;
-    if (node.base !== 'translations.json') return;
+    if (node.base !== 'translations.yaml') return;
     if (node.relativeDirectory === 'generic') return;
 
     const locale = node.relativeDirectory as string;

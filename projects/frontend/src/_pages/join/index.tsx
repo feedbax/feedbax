@@ -8,7 +8,9 @@ import { Provider } from 'react-redux';
 
 import { jsx } from '@emotion/react';
 
+import CookieConsent from '~components/CookieConsent';
 import GlobalStyles from '~components/GlobalStyles';
+
 import Loading from '~components/pages/join/Loading';
 import Event from '~components/pages/event/Event';
 
@@ -51,6 +53,7 @@ const EventRoute = React.memo(
 const Join = React.memo(
   (): JSX.Element => (
     <Provider store={store}>
+      <CookieConsent />
       <GlobalStyles color="third" />
 
       <Router>

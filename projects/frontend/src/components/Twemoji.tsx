@@ -54,7 +54,7 @@ const twemojiRenderer = (
 
 // eslint-disable-next-line import/prefer-default-export
 const twemoji = new Proxy(target, {
-  get <T extends keyof TwemojiHTML>(_, Element: T) {
+  get <T extends keyof TwemojiHTML>(_: unknown, Element: T) {
     return (
       (props: GetTwemojiProps<T>) => {
         const { renderWhenVisible = false, ...restProps } = props;

@@ -109,6 +109,15 @@ const stylesGlobal = css`
   * {
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
     -webkit-overflow-scrolling: touch;
+
+    &:focus {
+      outline: #ffda73 auto 2px;
+      outline-offset: 8px;
+    }
+
+    &:focus:not(.focus-visible) {
+      outline: none;
+    }
   }
 
   @font-face {

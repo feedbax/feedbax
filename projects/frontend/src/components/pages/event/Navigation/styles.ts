@@ -67,15 +67,6 @@ export const stylesNavigation = css`
       opacity: 0.6;
     }
 
-    &:focus {
-      outline: #ffda73 auto 2px;
-      outline-offset: 8px;
-    }
-
-    &:focus:not(.focus-visible) {
-      outline: 0;
-    }
-
     &.left {
       left: 0;
 
