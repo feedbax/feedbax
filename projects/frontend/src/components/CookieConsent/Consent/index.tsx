@@ -2,26 +2,16 @@
 /** @jsxFrag React.Fragment */
 
 import React, { useEffect, useRef } from 'react';
-import { createPortal } from 'react-dom';
-
-import { jsx, css } from '@emotion/react';
-import { stylesConsent, stylesConsentContent } from './styles';
-
-import { AnimatePresence, motion } from 'framer-motion';
-
-import LocaleLink from '~components/I18n/LocaleLink';
-import hyphens from '~components/Hyphens';
-
 import useTranslation from '~hooks/components/I18n/use-translation';
 
-import type { Variants } from 'framer-motion';
-import type { ConsentComponent } from '../types';
+import { jsx, css } from '@emotion/react';
+import { stylesConsentContent } from './styles';
 
-const variants: Variants = {
-  initial: { opacity: 0, backdropFilter: 'blur(0px)' },
-  animate: { opacity: 1, backdropFilter: 'blur(5px)' },
-  exit: { opacity: 0, backdropFilter: 'blur(0px)' },
-};
+import LocaleLink from '~components/I18n/LocaleLink';
+import Modal from '~components/Modal';
+import hyphens from '~components/Hyphens';
+
+import type { ConsentComponent } from '../types';
 
 const stylesButton = css`
   display: inline-block;
@@ -66,44 +56,33 @@ const Consent: ConsentComponent = React.memo(
 
     useEffect(() => mountedRef.current(), []);
 
-    return createPortal((
-      <AnimatePresence>
-        {show && (
-          <motion.div
-            css={stylesConsent}
-            variants={variants}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            transition={{ duration: 0.4 }}
-          >
-            <hyphens.div style={stylesConsentContent}>
-              <h2>{t('generic', 'cookie_consent', 'title')}</h2>
-              <p>{t('generic', 'cookie_consent', 'content')}</p>
+    return (
+      <Modal isOpen={show}>
+        <hyphens.div style={stylesConsentContent}>
+          <h2>{t('generic', 'cookie_consent', 'title')}</h2>
+          <p>{t('generic', 'cookie_consent', 'content')}</p>
 
-              <small>
-                {t('generic', 'cookie_consent', 'small')}
+          <small>
+            {t('generic', 'cookie_consent', 'small')}
 
-                &nbsp;
+            &nbsp;
 
-                <LocaleLink to="/legal/privacy-policy">
-                  {t('generic', 'footer', 'privacy_policy')}
-                  {' & '}
-                  {t('generic', 'footer', 'imprint')}
-                </LocaleLink>
-              </small>
+            <LocaleLink to="/legal/privacy-policy">
+              {t('generic', 'footer', 'privacy_policy')}
+              {' & '}
+              {t('generic', 'footer', 'imprint')}
+            </LocaleLink>
+          </small>
 
-              <br />
+          <br />
 
-              <Button
-                label="Akzeptieren"
-                onAction={onAgree}
-              />
-            </hyphens.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    ), document.body);
+          <Button
+            label="Akzeptieren"
+            onAction={onAgree}
+          />
+        </hyphens.div>
+      </Modal>
+    );
   },
 );
 
