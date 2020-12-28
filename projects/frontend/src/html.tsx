@@ -125,8 +125,7 @@ const stylesGlobal = css`
   @font-face {
     font-family: "Klinic Slab";
 
-    src:  local("Georgia"),
-          url(${KlinicSlabBoldWoff2}) format("woff2"),
+    src:  url(${KlinicSlabBoldWoff2}) format("woff2"),
           url(${KlinicSlabBoldWoff}) format("woff");
 
     font-weight: bold;
@@ -137,8 +136,7 @@ const stylesGlobal = css`
   @font-face {
     font-family: "Klinic Slab Book";
 
-    src:  local("Georgia"),
-          url(${KlinicSlabBookWoff2}) format("woff2"),
+    src:  url(${KlinicSlabBookWoff2}) format("woff2"),
           url(${KlinicSlabBookWoff}) format("woff");
 
     font-display: swap;
@@ -149,8 +147,7 @@ const stylesGlobal = css`
   @font-face {
     font-family: "Klinic Slab Book";
 
-    src:  local("Georgia"),
-          url(${KlinicSlabBookItalicWoff2}) format("woff2"),
+    src:  url(${KlinicSlabBookItalicWoff2}) format("woff2"),
           url(${KlinicSlabBookItalicWoff}) format("woff");
 
     font-display: swap;
@@ -161,8 +158,7 @@ const stylesGlobal = css`
   @font-face {
     font-family: "Roboto Slab";
 
-    src:  local("Georgia"),
-          url(${RobotoSlabBoldWoff2}) format("woff2"),
+    src:  url(${RobotoSlabBoldWoff2}) format("woff2"),
           url(${RobotoSlabBoldWoff}) format("woff");
 
     font-display: swap;
@@ -173,8 +169,7 @@ const stylesGlobal = css`
   @font-face {
     font-family: "Roboto Slab";
 
-    src:  local("Georgia"),
-          url(${RobotoSlabRegularWoff2}) format("woff2"),
+    src:  url(${RobotoSlabRegularWoff2}) format("woff2"),
           url(${RobotoSlabRegularWoff}) format("woff");
 
     font-display: swap;
