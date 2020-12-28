@@ -62,7 +62,7 @@ export const stylesBackround = css`
   }
 
   & .bot {
-    bottom: 0;
+    bottom: -4px;
     left: 0;
   }
 
