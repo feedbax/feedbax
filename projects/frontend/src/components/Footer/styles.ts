@@ -1,16 +1,15 @@
 import { css } from '@emotion/react';
-import { fluidRange } from '~lib/css-helper';
-import { colors } from '~theme';
+import { cssVar, fluidRange } from '~lib/css-helper';
 
 export const stylesFooter = css`
   position: relative;
   text-align: center;
 
-  font-family: "Klinic Slab Book";
+  font-family: ${cssVar('--font-feedbax-tertiary')};
   font-style: normal;
 
-  color: ${colors.third};
-  background-color: ${colors.fourth};
+  color: ${cssVar('--color-primary-text')};
+  background-color: ${cssVar('--color-background-footer')};
 
 
   ${fluidRange({
@@ -43,11 +42,11 @@ export const stylesFooter = css`
 
   .copy, .link {
     font-weight: normal;
-    color: ${colors.third};
+    color: ${cssVar('--color-primary-text')};
     margin: 0 5px;
 
     &:visited {
-      color: ${colors.third};
+      color: ${cssVar('--color-primary-text')};
     }
   }
 `;

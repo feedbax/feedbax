@@ -1,7 +1,5 @@
 import { css } from '@emotion/react';
-import { fluidRange } from '~lib/css-helper';
-import { colors } from '~theme';
-import { defaultColors } from './const';
+import { cssVar, fluidRange } from '~lib/css-helper';
 
 import type { SerializedStyles } from '@emotion/react';
 import type { IconButtonProps } from './types';
@@ -28,7 +26,7 @@ export const getStyles = (
     const sizeMin = (sizeBounds.min ?? size) / 16;
     const sizeMax = (sizeBounds.max ?? 2 * size) / 16;
 
-    const bgColor = colors[color.background ?? defaultColors.background];
+    const bgColor = cssVar(color.background ?? '--color-feedbax-secondary');
 
     const shadowXY = Math.round(size * 0.1);
     const shadowBlur = Math.round(size * 0.2);

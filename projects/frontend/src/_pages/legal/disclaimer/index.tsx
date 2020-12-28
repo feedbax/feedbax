@@ -19,7 +19,7 @@ const Disclaimer = React.memo(
   ({ data }: PrivacyPolicyProps): JSX.Element => (
     <div css={stylesLegal}>
       <GlobalStyles />
-      <MenuButton color={{ background: 'first' }} />
+      <MenuButton color={{ background: '--color-feedbax-primary' }} />
 
       <Logo />
 

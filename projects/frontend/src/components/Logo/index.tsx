@@ -4,11 +4,9 @@ import React from 'react';
 import isEqual from 'lodash.isequal';
 
 import { jsx } from '@emotion/react';
-import { stylesImageWrapper, stylesImage } from './styles';
+import { stylesImageWrapper } from './styles';
 
-import logo from '~assets/images/logo.svg';
-import logoNoText from '~assets/images/logo_no_text.svg';
-import logoNoShadowAndText from '~assets/images/logo_no_shadow_no_text.svg';
+import loadable from '@loadable/component';
 
 import LocaleLink from '~components/I18n/LocaleLink';
 
@@ -18,14 +16,12 @@ const Logo = React.memo((props: LogoProps) => {
   const { variant = 'text' } = props;
   const { link = '/' } = props;
 
+  const LogoSVG = getSrc(variant);
+
   return (
     <div css={stylesImageWrapper(props)}>
       <LocaleLink to={link}>
-        <img
-          css={stylesImage}
-          src={getSrc(variant)}
-          alt="This is the feedb.ax logo"
-        />
+        <LogoSVG />
       </LocaleLink>
     </div>
   );
@@ -37,16 +33,16 @@ export type { Variant } from './types';
 const getSrc = (variant: Variant) => {
   switch (variant) {
     case 'no-shadow-and-text': {
-      return logoNoShadowAndText;
+      return loadable(() => import('~assets/images/logo_no_shadow_no_text.inline.svg'));
     }
 
     case 'no-text': {
-      return logoNoText;
+      return loadable(() => import('~assets/images/logo_no_text.inline.svg'));
     }
 
     default:
     case 'text': {
-      return logo;
+      return loadable(() => import('~assets/images/logo.inline.svg'));
     }
   }
 };

@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
-import { colors } from '~theme';
-import { fluidRange } from '~lib/css-helper';
+import { cssVar, fluidRange } from '~lib/css-helper';
 
 export const stylesMore = css`
   position: relative;
@@ -20,7 +19,7 @@ export const stylesFront = css`
   min-height: 100vh;
   min-height: calc(var(--vh, 1vh) * 100);
 
-  background-color: ${colors.first};
+  background-color: ${cssVar('--color-feedbax-primary')};
 
   & * {
     z-index: 1;

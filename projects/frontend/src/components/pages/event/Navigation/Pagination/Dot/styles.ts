@@ -1,13 +1,13 @@
 import { css } from '@emotion/react';
-import { fluidRange } from '~lib/css-helper';
-import { colors } from '~theme';
+import { cssVar, fluidRange } from '~lib/css-helper';
+
 import { DOT_SIZE_DOT, DOT_SIZE_MARGIN } from '../const';
 
 export const stylesDot = css`
   flex: 0 0 auto;
 
   position: relative;
-  background-color: ${colors.third};
+  background-color: ${cssVar('--color-primary-text')};
   border-radius: 50%;
   transition: transform 0.3s ease 0s, opacity 0.3s ease 0s;
   transform: scale(0.6);

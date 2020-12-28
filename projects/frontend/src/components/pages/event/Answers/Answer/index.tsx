@@ -39,7 +39,7 @@ const Answer = React.memo(({ answerId, first }: Props) => {
         <IconButton
           icon={Icons.Heart}
           variant={answer?.hasLiked ? Variants.Filled : Variants.Outline}
-          color={{ icon: 'first', background: 'third' }}
+          color={{ icon: '--color-feedbax-primary', background: '--color-primary-text' }}
           ariaLabel="Like answer"
         />
       </div>

@@ -1,19 +1,19 @@
 import { css } from '@emotion/react';
-import { fluidRange } from '~lib/css-helper';
+import { cssVar, fluidRange } from '~lib/css-helper';
 
 export const stylesConsentContent = css`
   flex: 0 0 auto;
 
-  font-family: "Roboto Slab";
+  font-family: ${cssVar('--font-feedbax-secondary')};
   text-align: justify;
 
   padding: 1rem;
   box-sizing: border-box;
 
-  color: #fff;
+  color: ${cssVar('--color-primary-text')};
 
   a {
-    color: #fff;
+    color: ${cssVar('--color-primary-text')};
   }
 
   ${fluidRange({

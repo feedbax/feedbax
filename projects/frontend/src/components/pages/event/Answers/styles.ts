@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
-import { fluidRange } from '~lib/css-helper';
-import { colors } from '~theme';
+import { cssVar, fluidRange } from '~lib/css-helper';
 
 export const stylesLoadMore = css`
   position: absolute;
@@ -32,6 +31,6 @@ export const stylesAnswers = css`
       css: ([ height ]) => ({ height }),
     })}
 
-    background-color: ${colors.second};
+    background-color: ${cssVar('--color-feedbax-secondary')};
   }
 `;

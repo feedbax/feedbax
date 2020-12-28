@@ -2,6 +2,7 @@
 
 import { jsx, css, Global } from '@emotion/react';
 import { normalize } from 'polished';
+import { themes } from '~theme';
 
 import KlinicSlabBoldWoff2 from '~assets/fonts/KlinicSlab-Bold.woff2';
 import KlinicSlabBoldWoff from '~assets/fonts/KlinicSlab-Bold.woff';
@@ -27,7 +28,7 @@ export default function HTML (props: Props): JSX.Element {
     /* eslint-disable react/jsx-props-no-spreading */
     /* eslint-disable react/no-danger */
     // eslint-disable-next-line jsx-a11y/html-has-lang
-    <html {...htmlAttributes}>
+    <html {...htmlAttributes} className="theme-default">
       <head>
         <meta charSet="utf-8" />
         <meta httpEquiv="x-ua-compatible" content="ie=edge" />
@@ -82,6 +83,7 @@ type Props = {
 /* eslint-disable @typescript-eslint/indent */
 const stylesGlobal = css`
   ${normalize()}
+  ${themes}
 
   html,
   body,

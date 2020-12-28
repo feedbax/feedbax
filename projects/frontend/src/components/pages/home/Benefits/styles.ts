@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
-import { fluidRange } from '~lib/css-helper';
-import { colors } from '~theme';
+import { cssVar, fluidRange } from '~lib/css-helper';
 
 export const stylesBenefit = css`
   position: relative;
@@ -51,10 +50,10 @@ export const stylesBenefit = css`
   }
 
   .text {
-    font-family: "Klinic Slab";
+    font-family: ${cssVar('--font-feedbax-primary')};
     font-style: normal;
     font-weight: normal;
-    color: ${colors.third};
+    color: ${cssVar('--color-primary-text')};
     text-align: center;
     display: inline-block;
 
@@ -70,7 +69,7 @@ export const stylesBenefit = css`
     small {
       display: block;
 
-      font-family: "Klinic Slab Book";
+      font-family: ${cssVar('--font-feedbax-tertiary')};
       font-size: 0.65em;
 
       ul {

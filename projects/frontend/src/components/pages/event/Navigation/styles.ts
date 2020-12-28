@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
-import { fluidRange } from '~lib/css-helper';
-import { colors } from '~theme';
+import { cssVar, fluidRange } from '~lib/css-helper';
 
 export const stylesNavigation = css`
   position: relative;
@@ -36,7 +35,7 @@ export const stylesNavigation = css`
 
         '&::after': {
           padding: paddingNavAfter,
-          border: `${borderWidthNavAfter} solid ${colors.third}`,
+          border: `${borderWidthNavAfter} solid ${cssVar('--color-primary-text')}`,
 
           borderTop: 0,
           borderLeft: 0,

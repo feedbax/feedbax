@@ -54,7 +54,7 @@ const Join = React.memo(
   (): JSX.Element => (
     <Provider store={store}>
       <CookieConsent />
-      <GlobalStyles color="third" />
+      <GlobalStyles color="--color-primary-text" />
 
       <Router>
         <EventRoute path=":locale/@/:eventSlug/:questionIndex" />

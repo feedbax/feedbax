@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
-import { fluidRange } from '~lib/css-helper';
-import { colors } from '~theme';
+import { cssVar, fluidRange } from '~lib/css-helper';
 
 export const stylesSeeMore = css`
   position: relative;
@@ -29,16 +28,16 @@ export const stylesSeeMore = css`
   & span {
     flex: 0 1 auto;
 
-    background: ${colors.third};
+    background: ${cssVar('--color-primary-text')};
     padding: 0.11em 0.33em;
     border-radius: 1em;
 
-    font-family: "Klinic Slab";
+    font-family: ${cssVar('--font-feedbax-primary')};
     font-style: normal;
     font-weight: normal;
     text-align: center;
 
-    color: ${colors.first};
+    color: ${cssVar('--color-feedbax-primary')};
   }
 
   & div {
@@ -51,8 +50,8 @@ export const stylesSeeMore = css`
     height: 10em;
     width: 2px;
 
-    background: ${colors.first};
-    border-right: 2px solid ${colors.third};
+    background: ${cssVar('--color-feedbax-primary')};
+    border-right: 2px solid ${cssVar('--color-primary-text')};
     border-radius: 2px;
   }
 `;

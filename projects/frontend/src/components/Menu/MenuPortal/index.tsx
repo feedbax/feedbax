@@ -104,7 +104,7 @@ const MenuPortal = React.memo(
           styles={[stylesIconButtonBack, hasHistory ? stylesShow : stylesHide]}
 
           icon={Icons.ArrowBack}
-          color={{ background: 'transparent' }}
+          color={{ background: '--transparent' }}
 
           ariaLabel="Previous Items"
           onClick={() => {
@@ -134,7 +134,7 @@ const MenuPortal = React.memo(
           styles={stylesIconButtonClose}
 
           icon={Icons.Close}
-          color={{ background: 'transparent' }}
+          color={{ background: '--transparent' }}
 
           ariaLabel="Close Menu"
           onClick={toggleOpen}

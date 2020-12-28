@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
-import { fluidRange } from '~lib/css-helper';
-import { colors } from '~theme';
+import { cssVar, fluidRange } from '~lib/css-helper';
 
 export const stylesEventLogin = css`
   position: relative;
@@ -26,10 +25,10 @@ export const stylesEventLogin = css`
       maxWidth,
 
       boxShadow: `
-        ${sa} ${sa} 0px ${colors.second}, 
-        ${sb} ${sb} 0px ${colors.first}, 
-        ${sc} ${sc} 0px ${colors.third}, 
-        ${sd} ${sd} 0px ${colors.third}
+        ${sa} ${sa} 0px ${cssVar('--color-feedbax-secondary')}, 
+        ${sb} ${sb} 0px ${cssVar('--color-feedbax-primary')}, 
+        ${sc} ${sc} 0px ${cssVar('--color-primary-text')}, 
+        ${sd} ${sd} 0px ${cssVar('--color-primary-text')}
       `,
 
       '& .text, & .button': {
@@ -55,7 +54,7 @@ export const stylesEventLogin = css`
     padding: 0;
     margin: 0;
 
-    font-family: "Klinic Slab";
+    font-family: ${cssVar('--font-feedbax-primary')};
     font-style: normal;
     font-weight: normal;
 
@@ -68,35 +67,35 @@ export const stylesEventLogin = css`
   }
 
   & .text {
-    color: ${colors.first};
-    border: 2px solid ${colors.third};
-    background-color: ${colors.third};
+    color: ${cssVar('--color-feedbax-primary')};
+    border: 2px solid ${cssVar('--color-primary-text')};
+    background-color: ${cssVar('--color-primary-text')};
 
     &:focus {
       outline: none;
-      border: 2px solid ${colors.second};
+      border: 2px solid ${cssVar('--color-feedbax-secondary')};
     }
 
     &::placeholder {
-      color: ${colors.first};
+      color: ${cssVar('--color-feedbax-primary')};
       opacity: 0.8;
     }
   }
 
   & .button {
-    color: ${colors.third};
-    background: ${colors.first};
+    color: ${cssVar('--color-primary-text')};
+    background: ${cssVar('--color-feedbax-primary')};
     cursor: pointer;
 
-    border: 2px solid ${colors.first};
+    border: 2px solid ${cssVar('--color-feedbax-primary')};
 
     &:hover {
-      background: ${colors.first};
+      background: ${cssVar('--color-feedbax-primary')};
     }
 
     &:focus {
       outline: none;
-      border: 2px solid ${colors.second};
+      border: 2px solid ${cssVar('--color-feedbax-secondary')};
     }
   }
 `;

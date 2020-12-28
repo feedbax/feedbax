@@ -1,10 +1,9 @@
 import { css } from '@emotion/react';
-import { colors } from '~theme';
-import { fluidRange } from '~lib/css-helper';
+import { cssVar, fluidRange } from '~lib/css-helper';
 
 export const stylesEventHeader = css`
   position: relative;
-  background-color: ${colors.second};
+  background-color: ${cssVar('--color-feedbax-secondary')};
 
   .content {
     position: relative;
@@ -52,6 +51,6 @@ export const stylesEvent = css`
     flex: 0 0 auto;
     width: 100%;
     height: 60px;
-    background: ${colors.first};
+    background: ${cssVar('--color-feedbax-primary')};
   }
 `;

@@ -4,7 +4,7 @@
 import React from 'react';
 
 import { jsx, css, keyframes } from '@emotion/react';
-import { colors } from '~theme';
+import { cssVar } from '~lib/css-helper';
 
 import { motion } from 'framer-motion';
 
@@ -79,7 +79,7 @@ const stylesLoading = css`
   width: 100vw;
   overflow: hidden;
   z-index: 1000;
-  background-color: ${colors.second};
+  background-color: ${cssVar('--color-feedbax-secondary')};
 
   .logo-loading {
     position: relative;
@@ -100,7 +100,7 @@ const stylesLoading = css`
       top: 0;
       left: 0;
       border-radius: 50%;
-      background-color: ${colors.third};
+      background-color: ${cssVar('--color-primary-text')};
 
       transform: scale(0);
       opacity: 1;

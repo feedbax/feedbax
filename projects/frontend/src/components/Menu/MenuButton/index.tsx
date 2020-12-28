@@ -2,14 +2,16 @@
 /** @jsxFrag React.Fragment */
 
 import React, { useState } from 'react';
+import loadable from '@loadable/component';
 
 import { jsx } from '@emotion/react';
 import { stylesMenuButton } from './styles';
 
 import IconButton, { Icons } from '~components/IconButton';
-import MenuPortal from '../MenuPortal';
 
 import type { IconButtonProps } from '~components/IconButton';
+
+const MenuPortal = loadable(() => import('../MenuPortal'));
 
 type MenuButtonProps = {
   color?: IconButtonProps['color'];

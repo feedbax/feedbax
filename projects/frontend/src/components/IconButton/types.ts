@@ -42,6 +42,3 @@ export type IconButtonProps = {
 
   setFocus?: boolean;
 };
-
-export type SVGIcon = React.FC<React.SVGProps<SVGSVGElement>>;
-export type IconState = { Component: SVGIcon };

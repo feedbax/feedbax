@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { fluidRange } from '~lib/css-helper';
+import { cssVar, fluidRange } from '~lib/css-helper';
 
 export const stylesItems = css`
   display: flex;
@@ -23,8 +23,8 @@ export const stylesItems = css`
 `;
 
 export const stylesItem = css`
-  color: #fff;
-  font-family: "Roboto Slab";
+  color: ${cssVar('--color-primary-text')};
+  font-family: ${cssVar('--font-feedbax-secondary')};
   text-decoration: none;
 
   ${fluidRange({
@@ -50,8 +50,8 @@ export const stylesItem = css`
 
   * {
     display: inline-block;
-    color: #fff;
-    font-family: "Roboto Slab";
+    color: ${cssVar('--color-primary-text')};
+    font-family: ${cssVar('--font-feedbax-secondary')};
     text-decoration: none;
 
     &:focus {

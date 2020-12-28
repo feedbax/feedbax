@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
-import { fluidRange } from '~lib/css-helper';
-import { colors } from '~theme';
+import { cssVar, fluidRange } from '~lib/css-helper';
 
 export const stylesQuestion = css`
   position: absolute;
@@ -8,7 +7,7 @@ export const stylesQuestion = css`
   width: 100%;
   top: 0;
 
-  color: ${colors.first};
+  color: ${cssVar('--color-feedbax-primary')};
   box-sizing: border-box;
 
   display: flex;
@@ -37,20 +36,20 @@ export const stylesQuestion = css`
       '.text': {
         paddingLeft: spacing,
         marginLeft: spacing,
-        borderLeft: `${borderSize} solid ${colors.first}`,
+        borderLeft: `${borderSize} solid ${cssVar('--color-feedbax-primary')}`,
       },
     }),
   })}
 
   .number {
     display: block;
-    font-family: "Klinic Slab";
+    font-family: ${cssVar('--font-feedbax-primary')};
     font-weight: bold;
   }
 
   .text {
     display: block;
-    font-family: "Klinic Slab";
+    font-family: ${cssVar('--font-feedbax-primary')};
     font-weight: bold;
     text-align: justify;
   }

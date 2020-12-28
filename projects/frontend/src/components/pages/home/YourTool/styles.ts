@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
-import { colors } from '~theme';
-import { fluidRange } from '~lib/css-helper';
+import { cssVar, fluidRange } from '~lib/css-helper';
 
 export const stylesTool = css`
   position: relative;
@@ -44,11 +43,11 @@ export const stylesTool = css`
     flex: 1 0 0;
     position: relative;
 
-    font-family: "Klinic Slab";
+    font-family: ${cssVar('--font-feedbax-primary')};
     font-style: normal;
     font-weight: normal;
 
-    color: ${colors.third};
+    color: ${cssVar('--color-primary-text')};
 
     text-align: right;
     box-sizing: border-box;

@@ -1,7 +1,7 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import useTranslation from '~hooks/components/I18n/use-translation';
 
 import { jsx, css } from '@emotion/react';
@@ -11,7 +11,7 @@ import LocaleLink from '~components/I18n/LocaleLink';
 import Modal from '~components/Modal';
 import hyphens from '~components/Hyphens';
 
-import type { ConsentComponent } from '../types';
+import type { ConsentProps } from '../types';
 
 const stylesButton = css`
   display: inline-block;
@@ -49,12 +49,9 @@ const Button = React.memo(
   ),
 );
 
-const Consent: ConsentComponent = React.memo(
-  ({ show, mounted, onAgree }) => {
-    const mountedRef = useRef(mounted);
+const Consent = React.memo(
+  ({ show, onAgree }: ConsentProps) => {
     const { t } = useTranslation();
-
-    useEffect(() => mountedRef.current(), []);
 
     return (
       <Modal isOpen={show}>

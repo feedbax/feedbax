@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
-import { transparentize } from 'polished';
-import { colors } from '~theme';
+import { cssVar } from '~lib/css-helper';
 
 export const stylesPortal = css`
   position: absolute;
@@ -15,10 +14,22 @@ export const stylesPortal = css`
   height: 100vh;
   height: calc(var(--vh, 1vh) * 100);
 
-  background-color: ${transparentize(0.2, colors.first)};
-
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: row;
+`;
+
+export const stylesBackground = css`
+  position: absolute;
+  z-index: -1;
+
+  left: 0;
+  top: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: ${cssVar('--color-feedbax-primary')};
+  opacity: 0.8;
 `;

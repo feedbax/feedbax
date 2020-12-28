@@ -1,9 +1,5 @@
 import { css } from '@emotion/react';
-import { colors } from '~theme';
-import { fluidRange } from '~lib/css-helper';
-
-import backgroundTop from '~assets/images/top.svg';
-import backgroundBottom from '~assets/images/bot.svg';
+import { cssVar, fluidRange } from '~lib/css-helper';
 
 export const stylesBackround = css`
   position: absolute;
@@ -16,8 +12,7 @@ export const stylesBackround = css`
   height: 100vh;
   height: calc(var(--vh, 1vh) * 100);
 
-  background-color: ${colors.third};
-  padding-bottom: 30vw;
+  background-color: ${cssVar('--color-primary-text')};
 
   ${fluidRange({
     screen: ['20rem', '120rem', '240rem'] as const,
@@ -53,24 +48,22 @@ export const stylesBackround = css`
   & .img {
     position: absolute;
     width: 100%;
-    height: 100%;
+    height: auto;
 
-    background-size: 100%;
-    background-repeat: no-repeat;
+    svg {
+      display: block;
+    }
   }
 
   & .top {
-    background-image: url(${backgroundTop});
-    background-position: top right;
     max-width: 70%;
+    top: 0;
     right: 0;
   }
 
   & .bot {
-    background-image: url(${backgroundBottom});
-    background-position: bottom;
-
-    padding-bottom: 4px;
+    bottom: 0;
+    left: 0;
   }
 
   @media (orientation: portrait) {

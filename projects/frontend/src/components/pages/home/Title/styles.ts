@@ -1,16 +1,15 @@
 import { css } from '@emotion/react';
-import { colors } from '~theme';
-import { fluidRange } from '~lib/css-helper';
+import { cssVar, fluidRange } from '~lib/css-helper';
 
 export const stylesTitle = css`
   position: relative;
 
-  font-family: "Klinic Slab";
+  font-family: ${cssVar('--font-feedbax-primary')};
   font-style: normal;
   font-weight: normal;
 
   text-align: center;
-  color: ${colors.third};
+  color: ${cssVar('--color-primary-text')};
 
   ${fluidRange({
     screen: ['20rem', '120rem', '240rem'] as const,
@@ -29,10 +28,10 @@ export const stylesTitle = css`
       marginTop,
 
       textShadow: `
-        ${sa} ${sa} 0px ${colors.second}, 
-        ${sb} ${sb} 0px ${colors.first}, 
-        ${sc} ${sc} 0px ${colors.third}, 
-        ${sd} ${sd} 0px ${colors.third}
+        ${sa} ${sa} 0px ${cssVar('--color-feedbax-secondary')}, 
+        ${sb} ${sb} 0px ${cssVar('--color-feedbax-primary')}, 
+        ${sc} ${sc} 0px ${cssVar('--color-primary-text')}, 
+        ${sd} ${sd} 0px ${cssVar('--color-primary-text')}
       `,
     }),
   })}

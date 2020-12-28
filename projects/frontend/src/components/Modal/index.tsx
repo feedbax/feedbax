@@ -1,13 +1,13 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 
-import React, { useRef } from 'react';
+import React from 'react';
 import { createPortal } from 'react-dom';
 
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { Global, css, jsx } from '@emotion/react';
-import { stylesPortal } from './styles';
+import { stylesPortal, stylesBackground } from './styles';
 
 import type { Variants } from 'framer-motion';
 import type { CSSInterpolation } from '@emotion/serialize';
@@ -17,8 +17,6 @@ type MenuPortalProps = {
   children: React.ReactNode;
   onBackdropClick?: () => void;
 };
-
-type _MouseEvent = React.MouseEvent<HTMLDivElement, MouseEvent>;
 
 const isSSR = typeof window === 'undefined';
 
@@ -33,18 +31,14 @@ const Modal = React.memo(
     const { isOpen, onBackdropClick } = props;
     const { children } = props;
 
-    const backdropRef = useRef<HTMLDivElement>(null);
-
     const stylesBackdrop: CSSInterpolation = (
       onBackdropClick
         ? ({ cursor: 'pointer' })
         : ({ cursor: 'default' })
     );
 
-    const $toggleOpen = (e: _MouseEvent) => {
+    const $toggleOpen = () => {
       if (!onBackdropClick) return;
-      if (backdropRef.current !== e.target) return;
-
       onBackdropClick();
     };
 
@@ -69,9 +63,16 @@ const Modal = React.memo(
               animate="animate"
               exit="exit"
               transition={{ duration: 0.4 }}
-              ref={backdropRef}
-              onClick={$toggleOpen}
             >
+              { /* eslint-disable jsx-a11y/no-static-element-interactions */ }
+              { /* eslint-disable jsx-a11y/click-events-have-key-events */ }
+              <div
+                css={css([stylesBackground, stylesBackdrop])}
+                onClick={$toggleOpen}
+              />
+              { /* eslint-enable jsx-a11y/no-static-element-interactions */ }
+              { /* eslint-enable jsx-a11y/click-events-have-key-events */ }
+
               {children}
             </motion.div>
           </>

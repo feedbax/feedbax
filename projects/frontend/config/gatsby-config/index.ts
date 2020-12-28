@@ -46,6 +46,8 @@ export default {
     // add typescript
     'gatsby-plugin-typescript',
 
+    'gatsby-plugin-loadable-components-ssr',
+
     // transfrom images
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',

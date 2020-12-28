@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
-import { fluidRange } from '~lib/css-helper';
-import { colors } from '~theme';
+import { cssVar, fluidRange } from '~lib/css-helper';
 
 export const stylesAnswer = css`
   position: relative;
@@ -46,14 +45,14 @@ export const stylesAnswer = css`
   })}
 
   box-sizing: border-box;
-  background: ${colors.third};
+  background: ${cssVar('--color-primary-text')};
 
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 
-  font-family: "Klinic Slab Book";
+  font-family: ${cssVar('--font-feedbax-tertiary')};
   text-align: justify;
 
   &:first-of-type {
@@ -62,7 +61,7 @@ export const stylesAnswer = css`
 
   .text {
     flex: 1 1 auto;
-    color: ${colors.first};
+    color: ${cssVar('--color-feedbax-primary')};
   }
 
   .like {
@@ -74,7 +73,7 @@ export const stylesAnswer = css`
     align-items: center;
 
     .count {
-      color: ${colors.first};
+      color: ${cssVar('--color-feedbax-primary')};
       text-align: right;
     }
   }

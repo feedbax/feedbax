@@ -1,14 +1,13 @@
 import { css } from '@emotion/react';
-import { colors } from '~theme';
-import { fluidRange } from '~lib/css-helper';
+import { cssVar, fluidRange } from '~lib/css-helper';
 
 export const stylesLegal = css`
-  font-family: "Roboto Slab";
+  font-family: ${cssVar('--font-feedbax-secondary')};
 
   position: relative;
-  background-color: ${colors.first};
+  background-color: ${cssVar('--color-feedbax-primary')};
 
-  color: ${colors.third};
+  color: ${cssVar('--color-primary-text')};
   text-align: left;
 
   ${fluidRange({
@@ -33,7 +32,7 @@ export const stylesLegal = css`
   })}
 
   * {
-    color: ${colors.third};
+    color: ${cssVar('--color-primary-text')};
   }
 
   .content {

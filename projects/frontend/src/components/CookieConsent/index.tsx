@@ -1,33 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import Cookies from 'js-cookie';
 
-import type { ConsentComponent } from './types';
+import loadable from '@loadable/component';
+import cookies from 'js-cookie';
 
-const Nothing: ConsentComponent = React.memo(() => <></>);
+const Consent = loadable(() => import('./Consent'));
 
 const CookieConsent = React.memo(
   () => {
     const [showConsent, setShowConsent] = useState(false);
-    const [render, setRender] = useState({ Component: Nothing });
 
     useEffect(() => {
-      const consentAccepted = Cookies.get('consent-accepted');
+      const consentAccepted = cookies.get('consent-accepted');
 
       if (typeof consentAccepted === 'undefined') {
-        import('./Consent')
-          .then(({ default: Consent }) => {
-            setRender({ Component: Consent });
-          });
+        setShowConsent(true);
       }
     }, []);
 
     return (
-      <render.Component
+      <Consent
         show={showConsent}
-        mounted={() => setShowConsent(true)}
-
         onAgree={() => {
-          Cookies.set('consent-accepted', '1', { expires: 365 });
+          cookies.set('consent-accepted', '1', { expires: 365 });
           setShowConsent(false);
         }}
       />
