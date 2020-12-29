@@ -73,6 +73,8 @@ export const getStyles = (
       }
 
       svg {
+        flex: 1 1 auto;
+
         padding: 0px;
         position: relative;
         cursor: pointer;
