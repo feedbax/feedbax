@@ -2,15 +2,13 @@ import generateNodeTypes from './generate-node-types';
 
 import type { CreateNodeArgs, NodeInput } from 'gatsby';
 
+const localesSet = new Set<string>();
 let localesNode: NodeInput;
 
 const getData = (
   (locale: string): string[] => {
-    if (localesNode) {
-      return [...localesNode.data as string[], locale];
-    }
-
-    return [locale];
+    localesSet.add(locale);
+    return Array.from(localesSet);
   }
 );
 
