@@ -13,7 +13,6 @@ import { graphql, useStaticQuery } from 'gatsby';
 import Img from 'gatsby-image';
 
 import type { Benefit, QueryData } from './types';
-import hyphens from '~components/Hyphens';
 
 const Benefits = React.memo(
   () => {
@@ -22,7 +21,7 @@ const Benefits = React.memo(
       ({ image, text }: Benefit) => (
         <div css={stylesBenefit} key={image}>
           <Img className="image" fluid={data[image].childImageSharp.fluid} />
-          <hyphens.div className="text">{text.content}</hyphens.div>
+          <div className="text">{text.content}</div>
         </div>
       ), [data],
     );

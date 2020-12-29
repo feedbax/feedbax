@@ -1,15 +1,27 @@
 import path from 'path';
 import type { CreatePagesArgs } from 'gatsby';
 
-type Query = import('~graphql-types').Query;
-type TranslationData = import('~graphql-types').TranslationData;
-type Locales = string[];
+type Locales = import('~types/locales').Locales;
+type Translation = import('~types/translation').Translation;
+type PageFile = import('~types/page').Page;
+
+type Query = {
+  translation: Translation;
+  locales: Locales;
+
+  allFile: {
+    nodes: PageFile[];
+  }
+};
+
+type TranslationData = Translation['data'];
+type LocalesData = Locales['data'];
 
 type GraphQl = CreatePagesArgs['graphql'];
 type TranslationsMap = Map<string, TranslationData>;
 
 const getLocales = (
-  async (graphql: GraphQl): Promise<Locales> => {
+  async (graphql: GraphQl): Promise<LocalesData> => {
     const localesData = await graphql<Query>(`
       query Locales {
         locales {

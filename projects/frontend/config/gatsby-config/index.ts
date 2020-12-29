@@ -9,14 +9,6 @@ import path from 'path';
 export default {
   plugins: [
     {
-      // automatically generate typings from graphql schema
-      resolve: 'gatsby-plugin-generate-typings',
-      options: {
-        dest: path.join(global.rootDir, 'src/graphql-types.d.ts'),
-      },
-    },
-
-    {
       // source pages
       resolve: 'gatsby-source-filesystem',
       options: {

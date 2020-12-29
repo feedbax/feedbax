@@ -2,16 +2,17 @@ import React from 'react';
 import TranslationContext from '~components/I18n/Context';
 
 import type { WrapPageElementBrowserArgs } from 'gatsby';
-import type { TranslationDataClean } from '~components/I18n/types';
 
 import '~polyfill';
+
+type TranslationData = import('~types/translation').Data;
 
 type Props = WrapPageElementBrowserArgs & {
   props: {
     pageContext: {
       locale: string;
       locales: string[];
-      translation: TranslationDataClean;
+      translation: TranslationData;
     };
   };
 };

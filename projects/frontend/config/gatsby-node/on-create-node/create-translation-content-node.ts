@@ -1,6 +1,8 @@
 import marked from 'marked';
 import xss from 'xss';
 
+import generateNodeTypes from './generate-node-types';
+
 import type { CreateNodeArgs } from 'gatsby';
 
 const createTranslationMarkdownNode = (
@@ -26,7 +28,7 @@ const createTranslationMarkdownNode = (
 
     const hyphenatedHTML = hyphenateHTMLSync(sanitizedHTML);
 
-    createNode({
+    const newNode = {
       id: createNodeId(`translation_markdown_${node.base}_${locale}`),
       parent: node.id,
 
@@ -39,6 +41,12 @@ const createTranslationMarkdownNode = (
 
       file: `~${node.base as string}`,
       data: hyphenatedHTML,
+    };
+
+    createNode(newNode);
+    generateNodeTypes(newNode, {
+      fileName: 'translation-content.d.ts',
+      rootName: 'TranslationContent',
     });
   }
 );

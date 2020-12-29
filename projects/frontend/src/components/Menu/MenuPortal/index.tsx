@@ -73,7 +73,7 @@ const MenuPortal = React.memo(
 
     const getItemProps = (
       (item: MenuItem, index: number) => ({
-        css: [stylesItem, stylesTabable],
+        css: [stylesItem, stylesTabable, item.styles],
 
         role: 'button',
         tabIndex: 0,
@@ -99,7 +99,6 @@ const MenuPortal = React.memo(
         onBackdropClick={toggleOpen}
       >
         <IconButton
-          size={38}
           neumorphism={false}
           styles={[stylesIconButtonBack, hasHistory ? stylesShow : stylesHide]}
 
@@ -129,7 +128,6 @@ const MenuPortal = React.memo(
         </div>
 
         <IconButton
-          size={38}
           neumorphism={false}
           styles={stylesIconButtonClose}
 

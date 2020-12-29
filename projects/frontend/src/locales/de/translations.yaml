@@ -1,9 +1,8 @@
 ---
 menu:
   change_locale: Sprache ändern
-  login: Einloggen
+  create_event: Event erstellen
   logout: Ausloggen
-  register: Registrieren
 
 home:
   lets_go: Los geht's

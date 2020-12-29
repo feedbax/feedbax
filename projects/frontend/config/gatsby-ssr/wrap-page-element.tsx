@@ -2,14 +2,15 @@ import React from 'react';
 import TranslationContext from '~components/I18n/Context';
 
 import type { WrapPageElementNodeArgs } from 'gatsby';
-import type { TranslationDataClean } from '~components/I18n/types';
+
+type TranslationData = import('~types/translation').Data;
 
 type Props = WrapPageElementNodeArgs & {
   props: {
     pageContext: {
       locale: string;
       locales: string[];
-      translation: TranslationDataClean;
+      translation: TranslationData;
     };
   };
 };

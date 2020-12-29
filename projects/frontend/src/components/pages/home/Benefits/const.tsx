@@ -1,5 +1,7 @@
 import React from 'react';
+
 import Translation from '~components/I18n/Translation';
+import hyphens from '~components/Hyphens';
 
 // eslint-disable-next-line import/prefer-default-export
 export const benefits = [
@@ -45,12 +47,12 @@ export const benefits = [
             <>
               {t('home', 'benefit_4', 'title')}
 
-              <small>
+              <hyphens.small>
                 <ul>
                   <li>{t('home', 'benefit_4', 'content_1')}</li>
                   <li>{t('home', 'benefit_4', 'content_2')}</li>
                 </ul>
-              </small>
+              </hyphens.small>
             </>
           )}
         </Translation>
@@ -66,7 +68,7 @@ export const benefits = [
           {(t) => (
             <>
               {t('home', 'benefit_5', 'title')}
-              <small>{t('home', 'benefit_5', 'content_1')}</small>
+              <hyphens.small>{t('home', 'benefit_5', 'content_1')}</hyphens.small>
               <code>{t('home', 'benefit_5', 'content_2')}</code>
             </>
           )}
@@ -83,7 +85,7 @@ export const benefits = [
           {(t) => (
             <>
               {t('home', 'benefit_6', 'title')}
-              <small>{t('home', 'benefit_6', 'content_1')}</small>
+              <hyphens.small>{t('home', 'benefit_6', 'content_1')}</hyphens.small>
             </>
           )}
         </Translation>

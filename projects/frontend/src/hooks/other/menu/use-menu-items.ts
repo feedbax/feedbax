@@ -12,7 +12,7 @@ const useMenuItems = (): MenuItem[] => {
   const menuEvent = useEventMenu();
 
   const items = useMemo(
-    () => [...menuHome, ...menuLanguage, ...menuEvent],
+    () => [...menuHome, ...menuEvent, ...menuLanguage],
     [menuLanguage, menuHome, menuEvent],
   );
 

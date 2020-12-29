@@ -14,18 +14,10 @@ const useHomeMenu = (): MenuItem[] => {
   const menuItems = useMemo(
     () => [
       {
-        key: 'login',
+        key: 'create-event',
         content: (
-          <LocaleLink to="/login" tabIndex={-1}>
-            {t('menu', 'login')}
-          </LocaleLink>
-        ),
-      },
-      {
-        key: 'register',
-        content: (
-          <LocaleLink to="/register" tabIndex={-1}>
-            {t('menu', 'register')}
+          <LocaleLink to="/@/create" tabIndex={-1}>
+            {t('menu', 'create_event')}
           </LocaleLink>
         ),
       },

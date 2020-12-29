@@ -10,6 +10,7 @@ type GetIcon = (
   )
 );
 
+// eslint-disable-next-line import/prefer-default-export
 export const getIcon: GetIcon = (
   (icon, variant = Variants.None) => {
     switch (`${icon}_${variant}`) {
@@ -17,6 +18,12 @@ export const getIcon: GetIcon = (
       case `${Icons.Exit}_${Variants.Filled}`:
       case `${Icons.Exit}_${Variants.Outline}`: {
         return loadable(() => import('~assets/images/icons/exit_app.inline.svg'));
+      }
+
+      case `${Icons.Language}_${Variants.None}`:
+      case `${Icons.Language}_${Variants.Filled}`:
+      case `${Icons.Language}_${Variants.Outline}`: {
+        return loadable(() => import('~assets/images/icons/language.inline.svg'));
       }
 
       case `${Icons.ArrowBack}_${Variants.None}`:

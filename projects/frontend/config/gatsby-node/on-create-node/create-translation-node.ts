@@ -1,6 +1,8 @@
 import fs from 'fs';
 import path from 'path';
+
 import YAML from 'yaml';
+import generateNodeTypes from './generate-node-types';
 
 import type { CreateNodeArgs } from 'gatsby';
 
@@ -61,7 +63,7 @@ const createTranslationNode = (
 
     const data = YAML.parse(yamlContent, reviver, {});
 
-    createNode({
+    const newNode = {
       id: createNodeId(`translation_${locale}`),
       parent: node.id,
 
@@ -72,6 +74,12 @@ const createTranslationNode = (
 
       locale,
       data,
+    };
+
+    createNode(newNode);
+    generateNodeTypes(newNode, {
+      fileName: 'translation.d.ts',
+      rootName: 'Translation',
     });
   }
 );

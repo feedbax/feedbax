@@ -1,9 +1,11 @@
 import { createContext } from 'react';
 import { defaultLocale } from '~locales/const';
-import type { Context, TranslationDataClean } from './types';
+import type { Context } from './types';
+
+type TranslationData = import('~types/translation').Data;
 
 const TranslationContext = createContext<Context>({
-  translation: {} as unknown as TranslationDataClean,
+  translation: {} as unknown as TranslationData,
   locale: defaultLocale,
   locales: [defaultLocale],
 });

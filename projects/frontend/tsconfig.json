@@ -20,7 +20,6 @@
     "lib": ["dom", "dom.iterable", "esnext"],
 
     "paths": {
-      "~graphql-types": ["src/graphql-types.d"],
       "~locales": ["src/locales"],
       "~polyfill": ["src/polyfill"],
       "~store": ["src/store"],
@@ -32,7 +31,8 @@
       "~lib/*": ["src/lib/*"],
       "~locales/*": ["src/locales/*"],
       "~pages/*": ["src/_pages/*"],
-      "~store/*": ["src/store/*"]
+      "~store/*": ["src/store/*"],
+      "~types/*": ["src/types/*"]
     },
 
     "plugins": [

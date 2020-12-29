@@ -1,3 +1,5 @@
+import generateNodeTypes from './generate-node-types';
+
 import type { CreateNodeArgs, NodeInput } from 'gatsby';
 
 let localesNode: NodeInput;
@@ -40,6 +42,10 @@ const createLocalesNode = (
     };
 
     createNode(localesNode);
+    generateNodeTypes(localesNode, {
+      fileName: 'locales.d.ts',
+      rootName: 'Locales',
+    });
   }
 );
 

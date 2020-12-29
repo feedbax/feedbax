@@ -4,6 +4,7 @@ import useTranslation from '~hooks/components/I18n/use-translation';
 import useLocation from '~hooks/components/I18n/use-location';
 
 import LocaleLink from '~components/I18n/LocaleLink';
+import Icon, { Icons } from '~components/Icon';
 
 import type { MenuItem } from '~components/Menu';
 
@@ -35,11 +36,38 @@ const useLanguageMenu = (): MenuItem[] => {
   const { t, locale, locales } = translation;
   const $locales = locales.filter(($locale) => $locale !== locale);
 
-  const menuItems = useMemo(
+  const menuItems = useMemo<MenuItem[]>(
     () => [
       {
         key: 'change-locale',
-        content: t('menu', 'change_locale'),
+
+        styles: {
+          width: '50%',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginTop: '1rem',
+
+          svg: {
+            flex: '0 0 auto',
+            padding: '0 1rem',
+          },
+
+          '&::before, &::after': {
+            content: '""',
+            position: 'relative',
+            height: '1px',
+            background: 'white',
+            flex: '1 1 auto',
+          },
+        },
+
+        content: (
+          <Icon
+            icon={Icons.Language}
+            color={{ background: '--color-transparent' }}
+          />
+        ),
 
         items: $locales.map((_locale) => ({
           key: `change-locale-${_locale}`,

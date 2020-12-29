@@ -52,9 +52,8 @@ fragment translationData on Translation {
 
     menu {
       change_locale
-      login
+      create_event
       logout
-      register
     }
   }
 }

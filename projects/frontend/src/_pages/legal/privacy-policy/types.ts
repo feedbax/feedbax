@@ -1,4 +1,8 @@
-import type { Query } from '~graphql-types';
+type TranslationContent = import('~types/translation-content').TranslationContent;
+
+type Query = {
+  translationMarkdown: TranslationContent;
+};
 
 export type PrivacyPolicyProps = {
   data: Query;

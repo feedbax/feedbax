@@ -36,6 +36,8 @@ export const getStyles = (
                   -${shadowXY}px -${shadowXY}px ${shadowBlur}px rgba(255, 255, 255, 0.18)`,
     });
 
+    const sizeSVG = neumorphism ? '0.57em' : '1em';
+
     return css`
       position: relative;
   
@@ -73,7 +75,7 @@ export const getStyles = (
       }
 
       svg {
-        flex: 1 1 auto;
+        flex: 0 0 auto;
 
         padding: 0px;
         position: relative;
@@ -86,8 +88,8 @@ export const getStyles = (
         align-items: center;
         transition: opacity .3s ease 0s, transform .3s ease;
 
-        width: 0.571428em;
-        height: 0.571428em;
+        width: ${sizeSVG};
+        height: ${sizeSVG};
       }
     `;
   }

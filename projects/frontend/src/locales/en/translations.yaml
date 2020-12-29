@@ -1,9 +1,8 @@
 ---
 menu:
   change_locale: Change language
-  login: Login
+  create_event: Create event
   logout: Logout
-  register: Register
 
 home:
   lets_go: Let's go

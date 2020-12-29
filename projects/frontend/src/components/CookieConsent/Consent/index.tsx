@@ -5,6 +5,7 @@ import React from 'react';
 import useTranslation from '~hooks/components/I18n/use-translation';
 
 import { jsx, css } from '@emotion/react';
+import { cssVar, fluidRange } from '~lib/css-helper';
 import { stylesConsentContent } from './styles';
 
 import LocaleLink from '~components/I18n/LocaleLink';
@@ -15,17 +16,31 @@ import type { ConsentProps } from '../types';
 
 const stylesButton = css`
   display: inline-block;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-
   cursor: pointer;
+
+  background-color: ${cssVar('--color-feedbax-secondary')};
+
+  ${fluidRange({
+    screen: ['20rem', '120rem', '240rem'] as const,
+
+    sizes: [
+      ['0.13rem', '0.13rem', '0.25rem'],
+      ['0.31rem', '0.31rem', '0.63rem'],
+    ] as const,
+
+    css: ([paddingY, paddingX]) => ({
+      padding: `${paddingY} ${paddingX}`,
+    }),
+  })}
+
+  &:hover {
+    opacity: 0.8;
+  }
 `;
 
 type ActionEvent = (
-  React.KeyboardEvent<HTMLDivElement>
-  | React.MouseEvent<HTMLDivElement, MouseEvent>
+  React.KeyboardEvent<HTMLSpanElement>
+  | React.MouseEvent<HTMLSpanElement, MouseEvent>
 );
 
 type ButtonProps = {
@@ -35,7 +50,7 @@ type ButtonProps = {
 
 const Button = React.memo(
   ({ onAction, label }: ButtonProps) => (
-    <div
+    <span
       css={stylesButton}
 
       onClick={onAction}
@@ -45,7 +60,7 @@ const Button = React.memo(
       tabIndex={0}
     >
       {label}
-    </div>
+    </span>
   ),
 );
 
@@ -71,12 +86,12 @@ const Consent = React.memo(
             </LocaleLink>
           </small>
 
-          <br />
-
-          <Button
-            label="Akzeptieren"
-            onAction={onAgree}
-          />
+          <p>
+            <Button
+              label={t('generic', 'cookie_consent', 'agree')}
+              onAction={onAgree}
+            />
+          </p>
         </hyphens.div>
       </Modal>
     );

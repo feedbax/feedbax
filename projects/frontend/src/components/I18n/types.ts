@@ -1,44 +1,26 @@
-import type { TranslationData } from '~graphql-types';
-
-type RequiredGraphql<T> = (
-  T extends string
-    ? string
-    : T extends number
-      ? number
-      : T extends boolean
-        ? boolean
-        : {
-          [K in keyof Omit<T, '__typename'>]-?: (
-            RequiredGraphql<NonNullable<T[K]>>
-          )
-        }
-)
-
-export type TranslationDataClean = (
-  RequiredGraphql<TranslationData>
-);
+type TranslationData = import('~types/translation').Data;
 
 export type Context = {
-  translation: TranslationDataClean;
+  translation: TranslationData;
   locale: string;
   locales: string[];
 };
 
 export interface Translate {
-  (): TranslationDataClean;
+  (): TranslationData;
 
   <
-    K1 extends keyof (TranslationDataClean),
-  >(prop1: K1): TranslationDataClean[K1];
+    K1 extends keyof (TranslationData),
+  >(prop1: K1): TranslationData[K1];
 
   <
-    K1 extends keyof (TranslationDataClean),
-    K2 extends keyof (TranslationDataClean[K1]),
-  >(prop1: K1, prop2: K2): TranslationDataClean[K1][K2];
+    K1 extends keyof (TranslationData),
+    K2 extends keyof (TranslationData[K1]),
+  >(prop1: K1, prop2: K2): TranslationData[K1][K2];
 
   <
-    K1 extends keyof (TranslationDataClean),
-    K2 extends keyof (TranslationDataClean[K1]),
-    K3 extends keyof (TranslationDataClean[K1][K2]),
-  >(prop1: K1, prop2: K2, prop3: K3): TranslationDataClean[K1][K2][K3];
+    K1 extends keyof (TranslationData),
+    K2 extends keyof (TranslationData[K1]),
+    K3 extends keyof (TranslationData[K1][K2]),
+  >(prop1: K1, prop2: K2, prop3: K3): TranslationData[K1][K2][K3];
 }

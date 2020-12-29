@@ -5,11 +5,10 @@ import React from 'react';
 import isEqual from 'lodash.isequal';
 
 import LocaleLink from '~components/I18n/LocaleLink';
+import Icon from '~components/Icon';
 
 import { jsx, css } from '@emotion/react';
 import { getStyles } from './styles';
-import { cssVar } from '~lib/css-helper';
-import { getIcon } from './const';
 
 import type { IconButtonProps } from './types';
 
@@ -27,8 +26,13 @@ const IconButton = React.memo(
     const { setFocus = false } = props;
     const $setFocus = (el: HTMLElement | null) => setFocus && el?.focus();
 
-    const IconComponent = getIcon(icon, variant);
-    const Icon = <IconComponent fill={cssVar(color.icon ?? '--color-primary-text')} />;
+    const _Icon = (
+      <Icon
+        icon={icon}
+        variant={variant}
+        color={color}
+      />
+    );
 
     if (to) {
       return (
@@ -38,7 +42,7 @@ const IconButton = React.memo(
           ref={$setFocus}
           aria-label={ariaLabel}
         >
-          {Icon}
+          {_Icon}
         </LocaleLink>
       );
     }
@@ -54,7 +58,7 @@ const IconButton = React.memo(
           onClick={onClick}
           onMouseUp={(e) => e.currentTarget.blur()}
         >
-          {Icon}
+          {_Icon}
         </button>
       );
     }
@@ -66,11 +70,13 @@ const IconButton = React.memo(
         ref={$setFocus}
         aria-label={ariaLabel}
       >
-        {Icon}
+        {_Icon}
       </button>
     );
   }, isEqual,
 );
 
 export default IconButton;
+
 export * from './types';
+export { Icons, Variants } from '~components/Icon';

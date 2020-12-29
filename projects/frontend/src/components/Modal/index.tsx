@@ -64,8 +64,9 @@ const Modal = React.memo(
           <>
             <Global
               styles={css`
-                html, body, #___gatsby {
-                  overflow: hidden;
+                body {
+                  position: fixed;
+                  overflow-y: scroll;
                 }
               `}
             />
