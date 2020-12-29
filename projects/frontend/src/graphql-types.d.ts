@@ -1589,6 +1589,8 @@ export type Query = {
   allSitePage: SitePageConnection;
   imageSharp?: Maybe<ImageSharp>;
   allImageSharp: ImageSharpConnection;
+  translationFragment?: Maybe<TranslationFragment>;
+  allTranslationFragment: TranslationFragmentConnection;
   translationMarkdown?: Maybe<TranslationMarkdown>;
   allTranslationMarkdown: TranslationMarkdownConnection;
   translation?: Maybe<Translation>;
@@ -1768,6 +1770,23 @@ export type QueryImageSharpArgs = {
 export type QueryAllImageSharpArgs = {
   filter?: Maybe<ImageSharpFilterInput>;
   sort?: Maybe<ImageSharpSortInput>;
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryTranslationFragmentArgs = {
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+  fragment?: Maybe<StringQueryOperatorInput>;
+};
+
+
+export type QueryAllTranslationFragmentArgs = {
+  filter?: Maybe<TranslationFragmentFilterInput>;
+  sort?: Maybe<TranslationFragmentSortInput>;
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
 };
@@ -2273,12 +2292,14 @@ export type SitePageContextTranslationGenericCookie_Consent = {
   content?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   small?: Maybe<Scalars['String']>;
+  agree?: Maybe<Scalars['String']>;
 };
 
 export type SitePageContextTranslationGenericCookie_ConsentFilterInput = {
   content?: Maybe<StringQueryOperatorInput>;
   title?: Maybe<StringQueryOperatorInput>;
   small?: Maybe<StringQueryOperatorInput>;
+  agree?: Maybe<StringQueryOperatorInput>;
 };
 
 export type SitePageContextTranslationGenericFilterInput = {
@@ -3024,12 +3045,14 @@ export type TranslationDataGenericCookie_Consent = {
   title?: Maybe<Scalars['String']>;
   content?: Maybe<Scalars['String']>;
   small?: Maybe<Scalars['String']>;
+  agree?: Maybe<Scalars['String']>;
 };
 
 export type TranslationDataGenericCookie_ConsentFilterInput = {
   title?: Maybe<StringQueryOperatorInput>;
   content?: Maybe<StringQueryOperatorInput>;
   small?: Maybe<StringQueryOperatorInput>;
+  agree?: Maybe<StringQueryOperatorInput>;
 };
 
 export type TranslationDataGenericFilterInput = {
@@ -3264,6 +3287,7 @@ export type TranslationFieldsEnum =
   | 'data___generic___cookie_consent___title'
   | 'data___generic___cookie_consent___content'
   | 'data___generic___cookie_consent___small'
+  | 'data___generic___cookie_consent___agree'
   | 'data___generic___locales___de'
   | 'data___generic___locales___en'
   | 'data___generic___locales___it'
@@ -3277,6 +3301,156 @@ export type TranslationFilterInput = {
   internal?: Maybe<InternalFilterInput>;
   locale?: Maybe<StringQueryOperatorInput>;
   data?: Maybe<TranslationDataFilterInput>;
+};
+
+export type TranslationFragment = Node & {
+  __typename?: 'TranslationFragment';
+  id: Scalars['ID'];
+  parent?: Maybe<Node>;
+  children: Array<Node>;
+  internal: Internal;
+  fragment?: Maybe<Scalars['String']>;
+};
+
+export type TranslationFragmentConnection = {
+  __typename?: 'TranslationFragmentConnection';
+  totalCount: Scalars['Int'];
+  edges: Array<TranslationFragmentEdge>;
+  nodes: Array<TranslationFragment>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  group: Array<TranslationFragmentGroupConnection>;
+};
+
+
+export type TranslationFragmentConnectionDistinctArgs = {
+  field: TranslationFragmentFieldsEnum;
+};
+
+
+export type TranslationFragmentConnectionGroupArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  field: TranslationFragmentFieldsEnum;
+};
+
+export type TranslationFragmentEdge = {
+  __typename?: 'TranslationFragmentEdge';
+  next?: Maybe<TranslationFragment>;
+  node: TranslationFragment;
+  previous?: Maybe<TranslationFragment>;
+};
+
+export type TranslationFragmentFieldsEnum = 
+  | 'id'
+  | 'parent___id'
+  | 'parent___parent___id'
+  | 'parent___parent___parent___id'
+  | 'parent___parent___parent___children'
+  | 'parent___parent___children'
+  | 'parent___parent___children___id'
+  | 'parent___parent___children___children'
+  | 'parent___parent___internal___content'
+  | 'parent___parent___internal___contentDigest'
+  | 'parent___parent___internal___description'
+  | 'parent___parent___internal___fieldOwners'
+  | 'parent___parent___internal___ignoreType'
+  | 'parent___parent___internal___mediaType'
+  | 'parent___parent___internal___owner'
+  | 'parent___parent___internal___type'
+  | 'parent___children'
+  | 'parent___children___id'
+  | 'parent___children___parent___id'
+  | 'parent___children___parent___children'
+  | 'parent___children___children'
+  | 'parent___children___children___id'
+  | 'parent___children___children___children'
+  | 'parent___children___internal___content'
+  | 'parent___children___internal___contentDigest'
+  | 'parent___children___internal___description'
+  | 'parent___children___internal___fieldOwners'
+  | 'parent___children___internal___ignoreType'
+  | 'parent___children___internal___mediaType'
+  | 'parent___children___internal___owner'
+  | 'parent___children___internal___type'
+  | 'parent___internal___content'
+  | 'parent___internal___contentDigest'
+  | 'parent___internal___description'
+  | 'parent___internal___fieldOwners'
+  | 'parent___internal___ignoreType'
+  | 'parent___internal___mediaType'
+  | 'parent___internal___owner'
+  | 'parent___internal___type'
+  | 'children'
+  | 'children___id'
+  | 'children___parent___id'
+  | 'children___parent___parent___id'
+  | 'children___parent___parent___children'
+  | 'children___parent___children'
+  | 'children___parent___children___id'
+  | 'children___parent___children___children'
+  | 'children___parent___internal___content'
+  | 'children___parent___internal___contentDigest'
+  | 'children___parent___internal___description'
+  | 'children___parent___internal___fieldOwners'
+  | 'children___parent___internal___ignoreType'
+  | 'children___parent___internal___mediaType'
+  | 'children___parent___internal___owner'
+  | 'children___parent___internal___type'
+  | 'children___children'
+  | 'children___children___id'
+  | 'children___children___parent___id'
+  | 'children___children___parent___children'
+  | 'children___children___children'
+  | 'children___children___children___id'
+  | 'children___children___children___children'
+  | 'children___children___internal___content'
+  | 'children___children___internal___contentDigest'
+  | 'children___children___internal___description'
+  | 'children___children___internal___fieldOwners'
+  | 'children___children___internal___ignoreType'
+  | 'children___children___internal___mediaType'
+  | 'children___children___internal___owner'
+  | 'children___children___internal___type'
+  | 'children___internal___content'
+  | 'children___internal___contentDigest'
+  | 'children___internal___description'
+  | 'children___internal___fieldOwners'
+  | 'children___internal___ignoreType'
+  | 'children___internal___mediaType'
+  | 'children___internal___owner'
+  | 'children___internal___type'
+  | 'internal___content'
+  | 'internal___contentDigest'
+  | 'internal___description'
+  | 'internal___fieldOwners'
+  | 'internal___ignoreType'
+  | 'internal___mediaType'
+  | 'internal___owner'
+  | 'internal___type'
+  | 'fragment';
+
+export type TranslationFragmentFilterInput = {
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+  fragment?: Maybe<StringQueryOperatorInput>;
+};
+
+export type TranslationFragmentGroupConnection = {
+  __typename?: 'TranslationFragmentGroupConnection';
+  totalCount: Scalars['Int'];
+  edges: Array<TranslationFragmentEdge>;
+  nodes: Array<TranslationFragment>;
+  pageInfo: PageInfo;
+  field: Scalars['String'];
+  fieldValue?: Maybe<Scalars['String']>;
+};
+
+export type TranslationFragmentSortInput = {
+  fields?: Maybe<Array<Maybe<TranslationFragmentFieldsEnum>>>;
+  order?: Maybe<Array<Maybe<SortOrderEnum>>>;
 };
 
 export type TranslationGroupConnection = {

@@ -27,8 +27,8 @@ const getLocales = (
 );
 
 const getTranslations = (
-  async (graphql: GraphQl, locales: string[]): Promise<TranslationsMap> => {
-    const { translationFragment } = await import('~locales/const');
+  async ({ graphql, getNode }: CreatePagesArgs, locales: string[]): Promise<TranslationsMap> => {
+    const translationFragment = getNode('translation-fragment.gql').fragment;
 
     const translations = new Map<string, TranslationData>();
     const promises: Promise<void>[] = [];
@@ -191,7 +191,7 @@ const createTranslatedPages = (
     const { defaultLocale } = await import('~locales/const');
 
     const locales = await getLocales(graphql);
-    const translations = await getTranslations(graphql, locales);
+    const translations = await getTranslations(props, locales);
     const allPages = await getPages(graphql);
 
     const promises: Promise<void>[] = [];
