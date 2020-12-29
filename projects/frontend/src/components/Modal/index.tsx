@@ -21,9 +21,23 @@ type MenuPortalProps = {
 const isSSR = typeof window === 'undefined';
 
 const variants: Variants = {
-  initial: { opacity: 0, backdropFilter: 'blur(0px)' },
-  animate: { opacity: 1, backdropFilter: 'blur(5px)' },
-  exit: { opacity: 0, backdropFilter: 'blur(0px)' },
+  initial: {
+    opacity: 0,
+    backdropFilter: 'blur(0px)',
+    WebkitBackdropFilter: 'blur(0px)',
+  },
+
+  animate: {
+    opacity: 1,
+    backdropFilter: 'blur(5px)',
+    WebkitBackdropFilter: 'blur(5px)',
+  },
+
+  exit: {
+    opacity: 0,
+    backdropFilter: 'blur(0px)',
+    WebkitBackdropFilter: 'blur(0px)',
+  },
 };
 
 const Modal = React.memo(
@@ -50,7 +64,7 @@ const Modal = React.memo(
           <>
             <Global
               styles={css`
-                body {
+                html, body, #___gatsby {
                   overflow: hidden;
                 }
               `}
