@@ -1,32 +1,21 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import twemojis from 'twemoji';
 
-type GetHTMLProps<T extends keyof React.ReactHTML> = (
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  React.ReactHTML[T] extends React.DetailedHTMLFactory<infer R, any>
-    ? R
-    : never
-);
-
 type TwemojiProps = {
   renderWhenVisible?: boolean;
 };
 
-type GetTwemojiProps<T extends keyof React.ReactHTML> = (
-  GetHTMLProps<T> & TwemojiProps
-);
-
 type TwemojiHTML = {
-  [key in keyof React.ReactHTML]: React.FC<GetTwemojiProps<key>>
+  [T in keyof JSX.IntrinsicElements]: (
+    React.FC<Omit<JSX.IntrinsicElements[T], 'ref'> & TwemojiProps>
+  )
 };
-
-const target = {} as TwemojiHTML;
 
 const imageSourceGenerator = (icon: string) => `/twemoji/72x72/${icon}.png`;
 const parserProps = { callback: imageSourceGenerator };
 
 const twemojisParse = (
-  (element: Element): void => {
+  (element: HTMLElement): void => {
     if (element.hasAttribute('twemoji-parsed')) return;
 
     twemojis.parse(element, parserProps);
@@ -52,11 +41,13 @@ const twemojiRenderer = (
     )
 );
 
-// eslint-disable-next-line import/prefer-default-export
-const twemoji = new Proxy(target, {
-  get <T extends keyof TwemojiHTML>(_: unknown, Element: T) {
+const target = {} as TwemojiHTML;
+
+const handler = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  get (_: unknown, Element: any) {
     return (
-      (props: GetTwemojiProps<T>) => {
+      (props: TwemojiProps) => {
         const { renderWhenVisible = false, ...restProps } = props;
         const elementRef = useRef<HTMLElement>();
 
@@ -95,6 +86,7 @@ const twemoji = new Proxy(target, {
       }
     );
   },
-});
+} as ProxyHandler<TwemojiHTML>;
 
+const twemoji: TwemojiHTML = new Proxy(target, handler);
 export default twemoji;

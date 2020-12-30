@@ -5,21 +5,20 @@ import { jsx, css, PropsOf } from '@emotion/react';
 
 import type { SerializedStyles } from '@emotion/react';
 
-type GetHTMLProps<T extends keyof React.ReactHTML> = (
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  React.ReactHTML[T] extends React.DetailedHTMLFactory<infer R, any>
-    ? R
-    : never
-);
-
 type HyphensProps = { style?: SerializedStyles };
 
-type GetHyphensProps<T extends keyof React.ReactHTML> = (
-  GetHTMLProps<T> & HyphensProps
-);
+type HyphenCustom = {
+  custom: <T extends React.FC>(component: T) => (
+    React.FC<PropsOf<T> & HyphensProps>
+  )
+};
 
-type HyphenCustom = { custom: <T>(component: T) => React.FC<PropsOf<T> & HyphensProps> };
-type HyphenHTML = { [key in keyof React.ReactHTML]: React.FC<GetHyphensProps<key>> };
+type HyphenHTML = {
+  [T in keyof JSX.IntrinsicElements]: (
+    React.FC<JSX.IntrinsicElements[T] & HyphensProps>
+  )
+};
+
 type Hyphen = HyphenCustom & HyphenHTML;
 
 type Component = React.FC<{
@@ -29,14 +28,14 @@ type Component = React.FC<{
 
 const target = {} as Hyphen;
 
-// eslint-disable-next-line import/prefer-default-export
-const hyphens = new Proxy(target, {
-  get <T extends keyof Hyphen>(_: unknown, Element: T) {
+const handler = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  get (_: unknown, Element: any) {
     if (Element === 'custom') {
       return (
         (Component: Component) => (
           React.forwardRef(
-            ({ style, ...rest }: GetHyphensProps<T>, ref) => (
+            ({ style, ...rest }: HyphensProps, ref) => (
               <Component
                 // eslint-disable-next-line react/jsx-props-no-spreading
                 {...rest}
@@ -50,12 +49,10 @@ const hyphens = new Proxy(target, {
       );
     }
 
-    const _Element: keyof HyphenHTML = Element;
-
     return (
       React.forwardRef(
-        ({ style, ...rest }: GetHyphensProps<T>, ref) => (
-          <_Element
+        ({ style, ...rest }: HyphensProps, ref) => (
+          <Element
             // eslint-disable-next-line react/jsx-props-no-spreading
             {...rest}
 
@@ -66,6 +63,7 @@ const hyphens = new Proxy(target, {
       )
     );
   },
-});
+} as ProxyHandler<Hyphen>;
 
+const hyphens = new Proxy(target, handler);
 export default hyphens;
