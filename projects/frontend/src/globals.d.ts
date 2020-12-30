@@ -37,5 +37,3 @@ declare const global: {
   window: Record<string, unknown>;
   rootDir: string;
 };
-
-declare function MACRO<T> (t: T): T;

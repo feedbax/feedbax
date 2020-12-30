@@ -17,9 +17,7 @@ const GlobalStyles = React.memo(
     <Global
       styles={
         css`
-          html,
-          body,
-          #___gatsby {
+          html, body, #___gatsby {
             background-color: ${cssVar(color)};
           }
         `

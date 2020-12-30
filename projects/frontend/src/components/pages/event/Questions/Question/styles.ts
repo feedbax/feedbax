@@ -42,12 +42,14 @@ export const stylesQuestion = css`
   })}
 
   .number {
+    flex: 0 0 auto;
     display: block;
     font-family: ${cssVar('--font-feedbax-primary')};
     font-weight: bold;
   }
 
   .text {
+    flex: 0 1 auto;
     display: block;
     font-family: ${cssVar('--font-feedbax-primary')};
     font-weight: bold;

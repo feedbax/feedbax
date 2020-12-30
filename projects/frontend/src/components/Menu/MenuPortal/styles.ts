@@ -30,6 +30,18 @@ export const stylesItem = css`
   .icon {
     position: absolute;
     left: 0;
+    top: 0;
+    bottom: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      flex: 0 0 auto;
+      width: 0.8em;
+      height: 0.8em;
+    }
   }
 
   ${fluidRange({
@@ -43,7 +55,7 @@ export const stylesItem = css`
     css: ([unit, paddingY]) => ({
       fontSize: unit,
       lineHeight: unit,
-      padding: `${paddingY} 1.5em`,
+      padding: `${paddingY} 1.2em`,
 
       '*': {
         fontSize: unit,

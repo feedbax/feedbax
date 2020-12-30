@@ -1,6 +1,6 @@
 import path from 'path';
-import config from 'tsconfig.json';
 
+import config from 'tsconfig.json';
 import createCustomEslintConfiguration from './create-custom-eslint-configuration';
 
 import type { CreateWebpackConfigArgs } from 'gatsby';

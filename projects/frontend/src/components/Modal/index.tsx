@@ -6,7 +6,7 @@ import { createPortal } from 'react-dom';
 
 import { motion, AnimatePresence } from 'framer-motion';
 
-import { Global, css, jsx } from '@emotion/react';
+import { css, jsx } from '@emotion/react';
 import { stylesPortal, stylesBackground } from './styles';
 
 import type { Variants } from 'framer-motion';
@@ -61,36 +61,25 @@ const Modal = React.memo(
     return createPortal((
       <AnimatePresence>
         {isOpen && (
-          <>
-            <Global
-              styles={css`
-                body {
-                  position: fixed;
-                  overflow-y: scroll;
-                }
-              `}
+          <motion.div
+            css={css([stylesPortal, stylesBackdrop])}
+            variants={variants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            transition={{ duration: 0.4 }}
+          >
+            { /* eslint-disable jsx-a11y/no-static-element-interactions */ }
+            { /* eslint-disable jsx-a11y/click-events-have-key-events */ }
+            <div
+              css={css([stylesBackground, stylesBackdrop])}
+              onClick={$toggleOpen}
             />
+            { /* eslint-enable jsx-a11y/no-static-element-interactions */ }
+            { /* eslint-enable jsx-a11y/click-events-have-key-events */ }
 
-            <motion.div
-              css={css([stylesPortal, stylesBackdrop])}
-              variants={variants}
-              initial="initial"
-              animate="animate"
-              exit="exit"
-              transition={{ duration: 0.4 }}
-            >
-              { /* eslint-disable jsx-a11y/no-static-element-interactions */ }
-              { /* eslint-disable jsx-a11y/click-events-have-key-events */ }
-              <div
-                css={css([stylesBackground, stylesBackdrop])}
-                onClick={$toggleOpen}
-              />
-              { /* eslint-enable jsx-a11y/no-static-element-interactions */ }
-              { /* eslint-enable jsx-a11y/click-events-have-key-events */ }
-
-              {children}
-            </motion.div>
-          </>
+            {children}
+          </motion.div>
         )}
       </AnimatePresence>
     ), document.body);
