@@ -2,13 +2,16 @@
 /** @jsxFrag React.Fragment */
 
 import React from 'react';
+
 import useTranslation from '~hooks/components/I18n/use-translation';
+import useLocation from '~hooks/components/I18n/use-location';
 
 import { jsx, css } from '@emotion/react';
 import { cssVar, fluidRange } from '~lib/css-helper';
-import { stylesConsentContent } from './styles';
+import { stylesConsentContent, stylesLanguageChooser } from './styles';
 
 import LocaleLink from '~components/I18n/LocaleLink';
+import Icon, { Icons } from '~components/Icon';
 import Modal from '~components/Modal';
 import hyphens from '~components/Hyphens';
 
@@ -66,7 +69,10 @@ const Button = React.memo(
 
 const Consent = React.memo(
   ({ show, onAgree }: ConsentProps) => {
-    const { t } = useTranslation();
+    const { t, locale, locales } = useTranslation();
+    const pathname = useLocation();
+
+    const $locales = locales.filter(($locale) => $locale !== locale);
 
     return (
       <Modal isOpen={show}>
@@ -92,6 +98,19 @@ const Consent = React.memo(
               onAction={onAgree}
             />
           </p>
+
+          <div css={stylesLanguageChooser}>
+            <Icon icon={Icons.Language} />
+            {$locales.map(($locale) => (
+              <LocaleLink
+                to={pathname}
+                locale={$locale}
+                key={$locale}
+              >
+                {t('generic', 'locales', $locale as 'de')}
+              </LocaleLink>
+            ))}
+          </div>
         </hyphens.div>
       </Modal>
     );

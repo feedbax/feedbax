@@ -41,33 +41,8 @@ const useLanguageMenu = (): MenuItem[] => {
       {
         key: 'change-locale',
 
-        styles: {
-          width: '50%',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginTop: '1rem',
-
-          svg: {
-            flex: '0 0 auto',
-            padding: '0 1rem',
-          },
-
-          '&::before, &::after': {
-            content: '""',
-            position: 'relative',
-            height: '1px',
-            background: 'white',
-            flex: '1 1 auto',
-          },
-        },
-
-        content: (
-          <Icon
-            icon={Icons.Language}
-            color={{ background: '--color-transparent' }}
-          />
-        ),
+        icon: <Icon icon={Icons.Language} />,
+        content: t('menu', 'change_locale'),
 
         items: $locales.map((_locale) => ({
           key: `change-locale-${_locale}`,

@@ -8,7 +8,7 @@ import { jsx } from '@emotion/react';
 import { stylesItem, stylesItems } from './styles';
 import { stylesShow, stylesHide } from './styles';
 import { stylesIconButtonBack, stylesIconButtonClose } from './styles';
-import { stylesTabable } from './styles';
+import { stylesTabable, stylesMenuContent } from './styles';
 
 import IconButton, { Icons } from '~components/IconButton';
 import Modal from '~components/Modal';
@@ -20,8 +20,8 @@ type MenuPortalProps = {
   toggleOpen: () => void;
 };
 
-type _MouseEvent = React.MouseEvent<HTMLDivElement, MouseEvent>;
-type _KeyboardEvent = React.KeyboardEvent<HTMLDivElement>;
+type _MouseEvent = React.MouseEvent<HTMLElement, MouseEvent>;
+type _KeyboardEvent = React.KeyboardEvent<HTMLElement>;
 type Event = _MouseEvent | _KeyboardEvent;
 
 const MenuPortal = React.memo(
@@ -73,7 +73,7 @@ const MenuPortal = React.memo(
 
     const getItemProps = (
       (item: MenuItem, index: number) => ({
-        css: [stylesItem, stylesTabable, item.styles],
+        css: [stylesItem, stylesTabable],
 
         role: 'button',
         tabIndex: 0,
@@ -98,45 +98,48 @@ const MenuPortal = React.memo(
         isOpen={isOpen}
         onBackdropClick={toggleOpen}
       >
-        <IconButton
-          neumorphism={false}
-          styles={[stylesIconButtonBack, hasHistory ? stylesShow : stylesHide]}
+        <div css={stylesMenuContent}>
+          <IconButton
+            neumorphism={false}
+            styles={[stylesIconButtonBack, hasHistory ? stylesShow : stylesHide]}
 
-          icon={Icons.ArrowBack}
-          color={{ background: '--color-transparent' }}
+            icon={Icons.ArrowBack}
+            color={{ background: '--color-transparent' }}
 
-          ariaLabel="Previous Items"
-          onClick={() => {
-            if (hasHistory) {
-              const $items = itemsHistory.current.pop();
-              setItems($items ?? []);
-            }
-          }}
-        />
+            ariaLabel="Previous Items"
+            onClick={() => {
+              if (hasHistory) {
+                const $items = itemsHistory.current.pop();
+                setItems($items ?? []);
+              }
+            }}
+          />
 
-        <div css={stylesItems}>
-          {items.map((item, i) => (
-            <div
-              key={item.key}
+          <div css={stylesItems}>
+            {items.map((item, i) => (
+              <div
+                key={item.key}
 
-              // eslint-disable-next-line react/jsx-props-no-spreading
-              {...getItemProps(item, i)}
-            >
-              {item.content}
-            </div>
-          ))}
+                // eslint-disable-next-line react/jsx-props-no-spreading
+                {...getItemProps(item, i)}
+              >
+                <span className="icon">{item.icon}</span>
+                {item.content}
+              </div>
+            ))}
+          </div>
+
+          <IconButton
+            neumorphism={false}
+            styles={stylesIconButtonClose}
+
+            icon={Icons.Close}
+            color={{ background: '--color-transparent' }}
+
+            ariaLabel="Close Menu"
+            onClick={toggleOpen}
+          />
         </div>
-
-        <IconButton
-          neumorphism={false}
-          styles={stylesIconButtonClose}
-
-          icon={Icons.Close}
-          color={{ background: '--color-transparent' }}
-
-          ariaLabel="Close Menu"
-          onClick={toggleOpen}
-        />
       </Modal>
     );
   },

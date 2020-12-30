@@ -1,25 +1,23 @@
 import { css } from '@emotion/react';
 import { cssVar, fluidRange } from '~lib/css-helper';
 
-export const stylesItems = css`
+export const stylesMenuContent = css`
+  flex: 1 1 auto;
+
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
 
   ${fluidRange({
     screen: ['20rem', '120rem', '240rem'] as const,
-
-    sizes: [
-      ['1.2rem',  '1.56rem',    '3.13rem'],
-      ['15rem',   '20rem',      '40rem'],
-    ] as const,
-
-    css: ([marginY, minWidth]) => ({
-      margin: `0 ${marginY}`,
-      minWidth,
-    }),
+    sizes: [['20rem', '30rem', '60rem']] as const,
+    css: ([maxWidth]) => ({ maxWidth }),
   })}
+`;
+
+export const stylesItems = css`
+  margin: 0 auto;
 `;
 
 export const stylesItem = css`
@@ -27,19 +25,25 @@ export const stylesItem = css`
   font-family: ${cssVar('--font-feedbax-secondary')};
   text-decoration: none;
 
+  position: relative;
+
+  .icon {
+    position: absolute;
+    left: 0;
+  }
+
   ${fluidRange({
     screen: ['20rem', '120rem', '240rem'] as const,
 
     sizes: [
-      ['1.5rem',    '2rem',       '4rem'],
-      ['0.4rem',    '0.5rem',     '1rem'],
-      ['0.21rem',   '0.31rem',    '0.63rem'],
+      ['1.5rem',  '2rem',   '4rem'],
+      ['0.4rem',  '0.5rem', '1rem'],
     ] as const,
 
-    css: ([unit, paddingX, paddingY]) => ({
+    css: ([unit, paddingY]) => ({
       fontSize: unit,
       lineHeight: unit,
-      padding: `${paddingX} ${paddingY}`,
+      padding: `${paddingY} 1.5em`,
 
       '*': {
         fontSize: unit,
