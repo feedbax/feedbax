@@ -65,7 +65,7 @@ const currentAnswersSelector = (
       filterAnswers(
         answers
           .filter((a) => a.questionId === currentQuestionId)
-          .sort((a, b) => b.created - a.created),
+          .sort((a, b) => b.createdDate - a.createdDate),
 
         currentFilter,
       )

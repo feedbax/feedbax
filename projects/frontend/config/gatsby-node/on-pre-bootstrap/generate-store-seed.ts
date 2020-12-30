@@ -6,15 +6,12 @@ const generateStoreSeed = (
     const seedPath = path.join(global.rootDir, 'src/store/seed.json');
     if (fs.existsSync(seedPath)) return;
 
-    const { default: generateQuestionsState } = await import('~store/modules/questions/seed');
-    const { default: generateAnswersState } = await import('~store/modules/answers/seed');
+    const { default: generateStateSeed } = await import('~store/helper/seed');
 
-    const questionsState = generateQuestionsState();
-    const answersState = generateAnswersState(questionsState);
+    const seedContent = generateStateSeed();
+    const seedContentJSON = JSON.stringify(seedContent);
 
-    const seedContent = JSON.stringify({ questionsState, answersState });
-
-    fs.writeFileSync(seedPath, seedContent);
+    fs.writeFileSync(seedPath, seedContentJSON);
   }
 );
 

@@ -1,14 +1,22 @@
 import type { CaseReducer, PayloadAction } from '@reduxjs/toolkit';
+import type { feedbax } from '@feedbax/api';
 
-export type AnswerState = {
-  id: string;
-  questionId: string;
-  text: string;
-  isMine: boolean;
-  hasLiked: boolean;
-  likesCount: number;
-  created: number;
-};
+/* eslint-disable @typescript-eslint/indent */
+export type AnswerModel = (
+  Required<
+    Omit<
+      feedbax.Model.Answer,
+      'toJSON'
+    >
+  >
+);
+/* eslint-enable @typescript-eslint/indent */
+
+export type AnswerState = (
+  AnswerModel & {
+    questionId: string;
+  }
+);
 
 export enum AnswersFilter {
   Liked,
