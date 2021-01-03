@@ -41,8 +41,8 @@
   },
 
   "exclude": [
-    "node_modules",
-    "public",
-    ".cache"
+    "./node_modules/*",
+    "./public/*",
+    "./.cache/*"
   ]
 }

@@ -1,7 +1,7 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 
 import { jsx } from '@emotion/react';
 import { stylesEvent, stylesEventHeader } from './styles';
@@ -16,22 +16,52 @@ import Filters from '~components/pages/event/Filters';
 import Answers from '~components/pages/event/Answers';
 
 import { useSelector } from 'react-redux';
-import { selectors } from '~store/modules/questions';
+import { selectors as questionsSelectors } from '~store/modules/questions';
+import { selectors as answersSelectors } from '~store/modules/answers';
 
 const Event = React.memo(
   () => {
-    const currentIndex = useSelector(selectors.currentIndex);
+    const [answersCount, setAnswersCount] = useState(10);
+
+    const currentQuestionIndex = useSelector(questionsSelectors.currentIndex);
+    const answersCountMax = useSelector(answersSelectors.currentAnswersCount);
+
     const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
-      if (scrollContainerRef.current) {
-        scrollContainerRef.current.scrollTop = 0;
+    useEffect(
+      () => { // onQuestionChange
+        if (scrollContainerRef.current) {
+          setAnswersCount(10);
+          scrollContainerRef.current.scrollTop = 0;
+        }
+      }, [currentQuestionIndex],
+    );
+
+    const handleScroll = (
+      (event: React.UIEvent<HTMLDivElement, UIEvent>) => {
+        const { scrollHeight, clientHeight, scrollTop } = event.currentTarget;
+        const scrollTopMax = scrollHeight - clientHeight;
+        const scrollTopDelta = scrollTopMax - scrollTop;
+
+        const shouldLoadMore = scrollTopDelta <= 200;
+
+        if (shouldLoadMore) {
+          setAnswersCount(
+            (answersCountCurrent) => (
+              Math.min(answersCountCurrent + 10, answersCountMax)
+            ),
+          );
+        }
       }
-    }, [currentIndex, scrollContainerRef]);
+    );
 
     return (
       <div css={stylesEvent}>
-        <div className="scroll-container" ref={scrollContainerRef}>
+        <div
+          className="scroll-container"
+          ref={scrollContainerRef}
+          onScroll={handleScroll}
+        >
           <div css={stylesEventHeader}>
             <MenuButton />
 
@@ -51,7 +81,7 @@ const Event = React.memo(
             </div>
           </div>
 
-          <Answers />
+          <Answers count={answersCount} />
         </div>
 
         <div className="toolbar" />

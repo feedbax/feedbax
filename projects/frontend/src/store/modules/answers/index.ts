@@ -3,9 +3,11 @@ import { createSlice } from '@reduxjs/toolkit';
 import reducers from './reducers';
 import seed from '~store/seed.json';
 
+import type { AnswersState } from './types';
+
 export const answersSlice = createSlice({
   name: 'answer',
-  initialState: seed.answersState,
+  initialState: seed.answersState as AnswersState,
   reducers,
 });
 

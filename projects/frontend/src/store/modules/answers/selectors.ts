@@ -1,40 +1,16 @@
 import memoize from 'lodash.memoize';
 
 import createSelector from '~store/helper/create-selector';
-import { selectors as questionsSelectors } from '~store/modules/questions';
+import questionsSelectors from '~store/modules/questions/selectors';
 
 import { AnswersFilter } from './types';
 
 import type { RootState } from '~store';
 import type { AnswerState } from './types';
 
-const currentFilterSelector = (
-  (state: RootState): AnswersFilter => (
-    state.answersState.currentFilter
-  )
+type FilterAnswers = (
+  (answers: AnswerState[], filter: AnswersFilter) => AnswerState[]
 );
-
-const answersSelector = (
-  (state: RootState) => (
-    state.answersState.answers
-  )
-);
-
-const answersMapSelector = (
-  (state: RootState) => {
-    const { answers } = state.answersState;
-    const answersMap = new Map<string, AnswerState>();
-
-    for (let i = 0; i < answers.length; i += 1) {
-      const answer = answers[i];
-      answersMap.set(answer.id, answer);
-    }
-
-    return answersMap;
-  }
-);
-
-type FilterAnswers = (answers: AnswerState[], filter: AnswersFilter) => AnswerState[];
 
 const filterAnswers: FilterAnswers = (
   (answers, filter) => {
@@ -55,16 +31,28 @@ const filterAnswers: FilterAnswers = (
   }
 );
 
-const currentAnswersSelector = (
+const currentFilterSelector = (
+  (state: RootState): AnswersFilter => (
+    state.answersState.currentFilter
+  )
+);
+
+const answersSelector = (
+  (state: RootState) => (
+    state.answersState.answers
+  )
+);
+
+const currentFilteredAnswersSelector = (
   createSelector(
     answersSelector,
     currentFilterSelector,
-    questionsSelectors.currentQuestionId,
+    questionsSelectors.currentQuestionAnswerIds,
 
-    (answers, currentFilter, currentQuestionId) => (
+    (answers, currentFilter, currentQuestionAnswerIds) => (
       filterAnswers(
-        answers
-          .filter((a) => a.questionId === currentQuestionId)
+        currentQuestionAnswerIds
+          .map((answerId) => answers[answerId])
           .sort((a, b) => b.createdDate - a.createdDate),
 
         currentFilter,
@@ -73,27 +61,36 @@ const currentAnswersSelector = (
   )
 );
 
-const currentAnswersIdsSelector = (
+const currentAnswersCountSelector = (
   createSelector(
-    currentAnswersSelector,
-    (answers) => answers.map((a) => a.id),
+    questionsSelectors.currentQuestionAnswerIds,
+    (answers) => answers.length,
   )
 );
 
 const answerByIdSelector = (
   createSelector(
-    answersMapSelector,
-    (answersMap) => memoize(
+    answersSelector,
+    (answers) => memoize(
       (answerId: string) => (
-        answersMap.get(answerId)
+        answers[answerId]
       ),
     ),
   )
 );
 
-const getCurrentAnswersIdsSelector = (
+const currentFilteredAnswerIdsSelector = (
   createSelector(
-    currentAnswersIdsSelector,
+    currentFilteredAnswersSelector,
+    (answers) => answers.map(
+      (answer) => answer.id,
+    ),
+  )
+);
+
+const currentFilteredAnswerIdsByAmountSelector = (
+  createSelector(
+    currentFilteredAnswerIdsSelector,
     (answers) => memoize(
       (count: number) => (
         answers.slice(0, count)
@@ -104,10 +101,12 @@ const getCurrentAnswersIdsSelector = (
 
 const selectors = {
   currentFilter: currentFilterSelector,
-  currentAnswers: currentAnswersSelector,
-  currentAnswersIds: currentAnswersIdsSelector,
+  currentFilteredAnswers: currentFilteredAnswersSelector,
+  currentFilteredAnswerIds: currentFilteredAnswerIdsSelector,
+  currentAnswersCount: currentAnswersCountSelector,
+  currentFilteredAnswerIdsByAmount: currentFilteredAnswerIdsByAmountSelector,
+
   answerById: answerByIdSelector,
-  getCurrentAnswersIds: getCurrentAnswersIdsSelector,
 };
 
 export default selectors;

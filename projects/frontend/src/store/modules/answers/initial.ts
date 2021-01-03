@@ -3,7 +3,7 @@ import type { AnswersState } from './types';
 
 const initialState: AnswersState = ({
   currentFilter: AnswersFilter.Recent,
-  answers: [],
+  answers: {},
 });
 
 export default initialState;

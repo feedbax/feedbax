@@ -144,6 +144,13 @@ const createCustomEslintConfiguration = (
           'array-bracket-spacing': 'off',
         },
       },
+
+      {
+        files: ['**/reducer.ts'],
+        rules: {
+          'no-param-reassign': 'off',
+        },
+      },
     ];
 
     fs.writeFileSync('.eslintrc', JSON.stringify(baseConfig, null, 2));
