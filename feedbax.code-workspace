@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"name": "@feedbax/frontend",
+			"path": "packages/frontend"
+		},
+		{
+			"name": "@feedbax/api",
+			"path": "packages/api"
+		},
+		{
+			"name": "@feedbax/protos",
+			"path": "packages/protos"
+		}
+	]
+}
