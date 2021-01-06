@@ -18,6 +18,10 @@ export type FelaRule = IStyle & {
   };
 };
 
+export const createRule = (
+  (rule: FelaRule): FelaRule => rule
+);
+
 /* eslint-disable @typescript-eslint/indent */
 
 type Tuple<T, N extends number, R extends unknown[] = []> = (

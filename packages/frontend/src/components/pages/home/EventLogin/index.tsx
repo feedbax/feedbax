@@ -16,7 +16,7 @@ const EventLogin = React.memo(
     return (
       <div className={css(rules.container)}>
         <input
-          className={css(rules.input)}
+          className={css([rules.shared, rules.input])}
           type="text"
 
           value={eventCode}
@@ -25,7 +25,7 @@ const EventLogin = React.memo(
         />
 
         <LocaleLink
-          className={css(rules.button)}
+          className={css([rules.shared, rules.button])}
           to={`/@/${eventCode}`}
         >
           {t('home', 'lets_go')}
