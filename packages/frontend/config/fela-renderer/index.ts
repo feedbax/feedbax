@@ -4,7 +4,7 @@ import isCSSShorthand from 'is-css-shorthand';
 import prefixer from 'fela-plugin-prefixer';
 import fallbackValue from 'fela-plugin-fallback-value';
 
-import type { FelaRule } from '~lib/css-helper';
+import type { FelaRule } from '~lib/css-helper/fela';
 
 const isStyle = (
   (val: unknown): val is FelaRule => (
