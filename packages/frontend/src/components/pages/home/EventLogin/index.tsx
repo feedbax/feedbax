@@ -14,17 +14,18 @@ const EventLogin = React.memo(
     const { t } = useTranslation();
 
     return (
-      <div className={css(rules.eventLogin.container)}>
+      <div className={css(rules.container)}>
         <input
-          onChange={(e) => setEventCode(e.target.value)}
-          className={css(rules.eventLogin.input)}
-          placeholder="Event-Code"
-          value={eventCode}
+          className={css(rules.input)}
           type="text"
+
+          value={eventCode}
+          placeholder="Event-Code"
+          onChange={(e) => setEventCode(e.target.value)}
         />
 
         <LocaleLink
-          className={css(rules.eventLogin.button)}
+          className={css(rules.button)}
           to={`/@/${eventCode}`}
         >
           {t('home', 'lets_go')}

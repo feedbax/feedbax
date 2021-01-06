@@ -169,9 +169,7 @@ const eventLoginButton: FelaRule = {
 };
 
 export const rules = {
-  eventLogin: {
-    container: eventLoginContainer,
-    input: eventLoginInput,
-    button: eventLoginButton,
-  },
+  container: eventLoginContainer,
+  input: eventLoginInput,
+  button: eventLoginButton,
 };

@@ -104,9 +104,7 @@ const toolImage: FelaRule = {
 };
 
 export const rules = {
-  tool: {
-    container: toolContainer,
-    text: toolText,
-    image: toolImage,
-  },
+  container: toolContainer,
+  text: toolText,
+  image: toolImage,
 };

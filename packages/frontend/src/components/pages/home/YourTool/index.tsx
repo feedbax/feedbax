@@ -18,13 +18,13 @@ const YourTool = React.memo(
     const { t } = useTranslation();
 
     return (
-      <div className={css(rules.tool.container)}>
-        <div className={css(rules.tool.text)}>
+      <div className={css(rules.container)}>
+        <div className={css(rules.text)}>
           {t('home', 'your_tool')}
         </div>
 
         <Img
-          className={css(rules.tool.image)}
+          className={css(rules.image)}
           fluid={data.file.childImageSharp.fluid}
           imgStyle={{ objectFit: 'contain' }}
           alt="tool preview"

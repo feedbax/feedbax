@@ -10,12 +10,12 @@ const SeeMore = React.memo(
     const { css } = useFela();
 
     return (
-      <div className={css(rules.seeMore.container)}>
-        <span className={css(rules.seeMore.text)}>
+      <div className={css(rules.container)}>
+        <span className={css(rules.text)}>
           {t('home', 'see_more')}
         </span>
 
-        <div className={css(rules.seeMore.arrow)} />
+        <div className={css(rules.arrow)} />
       </div>
     );
   },

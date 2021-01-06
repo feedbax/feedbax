@@ -62,9 +62,7 @@ const seeMoreArrow: FelaRule = {
 };
 
 export const rules = {
-  seeMore: {
-    container: seeMoreContainer,
-    text: seeMoreText,
-    arrow: seeMoreArrow,
-  },
+  container: seeMoreContainer,
+  text: seeMoreText,
+  arrow: seeMoreArrow,
 };
