@@ -2,7 +2,7 @@ import type { Reducer } from './types';
 
 const addToCurrentIndex: Reducer<number> = (
   (state, action) => {
-    const questionsCount = state.questions.length;
+    const questionsCount = Object.keys(state.questions).length;
 
     const minIndex = 0;
     const maxIndex = questionsCount - 1;
@@ -21,7 +21,7 @@ const addToCurrentIndex: Reducer<number> = (
 
 const setCurrentIndex: Reducer<number> = (
   (state, action) => {
-    const questionsCount = state.questions.length;
+    const questionsCount = Object.keys(state.questions).length;
 
     const minIndex = 0;
     const maxIndex = questionsCount - 1;

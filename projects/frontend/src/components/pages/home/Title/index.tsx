@@ -1,16 +1,18 @@
-/** @jsx jsx */
-
 import React from 'react';
 
-import { jsx } from '@emotion/react';
-import { stylesTitle } from './styles';
+import { useFela } from 'react-fela';
+import { ruleTitle } from './styles';
 
 const Title = React.memo(
-  () => (
-    <div css={stylesTitle}>
-      feedb.ax
-    </div>
-  ),
+  () => {
+    const { css } = useFela();
+
+    return (
+      <div className={css(ruleTitle)}>
+        feedb.ax
+      </div>
+    );
+  },
 );
 
 export default Title;

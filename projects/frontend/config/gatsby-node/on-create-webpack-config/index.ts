@@ -3,6 +3,8 @@ import path from 'path';
 import config from 'tsconfig.json';
 import createCustomEslintConfiguration from './create-custom-eslint-configuration';
 
+import { rootDir } from '~config/gatsby-config';
+
 import type { CreateWebpackConfigArgs } from 'gatsby';
 
 const onCreateWebpackConfig = (
@@ -20,7 +22,7 @@ const onCreateWebpackConfig = (
       const pathSource = _pathSource.replace('/*', '');
       const pathDestination = _pathDestination.replace('/*', '');
 
-      webpackAlias[pathSource] = path.resolve(global.rootDir, pathDestination);
+      webpackAlias[pathSource] = path.resolve(rootDir, pathDestination);
     }
 
     actions.setWebpackConfig({

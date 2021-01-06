@@ -28,8 +28,7 @@ const createCustomEslintConfiguration = (
     ];
 
     baseConfig.extends = [
-      ...baseConfig.extends,
-
+      'react-app',
       'airbnb',
       'plugin:import/typescript',
       'plugin:@typescript-eslint/eslint-recommended',

@@ -6,6 +6,8 @@
 
 import path from 'path';
 
+export const rootDir = process.cwd();
+
 export default {
   plugins: [
     {
@@ -13,7 +15,7 @@ export default {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'pages',
-        path: path.join(global.rootDir, 'src/_pages'),
+        path: path.join(rootDir, 'src/_pages'),
       },
     },
 
@@ -22,7 +24,7 @@ export default {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'images',
-        path: path.join(global.rootDir, 'src/assets/images'),
+        path: path.join(rootDir, 'src/assets/images'),
       },
     },
 
@@ -31,7 +33,7 @@ export default {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'locales',
-        path: path.join(global.rootDir, 'src/locales'),
+        path: path.join(rootDir, 'src/locales'),
       },
     },
 

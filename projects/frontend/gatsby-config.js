@@ -18,5 +18,4 @@ require('ts-node').register({
   },
 });
 
-global.rootDir = __dirname;
 module.exports = require('./config/gatsby-config');

@@ -1,9 +1,11 @@
 import path from 'path';
 import fs from 'fs';
 
+import { rootDir } from '~config/gatsby-config';
+
 const generateStoreSeed = (
   async (): Promise<void> => {
-    const seedPath = path.join(global.rootDir, 'src/store/seed.json');
+    const seedPath = path.join(rootDir, 'src/store/seed.json');
     if (fs.existsSync(seedPath)) return;
 
     const { default: generateStateSeed } = await import('~store/helper/seed');

@@ -27,6 +27,7 @@
 
       "~assets/*": ["src/assets/*"],
       "~components/*": ["src/components/*"],
+      "~config/*": ["config/*"],
       "~hooks/*": ["src/hooks/*"],
       "~lib/*": ["src/lib/*"],
       "~locales/*": ["src/locales/*"],

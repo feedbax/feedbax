@@ -31,6 +31,11 @@ declare module '*.mdx' {
 declare module 'focus-visible';
 declare module 'intersection-observer';
 
+declare module 'is-css-shorthand' {
+  declare function isCSSShorthand (property: string): boolean;
+  export default isCSSShorthand;
+}
+
 declare const ResizeObserver: typeof import('resize-observer').ResizeObserver;
 
 declare const global: {

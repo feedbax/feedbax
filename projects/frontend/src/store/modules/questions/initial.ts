@@ -2,7 +2,7 @@ import type { QuestionsState } from './types';
 
 const initialState: QuestionsState = {
   currentIndex: 0,
-  questions: [],
+  questions: {},
 };
 
 export default initialState;

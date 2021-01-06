@@ -2,6 +2,8 @@ import fs from 'fs';
 import path from 'path';
 import jsonToTs from 'json-to-ts';
 
+import { rootDir } from '~config/gatsby-config';
+
 type Options = {
   fileName: string;
   rootName: string;
@@ -10,7 +12,7 @@ type Options = {
 const generateNodeTypes = (
   async (node: unknown, options: Options): Promise<void> => {
     fs.writeFileSync(
-      path.join(global.rootDir, 'src/types', options.fileName),
+      path.join(rootDir, 'src/types', options.fileName),
 
       jsonToTs(node, { rootName: options.rootName })
         .join('\n\n')

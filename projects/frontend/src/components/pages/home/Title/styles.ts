@@ -1,17 +1,17 @@
-import { css } from '@emotion/react';
-import { cssVar, fluidRange } from '~lib/css-helper';
+import { cssVar, fluidRangeFela } from '~lib/css-helper';
+import type { FelaRule } from '~lib/css-helper';
 
-export const stylesTitle = css`
-  position: relative;
+export const ruleTitle: FelaRule = {
+  position: 'relative',
 
-  font-family: ${cssVar('--font-feedbax-primary')};
-  font-style: normal;
-  font-weight: normal;
+  fontFamily: cssVar('--font-feedbax-primary'),
+  fontStyle: 'normal',
+  fontWeight: 'normal',
 
-  text-align: center;
-  color: ${cssVar('--color-primary-text')};
+  textAlign: 'center',
+  color: cssVar('--color-primary-text'),
 
-  ${fluidRange({
+  fluidRange: fluidRangeFela({
     screen: ['20rem', '120rem', '240rem'] as const,
 
     sizes: [
@@ -23,7 +23,11 @@ export const stylesTitle = css`
       [ '0.19rem',   '0.38rem',  '0.75rem'],
     ] as const,
 
-    css: ([fontSize, marginTop, sa, sb, sc, sd]) => ({
+    css: ([
+      fontSize,
+      marginTop,
+      sa, sb, sc, sd,
+    ]) => ({
       fontSize,
       marginTop,
 
@@ -34,5 +38,5 @@ export const stylesTitle = css`
         ${sd} ${sd} 0px ${cssVar('--color-primary-text')}
       `,
     }),
-  })}
-`;
+  }),
+};

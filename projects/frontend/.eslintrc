@@ -5,7 +5,7 @@
     "__BASE_PATH__": true
   },
   "extends": [
-    "/workspaces/feedbax-v3/projects/frontend/node_modules/gatsby/node_modules/eslint-config-react-app/index.js",
+    "react-app",
     "airbnb",
     "plugin:import/typescript",
     "plugin:@typescript-eslint/eslint-recommended",
