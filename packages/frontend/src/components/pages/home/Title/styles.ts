@@ -1,7 +1,7 @@
 import { cssVar, fluidRangeFela } from '~lib/css-helper';
 import type { FelaRule } from '~lib/css-helper';
 
-export const ruleTitle: FelaRule = {
+const title: FelaRule = {
   position: 'relative',
 
   fontFamily: cssVar('--font-feedbax-primary'),
@@ -39,4 +39,8 @@ export const ruleTitle: FelaRule = {
       `,
     }),
   }),
+};
+
+export const rules = {
+  title,
 };

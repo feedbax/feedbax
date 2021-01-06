@@ -19,20 +19,6 @@ export type FelaRule = IStyle & {
 };
 
 /* eslint-disable @typescript-eslint/indent */
-type Return<T extends string> = (
-  T extends `& ${infer _}` ? { nested: FelaRule }
-  : T extends `@media (${infer _})` ? { nested: FelaRule }
-  : undefined
-);
-/* eslint-enable */
-
-export const s = (
-  <T extends string> (selector: T, props: FelaRule): Return<T> => ({
-    [selector as 'nested']: props,
-  }) as unknown as Return<T>
-);
-
-/* eslint-disable @typescript-eslint/indent */
 
 type Tuple<T, N extends number, R extends unknown[] = []> = (
   R['length'] extends N

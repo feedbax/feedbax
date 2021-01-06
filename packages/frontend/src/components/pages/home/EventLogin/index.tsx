@@ -1,29 +1,32 @@
-/** @jsx jsx */
-
 import React, { useState } from 'react';
 import useTranslation from '~hooks/components/I18n/use-translation';
 
-import { jsx } from '@emotion/react';
-import { stylesEventLogin } from './styles';
+import { useFela } from 'react-fela';
+import { rules } from './styles';
 
 import LocaleLink from '~components/I18n/LocaleLink';
 
 const EventLogin = React.memo(
   () => {
     const [eventCode, setEventCode] = useState('');
+
+    const { css } = useFela();
     const { t } = useTranslation();
 
     return (
-      <div css={stylesEventLogin}>
+      <div className={css(rules.eventLogin.container)}>
         <input
-          className="text"
-          type="text"
+          onChange={(e) => setEventCode(e.target.value)}
+          className={css(rules.eventLogin.input)}
           placeholder="Event-Code"
           value={eventCode}
-          onChange={(e) => setEventCode(e.target.value)}
+          type="text"
         />
 
-        <LocaleLink className="button" to={`/@/${eventCode}`}>
+        <LocaleLink
+          className={css(rules.eventLogin.button)}
+          to={`/@/${eventCode}`}
+        >
           {t('home', 'lets_go')}
         </LocaleLink>
       </div>

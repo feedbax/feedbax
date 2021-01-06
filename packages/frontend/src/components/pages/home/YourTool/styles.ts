@@ -1,7 +1,7 @@
 import { cssVar, fluidRangeFela } from '~lib/css-helper';
 import type { FelaRule } from '~lib/css-helper';
 
-const tool: FelaRule = {
+const toolContainer: FelaRule = {
   position: 'relative',
   width: '100%',
 
@@ -62,30 +62,23 @@ const toolText: FelaRule = {
     screen: ['20rem', '120rem', '240rem'] as const,
 
     sizes: [
-      ['2.73rem', '3.13rem',  '6.25rem'],
       ['2rem',    '3.6rem',   '7.2rem'],
       ['3.35rem', '3.75rem',  '7.5rem'],
     ] as const,
 
     css: (units) => {
-      const [marginTop, ...rest1] = units;
-      const [fontSize, paddingRight] = rest1;
+      const [fontSize, paddingRight] = units;
 
       return {
         fontSize,
         paddingRight,
-
-        nested: {
-          '@media (max-width: 50rem)': {
-            marginTop,
-          },
-        },
       };
     },
   }),
 
   nested: {
     '@media (max-width: 50rem)': {
+      marginTop: '1.35em',
       maxWidth: '100%',
       paddingRight: '0',
       textAlign: 'center',
@@ -110,4 +103,10 @@ const toolImage: FelaRule = {
   },
 };
 
-export default { tool, toolText, toolImage };
+export const rules = {
+  tool: {
+    container: toolContainer,
+    text: toolText,
+    image: toolImage,
+  },
+};

@@ -1,14 +1,18 @@
-import { css } from '@emotion/react';
-import { cssVar, fluidRange } from '~lib/css-helper';
+import { cssVar, fluidRangeFela } from '~lib/css-helper';
+import type { FelaRule } from '~lib/css-helper';
 
-export const stylesEventLogin = css`
-  position: relative;
-  display: block;
+const eventLoginContainer: FelaRule = {
+  position: 'relative',
+  display: 'block',
 
-  width: 100%;
-  margin: 0 auto;
+  width: '100%',
 
-  ${fluidRange({
+  marginTop: 0,
+  marginRight: 'auto',
+  marginBottom: 0,
+  marginLeft: 'auto',
+
+  fluidRange: fluidRangeFela({
     screen: ['20rem', '120rem', '240rem'] as const,
 
     sizes: [
@@ -17,11 +21,9 @@ export const stylesEventLogin = css`
       [ '0.13rem',  '0.25rem',   '0.5rem'],
       ['-0.19rem', '-0.38rem',  '-0.75rem'],
       [ '0.19rem',  '0.38rem',   '0.75rem'],
-      [ '3.13rem',  '4.38rem',   '8.75rem'],
-      [ '1.5rem',   '2rem',      '4rem'],
     ] as const,
 
-    css: ([maxWidth, sa, sb, sc, sd, height, fontSize]) => ({
+    css: ([maxWidth, sa, sb, sc, sd]) => ({
       maxWidth,
 
       boxShadow: `
@@ -30,72 +32,146 @@ export const stylesEventLogin = css`
         ${sc} ${sc} 0px ${cssVar('--color-primary-text')}, 
         ${sd} ${sd} 0px ${cssVar('--color-primary-text')}
       `,
-
-      '& .text, & .button': {
-        height,
-        fontSize,
-      },
     }),
-  })}
+  }),
+};
 
-  & .text,
-  & .button {
-    border-radius: 0 !important;
-    -webkit-appearance: none;
+const eventLoginInput: FelaRule = {
+  position: 'relative',
+  boxSizing: 'border-box',
+  width: '100%',
 
-    display: inline-block;
-    position: relative;
-    box-sizing: border-box;
+  borderRadius: '0 !important',
+  appearance: 'none',
 
-    width: 100%;
+  paddingTop: 0,
+  paddingRight: 0,
+  paddingBottom: 0,
+  paddingLeft: 0,
 
-    border: 0;
+  marginTop: 0,
+  marginRight: 0,
+  marginBottom: 0,
+  marginLeft: 0,
 
-    padding: 0;
-    margin: 0;
+  fontFamily: cssVar('--font-feedbax-primary'),
+  fontStyle: 'normal',
+  fontWeight: 'normal',
 
-    font-family: ${cssVar('--font-feedbax-primary')};
-    font-style: normal;
-    font-weight: normal;
+  textIndent: '1em',
+  textAlign: 'left',
 
-    text-indent: 1em;
-    text-align: left;
+  display: 'flex',
+  justifyContent: 'flex-start',
+  alignItems: 'center',
 
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-  }
+  color: cssVar('--color-feedbax-primary'),
+  backgroundColor: cssVar('--color-primary-text'),
 
-  & .text {
-    color: ${cssVar('--color-feedbax-primary')};
-    border: 2px solid ${cssVar('--color-primary-text')};
-    background-color: ${cssVar('--color-primary-text')};
+  borderColor: cssVar('--color-primary-text'),
+  borderWidth: '2px',
+  borderStyle: 'solid',
 
-    &:focus {
-      outline: none;
-      border: 2px solid ${cssVar('--color-feedbax-secondary')};
-    }
+  nested: {
+    ':focus': {
+      outlineStyle: 'none',
 
-    &::placeholder {
-      color: ${cssVar('--color-feedbax-primary')};
-      opacity: 0.8;
-    }
-  }
+      borderColor: cssVar('--color-feedbax-secondary'),
+      borderWidth: '2px',
+      borderStyle: 'solid',
+    },
 
-  & .button {
-    color: ${cssVar('--color-primary-text')};
-    background: ${cssVar('--color-feedbax-primary')};
-    cursor: pointer;
+    '::placeholder': {
+      color: cssVar('--color-feedbax-primary'),
+      opacity: 0.8,
+    },
+  },
 
-    border: 2px solid ${cssVar('--color-feedbax-primary')};
+  fluidRange: fluidRangeFela({
+    screen: ['20rem', '120rem', '240rem'] as const,
 
-    &:hover {
-      background: ${cssVar('--color-feedbax-primary')};
-    }
+    sizes: [
+      [ '3.13rem',  '4.38rem',  '8.75rem'],
+      [ '1.5rem',   '2rem',     '4rem'],
+    ] as const,
 
-    &:focus {
-      outline: none;
-      border: 2px solid ${cssVar('--color-feedbax-secondary')};
-    }
-  }
-`;
+    css: ([height, fontSize]) => ({
+      height,
+      fontSize,
+    }),
+  }),
+};
+
+const eventLoginButton: FelaRule = {
+  position: 'relative',
+  boxSizing: 'border-box',
+  width: '100%',
+
+  borderRadius: '0 !important',
+  appearance: 'none',
+
+  paddingTop: 0,
+  paddingRight: 0,
+  paddingBottom: 0,
+  paddingLeft: 0,
+
+  marginTop: 0,
+  marginRight: 0,
+  marginBottom: 0,
+  marginLeft: 0,
+
+  fontFamily: cssVar('--font-feedbax-primary'),
+  fontStyle: 'normal',
+  fontWeight: 'normal',
+
+  textIndent: '1em',
+  textAlign: 'left',
+
+  display: 'flex',
+  justifyContent: 'flex-start',
+  alignItems: 'center',
+
+  color: cssVar('--color-primary-text'),
+  backgroundColor: cssVar('--color-feedbax-primary'),
+  cursor: 'pointer',
+
+  borderColor: cssVar('--color-feedbax-primary'),
+  borderWidth: '2px',
+  borderStyle: 'solid',
+
+  nested: {
+    ':hover': {
+      backgroundColor: cssVar('--color-feedbax-primary'),
+    },
+
+    ':focus': {
+      outlineStyle: 'none',
+
+      borderColor: cssVar('--color-feedbax-secondary'),
+      borderWidth: '2px',
+      borderStyle: 'solid',
+    },
+  },
+
+  fluidRange: fluidRangeFela({
+    screen: ['20rem', '120rem', '240rem'] as const,
+
+    sizes: [
+      [ '3.13rem',  '4.38rem',  '8.75rem'],
+      [ '1.5rem',   '2rem',     '4rem'],
+    ] as const,
+
+    css: ([height, fontSize]) => ({
+      height,
+      fontSize,
+    }),
+  }),
+};
+
+export const rules = {
+  eventLogin: {
+    container: eventLoginContainer,
+    input: eventLoginInput,
+    button: eventLoginButton,
+  },
+};

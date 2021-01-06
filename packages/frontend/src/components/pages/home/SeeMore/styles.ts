@@ -1,10 +1,16 @@
-import { css } from '@emotion/react';
-import { cssVar, fluidRange } from '~lib/css-helper';
+import { cssVar, fluidRangeFela } from '~lib/css-helper';
+import type { FelaRule } from '~lib/css-helper';
 
-export const stylesSeeMore = css`
-  position: relative;
+const seeMoreContainer: FelaRule = {
+  position: 'relative',
+  height: '6.8em',
 
-  ${fluidRange({
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'flex-start',
+  alignItems: 'center',
+
+  fluidRange: fluidRangeFela({
     screen: ['20rem', '120rem', '240rem'] as const,
 
     sizes: [
@@ -16,42 +22,49 @@ export const stylesSeeMore = css`
       marginTop,
       fontSize,
     }),
-  })}
+  }),
+};
 
-  height: 6.8em;
+const seeMoreText: FelaRule = {
+  flexGrow: 0,
+  flexShrink: 1,
+  flexBasis: 'auto',
 
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
+  paddingTop: '0.11em',
+  paddingRight: '0.33em',
+  paddingBottom: '0.11em',
+  paddingLeft: '0.33em',
 
-  & span {
-    flex: 0 1 auto;
+  borderRadius: '1em',
 
-    background: ${cssVar('--color-primary-text')};
-    padding: 0.11em 0.33em;
-    border-radius: 1em;
+  backgroundColor: cssVar('--color-primary-text'),
+  color: cssVar('--color-feedbax-primary'),
+  fontFamily: cssVar('--font-feedbax-primary'),
 
-    font-family: ${cssVar('--font-feedbax-primary')};
-    font-style: normal;
-    font-weight: normal;
-    text-align: center;
+  fontStyle: 'normal',
+  fontWeight: 'normal',
+  textAlign: 'center',
+};
 
-    color: ${cssVar('--color-feedbax-primary')};
-  }
+const seeMoreArrow: FelaRule = {
+  display: 'block',
+  position: 'absolute',
 
-  & div {
-    display: block;
-    position: absolute;
+  top: '2.1em',
+  left: 'calc(50% - 2px)',
 
-    top: 2.1em;
-    left: calc(50% - 2px);
+  height: '10em',
+  width: '2px',
 
-    height: 10em;
-    width: 2px;
+  backgroundColor: cssVar('--color-feedbax-primary'),
+  borderRight: `2px solid ${cssVar('--color-primary-text')}`,
+  borderRadius: '2px',
+};
 
-    background: ${cssVar('--color-feedbax-primary')};
-    border-right: 2px solid ${cssVar('--color-primary-text')};
-    border-radius: 2px;
-  }
-`;
+export const rules = {
+  seeMore: {
+    container: seeMoreContainer,
+    text: seeMoreText,
+    arrow: seeMoreArrow,
+  },
+};
