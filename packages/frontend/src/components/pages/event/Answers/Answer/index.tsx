@@ -29,7 +29,7 @@ const Answer = React.memo(({ answerId, first }: Props) => {
 
   return (
     <div css={[stylesAnswer, stylesFirst]}>
-      <AnswerText className="text" renderWhenVisible>
+      <AnswerText className="text">
         {answer?.text}
       </AnswerText>
 

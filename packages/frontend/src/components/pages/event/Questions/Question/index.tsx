@@ -37,7 +37,7 @@ const Question = React.memo(({ questionId, index }: QuestionProps) => {
       key={question?.order}
     >
       <div className="number">{`${index + 1}`.padStart(2, '0')}</div>
-      <QuestionText className="text" renderWhenVisible>
+      <QuestionText className="text">
         {question?.text}
       </QuestionText>
     </div>
