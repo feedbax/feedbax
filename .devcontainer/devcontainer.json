@@ -1,6 +1,9 @@
 {
-  "name": "@feedbax",
-  "image": "node:12.19.0-stretch",
+  "name": "@feedbax/pnpm",
+
+  "build": {
+    "dockerfile": "./Dockerfile",
+  },
 
   "postCreateCommand": "sh ./.devcontainer/setdockerhost.sh",
   "postStartCommand": "sh ./.devcontainer/setdockerhost.sh",

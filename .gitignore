@@ -1,5 +1,8 @@
 # not ready yet
 projects/api
+projects/frontend-v2
+
+.pnpm-store
 
 # compiled
 dist
