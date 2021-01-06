@@ -138,7 +138,6 @@ const createCustomEslintConfiguration = (
         files: ['**/styles.ts'],
         rules: {
           'import/prefer-default-export': 'off',
-          '@typescript-eslint/indent': 'off',
           'no-multi-spaces': 'off',
           'array-bracket-spacing': 'off',
         },
