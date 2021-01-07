@@ -7,7 +7,8 @@ renderer.renderStatic(
     margin: 0,
 
     width: '100%',
-    height: '100vh;calc(var(--vh, 1vh) * 100);',
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    height: ['100vh', 'calc(var(--vh, 1vh) * 100)'] as any,
 
     touchAction: 'pan-y',
     fontSize: '100%',

@@ -2,10 +2,8 @@ import React from 'react';
 
 import { renderToString } from 'react-dom/server';
 import { RendererProvider } from 'react-fela';
-import { createRenderer } from 'fela';
 import { renderToSheetList } from 'fela-dom';
-
-import configRenderer from '~config/fela-renderer';
+import { renderer } from '~themes';
 
 import type { ReplaceRendererArgs } from 'gatsby';
 
@@ -14,8 +12,6 @@ export default (
     const { bodyComponent } = props;
     const { replaceBodyHTMLString } = props;
     const { setHeadComponents } = props;
-
-    const renderer = createRenderer(configRenderer);
 
     const bodyHTML = (
       renderToString(

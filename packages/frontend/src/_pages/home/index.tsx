@@ -13,7 +13,6 @@ import SeeMore from '~components/pages/home/SeeMore';
 import YourTool from '~components/pages/home/YourTool';
 import Benefits from '~components/pages/home/Benefits';
 
-import GlobalStyles from '~components/GlobalStyles';
 import MenuButton from '~components/Menu';
 import Logo from '~components/Logo';
 import Footer from '~components/Footer';
@@ -22,8 +21,6 @@ import CookieConsent from '~components/CookieConsent';
 const Home = React.memo(
   (): JSX.Element => (
     <div css={stylesFront}>
-      <GlobalStyles />
-
       <CookieConsent />
       <MenuButton />
 

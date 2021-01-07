@@ -7,11 +7,11 @@ import { answersSlice } from './modules/answers';
 
 type extractState<T> = T extends Reducer<infer X, Action<unknown>> ? X : never;
 
-export const feedbaxReducer = combineReducers({
+export const rootReducer = combineReducers({
   eventsState: eventsSlice.reducer,
   questionsState: questionsSlice.reducer,
   answersState: answersSlice.reducer,
 });
 
-export type RootState = extractState<typeof feedbaxReducer>;
-export const store = createStore(feedbaxReducer);
+export type RootState = extractState<typeof rootReducer>;
+export const store = createStore(rootReducer);

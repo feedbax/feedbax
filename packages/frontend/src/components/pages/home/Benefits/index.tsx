@@ -3,24 +3,29 @@ import { graphql, useStaticQuery } from 'gatsby';
 
 import { benefits } from './const';
 
+import { useFela } from 'react-fela';
+import { rules } from './styles';
+
 import Img from 'gatsby-image';
 
 import type { Benefit, QueryData } from './types';
 
 const Benefits = React.memo(
   () => {
+    const { css } = useFela();
+
     const data = useStaticQuery<QueryData>(query);
     const renderBenefit = useCallback(
       ({ image, text }: Benefit) => (
-        <div key={image}>
-          <Img className="image" fluid={data[image].childImageSharp.fluid} />
-          <div className="text">{text.content}</div>
+        <div key={image} className={css(rules.benefit.container)}>
+          <Img className={css(rules.benefit.image)} fluid={data[image].childImageSharp.fluid} />
+          <div className={css(rules.benefit.text)}>{text.content}</div>
         </div>
-      ), [data],
+      ), [css, data],
     );
 
     return (
-      <div>
+      <div className={css(rules.benefits.container)}>
         {benefits.map(renderBenefit)}
       </div>
     );

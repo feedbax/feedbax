@@ -6,8 +6,6 @@ import { graphql } from 'gatsby';
 import { jsx } from '@emotion/react';
 import { stylesLegal } from './styles';
 
-import GlobalStyles from '~components/GlobalStyles';
-
 import Footer from '~components/Footer';
 import Logo from '~components/Logo';
 import MenuButton from '~components/Menu';
@@ -18,7 +16,6 @@ import type { PrivacyPolicyProps } from './types';
 const Disclaimer = React.memo(
   ({ data }: PrivacyPolicyProps): JSX.Element => (
     <div css={stylesLegal}>
-      <GlobalStyles />
       <MenuButton color={{ background: '--color-feedbax-primary' }} />
 
       <Logo />
