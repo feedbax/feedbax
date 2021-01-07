@@ -1,8 +1,5 @@
 import React from 'react';
-import TranslationContext from '~components/I18n/Context';
-
-import 'focus-visible';
-import '~fix-vx-units';
+import PageElement from '~components/PageElement';
 
 import type { WrapPageElementBrowserArgs } from 'gatsby';
 
@@ -24,15 +21,15 @@ const wrapPageElement = (
     const { locale, locales, translation } = pageContext;
 
     return (
-      <TranslationContext.Provider
-        value={{
+      <PageElement
+        pageContext={{
           translation,
           locales,
           locale,
         }}
       >
         {element}
-      </TranslationContext.Provider>
+      </PageElement>
     );
   }
 );

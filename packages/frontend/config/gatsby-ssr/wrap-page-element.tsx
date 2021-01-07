@@ -1,8 +1,5 @@
 import React from 'react';
-import TranslationContext from '~components/I18n/Context';
-
-import 'focus-visible';
-import '~fix-vx-units';
+import PageElement from '~components/PageElement';
 
 import type { WrapPageElementNodeArgs } from 'gatsby';
 
@@ -20,20 +17,19 @@ type Props = WrapPageElementNodeArgs & {
 
 const wrapPageElement = (
   (props: Props): JSX.Element => {
-    const { element, props: props2 } = props;
-    const { pageContext } = props2;
+    const { element, props: { pageContext } } = props;
     const { locale, locales, translation } = pageContext;
 
     return (
-      <TranslationContext.Provider
-        value={{
+      <PageElement
+        pageContext={{
           translation,
           locales,
           locale,
         }}
       >
         {element}
-      </TranslationContext.Provider>
+      </PageElement>
     );
   }
 );
