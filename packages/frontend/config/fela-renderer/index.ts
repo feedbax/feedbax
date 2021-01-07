@@ -65,6 +65,10 @@ const fluidRange: TPlugin = (
         }
 
         delete $style.fluidRange;
+      } else if (isStyle(value)) {
+        $style = merge($style, {
+          [prop]: fluidRange(value),
+        });
       }
     }
 
