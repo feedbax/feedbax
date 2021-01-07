@@ -16,6 +16,10 @@ export type FelaRule = IStyle & {
   nested?: {
     [property: string]: FelaRule;
   };
+
+  variables?: {
+    [property: string]: string | string[];
+  }
 };
 
 export const createRule = (

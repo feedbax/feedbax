@@ -1,13 +1,7 @@
 import { shade, tint } from 'polished';
-import type { CSSInterpolation } from '@emotion/serialize';
+import type { Colors } from '~themes/types';
 
-const fonts = {
-  '--font-feedbax-primary': 'Klinic Slab',
-  '--font-feedbax-secondary': 'Roboto Slab',
-  '--font-feedbax-tertiary': 'Klinic Slab Book',
-};
-
-const colors = {
+const colors: Colors = {
   '--color-feedbax-primary': '#3a5568',
   '--color-feedbax-secondary': '#ff7d65',
 
@@ -29,23 +23,8 @@ const colors = {
     'transparent',
   ],
 
-  get '--color-primary-text' () {
-    return 'var(--color-white-100)';
-  },
-
-  get '--color-background-footer' () {
-    return 'var(--color-black-90)';
-  },
+  '--color-primary-text': 'var(--color-white-100)',
+  '--color-background-footer': 'var(--color-black-90)',
 };
 
-const themeDefault = {
-  ...colors,
-  ...fonts,
-};
-
-export const themes: CSSInterpolation = {
-  'html.theme-default': themeDefault,
-};
-
-export type Theme = typeof themeDefault;
-export type Colors = keyof typeof colors;
+export default colors;

@@ -1,11 +1,11 @@
 import type React from 'react';
 import type { CSSInterpolation } from '@emotion/serialize';
-import type { Colors } from '~theme';
+import type { ColorKeys } from '~themes/types';
 import type { IconProps } from '~components/Icon';
 
 export type IconButtonColors = {
-  icon?: Colors;
-  background?: Colors;
+  icon?: ColorKeys;
+  background?: ColorKeys;
 };
 
 export type IconButtonProps = IconProps & {

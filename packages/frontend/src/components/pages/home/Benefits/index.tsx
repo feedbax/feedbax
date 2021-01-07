@@ -1,14 +1,7 @@
-/** @jsx jsx */
-/** @jsxFrag React.Fragment */
-
 import React, { useCallback } from 'react';
-
-import { jsx } from '@emotion/react';
-import { stylesBenefit, stylesBenefits } from './styles';
+import { graphql, useStaticQuery } from 'gatsby';
 
 import { benefits } from './const';
-
-import { graphql, useStaticQuery } from 'gatsby';
 
 import Img from 'gatsby-image';
 
@@ -19,7 +12,7 @@ const Benefits = React.memo(
     const data = useStaticQuery<QueryData>(query);
     const renderBenefit = useCallback(
       ({ image, text }: Benefit) => (
-        <div css={stylesBenefit} key={image}>
+        <div key={image}>
           <Img className="image" fluid={data[image].childImageSharp.fluid} />
           <div className="text">{text.content}</div>
         </div>
@@ -27,7 +20,7 @@ const Benefits = React.memo(
     );
 
     return (
-      <div css={stylesBenefits}>
+      <div>
         {benefits.map(renderBenefit)}
       </div>
     );

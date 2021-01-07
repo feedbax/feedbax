@@ -6,10 +6,10 @@ import React from 'react';
 import { jsx, css, Global } from '@emotion/react';
 import { cssVar } from '~lib/css-helper';
 
-import type { Colors } from '~theme';
+import type { ColorKeys } from '~themes/types';
 
 type Props = {
-  color?: Colors;
+  color?: ColorKeys;
 };
 
 const GlobalStyles = React.memo(

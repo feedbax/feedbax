@@ -23,7 +23,7 @@
       "~locales": ["src/locales"],
       "~fix-vx-units": ["src/fix-vx-units"],
       "~store": ["src/store"],
-      "~theme": ["src/theme"],
+      "~themes": ["src/themes"],
 
       "~assets/*": ["src/assets/*"],
       "~components/*": ["src/components/*"],
@@ -33,6 +33,7 @@
       "~locales/*": ["src/locales/*"],
       "~pages/*": ["src/_pages/*"],
       "~store/*": ["src/store/*"],
+      "~themes/*": ["src/themes/*"],
       "~types/*": ["src/types/*"]
     },
 

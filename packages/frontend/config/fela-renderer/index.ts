@@ -5,6 +5,7 @@ import prefixer from 'fela-plugin-prefixer';
 import fallbackValue from 'fela-plugin-fallback-value';
 
 import type { FelaRule } from '~lib/css-helper/fela';
+import type { TPlugin } from 'fela';
 
 const isStyle = (
   (val: unknown): val is FelaRule => (
@@ -14,20 +15,26 @@ const isStyle = (
   )
 );
 
-const checkCSSShorthand = (
-  (style: FelaRule): FelaRule => {
+const checkCSSShorthand: TPlugin = (
+  (style: FelaRule, type): FelaRule => {
+    if (type !== 'RULE') return style;
+
     const $styleEntries = Object.entries(style);
 
     for (let i = 0; i < $styleEntries.length; i += 1) {
       const [prop, value] = $styleEntries[i];
 
       if (isCSSShorthand(prop)) {
-        // eslint-disable-next-line no-console
-        console.debug('css shorthand found', prop, value);
+        try {
+          throw new Error(`css shorthand found ${prop} ${value}`);
+        } catch (error) {
+          // eslint-disable-next-line no-console
+          console.warn(error);
+        }
       }
 
       if (isStyle(value)) {
-        checkCSSShorthand(value);
+        checkCSSShorthand(value, type);
       }
     }
 
@@ -35,7 +42,7 @@ const checkCSSShorthand = (
   }
 );
 
-const fluidRange = (
+const fluidRange: TPlugin = (
   (style: FelaRule): FelaRule => {
     let $style = style;
     const $styleEntries = Object.entries($style);
@@ -65,7 +72,7 @@ const fluidRange = (
   }
 );
 
-const nested = (
+const nested: TPlugin = (
   (style: FelaRule): FelaRule => {
     let $style = style;
     const $styleEntries = Object.entries($style);
@@ -74,6 +81,28 @@ const nested = (
       const [prop, value] = $styleEntries[i];
 
       if (prop === 'nested' && isStyle(value)) {
+        $style = merge($style, nested(value));
+        delete $style.nested;
+      } else if (isStyle(value)) {
+        $style = merge($style, {
+          [prop]: nested(value),
+        });
+      }
+    }
+
+    return $style;
+  }
+);
+
+const variables: TPlugin = (
+  (style: FelaRule): FelaRule => {
+    let $style = style;
+    const $styleEntries = Object.entries($style);
+
+    for (let i = 0; i < $styleEntries.length; i += 1) {
+      const [prop, value] = $styleEntries[i];
+
+      if (prop === 'variables' && isStyle(value)) {
         $style = merge($style, nested(value));
         delete $style.nested;
       } else if (isStyle(value)) {
@@ -101,6 +130,7 @@ export default {
   plugins: [
     fluidRange,
     nested,
+    variables,
 
     prefixer(),
     fallbackValue(),

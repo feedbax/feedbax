@@ -1,4 +1,4 @@
-import type { Colors } from '~theme';
+import type { ColorKeys } from '~themes/types';
 
 export enum Icons {
   Heart,
@@ -18,8 +18,8 @@ export enum Variants {
 }
 
 export type IconColors = {
-  icon?: Colors;
-  background?: Colors;
+  icon?: ColorKeys;
+  background?: ColorKeys;
 };
 
 export type IconProps = {

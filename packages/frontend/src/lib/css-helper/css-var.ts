@@ -1,4 +1,4 @@
-import type { Theme } from '~theme';
+import type { Theme } from '~themes/types';
 
 const cssVar = (
   <T extends keyof Theme> (cssVariable: T): string => (
