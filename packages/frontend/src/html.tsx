@@ -92,13 +92,13 @@ export default function HTML (props: Props): JSX.Element {
       <head>
         <meta charSet="utf-8" />
         <meta httpEquiv="x-ua-compatible" content="ie=edge" />
-
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, shrink-to-fit=no" />
 
         <script src={`https://polyfill.io/v3/polyfill.min.js?version=3.53.1&features=${polyfillFeatures.join(',')}`} />
 
         {headComponents}
       </head>
+
       <body {...bodyAttributes}>
         {preBodyComponents}
 
