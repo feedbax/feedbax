@@ -1,17 +1,18 @@
-import { css } from '@emotion/react';
-import { fluidRange } from '~lib/css-helper';
+import { fluidRangeFela, createRule } from '~lib/css-helper';
 
-export const stylesMenuButton = css`
-  position: absolute;
-  z-index: 999 !important;
+export const rules = {
+  button: createRule({
+    position: 'absolute',
+    zIndex: '999 !important' as unknown as 999,
 
-  ${fluidRange({
-    screen: ['20rem', '120rem', '240rem'] as const,
-    sizes: [['1.56rem', '1.56rem', '3.13rem']] as const,
+    fluidRange: fluidRangeFela({
+      screen: ['20rem', '120rem', '240rem'] as const,
+      sizes: [['1.56rem', '1.56rem', '3.13rem']] as const,
 
-    css: ([unit]) => ({
-      top: unit,
-      right: unit,
+      css: ([unit]) => ({
+        top: unit,
+        right: unit,
+      }),
     }),
-  })}
-`;
+  }),
+};

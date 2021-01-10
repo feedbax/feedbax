@@ -1,3 +1,4 @@
+import type { FelaRule } from '~lib/css-helper/fela';
 import type { ColorKeys } from '~themes/types';
 
 export enum Icons {
@@ -24,6 +25,8 @@ export type IconColors = {
 
 export type IconProps = {
   icon: Icons;
+
+  customRule?: FelaRule;
   variant?: Variants;
   color?: IconColors;
 };

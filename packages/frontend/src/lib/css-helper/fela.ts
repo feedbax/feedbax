@@ -23,7 +23,7 @@ export type FelaRule = IStyle & {
 };
 
 export const createRule = (
-  (rule: FelaRule): FelaRule => rule
+  <T extends FelaRule> (rule: T): FelaRule => rule
 );
 
 /* eslint-disable @typescript-eslint/indent */

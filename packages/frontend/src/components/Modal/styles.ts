@@ -1,35 +1,45 @@
-import { css } from '@emotion/react';
-import { cssVar } from '~lib/css-helper';
+import { cssVar, createRule } from '~lib/css-helper';
+import { FelaRule } from '~lib/css-helper/fela';
 
-export const stylesPortal = css`
-  position: fixed;
+export type BackdropProps = { isClickable?: boolean };
+export type BackdropRule = (props: BackdropProps) => FelaRule;
 
-  left: 0;
-  top: 0;
+export const rules = {
+  portal: createRule({
+    position: 'fixed',
+    overflow: 'hidden',
 
-  overflow: hidden;
-  z-index: 9999;
+    width: '100%',
+    height: ['100vh', 'calc(var(--vh, 1vh) * 100)'] as unknown as string,
 
-  width: 100%;
-  height: 100vh;
-  height: calc(var(--vh, 1vh) * 100);
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-`;
+    left: '0',
+    top: '0',
 
-export const stylesBackground = css`
-  position: absolute;
-  z-index: -1;
+    zIndex: 9999,
+  }),
 
-  left: 0;
-  top: 0;
+  backdrop: (
+    ({ isClickable }: BackdropProps): FelaRule => createRule({
+      cursor: isClickable ? 'pointer' : 'default',
+    })
+  ),
 
-  width: 100%;
-  height: 100%;
+  background: createRule({
+    position: 'absolute',
+    zIndex: -1,
 
-  background-color: ${cssVar('--color-feedbax-primary')};
-  opacity: 0.8;
-`;
+    backgroundColor: cssVar('--color-feedbax-primary'),
+    opacity: 0.8,
+
+    left: '0',
+    top: '0',
+
+    width: '100%',
+    height: '100%',
+  }),
+};

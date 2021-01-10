@@ -1,15 +1,14 @@
-/** @jsx jsx */
-
 import React from 'react';
-import { jsx, css, PropsOf } from '@emotion/react';
+import { useFela } from 'react-fela';
 
-import type { SerializedStyles } from '@emotion/react';
+import type { ComponentProps } from 'react';
+import type { FelaRule } from '~lib/css-helper/fela';
 
-type HyphensProps = { style?: SerializedStyles };
+type HyphensProps = { style?: FelaRule };
 
 type HyphenCustom = {
   custom: <T extends React.FC>(component: T) => (
-    React.FC<PropsOf<T> & HyphensProps>
+    React.FC<ComponentProps<T> & HyphensProps>
   )
 };
 
@@ -23,7 +22,7 @@ type Hyphen = HyphenCustom & HyphenHTML;
 
 type Component = React.FC<{
   ref: React.ForwardedRef<unknown>;
-  css: SerializedStyles;
+  className: string;
 }>;
 
 const target = {} as Hyphen;
@@ -35,15 +34,22 @@ const handler = {
       return (
         (Component: Component) => (
           React.forwardRef(
-            ({ style, ...rest }: HyphensProps, ref) => (
-              <Component
-                // eslint-disable-next-line react/jsx-props-no-spreading
-                {...rest}
+            ({ style, ...rest }: HyphensProps, ref) => {
+              const { css } = useFela();
 
-                ref={ref}
-                css={css([css`hyphens: manual !important;`, style])}
-              />
-            ),
+              const userRule = style ?? {};
+              const hyphensRule = { hyphens: 'manual !important' as 'manual' };
+
+              return (
+                <Component
+                  // eslint-disable-next-line react/jsx-props-no-spreading
+                  {...rest}
+
+                  ref={ref}
+                  className={css(hyphensRule, userRule)}
+                />
+              );
+            },
           )
         )
       );
@@ -51,15 +57,22 @@ const handler = {
 
     return (
       React.forwardRef(
-        ({ style, ...rest }: HyphensProps, ref) => (
-          <Element
-            // eslint-disable-next-line react/jsx-props-no-spreading
-            {...rest}
+        ({ style, ...rest }: HyphensProps, ref) => {
+          const { css } = useFela();
 
-            ref={ref}
-            css={css([css`hyphens: manual !important;`, style])}
-          />
-        ),
+          const userRule = style ?? {};
+          const hyphensRule = { hyphens: 'manual !important' as 'manual' };
+
+          return (
+            <Element
+              // eslint-disable-next-line react/jsx-props-no-spreading
+              {...rest}
+
+              ref={ref}
+              className={css(hyphensRule, userRule)}
+            />
+          );
+        },
       )
     );
   },

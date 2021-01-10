@@ -129,6 +129,9 @@ export const rules = {
       alignItems: 'flex-end',
       flexWrap: 'wrap',
 
+      marginRight: 'auto',
+      marginLeft: 'auto',
+
       fluidRange: fluidRangeFela({
         screen: ['20rem', '120rem', '240rem'] as const,
 
@@ -139,9 +142,7 @@ export const rules = {
 
         css: ([margin, maxWidth]) => ({
           marginTop: margin,
-          marginRight: 'auto',
           marginBottom: margin,
-          marginLeft: 'auto',
 
           maxWidth,
         }),

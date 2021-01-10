@@ -1,12 +1,10 @@
-/** @jsx jsx */
-/** @jsxFrag React.Fragment */
-
 import React from 'react';
 import isEqual from 'lodash.isequal';
 
-import { jsx } from '@emotion/react';
-import { stylesIcon } from './styles';
+import { useFela } from 'react-fela';
 import { cssVar } from '~lib/css-helper';
+import { rules } from './styles';
+
 import { getIcon } from './const';
 
 import type { IconProps } from './types';
@@ -15,12 +13,16 @@ const Icon = React.memo(
   (props: IconProps) => {
     const { icon, variant } = props;
     const { color = {} } = props;
+    const { customRule } = props;
+
+    const { css } = useFela({ customRule });
+    const className = css(rules.icon);
 
     const IconComponent = getIcon(icon, variant);
 
     return (
       <IconComponent
-        css={stylesIcon}
+        className={className}
         fill={cssVar(color.icon ?? '--color-primary-text')}
       />
     );

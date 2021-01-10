@@ -1,13 +1,8 @@
-/** @jsx jsx */
-/** @jsxFrag React.Fragment */
-
 import React, { useState } from 'react';
 import loadable from '@loadable/component';
 
-import { jsx } from '@emotion/react';
-import { stylesMenuButton } from './styles';
-
 import IconButton, { Icons } from '~components/IconButton';
+import { rules } from './styles';
 
 import type { IconButtonProps } from '~components/IconButton';
 
@@ -30,8 +25,8 @@ const MenuButton = React.memo(
 
         <IconButton
           color={color}
-          styles={stylesMenuButton}
           icon={Icons.Menu}
+          customRule={rules.button}
           onClick={toggleOpen}
           ariaLabel="Open menu"
         />

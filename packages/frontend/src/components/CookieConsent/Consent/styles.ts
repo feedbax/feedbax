@@ -1,62 +1,109 @@
-import { css } from '@emotion/react';
-import { cssVar, fluidRange } from '~lib/css-helper';
+import { cssVar, fluidRangeFela, createRule } from '~lib/css-helper';
 
-export const stylesConsentContent = css`
-  flex: 0 1 auto;
+export const rules = {
+  button: createRule({
+    display: 'inline-block',
+    cursor: 'pointer',
+    backgroundColor: cssVar('--color-feedbax-secondary'),
 
-  font-family: ${cssVar('--font-feedbax-secondary')};
-  text-align: justify;
+    fluidRange: fluidRangeFela({
+      screen: ['20rem', '120rem', '240rem'] as const,
 
-  padding: 1rem;
-  box-sizing: border-box;
+      sizes: [
+        ['0.13rem', '0.13rem', '0.25rem'],
+        ['0.31rem', '0.31rem', '0.63rem'],
+      ] as const,
 
-  max-height: 100%;
-  overflow: auto;
+      css: ([paddingY, paddingX]) => ({
+        paddingTop: paddingY,
+        paddingRight: paddingX,
+        paddingBottom: paddingY,
+        paddingLeft: paddingX,
+      }),
+    }),
 
-  color: ${cssVar('--color-primary-text')};
+    nested: {
+      ':hover': {
+        opacity: 0.8,
+      },
+    },
+  }),
 
-  & > * {
-    display: block;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-  }
+  content: createRule({
+    flexGrow: 0,
+    flexShrink: 1,
+    flexBasis: 'auto',
 
-  a {
-    color: ${cssVar('--color-primary-text')};
-  }
+    fontFamily: cssVar('--font-feedbax-secondary'),
+    textAlign: 'justify',
 
-  ${fluidRange({
-    screen: ['20rem', '120rem', '240rem'] as const,
+    paddingTop: '1rem',
+    paddingRight: '1rem',
+    paddingBottom: '1rem',
+    paddingLeft: '1rem',
 
-    sizes: [
-      ['20rem', '40rem',  '80rem'],
-      ['1rem',  '1.5rem', '3rem'],
-    ] as const,
+    boxSizing: 'border-box',
+    maxHeight: '100%',
+    overflow: 'auto',
+    color: cssVar('--color-primary-text'),
 
-    css: ([maxWidth, fontSize]) => ({ maxWidth, fontSize }),
-  })}
-`;
+    fluidRange: fluidRangeFela({
+      screen: ['20rem', '120rem', '240rem'] as const,
 
-export const stylesLanguageChooser = css`
-  padding-top: 1em;
-  margin-top: 2em;
-  font-size: 0.8em;
+      sizes: [
+        ['20rem', '40rem',  '80rem'],
+        ['1rem',  '1.5rem', '3rem'],
+      ] as const,
 
-  color: ${cssVar('--color-primary-text')};
-  border-top: 1px solid ${cssVar('--color-primary-text')};
+      css: ([maxWidth, fontSize]) => ({
+        maxWidth,
+        fontSize,
+      }),
+    }),
+  }),
 
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
+  link: createRule({
+    color: cssVar('--color-primary-text'),
+  }),
 
-  & > * {
-    flex: 0 0 auto;
-    padding: 0 0.4em;
-    border-right: 1px solid ${cssVar('--color-primary-text')};
-  }
+  block: createRule({
+    display: 'block',
+    marginBlockStart: '1em',
+    marginBlockEnd: '1em',
+  }),
 
-  & > *:last-child {
-    border: 0;
-  }
-`;
+  languageChooser: createRule({
+    paddingTop: '1em',
+    marginTop: '2em',
+
+    fontSize: '0.8em',
+
+    color: cssVar('--color-primary-text'),
+    borderTop: `1px solid ${cssVar('--color-primary-text')}`,
+
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  }),
+
+  language: createRule({
+    flexGrow: 0,
+    flexShrink: 0,
+    flexBasis: 'auto',
+
+    paddingTop: 0,
+    paddingRight: '0.4em',
+    paddingBottom: 0,
+    paddingLeft: '0.4em',
+
+    borderRight: `1px solid ${cssVar('--color-primary-text')}`,
+
+    nested: {
+      ':last-child': {
+        borderStyle: 'none',
+        borderWidth: 0,
+      },
+    },
+  }),
+};

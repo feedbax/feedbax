@@ -15,7 +15,7 @@ export default (
 
     const bodyHTML = (
       renderToString(
-        <RendererProvider renderer={renderer}>
+        <RendererProvider renderer={renderer} rehydrate>
           {bodyComponent}
         </RendererProvider>,
       )
@@ -24,16 +24,25 @@ export default (
     const sheetList = renderToSheetList(renderer);
 
     const elements = (
-      sheetList.map((sheet) => (
-        <style
-          // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{ __html: sheet.css }}
-          data-fela-type={sheet.type}
-          data-fela-support={sheet.support}
-          key={`${sheet.type}-${sheet.media}`}
-          media={sheet.media}
-        />
-      ))
+      sheetList.map(
+        (sheet) => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const { rehydration, type } = sheet as any;
+
+          return (
+            <style
+              type="text/css"
+              media={sheet.media}
+              data-fela-support={sheet.support}
+              data-fela-rehydration={rehydration}
+              data-fela-type={type}
+
+              // eslint-disable-next-line react/no-danger
+              dangerouslySetInnerHTML={{ __html: sheet.css }}
+            />
+          );
+        },
+      )
     );
 
     replaceBodyHTMLString(bodyHTML);

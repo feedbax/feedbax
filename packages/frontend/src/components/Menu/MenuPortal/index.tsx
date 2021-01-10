@@ -1,14 +1,8 @@
-/** @jsx jsx */
-/** @jsxFrag React.Fragment */
-
 import React, { useEffect, useRef, useState } from 'react';
 import useMenuItems from '~hooks/other/menu/use-menu-items';
 
-import { jsx } from '@emotion/react';
-import { stylesItem, stylesItems } from './styles';
-import { stylesShow, stylesHide } from './styles';
-import { stylesIconButtonBack, stylesIconButtonClose } from './styles';
-import { stylesTabable, stylesMenuContent } from './styles';
+import { useFela } from 'react-fela';
+import { rules } from './styles';
 
 import IconButton, { Icons } from '~components/IconButton';
 import Modal from '~components/Modal';
@@ -28,6 +22,7 @@ const MenuPortal = React.memo(
   (props: MenuPortalProps) => {
     const { isOpen, toggleOpen } = props;
 
+    const { css } = useFela();
     const menu = useMenuItems();
 
     const [items, setItems] = useState(menu);
@@ -73,7 +68,7 @@ const MenuPortal = React.memo(
 
     const getItemProps = (
       (item: MenuItem, index: number) => ({
-        css: [stylesItem, stylesTabable],
+        className: css(rules.item, rules.tabable),
 
         role: 'button',
         tabIndex: 0,
@@ -98,13 +93,13 @@ const MenuPortal = React.memo(
         isOpen={isOpen}
         onBackdropClick={toggleOpen}
       >
-        <div css={stylesMenuContent}>
+        <div className={css(rules.content)}>
           <IconButton
             neumorphism={false}
-            styles={[stylesIconButtonBack, hasHistory ? stylesShow : stylesHide]}
 
             icon={Icons.ArrowBack}
             color={{ background: '--color-transparent' }}
+            customRule={rules.buttonBack(hasHistory)}
 
             ariaLabel="Previous Items"
             onClick={() => {
@@ -115,7 +110,7 @@ const MenuPortal = React.memo(
             }}
           />
 
-          <div css={stylesItems}>
+          <div className={css(rules.items)}>
             {items.map((item, i) => (
               <div
                 key={item.key}
@@ -123,15 +118,15 @@ const MenuPortal = React.memo(
                 // eslint-disable-next-line react/jsx-props-no-spreading
                 {...getItemProps(item, i)}
               >
-                <span className="icon">{item.icon}</span>
-                {item.content}
+                <span className={css(rules.itemIcon)}>{item.icon}</span>
+                <span className={css(rules.itemContent)}>{item.content}</span>
               </div>
             ))}
           </div>
 
           <IconButton
             neumorphism={false}
-            styles={stylesIconButtonClose}
+            customRule={rules.buttonClose}
 
             icon={Icons.Close}
             color={{ background: '--color-transparent' }}

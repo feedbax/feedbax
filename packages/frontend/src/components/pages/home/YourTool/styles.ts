@@ -5,9 +5,9 @@ export const rules = {
     position: 'relative',
     width: '100%',
 
-    marginTop: '0px',
+    marginTop: 0,
     marginRight: 'auto',
-    marginBottom: '0px',
+    marginBottom: 0,
     marginLeft: 'auto',
 
     display: 'flex',
@@ -41,7 +41,7 @@ export const rules = {
   text: createRule({
     flexGrow: 1,
     flexShrink: 0,
-    flexBasis: '0px',
+    flexBasis: 0,
 
     position: 'relative',
 
@@ -72,7 +72,7 @@ export const rules = {
       '@media (max-width: 50rem)': {
         marginTop: '1.35em',
         maxWidth: '100%',
-        paddingRight: '0',
+        paddingRight: 0,
         textAlign: 'center',
       },
     },

@@ -1,16 +1,12 @@
-/** @jsx jsx */
-/** @jsxFrag React.Fragment */
-
 import React from 'react';
 import { createPortal } from 'react-dom';
 
 import { motion, AnimatePresence } from 'framer-motion';
 
-import { css, jsx } from '@emotion/react';
-import { stylesPortal, stylesBackground } from './styles';
+import { useFela } from 'react-fela';
+import { rules } from './styles';
 
 import type { Variants } from 'framer-motion';
-import type { CSSInterpolation } from '@emotion/serialize';
 
 type MenuPortalProps = {
   isOpen: boolean;
@@ -45,11 +41,9 @@ const Modal = React.memo(
     const { isOpen, onBackdropClick } = props;
     const { children } = props;
 
-    const stylesBackdrop: CSSInterpolation = (
-      onBackdropClick
-        ? ({ cursor: 'pointer' })
-        : ({ cursor: 'default' })
-    );
+    const { css } = useFela({
+      isClickable: typeof onBackdropClick !== 'undefined',
+    });
 
     const $toggleOpen = () => {
       if (!onBackdropClick) return;
@@ -62,7 +56,7 @@ const Modal = React.memo(
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            css={css([stylesPortal, stylesBackdrop])}
+            className={css(rules.portal, rules.backdrop)}
             variants={variants}
             initial="initial"
             animate="animate"
@@ -72,7 +66,7 @@ const Modal = React.memo(
             { /* eslint-disable jsx-a11y/no-static-element-interactions */ }
             { /* eslint-disable jsx-a11y/click-events-have-key-events */ }
             <div
-              css={css([stylesBackground, stylesBackdrop])}
+              className={css(rules.background, rules.backdrop)}
               onClick={$toggleOpen}
             />
             { /* eslint-enable jsx-a11y/no-static-element-interactions */ }

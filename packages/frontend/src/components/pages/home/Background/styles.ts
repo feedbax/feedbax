@@ -1,74 +1,77 @@
-import { css } from '@emotion/react';
-import { cssVar, fluidRange } from '~lib/css-helper';
+import { cssVar, fluidRangeFela, createRule } from '~lib/css-helper';
 
-export const stylesBackround = css`
-  position: absolute;
+export const rules = {
+  background: createRule({
+    position: 'absolute',
 
-  top: 0;
-  left: 0;
+    top: 0,
+    left: 0,
 
-  width: 100%;
+    width: '100%',
+    height: ['100vh', 'calc(var(--vh, 1vh) * 100)'] as unknown as string,
 
-  height: 100vh;
-  height: calc(var(--vh, 1vh) * 100);
+    backgroundColor: cssVar('--color-primary-text'),
+    zIndex: '0 !important' as unknown as 0,
 
-  background-color: ${cssVar('--color-primary-text')};
+    fluidRange: fluidRangeFela({
+      screen: ['20rem', '120rem', '240rem'] as const,
 
-  ${fluidRange({
-    screen: ['20rem', '120rem', '240rem'] as const,
+      sizes: [
+        ['31.06rem', '52.09rem', '104.19rem'],
+        ['6rem',     '45rem',    '90rem'],
+      ] as const,
 
-    sizes: [
-      ['31.06rem',  '52.09rem',  '104.19rem'],
-      ['6rem',      '45rem',     '90rem'],
-      ['0rem',     '-12.5rem',  '-25rem'],
-      ['64rem',     '64rem',     '128rem'],
-    ] as const,
-
-    css: ([
-      minHeight,
-      paddingBottom,
-      top,
-      maxHeight,
-    ]) => ({
-      minHeight,
-      paddingBottom,
-
-      '.top': {
-        top,
-      },
-
-      '@media (orientation: portrait)': {
-        maxHeight,
-      },
+      css: ([minHeight, paddingBottom]) => ({
+        minHeight,
+        paddingBottom,
+      }),
     }),
-  })}
+  }),
 
-  z-index: 0 !important;
+  image: createRule({
+    position: 'absolute',
+    width: '100%',
+    height: 'auto',
 
-  & .img {
-    position: absolute;
-    width: 100%;
-    height: auto;
+    nested: {
+      '& svg': {
+        display: 'block',
+      },
+    },
+  }),
 
-    svg {
-      display: block;
-    }
-  }
+  top: createRule({
+    maxWidth: '70%',
+    right: 0,
 
-  & .top {
-    max-width: 70%;
-    top: 0;
-    right: 0;
-  }
+    fluidRange: fluidRangeFela({
+      screen: ['20rem', '120rem', '240rem'] as const,
 
-  & .bot {
-    bottom: -4px;
-    left: 0;
-  }
+      sizes: [
+        ['0rem',  '-12.5rem', '-25rem'],
+        ['64rem', '64rem',    '128rem'],
+      ] as const,
 
-  @media (orientation: portrait) {
-    & .top {
-      max-width: 100%;
-    }
-  }
-`;
+      css: ([top, maxHeight]) => ({
+        top,
+
+        nested: {
+          '@media (orientation: portrait)': {
+            maxHeight,
+          },
+        },
+      }),
+    }),
+
+    nested: {
+      '@media (orientation: portrait)': {
+        maxWidth: '100%',
+      },
+    },
+  }),
+
+  bottom: createRule({
+    bottom: '-4px',
+    left: 0,
+  }),
+};

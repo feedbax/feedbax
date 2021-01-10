@@ -1,7 +1,7 @@
 import type React from 'react';
-import type { CSSInterpolation } from '@emotion/serialize';
 import type { ColorKeys } from '~themes/types';
 import type { IconProps } from '~components/Icon';
+import type { FelaRule } from '~lib/css-helper/fela';
 
 export type IconButtonColors = {
   icon?: ColorKeys;
@@ -15,7 +15,7 @@ export type IconButtonProps = IconProps & {
   sizeBounds?: { min?: number, max?: number };
 
   neumorphism?: boolean;
-  styles?: CSSInterpolation;
+  customRule?: FelaRule;
 
   to?: string;
   onClick?: (event: React.MouseEvent<unknown, MouseEvent>) => void;
