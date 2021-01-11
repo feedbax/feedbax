@@ -1,6 +1,7 @@
 # not ready yet
 projects/api
-projects/frontend-v2
+projects/frontend-next
+projects/frontend-sapper
 
 .pnpm-store
 
