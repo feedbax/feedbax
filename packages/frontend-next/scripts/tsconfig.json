@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "jsx": "preserve",
+
+    "baseUrl": ".",
+    "paths": {},
+
+    "plugins": [{ "transform": "@zerollup/ts-transform-paths" }],
+  },
+
+  "include": [
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+
+  "exclude": [
+    "node_modules"
+  ]
+}

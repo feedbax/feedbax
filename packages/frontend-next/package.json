@@ -1,0 +1,46 @@
+{
+  "name": "frontend-next",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "lint": "eslint src/**/*.{js,ts,jsx,tsx}",
+    "generate-translations": "ts-node --compiler ttypescript --dir ./scripts ./generate-translations/index.ts",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "fela": "^11.5.2",
+    "fela-dom": "^11.5.2",
+    "fela-plugin-fallback-value": "^11.5.2",
+    "fela-plugin-prefixer": "^11.5.2",
+    "focus-visible": "^5.2.0",
+    "framer-motion": "^3.2.1",
+    "is-css-shorthand": "^1.0.1",
+    "js-cookie": "^2.2.1",
+    "lodash.merge": "^4.6.2",
+    "next": "10.0.5",
+    "polished": "^4.0.5",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "react-fela": "^11.5.2"
+  },
+  "devDependencies": {
+    "@types/js-cookie": "^2.2.6",
+    "@types/lodash.merge": "^4.6.6",
+    "@types/react-dom": "^17.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.13.0",
+    "@typescript-eslint/parser": "^4.13.0",
+    "@zerollup/ts-transform-paths": "^1.7.18",
+    "eslint": "^7.17.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-react-app": "^6.0.0",
+    "eslint-import-resolver-typescript": "^2.3.0",
+    "eslint-plugin-import": "^2.22.1",
+    "json-to-ts": "^1.7.0",
+    "ts-node": "^9.1.1",
+    "ttypescript": "^1.5.12",
+    "yaml": "^2.0.0-1"
+  }
+}
