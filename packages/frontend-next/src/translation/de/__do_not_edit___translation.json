@@ -1,0 +1,49 @@
+{
+  "menu": {
+    "change_locale": "Spra­che än­dern",
+    "create_event": "Event er­stel­len",
+    "logout": "Aus­log­gen"
+  },
+  "home": {
+    "lets_go": "Los geht's",
+    "see_more": "Mehr über feedb.ax",
+    "your_tool": "Das Um­fra­ge-Tool für dei­ne Ver­an­stal­tung.",
+    "benefit_1": "Fin­de her­aus, was Teil­neh­mer be­wegt.",
+    "benefit_2": "Fra­gen, Ant­wor­ten, Stim­mungs­bil­der.",
+    "benefit_3": "Kos­ten­los, über­sicht­lich, ein­fach, schnell.",
+    "benefit_4": {
+      "title": "Vor­tei­le",
+      "content_1": "kom­plett spen­den­ba­siert",
+      "content_2": "kein Li­mit bei Events & Fra­gen"
+    },
+    "benefit_5": {
+      "title": "Du planst eine gro­ße Ver­an­stal­tung?",
+      "content_1": "Meld dich bei un­se­rem Ent­wick­ler für de­tail­lier­te Ab­spra­chen.",
+      "content_2": "si­las[at]sat-dil­len­burg.de"
+    },
+    "benefit_6": {
+      "title": "Spen­de",
+      "content_1": "Wenn du feedb.ax gut fin­dest, kannst du die CJ und un­se­ren Ent­wick­ler mit ei­nem Bei­trag dei­ner Wahl sup­por­ten."
+    }
+  },
+  "generic": {
+    "footer": {
+      "privacy_policy": "Da­ten­schutz",
+      "imprint": "Im­pres­sum",
+      "disclaimer": "Haf­tungs­aus­schluss"
+    },
+    "cookie_consent": {
+      "title": "Wir nut­zen Coo­kies!",
+      "content": "Die­se Web­site ver­wen­det aus­schließ­lich Coo­kies, In­de­xedDB und Lo­cal­S­to­rage Ein­trä­ge um den Be­trieb des Ser­vices si­cher­zu­stel­len.\nWir nut­zen kei­ne der Coo­kies für Ana­ly­se-, oder Wer­be­zwe­cke. Du kannst un­se­ren Ser­vice kom­plett kos­ten­los und an­onym nut­zen.",
+      "small": "Wei­te­re In­fos über die Coo­kies, de­ren Nut­zung und den ge­ne­rel­len Da­ten­schutz fin­dest du un­ter",
+      "agree": "Ich stim­me der Nut­zung zu"
+    },
+    "locales": {
+      "de": "Deutsch",
+      "en": "Eng­lish",
+      "it": "Ita­lia­no",
+      "pl": "Pol­ski",
+      "hr": "Hr­vat­ski"
+    }
+  }
+}

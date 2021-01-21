@@ -22,6 +22,7 @@ type TranslationHook = {
   t: TranslateFunction;
   locale: string;
   locales: string[];
+  distinctLocales: string[];
 };
 
 export function useTranslation (): TranslationHook {
@@ -46,9 +47,12 @@ export function useTranslation (): TranslationHook {
   if (typeof locale === 'undefined') throw new Error('locale is undefined');
   if (typeof locales === 'undefined') throw new Error('locales is undefined');
 
+  const distinctLocales = locales.filter(($locale) => $locale !== locale);
+
   return {
+    t,
     locale,
     locales,
-    t,
+    distinctLocales,
   };
 }

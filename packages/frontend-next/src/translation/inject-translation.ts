@@ -17,7 +17,7 @@ export const injectTranslation = (
 
       const translationsDir = path.resolve(process.cwd(), 'src/translation');
       const translationDir = path.join(translationsDir, locale);
-      const translationPath = path.join(translationDir, 'translations.json');
+      const translationPath = path.join(translationDir, '__do_not_edit___translation.json');
       const translationData = fs.readFileSync(translationPath, 'utf-8');
 
       const translation = JSON.parse(translationData);

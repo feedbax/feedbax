@@ -1,8 +1,6 @@
 import React from 'react';
 import { TranslationProvider } from './context';
 
-import type { ComponentClass, ComponentType } from 'react';
-
 type Props = {
   locale: string;
   locales: string[];
@@ -10,7 +8,7 @@ type Props = {
 };
 
 export const provideTranslation = (
-  (WrappedComponent: ComponentType): ComponentClass<Props> => (
+  (WrappedComponent: React.ComponentType): React.ComponentClass<Props> => (
     // eslint-disable-next-line react/prefer-stateless-function
     class extends React.Component<Props> {
       render () {

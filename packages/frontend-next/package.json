@@ -5,9 +5,9 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "lint": "eslint src/**/*.{js,ts,jsx,tsx}",
-    "generate-translations": "ts-node --compiler ttypescript --dir ./scripts ./generate-translations/index.ts",
     "dev": "next dev",
     "build": "next build",
+    "build:i18n": "ts-node --compiler ttypescript --dir src/translation/scripts generate-translations/index.ts",
     "start": "next start"
   },
   "dependencies": {

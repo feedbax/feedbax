@@ -1,3 +1,10 @@
+/**
+ * DO NOT EDIT, THIS FILE WAS GENERATED
+ * @ 2021-01-21T15:24:57.215Z
+ */
+
+/* eslint-disable */
+
 interface Translation {
   menu: Menu;
   home: Home;

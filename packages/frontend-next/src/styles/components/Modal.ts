@@ -11,7 +11,7 @@ const portal = createRule({
   width: '100%',
   height: ['100vh', 'calc(var(--vh, 1vh) * 100)'],
 
-  display: ['flex', 'tobi'],
+  display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
   flexDirection: 'row',
