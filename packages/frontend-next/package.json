@@ -3,12 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "preinstall": "npx only-allow pnpm",
-    "lint": "eslint src/**/*.{js,ts,jsx,tsx}",
     "dev": "next dev",
     "build": "next build",
-    "build:i18n": "ts-node --compiler ttypescript --dir src/i18n/scripts i18n-gen/index.ts",
-    "start": "next start"
+    "start": "next start",
+    "preinstall": "npx only-allow pnpm",
+    "lint": "eslint src/**/*.{js,ts,jsx,tsx}",
+    "build:i18n": "pnpm ts-node src/i18n/generator/index.ts",
+    "ts-node": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' ts-node --compiler ttypescript"
   },
   "dependencies": {
     "fela": "^11.5.2",

@@ -23,9 +23,10 @@
     "baseUrl": ".",
 
     "paths": {
-      "@/*": ["./src/*"],
-      "next-config": ["./next.config"]
-    }
+      "@/*": ["./src/*"]
+    },
+
+    "plugins": [{ "transform": "@zerollup/ts-transform-paths" }]
   },
 
   "include": [
