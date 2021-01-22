@@ -4,15 +4,12 @@ import path from 'path';
 import YAML from 'yaml';
 import jsonToTs from 'json-to-ts';
 
-import { createReviver } from './create-reviver';
+import config from '../../config.json';
+import { createReviver } from './helper/create-reviver';
 
 type Translation = Record<string, unknown>;
 
-const locales = ['de', 'en'];
-const defaultLocale = 'en';
-
-const inputDir = path.resolve(__dirname, 'languages');
-const outputDir = path.resolve(process.cwd(), 'src/translation');
+const translationDir = path.resolve(process.cwd(), 'src/i18n');
 
 (async function main () {
   await generateJson();
@@ -20,14 +17,14 @@ const outputDir = path.resolve(process.cwd(), 'src/translation');
 }());
 
 async function generateJson () {
-  for (let i = 0; i < locales.length; i += 1) {
-    const locale = locales[i];
+  for (let i = 0; i < config.locales.length; i += 1) {
+    const locale = config.locales[i];
 
-    const translationInputPath = path.join(inputDir, `${locale}.yaml`);
-    const translationOutputPath = path.join(outputDir, locale, '__do_not_edit___translation.json');
+    const translationInputPath = path.join(translationDir, locale, 'translation.yaml');
+    const translationOutputPath = path.join(translationDir, locale, '__do_not_edit__/translation.json');
 
     // eslint-disable-next-line no-await-in-loop
-    const reviver = await createReviver(inputDir, locale);
+    const reviver = await createReviver(translationDir, locale);
     const translationData = fs.readFileSync(translationInputPath, 'utf-8');
     const translation: Translation = YAML.parse(translationData, reviver, {});
 
@@ -36,12 +33,12 @@ async function generateJson () {
 }
 
 async function generateTypes () {
-  const translationOutputPath = path.join(outputDir, defaultLocale, '__do_not_edit___translation.json');
+  const translationOutputPath = path.join(translationDir, config.defaultLocale, '__do_not_edit__/translation.json');
   const translationData = fs.readFileSync(translationOutputPath, 'utf-8');
   const translation: Translation = JSON.parse(translationData);
 
   const types = jsonToTs(translation, { rootName: 'Translation' });
-  const typesPath = path.join(outputDir, 'translation.d.ts');
+  const typesPath = path.join(translationDir, 'translation.d.ts');
 
   const typesHead = [
     '/**',

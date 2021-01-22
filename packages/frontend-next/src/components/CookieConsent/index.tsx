@@ -1,5 +1,5 @@
 import { memo, useEffect, useState } from 'react';
-import { useTranslation } from '@/translation/hook';
+import { useTranslation } from '@/i18n/hook';
 import { useRouter } from 'next/router';
 
 import cookies from 'js-cookie';

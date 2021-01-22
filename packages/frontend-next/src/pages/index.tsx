@@ -1,8 +1,8 @@
 import { memo } from 'react';
 
-import { provideTranslation } from '@/translation/provide-translation';
-import { injectTranslation } from '@/translation/inject-translation';
-import { useTranslation } from '@/translation/hook';
+import { provideTranslation } from '@/i18n/provide-translation';
+import { injectTranslation } from '@/i18n/inject-translation';
+import { useTranslation } from '@/i18n/hook';
 
 import Head from 'next/head';
 import CookieConsent from '@/components/CookieConsent/dynamic';

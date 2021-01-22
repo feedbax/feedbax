@@ -7,7 +7,7 @@
     "lint": "eslint src/**/*.{js,ts,jsx,tsx}",
     "dev": "next dev",
     "build": "next build",
-    "build:i18n": "ts-node --compiler ttypescript --dir src/translation/scripts generate-translations/index.ts",
+    "build:i18n": "ts-node --compiler ttypescript --dir src/i18n/scripts i18n-gen/index.ts",
     "start": "next start"
   },
   "dependencies": {
@@ -29,6 +29,7 @@
   "devDependencies": {
     "@types/js-cookie": "^2.2.6",
     "@types/lodash.merge": "^4.6.6",
+    "@types/marked": "^1.2.1",
     "@types/react-dom": "^17.0.0",
     "@typescript-eslint/eslint-plugin": "^4.13.0",
     "@typescript-eslint/parser": "^4.13.0",
@@ -39,8 +40,11 @@
     "eslint-import-resolver-typescript": "^2.3.0",
     "eslint-plugin-import": "^2.22.1",
     "json-to-ts": "^1.7.0",
+    "marked": "^1.2.7",
     "ts-node": "^9.1.1",
     "ttypescript": "^1.5.12",
+    "webpack-license-plugin": "^4.1.2",
+    "xss": "^1.0.8",
     "yaml": "^2.0.0-1"
   }
 }

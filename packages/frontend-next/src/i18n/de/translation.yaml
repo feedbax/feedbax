@@ -30,7 +30,7 @@ home:
                 supporten.
 
 generic:
-  ref: "./generic.yaml"
+  ref: "../generic/translation.yaml"
 
   footer:
     privacy_policy: Datenschutz

@@ -29,7 +29,7 @@ home:
                 a contribution of your choice.
 
 generic:
-  ref: "./generic.yaml"
+  ref: "../generic/translation.yaml"
 
   footer:
     privacy_policy: Privacy Policy

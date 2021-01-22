@@ -190,6 +190,7 @@ importers:
     devDependencies:
       '@types/js-cookie': 2.2.6
       '@types/lodash.merge': 4.6.6
+      '@types/marked': 1.2.1
       '@types/react-dom': 17.0.0
       '@typescript-eslint/eslint-plugin': 4.13.0_a8b47e2b9a41dac71409c0957e11ff44
       '@typescript-eslint/parser': 4.13.0_eslint@7.17.0
@@ -200,12 +201,16 @@ importers:
       eslint-import-resolver-typescript: 2.3.0_860e0a3f1402db18f3476b9d86a8ac51
       eslint-plugin-import: 2.22.1_eslint@7.17.0
       json-to-ts: 1.7.0
+      marked: 1.2.7
       ts-node: 9.1.1
       ttypescript: 1.5.12_ts-node@9.1.1
+      webpack-license-plugin: 4.1.2
+      xss: 1.0.8
       yaml: 2.0.0-1
     specifiers:
       '@types/js-cookie': ^2.2.6
       '@types/lodash.merge': ^4.6.6
+      '@types/marked': ^1.2.1
       '@types/react-dom': ^17.0.0
       '@typescript-eslint/eslint-plugin': ^4.13.0
       '@typescript-eslint/parser': ^4.13.0
@@ -225,6 +230,7 @@ importers:
       js-cookie: ^2.2.1
       json-to-ts: ^1.7.0
       lodash.merge: ^4.6.2
+      marked: ^1.2.7
       next: 10.0.5
       polished: ^4.0.5
       react: 17.0.1
@@ -232,6 +238,8 @@ importers:
       react-fela: ^11.5.2
       ts-node: ^9.1.1
       ttypescript: ^1.5.12
+      webpack-license-plugin: ^4.1.2
+      xss: ^1.0.8
       yaml: ^2.0.0-1
   packages/protos:
     devDependencies:
@@ -5680,7 +5688,6 @@ packages:
   /debug/3.2.7:
     dependencies:
       ms: 2.1.3
-    dev: false
     resolution:
       integrity: sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==
   /debug/4.1.1:
@@ -8786,6 +8793,14 @@ packages:
       has-symbols: 1.0.1
     resolution:
       integrity: sha512-aeX0vrFm21ILl3+JpFFRNe9aUvp6VFZb2/CTbgLb8j75kOhvoNYjt9d8KA/tJG4gSo8nzEDedRl0h7vDmBYRVg==
+  /get-npm-tarball-url/2.0.2:
+    dependencies:
+      normalize-registry-url: 1.0.0
+    dev: true
+    engines:
+      node: '>=4'
+    resolution:
+      integrity: sha512-2dPhgT0K4pVyciTqdS0gr9nEwyCQwt9ql1/t5MCUMvcjWjAysjGJgT7Sx4n6oq3tFBjBN238mxX4RfTjT3838Q==
   /get-port/3.2.0:
     dev: false
     engines:
@@ -11609,7 +11624,6 @@ packages:
     resolution:
       integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
   /ms/2.1.3:
-    dev: false
     resolution:
       integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==
   /multicast-dns-service-types/1.1.0:
@@ -11684,6 +11698,17 @@ packages:
   /natural-compare/1.4.0:
     resolution:
       integrity: sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=
+  /needle/2.6.0:
+    dependencies:
+      debug: 3.2.7
+      iconv-lite: 0.4.24
+      sax: 1.2.4
+    dev: true
+    engines:
+      node: '>= 4.4.x'
+    hasBin: true
+    resolution:
+      integrity: sha512-KKYdza4heMsEfSWD7VPUIz3zX2XDwOyX2d+geb4vrERZMT5RMU6ujjaD+I5Yr54uZxQ2w6XRTAhHBbSCyovZBg==
   /negotiator/0.6.2:
     dev: false
     engines:
@@ -11905,6 +11930,10 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-LRDAa9/TEuqXd2laTShDlFa3WUI=
+  /normalize-registry-url/1.0.0:
+    dev: true
+    resolution:
+      integrity: sha512-0v6T4851b72ykk5zEtFoN4QX/Fqyk7pouIj9xZyAvAe9jlDhAwT4z6FlwsoQCHjeuK2EGUoAwy/F4y4B1uZq9A==
   /normalize-url/1.9.1:
     dependencies:
       object-assign: 4.1.1
@@ -14524,7 +14553,6 @@ packages:
     resolution:
       integrity: sha512-2LqoNPtKkZq/XbXNQ4C64GFEleSEHKv6NPSI+bMC/l+jpEXGJhiRYkAQToO24MR7NU4JRY2RpLpJ/gjo2Uf13w==
   /sax/1.2.4:
-    dev: false
     resolution:
       integrity: sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==
   /scheduler/0.19.1:
@@ -15020,7 +15048,6 @@ packages:
     resolution:
       integrity: sha1-ZYU1WEhh7JfXMNbPQYIuH1ZoQSg=
   /source-list-map/2.0.1:
-    dev: false
     resolution:
       integrity: sha512-qnQ7gVMxGNxsiL4lEuJwe/To8UnK7fAnmbGEEH8RpLouuKbeEm0lhbQVFIrNSuB+G7tVrAlVsZgETT5nljf+Iw==
   /source-map-resolve/0.5.3:
@@ -15083,6 +15110,12 @@ packages:
       spdx-license-ids: 3.0.7
     resolution:
       integrity: sha512-cbqHunsQWnJNE6KhVSMsMeH5H/L9EpymbzqTQ3uLwNCLZ1Q481oWaofqH7nO6V07xlXwY6PhQdQ2IedWx/ZK4Q==
+  /spdx-expression-validate/2.0.0:
+    dependencies:
+      spdx-expression-parse: 3.0.1
+    dev: true
+    resolution:
+      integrity: sha512-b3wydZLM+Tc6CFvaRDBOF9d76oGIHNCLYFeHbftFXUWjnfZWganmDmvtM5sm1cRwJc/VDBMLyGGrsLFd1vOxbg==
   /spdx-license-ids/3.0.7:
     resolution:
       integrity: sha512-U+MTEOO0AiDzxwFvoa4JVnMV6mZlJKk2sBLt90s7G0Gd0Mlknc7kxEn3nuDPNZRta7O2uy8oLcZLVT+4sqNZHQ==
@@ -16886,6 +16919,21 @@ packages:
     dev: false
     resolution:
       integrity: sha512-xs5dPOrGPCzuRXNi8F6rwhawWvQQkeli5Ro48PRuQh8pYPCPmNnltP9itiUPT4xI8oW+y0m59lyyeQk54s5VgA==
+  /webpack-license-plugin/4.1.2:
+    dependencies:
+      chalk: 4.1.0
+      get-npm-tarball-url: 2.0.2
+      lodash: 4.17.20
+      needle: 2.6.0
+      spdx-expression-validate: 2.0.0
+      webpack-sources: 2.2.0
+    dev: true
+    engines:
+      node: '>=8.0.0'
+    peerDependencies:
+      webpack: '>=4.0.0 < 6.0.0'
+    resolution:
+      integrity: sha512-aS/fMx9zGfqs7OSj02iCX7W4hnaiGolihz+sHn6nEwaMTFeTEp0Uu+QIyRMluC731USIB42hFIdI/vje1SKdrQ==
   /webpack-log/2.0.0:
     dependencies:
       ansi-colors: 3.2.4
@@ -16908,6 +16956,15 @@ packages:
     dev: false
     resolution:
       integrity: sha512-lgTS3Xhv1lCOKo7SA5TjKXMjpSM4sBjNV5+q2bqesbSPs5FjGmU6jjtBSkX9b4qW87vDIsCIlUPOEhbZrMdjeQ==
+  /webpack-sources/2.2.0:
+    dependencies:
+      source-list-map: 2.0.1
+      source-map: 0.6.1
+    dev: true
+    engines:
+      node: '>=10.13.0'
+    resolution:
+      integrity: sha512-bQsA24JLwcnWGArOKUxYKhX3Mz/nK1Xf6hxullKERyktjNMC4x8koOeaDNTA2fEJ09BdWLbM/iTW0ithREUP0w==
   /webpack-stats-plugin/0.3.2:
     dev: false
     engines:

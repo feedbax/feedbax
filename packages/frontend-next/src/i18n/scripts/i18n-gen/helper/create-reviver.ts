@@ -26,14 +26,14 @@ const getHypen = (
 );
 
 export const createReviver = (
-  async (yamlPath: string, locale?: string): Promise<Reviver> => {
+  async (yamlPath: string, locale: string): Promise<Reviver> => {
     const { hyphenateSync } = await getHypen(locale);
 
     return function reviver (key: string, value: unknown): unknown {
       if (typeof value === 'object' && value !== null) {
         if ('ref' in value) {
           const refRelativePath = (value as Record<string, string>).ref as string;
-          const refPath = path.join(yamlPath, refRelativePath);
+          const refPath = path.join(yamlPath, locale, refRelativePath);
           const refContent = fs.readFileSync(refPath, { encoding: 'utf-8' });
           const refParsed = YAML.parse(refContent, reviver, {});
 

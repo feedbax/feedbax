@@ -15,8 +15,8 @@
   "parser": "@typescript-eslint/parser",
 
   "parserOptions": {
-    "project": "./tsconfig.json",
-    "tsconfigRootDir": "./"
+    "project": "tsconfig.json",
+    "tsconfigRootDir": "."
   },
 
   "settings": {
@@ -31,7 +31,7 @@
     "import/no-extraneous-dependencies": [
       "error", {
         "devDependencies": [
-          "src/translation/scripts/**/*.ts"
+          "src/i18n/scripts/**/*.ts"
         ]
       }
     ],
