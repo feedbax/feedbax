@@ -8,24 +8,18 @@ import { createReviver } from './create-reviver';
 
 type Translation = Record<string, unknown>;
 
-type Context = {
-  inputDir: string;
-  outputDir: string;
-  locales: string[];
-};
+const locales = ['de', 'en'];
+const defaultLocale = 'en';
+
+const inputDir = path.resolve(__dirname, 'languages');
+const outputDir = path.resolve(process.cwd(), 'src/translation');
 
 (async function main () {
-  const inputDir = path.resolve(__dirname, 'languages');
-  const outputDir = path.resolve(process.cwd(), 'src/translation');
-  const locales = ['de', 'en'];
-
-  await generateJson({ inputDir, outputDir, locales });
-  await generateTypes({ inputDir, outputDir, locales });
+  await generateJson();
+  await generateTypes();
 }());
 
-async function generateJson (props: Context) {
-  const { inputDir, outputDir, locales } = props;
-
+async function generateJson () {
   for (let i = 0; i < locales.length; i += 1) {
     const locale = locales[i];
 
@@ -41,11 +35,8 @@ async function generateJson (props: Context) {
   }
 }
 
-async function generateTypes (props: Context) {
-  const { outputDir, locales } = props;
-  const [firstLocale] = locales;
-
-  const translationOutputPath = path.join(outputDir, firstLocale, '__do_not_edit___translation.json');
+async function generateTypes () {
+  const translationOutputPath = path.join(outputDir, defaultLocale, '__do_not_edit___translation.json');
   const translationData = fs.readFileSync(translationOutputPath, 'utf-8');
   const translation: Translation = JSON.parse(translationData);
 
