@@ -64,23 +64,21 @@ export default (
     for (let i = 0; i < loaderEntries.length; i += 1) {
       const [fileName, loaders] = loaderEntries[i];
 
+      const loaderDir = path.join(translationDir, 'generic/__generated');
+      const loaderPath = path.join(loaderDir, `loader-${fileName}.ts`);
+
       const loadersCode = loaders.map(
         ({ locale, componentPath }) => (
           `  ${locale}: dynamic(() => import('${componentPath}')),`
         ),
       );
 
-      fs.writeFileSync(
-        path.join(
-          translationDir,
-          'generic/__generated',
-          `loader-${fileName}.ts`,
-        ),
+      const loaderCode = loaderTemplateContent
+        .replace('__datetime', `${Date.now()}`)
+        .replace('// __loaders', loadersCode.join('\n'));
 
-        loaderTemplateContent
-          .replace('__datetime', `${Date.now()}`)
-          .replace('// __loaders', loadersCode.join('\n')),
-      );
+      fs.mkdirSync(loaderDir, { recursive: true });
+      fs.writeFileSync(loaderPath, loaderCode);
     }
   }
 );

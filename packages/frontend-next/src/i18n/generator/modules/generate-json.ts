@@ -13,13 +13,15 @@ export default (
       const locale = config.locales[i];
 
       const translationInputPath = path.join(translationDir, locale, 'translation.yaml');
-      const translationOutputPath = path.join(translationDir, locale, '__generated/translation.json');
+      const translationOutputDir = path.join(translationDir, locale, '__generated');
+      const translationOutputPath = path.join(translationOutputDir, 'translation.json');
 
       // eslint-disable-next-line no-await-in-loop
       const reviver = await createReviver(translationDir, locale);
       const translationData = fs.readFileSync(translationInputPath, 'utf-8');
       const translation: Translation = YAML.parse(translationData, reviver, {});
 
+      fs.mkdirSync(translationOutputDir, { recursive: true });
       fs.writeFileSync(translationOutputPath, JSON.stringify(translation, null, 2));
     }
   }
