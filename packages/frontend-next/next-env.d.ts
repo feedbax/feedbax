@@ -29,7 +29,9 @@ declare module 'react-fela' {
   export const renderToNodeList = _renderToNodeList;
 }
 
-declare module 'is-css-shorthand' {
-  declare function isCSSShorthand (property: string): boolean;
-  export default isCSSShorthand;
+declare module 'css-shorthand-properties' {
+  type CSSShorthand = { isShorthand: (prop: string) => boolean };
+  declare const css: CSSShorthand;
+
+  export default css;
 }

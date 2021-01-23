@@ -179,7 +179,6 @@ importers:
       fela-plugin-prefixer: 11.5.2
       focus-visible: 5.2.0
       framer-motion: 3.2.1_react-dom@17.0.1+react@17.0.1
-      is-css-shorthand: 1.0.1
       js-cookie: 2.2.1
       lodash.merge: 4.6.2
       next: 10.0.5_react-dom@17.0.1+react@17.0.1
@@ -196,6 +195,7 @@ importers:
       '@typescript-eslint/eslint-plugin': 4.13.0_a8b47e2b9a41dac71409c0957e11ff44
       '@typescript-eslint/parser': 4.13.0_eslint@7.17.0
       '@zerollup/ts-transform-paths': 1.7.18
+      css-shorthand-properties: 1.1.1
       eslint: 7.17.0
       eslint-config-airbnb: 18.2.1_860e0a3f1402db18f3476b9d86a8ac51
       eslint-config-react-app: 6.0.0_c6a0b008728ab18d5183a2d2e249e515
@@ -217,6 +217,7 @@ importers:
       '@typescript-eslint/eslint-plugin': ^4.13.0
       '@typescript-eslint/parser': ^4.13.0
       '@zerollup/ts-transform-paths': ^1.7.18
+      css-shorthand-properties: ^1.1.1
       eslint: ^7.17.0
       eslint-config-airbnb: ^18.2.1
       eslint-config-react-app: ^6.0.0
@@ -229,7 +230,6 @@ importers:
       focus-visible: ^5.2.0
       framer-motion: ^3.2.1
       glob: ^7.1.6
-      is-css-shorthand: ^1.0.1
       js-cookie: ^2.2.1
       json-to-ts: ^1.7.0
       lodash.merge: ^4.6.2
@@ -5474,7 +5474,6 @@ packages:
     resolution:
       integrity: sha512-jWQv3oCEL5kMErj4wRnK/OPoBi0D+P1FR2cDCKYPaMeD2eW3/mttav8HT4hT1CKopiJI/psEULjkClhvJo4Lvg==
   /css-shorthand-properties/1.1.1:
-    dev: false
     resolution:
       integrity: sha512-Md+Juc7M3uOdbAFwOYlTrccIZ7oCFuzrhKYQjdeUEW/sE1hv17Jp/Bws+ReOPpGVBTYCBoYo+G17V5Qo8QQ75A==
   /css-tree/1.0.0-alpha.37:

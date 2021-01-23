@@ -4,17 +4,7 @@ import checkCSSShorthand from './check-css-shorthand';
 import prefixer from 'fela-plugin-prefixer';
 import fallbackValue from 'fela-plugin-fallback-value';
 
-import type { TPlugin, IStyle } from 'fela';
-
-const _log = (
-  (message: string) => (
-    (style: IStyle): IStyle => {
-      // eslint-disable-next-line no-console
-      console.debug(message, JSON.stringify(style, null, 2));
-      return style;
-    }
-  )
-);
+import type { TPlugin } from 'fela';
 
 export default [
   fluidRange,
