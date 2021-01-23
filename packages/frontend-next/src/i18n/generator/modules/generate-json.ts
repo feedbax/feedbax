@@ -13,7 +13,7 @@ export default (
       const locale = config.locales[i];
 
       const translationInputPath = path.join(translationDir, locale, 'translation.yaml');
-      const translationOutputPath = path.join(translationDir, locale, '__do_not_edit__/translation.json');
+      const translationOutputPath = path.join(translationDir, locale, '__generated/translation.json');
 
       // eslint-disable-next-line no-await-in-loop
       const reviver = await createReviver(translationDir, locale);

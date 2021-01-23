@@ -9,9 +9,9 @@ export const injcetTranslation = (
 
     if (typeof locale === 'undefined') throw new Error('locale is undefined');
 
-    const translationsDir = path.resolve(process.cwd(), 'src/i18n');
+    const translationsDir = path.resolve(process.cwd(), 'src/i18n/locales');
     const translationDir = path.join(translationsDir, locale);
-    const translationPath = path.join(translationDir, '__do_not_edit__/translation.json');
+    const translationPath = path.join(translationDir, '__generated/translation.json');
     const translationData = fs.readFileSync(translationPath, 'utf-8');
 
     const translation = JSON.parse(translationData);

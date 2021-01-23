@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "pnpm build:i18n",
     "build": "next build",
     "start": "next start",
     "preinstall": "npx only-allow pnpm",
+    "postinstall": "pnpm build:i18n",
     "lint": "eslint src/**/*.{js,ts,jsx,tsx}",
     "build:i18n": "pnpm ts-node src/i18n/generator/index.ts",
     "ts-node": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' ts-node --compiler ttypescript"

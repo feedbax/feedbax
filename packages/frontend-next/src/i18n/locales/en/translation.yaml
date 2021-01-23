@@ -1,0 +1,56 @@
+---
+pages:
+  privacy-policy: Imprint & Privacy Policy
+  disclaimer: FOSS Licenses
+  home: feedb.ax - 365 STEPS
+
+menu:
+  change-locale: Change language
+  create-event: Create event
+  logout: Logout
+
+home:
+  lets-go: Let's go
+  see-more: More about feedb.ax
+  your-tool: The survey tool for your event.
+
+  benefit-1: Find out what moves participants.
+  benefit-2: Questions, answers, moods.
+  benefit-3: Free of charge, clear, simple, fast.
+
+  benefit-4:
+    title: Benefits
+    content-1: fully donation-based
+    content-2: no limit for events & questions
+
+  benefit-5:
+    title: You're planning a big event?
+    content-1: Contact our developer for detailed arrangements.
+    content-2: silas[at]sat-dillenburg.de
+
+  benefit-6:
+    title: Donation
+    content-1: If you like feedb.ax, you can support the CJ and our developer with
+                a contribution of your choice.
+
+generic:
+  ref: "../generic/translation.yaml"
+
+  footer:
+    privacy-policy: Privacy Policy
+    imprint: Imprint
+    disclaimer: Disclaimer
+
+  cookie-consent:
+    title: We use cookies!
+
+    content: This website only uses cookies, IndexedDB and LocalStorage
+              entries to ensure the operation of the service.
+
+              We do not use cookies for analysis or advertising purposes.
+              You can use our service completely free of charge and anonymously.
+
+    small: You can find more information about cookies,
+            their use and general data protection at
+
+    agree: I agree

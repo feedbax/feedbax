@@ -38,19 +38,19 @@ export default memo(
       <Modal id="cookie-consent" isOpen={showModal}>
         <hyphens.div customRule={rules.content}>
           <h2 className={css(rules.block)}>
-            {t('generic', 'cookie_consent', 'title')}
+            {t('generic', 'cookie-consent', 'title')}
           </h2>
 
           <p className={css(rules.block)}>
-            {t('generic', 'cookie_consent', 'content')}
+            {t('generic', 'cookie-consent', 'content')}
           </p>
 
           <small className={css(rules.block)}>
-            {t('generic', 'cookie_consent', 'small')}
+            {t('generic', 'cookie-consent', 'small')}
             &nbsp;
 
             <StyledLink href="/legal/privacy-policy" customRule={rules.link}>
-              {t('generic', 'footer', 'privacy_policy')}
+              {t('generic', 'footer', 'privacy-policy')}
               {' & '}
               {t('generic', 'footer', 'imprint')}
             </StyledLink>
@@ -58,7 +58,7 @@ export default memo(
 
           <p className={css(rules.block)}>
             <Button
-              label={t('generic', 'cookie_consent', 'agree')}
+              label={t('generic', 'cookie-consent', 'agree')}
               onAction={acceptCookies}
             />
           </p>

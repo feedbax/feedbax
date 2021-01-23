@@ -4,9 +4,6 @@ import { injcetTranslation } from '@/i18n/injector';
 import { useTranslation } from '@/i18n/hook';
 
 import Head from 'next/head';
-import hyphens from '@/components/Hyphens';
-
-import getContent from '@/i18n/locales/generic/__generated/loader-privacy-policy';
 
 import { useFela } from 'react-fela';
 import { rules } from '@/styles/pages/legal/privacy-policy';
@@ -14,22 +11,19 @@ import { rules } from '@/styles/pages/legal/privacy-policy';
 import type { GetStaticProps } from 'next';
 
 export default memo(
-  function PrivacyPolicy ({ locale }: PrivacyPolicyProps) {
+  function PrivacyPolicy ({ licenses }: DisclaimerProps) {
     const { t } = useTranslation();
     const { css } = useFela();
 
-    const Content = getContent[locale];
+    const [firstLicense] = licenses;
+    console.log('firstLicense', JSON.stringify(firstLicense, null, 2));
 
     return (
       <div className={css(rules.container)}>
         <Head>
-          <title>{t('pages', 'privacy-policy')}</title>
+          <title>{t('pages', 'disclaimer')}</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
-
-        <hyphens.div customRule={rules.content}>
-          <Content />
-        </hyphens.div>
       </div>
     );
   },
@@ -38,8 +32,10 @@ export default memo(
 export const getStaticProps: GetStaticProps = (
   async (_props) => {
     const props = await injcetTranslation(_props);
-    return { props };
+    const { default: licenses } = await import('@licenses');
+
+    return { props: { ...props, licenses } };
   }
 );
 
-type PrivacyPolicyProps = { locale: string };
+type DisclaimerProps = { licenses: typeof import('@licenses') };

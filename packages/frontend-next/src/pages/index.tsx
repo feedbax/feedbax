@@ -21,16 +21,16 @@ export default memo(
         <CookieConsent />
 
         <Head>
-          <title>Create Next App</title>
+          <title>{t('pages', 'home')}</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
 
         <main>
-          {t('home', 'benefit_1')}
+          {t('home', 'benefit-1')}
         </main>
 
         <footer>
-          {t('home', 'benefit_6', 'content_1')}
+          {t('home', 'benefit-6', 'content-1')}
         </footer>
       </div>
     );

@@ -1,31 +1,36 @@
 ---
+pages:
+  privacy-policy: Impressum & Datenschutz
+  disclaimer: FOSS Lizenzen
+  home: feedb.ax - 365 STEPS
+
 menu:
-  change_locale: Sprache ändern
-  create_event: Event erstellen
+  change-locale: Sprache ändern
+  create-event: Event erstellen
   logout: Ausloggen
 
 home:
-  lets_go: Los geht's
-  see_more: Mehr über feedb.ax
-  your_tool: Das Umfrage-Tool für deine Veranstaltung.
+  lets-go: Los geht's
+  see-more: Mehr über feedb.ax
+  your-tool: Das Umfrage-Tool für deine Veranstaltung.
 
-  benefit_1: Finde heraus, was Teilnehmer bewegt.
-  benefit_2: Fragen, Antworten, Stimmungsbilder.
-  benefit_3: Kostenlos, übersichtlich, einfach, schnell.
+  benefit-1: Finde heraus, was Teilnehmer bewegt.
+  benefit-2: Fragen, Antworten, Stimmungsbilder.
+  benefit-3: Kostenlos, übersichtlich, einfach, schnell.
 
-  benefit_4:
+  benefit-4:
     title: Vorteile
-    content_1: komplett spendenbasiert
-    content_2: kein Limit bei Events & Fragen
+    content-1: komplett spendenbasiert
+    content-2: kein Limit bei Events & Fragen
 
-  benefit_5:
+  benefit-5:
     title: Du planst eine große Veranstaltung?
-    content_1: Meld dich bei unserem Entwickler für detaillierte Absprachen.
-    content_2: silas[at]sat-dillenburg.de
+    content-1: Meld dich bei unserem Entwickler für detaillierte Absprachen.
+    content-2: silas[at]sat-dillenburg.de
 
-  benefit_6:
+  benefit-6:
     title: Spende
-    content_1: Wenn du feedb.ax gut findest, kannst du die CJ
+    content-1: Wenn du feedb.ax gut findest, kannst du die CJ
                 und unseren Entwickler mit einem Beitrag deiner Wahl
                 supporten.
 
@@ -33,11 +38,11 @@ generic:
   ref: "../generic/translation.yaml"
 
   footer:
-    privacy_policy: Datenschutz
+    privacy-policy: Datenschutz
     imprint: Impressum
     disclaimer: Haftungsausschluss
 
-  cookie_consent:
+  cookie-consent:
     title: Wir nutzen Cookies!
 
     content: Diese Website verwendet ausschließlich Cookies, IndexedDB

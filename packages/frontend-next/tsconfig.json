@@ -23,7 +23,8 @@
     "baseUrl": ".",
 
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@licenses": ["./licenses.json"]
     },
 
     "plugins": [{ "transform": "@zerollup/ts-transform-paths" }]
