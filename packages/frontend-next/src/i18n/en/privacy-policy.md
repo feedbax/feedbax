@@ -133,12 +133,11 @@ Cookies can be small files or other types of information storage.
 When using feedb.ax, the following data is stored and transferred anonymously to
 the server.
 
-- Multiple IndexedDB/LocalStoarge entries for your use of feedb.ax
-  (to avoid multi-account usage). This Entry is generated for each individual event
-  in which you participate. This mechanism is designed to prevent cross-event assignments
-  of participants. To save these entries
-  [github.com | ImmortalDB](https://github.com/gruns/ImmortalDB)
-  is used.
+- Multiple IndexedDB/LocalStoarge
+  entries for your use of feedb.ax (to avoid multi-account usage). This Entry
+  is generated for each individual event in which you participate. This mechanism
+  is designed to prevent cross-event assignments of participants. To save these
+  entries [github.com | ImmortalDB](https://github.com/gruns/ImmortalDB) is used.
 
 - A session cookie for the use of socket.io
 - A cookie to remember the accepted cookie message

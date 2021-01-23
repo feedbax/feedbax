@@ -12,7 +12,7 @@ export default (
     for (let i = 0; i < $styleEntries.length; i += 1) {
       const [prop, value] = $styleEntries[i];
 
-      if (isCSSShorthand(prop)) {
+      if (isCSSShorthand(prop) && process.browser) {
         try {
           throw new Error(`css shorthand found ${prop} ${value}`);
         } catch (error) {

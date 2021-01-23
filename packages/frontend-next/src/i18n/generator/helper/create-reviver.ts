@@ -2,32 +2,13 @@ import fs from 'fs';
 import path from 'path';
 import YAML from 'yaml';
 
-import type { HyphenationFunctionSync } from 'hyphen';
+import getHyphen from './get-hypen';
 
-const getHypen = (
-  async (locale?: string): Promise<Hyphenate> => {
-    switch (locale) {
-      case 'de': {
-        return import('hyphen/de');
-      }
+type Reviver = (key: string, value: unknown) => unknown;
 
-      case 'en': {
-        return import('hyphen/en');
-      }
-
-      default: {
-        return {
-          hyphenateSync: (text) => text,
-          hyphenateHTMLSync: (text) => text,
-        };
-      }
-    }
-  }
-);
-
-export const createReviver = (
-  async (yamlPath: string, locale: string): Promise<Reviver> => {
-    const { hyphenateSync } = await getHypen(locale);
+export default (
+  async function createReviver (yamlPath: string, locale: string): Promise<Reviver> {
+    const { hyphenateSync } = await getHyphen(locale);
 
     return function reviver (key: string, value: unknown): unknown {
       if (typeof value === 'object' && value !== null) {
@@ -54,10 +35,3 @@ export const createReviver = (
     };
   }
 );
-
-type Hyphenate = {
-  hyphenateSync: HyphenationFunctionSync;
-  hyphenateHTMLSync: HyphenationFunctionSync;
-}
-
-type Reviver = (key: string, value: unknown) => unknown;

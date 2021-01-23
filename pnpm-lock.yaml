@@ -188,6 +188,7 @@ importers:
       react-dom: 17.0.1_react@17.0.1
       react-fela: 11.5.2_fela@11.5.2+react@17.0.1
     devDependencies:
+      '@types/glob': 7.1.3
       '@types/js-cookie': 2.2.6
       '@types/lodash.merge': 4.6.6
       '@types/marked': 1.2.1
@@ -200,14 +201,15 @@ importers:
       eslint-config-react-app: 6.0.0_c6a0b008728ab18d5183a2d2e249e515
       eslint-import-resolver-typescript: 2.3.0_860e0a3f1402db18f3476b9d86a8ac51
       eslint-plugin-import: 2.22.1_eslint@7.17.0
+      glob: 7.1.6
       json-to-ts: 1.7.0
-      marked: 1.2.7
+      markdown-to-jsx: 7.1.1_react@17.0.1
       ts-node: 9.1.1
       ttypescript: 1.5.12_ts-node@9.1.1
       webpack-license-plugin: 4.1.2
-      xss: 1.0.8
       yaml: 2.0.0-1
     specifiers:
+      '@types/glob': ^7.1.3
       '@types/js-cookie': ^2.2.6
       '@types/lodash.merge': ^4.6.6
       '@types/marked': ^1.2.1
@@ -226,11 +228,12 @@ importers:
       fela-plugin-prefixer: ^11.5.2
       focus-visible: ^5.2.0
       framer-motion: ^3.2.1
+      glob: ^7.1.6
       is-css-shorthand: ^1.0.1
       js-cookie: ^2.2.1
       json-to-ts: ^1.7.0
       lodash.merge: ^4.6.2
-      marked: ^1.2.7
+      markdown-to-jsx: ^7.1.1
       next: 10.0.5
       polished: ^4.0.5
       react: 17.0.1
@@ -239,7 +242,6 @@ importers:
       ts-node: ^9.1.1
       ttypescript: ^1.5.12
       webpack-license-plugin: ^4.1.2
-      xss: ^1.0.8
       yaml: ^2.0.0-1
   packages/protos:
     devDependencies:
@@ -2581,8 +2583,7 @@ packages:
   /@types/glob/7.1.3:
     dependencies:
       '@types/minimatch': 3.0.3
-      '@types/node': 14.14.20
-    dev: false
+      '@types/node': 14.14.22
     resolution:
       integrity: sha512-SEYeGAIQIQX8NN6LDKprLjbrd5dARM5EXsd8GI/A5l0apYI1fGMWgPHSe4ZKL4eozlAyI+doUE9XbYS4xCkQ1w==
   /@types/history/4.7.8:
@@ -2679,7 +2680,6 @@ packages:
     resolution:
       integrity: sha512-d5adCgRHB+NAme23hkiTkvpfZUDqoNtL2Sr2nZBJqSj3zyHLxsfFWsGQ2sK2z9aX6L1xkJzon2c0jTPcsEjpaQ==
   /@types/minimatch/3.0.3:
-    dev: false
     resolution:
       integrity: sha512-tHq6qdbT9U1IRSGf14CL0pUlULksvY9OZ+5eEgl1N7t+OA3tGvNpxJCzuKQlsNgCVwbAs670L1vcVQi8j9HjnA==
   /@types/mkdirp/0.5.2:
@@ -2702,6 +2702,9 @@ packages:
   /@types/node/14.14.20:
     resolution:
       integrity: sha512-Y93R97Ouif9JEOWPIUyU+eyIdyRqQR0I8Ez1dzku4hDx34NWh4HbtIc3WNzwB1Y9ULvNGeu5B8h8bVL5cAk4/A==
+  /@types/node/14.14.22:
+    resolution:
+      integrity: sha512-g+f/qj/cNcqKkc3tFqlXOYjrmZA+jNBiDzbP3kH+B+otKFqAdPgVTGP1IeKRdMml/aE69as5S4FqtxAbl+LaMw==
   /@types/node/8.10.66:
     dev: false
     resolution:
@@ -11251,6 +11254,16 @@ packages:
     dev: false
     resolution:
       integrity: sha512-Ezda85ToJUBhM6WGaG6veasyym+Tbs3cMAw/ZhOPqXiYsr0jgocBV3j3nx+4lk47plLlIqjwuTm/ywVI+zjJ/A==
+  /markdown-to-jsx/7.1.1_react@17.0.1:
+    dependencies:
+      react: 17.0.1
+    dev: true
+    engines:
+      node: '>= 4'
+    peerDependencies:
+      react: '>= 0.14.0'
+    resolution:
+      integrity: sha512-PJgNmvdKM7f7dFDgr4N2ZQv5OuJ2dwwBZvKel61BO7JLh2QQLDs880uQO+OjsEKNmhCZ0ZOIKkCXFEuY9G0yEA==
   /marked/0.8.2:
     dev: true
     engines:

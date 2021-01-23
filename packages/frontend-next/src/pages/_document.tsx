@@ -26,6 +26,7 @@ export default class FeedbaxDocument extends Document {
     return (
       <Html current-theme="default">
         <Head />
+
         <body>
           <Main />
           <NextScript />

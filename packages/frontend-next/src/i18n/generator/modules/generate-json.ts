@@ -3,7 +3,7 @@ import path from 'path';
 import YAML from 'yaml';
 
 import config from '@/i18n/config.json';
-import { createReviver } from '@/i18n/generator/helper/create-reviver';
+import createReviver from '@/i18n/generator/helper/create-reviver';
 
 import type { Translation, Context } from '@/i18n/generator';
 

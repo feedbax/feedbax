@@ -1,4 +1,5 @@
 import { memo, useEffect, useState } from 'react';
+
 import { useTranslation } from '@/i18n/hook';
 import { useRouter } from 'next/router';
 
@@ -7,7 +8,7 @@ import cookies from 'js-cookie';
 import { useFela } from 'react-fela';
 import { rules } from '@/styles/components/CookieConsent';
 
-import Modal from '@/components/Modal/dynamic';
+import Modal from '@/components/Modal/portal';
 import hyphens from '@/components/Hyphens';
 import StyledLink from '@/components/StyledLink';
 import Icon, { Icons } from '@/components/Icon';
@@ -34,7 +35,7 @@ export default memo(
     }, []);
 
     return (
-      <Modal isOpen={showModal}>
+      <Modal id="cookie-consent" isOpen={showModal}>
         <hyphens.div customRule={rules.content}>
           <h2 className={css(rules.block)}>
             {t('generic', 'cookie_consent', 'title')}

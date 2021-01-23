@@ -76,6 +76,7 @@ export default memo(
 );
 
 export type ModalPortalProps = {
+  id: string;
   isOpen: boolean;
   children: React.ReactNode;
   onBackdropClick?: () => void;

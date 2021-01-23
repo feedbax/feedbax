@@ -1,44 +1,45 @@
 import { memo } from 'react';
-
-import { provideTranslation } from '@/i18n/provide-translation';
-import { injectTranslation } from '@/i18n/inject-translation';
-import { useTranslation } from '@/i18n/hook';
+import { injcetTranslation } from '@/i18n/injector';
 
 import Head from 'next/head';
+import hyphens from '@/components/Hyphens';
 
 import { useFela } from 'react-fela';
-import { rules } from '@/styles/pages/index';
+import { rules } from '@/styles/pages/legal/privacy-policy';
 
 import type { GetStaticProps } from 'next';
 
 export default memo(
-  provideTranslation(
-    function Home () {
-      const { t } = useTranslation();
-      const { css } = useFela();
+  function PrivacyPolicy ({ content }: PrivacyPolicyProps) {
+    const { css } = useFela();
 
-      return (
-        <div className={css(rules.container)}>
-          <Head>
-            <title>Create Next App</title>
-            <link rel="icon" href="/favicon.ico" />
-          </Head>
+    return (
+      <div className={css(rules.container)}>
+        <Head>
+          <title>Create Next App</title>
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
 
-          <main>
-            {t('home', 'benefit_1')}
-          </main>
-
-          <footer>
-            {t('home', 'benefit_6', 'content_1')}
-          </footer>
-        </div>
-      );
-    },
-  ),
+        <hyphens.div
+          customRule={rules.content}
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: content }}
+        />
+      </div>
+    );
+  },
 );
 
 export const getStaticProps: GetStaticProps = (
-  injectTranslation(
-    async (props) => ({ props }),
-  )
+  async (_props) => {
+    const props = await injcetTranslation(_props);
+    const fs = await import('fs');
+
+    const contentPath = `${process.cwd()}/src/i18n/${props.locale}/__do_not_edit__/privacy-policy.html`;
+    const content = fs.readFileSync(contentPath, 'utf-8');
+
+    return { props: { ...props, content } };
+  }
 );
+
+type PrivacyPolicyProps = { content: string };

@@ -146,11 +146,10 @@ Bei der Nutzung von feedb.ax werden folgende Daten gespeichert und anonymisiert
 an den Server übertragen.
 
 - Mehrere IndexedDB/LocalStoarge Einträge für deine Nutzung von feedb.ax
-  (zur Vermeidung von Multi-Accounts). Generiert für jedes einzelne Event,
-  an dem teilgenommen wird, um Event Übergreifende Zuordnungen von Teilnehmern
-  zu verhindern. Zum Speichern dieser Einträge wird
-  [github.com | ImmortalDB](https://github.com/gruns/ImmortalDB)
-  genutzt.
+  (zur Vermeidung von Multi-Accounts). Generiert für jedes einzelne
+  Event, an dem teilgenommen wird, um Event Übergreifende Zuordnungen
+  von Teilnehmern zu verhindern. Zum Speichern dieser Einträge
+  wird [github.com | ImmortalDB](https://github.com/gruns/ImmortalDB) genutzt.
 
 - Ein Sitzungs-Cookie für die Verwendung von socket.io
 - Ein Cookie zur Erinnerung an die akzeptierte Cookie-Nachricht
