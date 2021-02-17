@@ -2,7 +2,7 @@ import { memo } from 'react';
 import type { SvgIconProps } from './types';
 
 export default memo(
-  function SvgIcon (props: SvgIconProps) {
+  function SvgIcon(props: SvgIconProps) {
     const { className } = props;
     const { fill = 'white' } = props;
 

@@ -1,8 +1,7 @@
 import { memo } from 'react';
 import { motion } from 'framer-motion';
 
-import { useFela } from 'react-fela';
-import { rules } from '@/styles/components/Modal';
+import * as styles from '../styles';
 
 import type { Variants } from 'framer-motion';
 
@@ -27,21 +26,21 @@ const variants: Variants = {
 };
 
 export default memo(
-  function Modal (props: ModalProps): JSX.Element | null {
-    const { isOpen, children } = props;
+  function Modal(props: ModalProps): JSX.Element | null {
+    const { children } = props;
     const { onBackdropClick } = props;
 
     const isClickable = typeof onBackdropClick !== 'undefined';
-    const { css } = useFela({ isClickable });
+    const stylesBackdrop = { cursor: isClickable ? 'pointer' : 'auto' };
 
     const toggleOpen = () => {
       if (!onBackdropClick) return;
       onBackdropClick();
     };
 
-    return isOpen ? (
+    return (
       <motion.div
-        className={css(rules.portal, rules.backdrop)}
+        css={[styles.portal, stylesBackdrop]}
         variants={variants}
         initial="initial"
         animate="animate"
@@ -51,7 +50,7 @@ export default memo(
         { /* eslint-disable jsx-a11y/no-static-element-interactions */ }
         { /* eslint-disable jsx-a11y/click-events-have-key-events */ }
         <div
-          className={css(rules.background, rules.backdrop)}
+          css={[styles.background, stylesBackdrop]}
           onClick={toggleOpen}
         />
         { /* eslint-enable jsx-a11y/no-static-element-interactions */ }
@@ -59,7 +58,7 @@ export default memo(
 
         {children}
       </motion.div>
-    ) : null;
+    );
   },
 );
 

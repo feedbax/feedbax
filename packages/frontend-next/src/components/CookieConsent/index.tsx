@@ -1,12 +1,10 @@
 import { memo, useEffect, useState } from 'react';
 
-import { useTranslation } from '@/i18n/hook';
+import { useTranslation } from '@/utils/i18n/hook';
 import { useRouter } from 'next/router';
 
 import cookies from 'js-cookie';
-
-import { useFela } from 'react-fela';
-import { rules } from '@/styles/components/CookieConsent';
+import * as styles from './styles';
 
 import Modal from '@/components/Modal/portal';
 import hyphens from '@/components/Hyphens';
@@ -15,12 +13,11 @@ import Icon, { Icons } from '@/components/Icon';
 import Button from './Button';
 
 export default memo(
-  function CookieConsent () {
+  function CookieConsent() {
     const [showModal, setShowModal] = useState<boolean>(false);
 
     const { pathname } = useRouter();
     const { t, distinctLocales } = useTranslation();
-    const { css } = useFela();
 
     const acceptCookies = (): void => {
       cookies.set('consent-accepted', '1');
@@ -36,43 +33,43 @@ export default memo(
 
     return (
       <Modal id="cookie-consent" isOpen={showModal}>
-        <hyphens.div customRule={rules.content}>
-          <h2 className={css(rules.block)}>
+        <hyphens.div css={styles.content}>
+          <h2 css={styles.block}>
             {t('generic', 'cookie-consent', 'title')}
           </h2>
 
-          <p className={css(rules.block)}>
+          <p css={styles.block}>
             {t('generic', 'cookie-consent', 'content')}
           </p>
 
-          <small className={css(rules.block)}>
+          <small css={styles.block}>
             {t('generic', 'cookie-consent', 'small')}
             &nbsp;
 
-            <StyledLink href="/legal/privacy-policy" customRule={rules.link}>
+            <StyledLink href="/legal/privacy-policy" ccss={styles.link}>
               {t('generic', 'footer', 'privacy-policy')}
               {' & '}
               {t('generic', 'footer', 'imprint')}
             </StyledLink>
           </small>
 
-          <p className={css(rules.block)}>
+          <p css={styles.block}>
             <Button
               label={t('generic', 'cookie-consent', 'agree')}
               onAction={acceptCookies}
             />
           </p>
 
-          <div className={css(rules.languageChooser)}>
+          <div css={styles.languageChooser}>
             <Icon
               icon={Icons.Language}
-              customRule={rules.language}
+              ccss={styles.language}
             />
 
             {distinctLocales.map((locale) => (
               <StyledLink
+                ccss={styles.language}
                 href={pathname}
-                customRule={rules.language}
                 locale={locale}
                 key={locale}
               >

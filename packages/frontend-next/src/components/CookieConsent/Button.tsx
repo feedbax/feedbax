@@ -1,6 +1,5 @@
 import { memo } from 'react';
-import { useFela } from 'react-fela';
-import { rules } from '@/styles/components/CookieConsent';
+import * as styles from './styles';
 
 import type React from 'react';
 
@@ -15,21 +14,17 @@ type ButtonProps = {
 };
 
 export default memo(
-  ({ onAction, label }: ButtonProps) => {
-    const { css } = useFela();
+  ({ onAction, label }: ButtonProps) => (
+    <span
+      css={styles.button}
 
-    return (
-      <span
-        className={css(rules.button)}
+      onClick={onAction}
+      onKeyPress={onAction}
 
-        onClick={onAction}
-        onKeyPress={onAction}
-
-        role="button"
-        tabIndex={0}
-      >
-        {label}
-      </span>
-    );
-  },
+      role="button"
+      tabIndex={0}
+    >
+      {label}
+    </span>
+  ),
 );

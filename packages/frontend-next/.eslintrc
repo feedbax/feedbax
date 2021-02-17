@@ -1,96 +1,39 @@
 {
-  "extends": [
-    "react-app",
-    "airbnb",
-    "plugin:import/typescript",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended"
-  ],
-
-  "plugins": [
-    "@typescript-eslint",
-    "import"
-  ],
-
-  "parser": "@typescript-eslint/parser",
+  "extends": ["airbnb-typescript"],
 
   "parserOptions": {
-    "project": "tsconfig.json",
-    "tsconfigRootDir": "."
-  },
-
-  "settings": {
-    "import/resolver": {
-      "typescript": {
-        "alwaysTryTypes": true
-      }
-    }
+    "project": "./tsconfig.json"
   },
 
   "rules": {
-    "import/no-extraneous-dependencies": [
-      "error", {
-        "devDependencies": [
-          "src/i18n/generator/**/*.{ts,tsx}"
-        ]
-      }
-    ],
+    "prefer-arrow-callback": ["off"],
 
-    "import/prefer-default-export": "off",
-    "import/order": "off",
+    "react/react-in-jsx-scope": ["off"],
+    "react/require-default-props": ["off"],
+    "react/jsx-props-no-multi-spaces": ["off"],
+    "react/prop-types": ["off"],
 
-    "import/extensions": [
-      "error",
-      "ignorePackages",
-      {
-        "js": "never",
-        "jsx": "never",
-        "ts": "never",
-        "tsx": "never"
-      }
-    ],
-
-    "react/react-in-jsx-scope": "off",
-    "react/prop-types": "off",
-    "react/no-unused-prop-types": "off",
-    "react/require-default-props": "off",
-
-    "react/jsx-filename-extension": [
-      "error", {
-        "extensions": [
-          ".tsx",
-          ".jsx"
-        ]
-      }
-    ],
-
-    "no-shadow": "off",
-    "@typescript-eslint/no-shadow": ["error"],
-
-    "no-use-before-define": "off",
-    "@typescript-eslint/no-use-before-define": ["error"],
-
-    "space-before-function-paren": "off",
-    "@typescript-eslint/space-before-function-paren": ["error"],
-
-    "indent": "off",
-    "@typescript-eslint/indent": ["error", 2],
-
-    "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": ["error", {
-      "varsIgnorePattern": "(^_)",
-      "argsIgnorePattern": "(^_)"
+    "jsx-a11y/anchor-is-valid": ["error", {
+      "components": ["Link"],
+      "specialLink": ["hrefLeft", "hrefRight"],
+      "aspects": ["noHref", "invalidHref", "preferButton"]
     }],
 
-    "import/no-duplicates": "off",
-    "import/no-cycle": [
-      "error",
-      { "maxDepth": 10 }
+    "import/no-duplicates": ["off"],
+    "import/prefer-default-export": ["off"],
+    "import/order": ["off"],
+    "import/no-extraneous-dependencies": [
+      "error", {
+        "devDependencies": ["./src/utils/i18n/generator/**/*.{ts,tsx}"]
+      }
     ],
 
-    "react/jsx-props-no-multi-spaces": "off",
-    "no-underscore-dangle": "off",
-
-    "prefer-arrow-callback": "off"
+    "@typescript-eslint/naming-convention": ["off"],
+    "@typescript-eslint/no-unused-vars": [
+      "error", {
+        "varsIgnorePattern": "^_",
+        "argsIgnorePattern": "^_"
+      }
+    ]
   }
 }

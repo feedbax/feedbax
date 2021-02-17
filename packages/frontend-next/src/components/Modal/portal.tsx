@@ -6,12 +6,12 @@ import type { ModalRef } from './context';
 import type { ModalProps } from './Component';
 
 export default memo(
-  function Modal (props: ModalProps) {
+  function Modal(props: ModalProps) {
     const { createModal } = useContext(CreateModalContext);
     const modal = useRef<ModalRef>();
 
     useEffect(
-      function propsChanged () {
+      function propsChanged() {
         if (typeof createModal === 'undefined') return;
 
         if (typeof modal.current === 'undefined') {
@@ -26,7 +26,7 @@ export default memo(
 
     useEffect(
       () => (
-        function onUnmount () {
+        function onUnmount() {
           modal.current?.destroy();
         }
       ),

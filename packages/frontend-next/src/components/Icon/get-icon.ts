@@ -4,7 +4,7 @@ import { Icons, Variants } from './types';
 import type { SvgIconProps } from './icons/types';
 
 export default (
-  function getIcon (icon: Icons, variant?: Variants): React.ComponentType<SvgIconProps> {
+  function getIcon(icon: Icons, variant?: Variants): React.ComponentType<SvgIconProps> {
     const $variant = variant ?? Variants.None;
 
     switch (`${icon}_${$variant}`) {

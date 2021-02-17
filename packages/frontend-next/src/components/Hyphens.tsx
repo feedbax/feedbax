@@ -1,23 +1,20 @@
 import { forwardRef } from 'react';
-import { useFela } from 'react-fela';
 
+import type { Interpolation, Theme } from '@emotion/react';
 import type React from 'react';
-import type { IStyle } from 'fela';
 
 const target = {} as Hyphen;
 
 const handler = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  get (_: unknown, Element: any) {
+  get(_: unknown, Element: any) {
     if (Element === 'custom') {
       return (
         (Component: Component) => (
           forwardRef(
-            ({ customRule, ...rest }: HyphensProps, ref) => {
-              const { css } = useFela();
-
-              const userRule = customRule ?? {};
-              const hyphensRule = { hyphens: 'manual !important' as 'manual' };
+            ({ ccss, ...rest }: HyphensProps, ref) => {
+              const customCss = ccss ?? {};
+              const hyphensCss = { hyphens: 'manual !important' as 'manual' };
 
               return (
                 <Component
@@ -25,7 +22,7 @@ const handler = {
                   {...rest}
 
                   ref={ref}
-                  className={css(hyphensRule, userRule)}
+                  css={[hyphensCss, customCss]}
                 />
               );
             },
@@ -36,11 +33,9 @@ const handler = {
 
     return (
       forwardRef(
-        ({ customRule, ...rest }: HyphensProps, ref) => {
-          const { css } = useFela();
-
-          const userRule = customRule ?? {};
-          const hyphensRule = { hyphens: 'manual !important' as 'manual' };
+        ({ ccss, ...rest }: HyphensProps, ref) => {
+          const customStyles = ccss ?? {};
+          const hyphensCss = { hyphens: 'manual !important' as 'manual' };
 
           return (
             <Element
@@ -48,7 +43,7 @@ const handler = {
               {...rest}
 
               ref={ref}
-              className={css(hyphensRule, userRule)}
+              css={[hyphensCss, customStyles]}
             />
           );
         },
@@ -60,7 +55,7 @@ const handler = {
 const hyphens = new Proxy(target, handler);
 export default hyphens;
 
-type HyphensProps = { customRule?: IStyle };
+type HyphensProps = { ccss?: Interpolation<Theme> };
 
 type HyphenCustom = {
   custom: <T extends React.FC>(component: T) => (
@@ -78,5 +73,5 @@ type Hyphen = HyphenCustom & HyphenHTML;
 
 type Component = React.FC<{
   ref: React.ForwardedRef<unknown>;
-  className: string;
+  css?: Interpolation<Theme>;
 }>;

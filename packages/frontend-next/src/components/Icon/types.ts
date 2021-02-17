@@ -1,5 +1,5 @@
-import type { IStyle } from 'fela';
-import type { ColorKeys } from '@/theme/types';
+import type { ThemeColorKeys } from '@/utils/theme/types';
+import type { Interpolation, Theme } from '@emotion/react';
 
 export enum Icons {
   Heart,
@@ -19,14 +19,14 @@ export enum Variants {
 }
 
 export type IconColors = {
-  icon?: ColorKeys;
-  background?: ColorKeys;
+  icon?: ThemeColorKeys;
+  background?: ThemeColorKeys;
 };
 
 export type IconProps = {
   icon: Icons;
 
-  customRule?: IStyle;
+  ccss?: Interpolation<Theme>;
   variant?: Variants;
   color?: IconColors;
 };

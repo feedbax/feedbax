@@ -19,7 +19,7 @@ export const ConsumeModalContext = (
 export type ModalRef = {
   update: (newProps: ModalProps) => void;
   destroy: () => void;
-}
+};
 
 export type CreateModal = (props: ModalProps) => ModalRef;
 

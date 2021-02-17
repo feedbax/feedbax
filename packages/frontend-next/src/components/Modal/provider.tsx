@@ -4,7 +4,7 @@ import { CreateModalContext, ConsumeModalContext } from './context';
 import type { CreateModal, IConsumeModalContext } from './context';
 
 export default memo(
-  function ModalProvider ({ children }: Props): JSX.Element {
+  function ModalProvider({ children }: Props): JSX.Element {
     const [modals, setModals] = useState<IConsumeModalContext['modals']>({});
 
     const createModal = useRef<CreateModal>(

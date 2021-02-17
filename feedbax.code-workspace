@@ -16,5 +16,8 @@
 			"name": "@feedbax/protos",
 			"path": "packages/protos"
 		}
-	]
+	],
+	"settings": {
+		"typescript.tsdk": "@feedbax/frontend-next/node_modules/typescript/lib"
+	}
 }
