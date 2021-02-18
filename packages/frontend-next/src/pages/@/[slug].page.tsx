@@ -11,7 +11,7 @@ export default memo(
     const router = useRouter();
     const { t } = useTranslation();
 
-    console.log('render event', router);
+    if (router.isFallback) return <div>Loading..</div>;
 
     return (
       <div>
@@ -22,9 +22,12 @@ export default memo(
 );
 
 export const getStaticProps: GetStaticProps = withI18n(
-  async (context) => ({ props: context }),
+  async (context) => ({
+    props: context,
+    revalidate: 1,
+  }),
 );
 
 export const getStaticPaths: GetStaticPaths = (
-  async () => ({ paths: [], fallback: 'blocking' })
+  async () => ({ paths: [], fallback: true })
 );
