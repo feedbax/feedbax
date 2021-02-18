@@ -4,7 +4,6 @@ import { cssVar, fluid } from '@/utils/styles/helper';
 export const seeMoreContainer = css(
   {
     position: 'relative',
-    height: '11em',
 
     display: 'flex',
     flexDirection: 'column',
@@ -14,6 +13,7 @@ export const seeMoreContainer = css(
 
   fluid(['20rem', '120rem', '240rem'], {
     fontSize: ['1rem', '1.13rem', '2.25rem'],
+    height: ['8rem', '11rem', '22rem'],
   }),
 );
 
@@ -33,8 +33,9 @@ export const seeMoreText = css({
 
 export const seeMoreGuide = css(
   {
+    flex: '1 1 auto',
     display: 'block',
-    height: '10em',
+    height: '100%',
     marginTop: '1em',
     width: 0,
 
