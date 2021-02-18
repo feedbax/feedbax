@@ -19,16 +19,21 @@ export const seeMoreContainer = css(
 
 export const seeMoreText = css({
   flex: '0 1 auto',
-  borderRadius: '1em',
   padding: '0.11em 0.33em',
 
-  backgroundColor: cssVar('--color-primary-text'),
   color: cssVar('--color-feedbax-primary'),
   fontFamily: cssVar('--font-feedbax-primary'),
 
   fontStyle: 'normal',
   fontWeight: 'normal',
   textAlign: 'center',
+
+  textShadow: `
+      1px  0   0 ${cssVar('--color-primary-text')},
+    -1px  0   0 ${cssVar('--color-primary-text')},
+      0    1px 0 ${cssVar('--color-primary-text')},
+      0   -1px 0 ${cssVar('--color-primary-text')}
+  `,
 });
 
 export const seeMoreGuide = css(

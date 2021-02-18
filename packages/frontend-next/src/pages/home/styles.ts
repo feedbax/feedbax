@@ -38,7 +38,7 @@ export const mainGroup = css(
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: '2rem',
+    margin: '3rem 0',
   },
 
   fluidRange({

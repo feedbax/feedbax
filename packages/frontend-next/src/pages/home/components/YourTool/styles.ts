@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { cssVar, fluid } from '@/utils/styles/helper';
+import { cssVar, fluid, fluidRange } from '@/utils/styles/helper';
 
 export const container = css({
   position: 'relative',
@@ -27,6 +27,15 @@ export const text = css(
     flex: '1 1 50%',
   },
 
+  fluidRange({
+    screen: ['20rem', '120rem', '240rem'] as const,
+    sizes: [['0.125rem', '0.125rem', '0.25rem']] as const,
+
+    style: (shadow) => ({
+      textShadow: `${shadow} ${shadow} 0px ${cssVar('--color-feedbax-primary')}`,
+    }),
+  }),
+
   fluid(['20rem', '120rem', '240rem'], {
     padding: ['2rem', '3.75rem', '7.5rem'],
     fontSize: ['2rem', '3.6rem', '7.2rem'],
@@ -40,11 +49,6 @@ export const image = css(
     position: 'relative',
     display: 'block',
   },
-
-  // fluid(['20rem', '50rem'], {
-  //   width: ['20rem', '50rem'],
-  //   height: ['18.23rem', '45.59rem'],
-  // }),
 
   fluid(['20rem', '120rem', '240rem'], {
     width: ['18rem', '40rem', '80rem'],
