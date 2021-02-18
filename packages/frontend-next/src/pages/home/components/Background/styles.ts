@@ -61,8 +61,8 @@ export const bottomImage = css({
 });
 
 export const coloredBackground = css({
+  zIndex: 1,
+  marginTop: -8,
   flex: '1 1 auto',
   backgroundColor: cssVar('--color-feedbax-primary'),
-  zIndex: 1,
-  marginTop: -6,
 });

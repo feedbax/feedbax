@@ -5,8 +5,7 @@ import type { LogoProps } from '@/components/Logo';
 
 export const logoStatic = css({
   position: 'relative',
-  display: 'block',
-  margin: '0 auto',
+  display: 'inline-block',
 
   '& a': {
     display: 'block',

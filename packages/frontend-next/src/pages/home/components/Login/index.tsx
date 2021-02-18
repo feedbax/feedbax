@@ -6,9 +6,12 @@ type TitleProps = { children: React.ReactNode };
 export default memo(
   function Login({ children }: TitleProps): JSX.Element {
     return (
-      <div css={styles.titleText}>
+      <div className="login-form" css={styles.loginForm}>
         {children}
       </div>
     );
   },
 );
+
+export { default as Button } from './components/Button';
+export { default as Input } from './components/Input';

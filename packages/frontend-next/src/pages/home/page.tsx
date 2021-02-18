@@ -1,5 +1,7 @@
 import Head from 'next/head';
-import { memo } from 'react';
+
+import { memo, useState } from 'react';
+import { useRouter } from 'next/router';
 
 import { useTranslation } from '@/utils/i18n/hook';
 import { withI18n } from '@/utils/i18n/loader';
@@ -9,15 +11,23 @@ import Logo from '@/components/Logo';
 
 import Background from './components/Background';
 import Title from './components/Title';
-import Login from './components/Login';
+import Login, { Input, Button } from './components/Login';
 
 import * as styles from './styles';
 
 import type { GetStaticProps } from 'next';
+import SeeMore from './components/SeeMore';
 
 export default memo(
   function Home() {
     const { t } = useTranslation();
+    const router = useRouter();
+
+    const [eventCode, setEventCode] = useState('');
+    const handleEventLogin = () => (
+      eventCode !== ''
+      && router.push(`/@/${eventCode}`)
+    );
 
     return (
       <div css={styles.container}>
@@ -32,15 +42,30 @@ export default memo(
 
         <div css={styles.main}>
           <Logo />
-          <Title>feedb.ax</Title>
 
-          <Login>
-            lol
-          </Login>
+          <div css={styles.mainGroup}>
+            <Title>feedb.ax</Title>
+
+            <Login>
+              <Input
+                placeholder="Event-Code"
+                value={eventCode}
+                setValue={setEventCode}
+              />
+
+              <Button onClick={handleEventLogin}>
+                {t('home', 'lets-go')}
+              </Button>
+            </Login>
+
+            <SeeMore>
+              {t('home', 'see-more')}
+            </SeeMore>
+          </div>
         </div>
 
-        {Array.from({ length: 250 }, () => (
-          <div key={Math.random()}>hi</div>
+        {Array.from({ length: 250 }, (_, key) => (
+          <div key={key} data-key={key}>hi</div>
         ))}
       </div>
     );
