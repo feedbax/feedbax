@@ -5,6 +5,7 @@ import Head from 'next/head';
 
 import { Global } from '@emotion/react';
 import { themeStyles } from '@/utils/theme';
+import { normalize } from 'polished';
 
 export default memo(
   function Theme(): JSX.Element {
@@ -21,6 +22,7 @@ export default memo(
     return (
       <>
         <Global styles={themeStyles} />
+        <Global styles={normalize()} />
 
         <Head>
           <link rel="preload" as="style" href="/assets/fonts/fonts.css" />
