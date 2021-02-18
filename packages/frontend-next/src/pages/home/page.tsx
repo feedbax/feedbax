@@ -12,6 +12,7 @@ import Logo from '@/components/Logo';
 import Background from './components/Background';
 import Title from './components/Title';
 import Login, { Input, Button } from './components/Login';
+import YourTool from './components/YourTool';
 
 import * as styles from './styles';
 
@@ -62,6 +63,10 @@ export default memo(
               {t('home', 'see-more')}
             </SeeMore>
           </div>
+        </div>
+
+        <div css={styles.yourToolGroup}>
+          <YourTool>{t('home', 'your-tool')}</YourTool>
         </div>
 
         {Array.from({ length: 250 }, (_, key) => (

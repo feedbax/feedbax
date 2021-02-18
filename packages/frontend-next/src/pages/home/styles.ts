@@ -60,3 +60,14 @@ export const mainGroup = css(
     }),
   }),
 );
+
+export const yourToolGroup = css(
+  {
+    position: 'relative',
+    margin: '0 auto',
+  },
+
+  fluid(['20rem', '120rem', '240rem'], {
+    maxWidth: ['20rem', '80rem', '160rem'],
+  }),
+);
