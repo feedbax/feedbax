@@ -1,0 +1,49 @@
+@font-face {
+  font-family: 'Klinic Slab';
+  font-style: normal;
+  font-weight: bold;
+  font-display: swap;
+
+  src:  url("/assets/fonts/KlinicSlab-Bold.woff2") format('woff2'),
+        url("/assets/fonts/KlinicSlab-Bold.woff") format('woff');
+}
+
+@font-face {
+  font-family: 'Klinic Slab Book';
+  font-style: normal;
+  font-weight: normal;
+  font-display: swap;
+
+  src:  url("/assets/fonts/KlinicSlab-Book.woff2") format('woff2'),
+        url("/assets/fonts/KlinicSlab-Book.woff") format('woff');
+}
+
+@font-face {
+  font-family: 'Klinic Slab Book';
+  font-style: italic;
+  font-weight: normal;
+  font-display: swap;
+
+  src:  url("/assets/fonts/KlinicSlab-BookItalic.woff2") format('woff2'),
+        url("/assets/fonts/KlinicSlab-BookItalic.woff") format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto Slab';
+  font-style: normal;
+  font-weight: bold;
+  font-display: swap;
+
+  src:  url("/assets/fonts/RobotoSlab-Bold.woff2") format('woff2'),
+        url("/assets/fonts/RobotoSlab-Bold.woff") format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto Slab';
+  font-style: normal;
+  font-weight: normal;
+  font-display: swap;
+
+  src:  url("/assets/fonts/RobotoSlab-Regular.woff2") format('woff2'),
+        url("/assets/fonts/RobotoSlab-Regular.woff") format('woff');
+}
