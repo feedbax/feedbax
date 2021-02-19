@@ -1,10 +1,10 @@
 import { memo } from 'react';
 import * as styles from './styles';
 
-type TitleProps = { children: React.ReactNode };
+type LoginProps = { children: React.ReactNode };
 
 export default memo(
-  function Login({ children }: TitleProps): JSX.Element {
+  function Login({ children }: LoginProps): JSX.Element {
     return (
       <div className="login-form" css={styles.loginForm}>
         {children}
