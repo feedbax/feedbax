@@ -19,6 +19,22 @@ export default memo(
       [],
     );
 
+    useEffect(
+      function mounted() {
+        const fixViewportUnits = () => {
+          const vh = window.innerHeight * 0.01;
+          document.documentElement.style.setProperty('--vh', `${vh}px`);
+        };
+
+        window.addEventListener('resize', fixViewportUnits);
+        fixViewportUnits();
+
+        return () => window.removeEventListener('resize', fixViewportUnits);
+      },
+
+      [],
+    );
+
     return (
       <>
         <Global styles={themeStyles} />
