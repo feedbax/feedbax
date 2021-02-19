@@ -7,7 +7,7 @@ export default memo(
       <>
         <Icon
           icon={Icons.Menu}
-          color={{ icon: '--color-black-100' }}
+          color={{ icon: '--color-primary-text' }}
         />
       </>
     );

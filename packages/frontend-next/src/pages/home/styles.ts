@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { cssVar, fluid, fluidRange } from '@/utils/styles/helper';
 
 export const container = css({
-  color: cssVar('--color-white-100'),
+  color: cssVar('--color-primary-text'),
 
   position: 'relative',
   width: '100%',
@@ -62,6 +62,17 @@ export const mainGroup = css(
 );
 
 export const yourToolGroup = css(
+  {
+    position: 'relative',
+    margin: '0 auto',
+  },
+
+  fluid(['20rem', '120rem', '240rem'], {
+    maxWidth: ['20rem', '80rem', '160rem'],
+  }),
+);
+
+export const benefitsGroup = css(
   {
     position: 'relative',
     margin: '0 auto',

@@ -15,6 +15,12 @@ export const eventCodeInput = css(
       color: cssVar('--color-feedbax-primary'),
       opacity: 0.8,
     },
+
+    ':focus, :active, :hover': {
+      outline: 0,
+      border: `2px solid ${cssVar('--color-feedbax-primary')}`,
+      boxSizing: 'border-box',
+    },
   },
 
   fluid(['20rem', '120rem', '240rem'], {

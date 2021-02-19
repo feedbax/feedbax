@@ -44,7 +44,7 @@ export const button = css(
     backgroundColor: cssVar('--color-feedbax-secondary'),
 
     ':hover, :focus, :active': {
-      opacity: 0.8,
+      backgroundColor: cssVar('--color-feedbax-secondary-shade-20'),
       outline: 0,
     },
   },

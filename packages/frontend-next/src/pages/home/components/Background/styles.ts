@@ -19,7 +19,7 @@ export const imagesContainer = css({
   flex: '0 0 auto',
 
   position: 'relative',
-  backgroundColor: cssVar('--color-white-100'),
+  backgroundColor: cssVar('--color-primary-text'),
 
   width: '100%',
   minHeight: '100vh',

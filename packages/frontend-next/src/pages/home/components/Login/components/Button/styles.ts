@@ -12,6 +12,13 @@ export const loginButton = css(
     borderColor: cssVar('--color-feedbax-primary'),
 
     cursor: 'pointer',
+
+    ':focus, :active, :hover': {
+      backgroundColor: cssVar('--color-feedbax-primary-shade-20'),
+      borderColor: cssVar('--color-feedbax-primary-shade-20'),
+
+      outline: 0,
+    },
   },
 
   fluid(['20rem', '120rem', '240rem'], {

@@ -25,6 +25,15 @@ export default memo(
     const router = useRouter();
 
     const [eventCode, setEventCode] = useState('');
+
+    const setEventCodeClean = (
+      (code: string) => setEventCode(
+        code
+          .trim()
+          .toLocaleLowerCase(),
+      )
+    );
+
     const handleEventLogin = () => (
       eventCode !== ''
       && router.push(`/@/${eventCode}`)
@@ -51,7 +60,7 @@ export default memo(
               <Input
                 placeholder="Event-Code"
                 value={eventCode}
-                setValue={setEventCode}
+                setValue={setEventCodeClean}
               />
 
               <Button onClick={handleEventLogin}>
@@ -66,6 +75,10 @@ export default memo(
         </div>
 
         <div css={styles.yourToolGroup}>
+          <YourTool>{t('home', 'your-tool')}</YourTool>
+        </div>
+
+        <div css={styles.benefitsGroup}>
           <YourTool>{t('home', 'your-tool')}</YourTool>
         </div>
 
