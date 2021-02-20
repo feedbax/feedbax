@@ -1,45 +1,49 @@
 ---
+
 pages:
-  privacy-policy: Impressum & Datenschutz
-  disclaimer: FOSS Lizenzen
+  privacy-policy:
+    title: Impressum & Datenschutz
 
-menu:
-  change-locale: Sprache ändern
-  create-event: Event erstellen
-  logout: Ausloggen
+  disclaimer:
+    title: Lizenzen
 
-home:
-  title: feedb.ax by 365STEPS
-  description: |
-    Interagiere mit deiner Zielgruppe!
-    feedb.ax ist ein kostenloser Service von 365STEPS.
+  home:
+    title: feedb.ax by 365STEPS
+    description: |
+      Interagiere mit deiner Zielgruppe!
+      feedb.ax ist ein kostenloser Service von 365STEPS.
 
-  lets-go: Los geht's
-  see-more: Mehr über feedb.ax
-  your-tool: Das Umfrage-Tool für deine Veranstaltung.
+    lets-go: Los geht's
+    see-more: Mehr über feedb.ax
+    your-tool: Das Umfrage-Tool für deine Veranstaltung.
 
-  benefit-1: Finde heraus, was Teilnehmer bewegt.
-  benefit-2: Fragen, Antworten, Stimmungsbilder.
-  benefit-3: Kostenlos, übersichtlich, einfach, schnell.
+    benefit-1: Finde heraus, was Teilnehmer bewegt.
+    benefit-2: Fragen, Antworten, Stimmungsbilder.
+    benefit-3: Kostenlos, übersichtlich, einfach, schnell.
 
-  benefit-4:
-    title: Vorteile
-    content-1: komplett spendenbasiert
-    content-2: kein Limit bei Events & Fragen
+    benefit-4:
+      title: Vorteile
+      content-1: komplett spendenbasiert
+      content-2: kein Limit bei Events & Fragen
 
-  benefit-5:
-    title: Du planst eine große Veranstaltung?
-    content-1: Meld dich bei unserem Entwickler für detaillierte Absprachen.
-    content-2: silas[at]sat-dillenburg.de
+    benefit-5:
+      title: Du planst eine große Veranstaltung?
+      content-1: Meld dich bei unserem Entwickler für detaillierte Absprachen.
+      content-2: silas[at]sat-dillenburg.de
 
-  benefit-6:
-    title: Spende
-    content-1: Wenn du feedb.ax gut findest, kannst du die CJ
-                und unseren Entwickler mit einem Beitrag deiner Wahl
-                supporten.
+    benefit-6:
+      title: Spende
+      content-1: Wenn du feedb.ax gut findest, kannst du die CJ
+                  und unseren Entwickler mit einem Beitrag deiner Wahl
+                  supporten.
 
 generic:
   ref: "../generic/translation.yaml"
+
+  menu:
+    change-locale: Sprache ändern
+    create-event: Event erstellen
+    logout: Ausloggen
 
   footer:
     privacy-policy: Datenschutz

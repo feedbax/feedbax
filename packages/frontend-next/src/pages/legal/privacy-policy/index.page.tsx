@@ -15,7 +15,7 @@ export default memo(
     return (
       <div css={styles.container}>
         <Head>
-          <title>{t('pages', 'privacy-policy')}</title>
+          <title>{t('pages', 'privacy-policy', 'title')}</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
 
