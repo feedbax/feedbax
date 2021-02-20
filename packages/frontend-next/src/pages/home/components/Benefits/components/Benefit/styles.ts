@@ -12,7 +12,7 @@ export const benefitContainer = css(
   },
 
   fluid(['20rem', '120rem', '240rem'], {
-    padding: ['1.56rem', '4.13rem', '8.25rem'],
+    padding: ['1.5rem', '3.5rem', '7rem'],
   }),
 );
 

@@ -1,8 +1,6 @@
 import { useCallback, useContext } from 'react';
 import { useRouter } from 'next/router';
 
-import { TranslationContext } from './context';
-
 type TranslateFunction = {
   <A extends keyof Translation> (a: A): Translation[A];
 
@@ -26,8 +24,14 @@ type TranslationHook = {
 };
 
 export function useTranslation(): TranslationHook {
-  const translation = useContext(TranslationContext);
+  let translation: Translation;
   const { locale, locales } = useRouter();
+
+  if (process.browser) {
+    translation = (window as any).translation ?? {};
+  } else {
+    translation = require(`@/utils/i18n/locales/${locale}/__generated/translation.json`);
+  }
 
   const t = useCallback(
     (a: string, b?: string, c?: string) => {

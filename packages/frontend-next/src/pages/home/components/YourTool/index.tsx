@@ -19,6 +19,7 @@ export default memo(
           <Image
             layout="fill"
             objectFit="contain"
+            alt="A mockup of an example feedbax event."
             src="/assets/images/mockup.png"
           />
         </div>

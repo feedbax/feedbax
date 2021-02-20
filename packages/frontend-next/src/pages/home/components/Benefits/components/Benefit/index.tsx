@@ -1,5 +1,8 @@
 import { memo } from 'react';
+
 import Image from 'next/image';
+import hyphens from "@/components/Hyphens";
+
 import * as styles from './styles';
 
 type BenefitProps = {
@@ -29,9 +32,9 @@ export default memo(
           />
         </div>
 
-        <div css={styles.benefitText}>
+        <hyphens.div ccss={styles.benefitText}>
           {children}
-        </div>
+        </hyphens.div>
       </div>
     );
   },

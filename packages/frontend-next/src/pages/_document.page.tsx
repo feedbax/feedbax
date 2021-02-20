@@ -1,0 +1,47 @@
+import Document from 'next/document';
+import { Html, Head, Main, NextScript } from 'next/document';
+
+import fs from 'fs';
+import path from 'path';
+
+import type { DocumentContext } from 'next/document';
+
+export default (
+  class FeedbaxDocument extends Document<{ translation: unknown }> {
+    static async getInitialProps(context: DocumentContext) {
+      const initialProps = await Document.getInitialProps(context);   
+
+      const currentLocaleElement = initialProps.head?.find((el) => 'data-locale' in el?.props);
+      const currentLocale = currentLocaleElement?.props['data-locale'];
+
+      const translationsDir = path.resolve(process.cwd(), 'src/utils/i18n/locales');
+      const translationDir = path.join(translationsDir, currentLocale);
+      const translationPath = path.join(translationDir, '__generated/translation.json');
+      const translationData = fs.readFileSync(translationPath, 'utf-8');
+
+      const translation = JSON.parse(translationData);
+
+      return { ...initialProps, translation };
+    }
+  
+    render() {      
+      return (
+        <Html>
+          <Head />
+
+          <body>
+            <Main />
+            <NextScript />
+
+            <script
+              id="__I18N_DATA__"
+              dangerouslySetInnerHTML={{
+                __html: `window.translation = ${JSON.stringify(this.props.translation)};`,
+              }}
+            />
+          </body>
+        </Html>
+      )
+    }
+  }
+);

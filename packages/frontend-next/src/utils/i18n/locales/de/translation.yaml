@@ -2,7 +2,6 @@
 pages:
   privacy-policy: Impressum & Datenschutz
   disclaimer: FOSS Lizenzen
-  home: feedb.ax - 365 STEPS
 
 menu:
   change-locale: Sprache ändern
@@ -10,6 +9,11 @@ menu:
   logout: Ausloggen
 
 home:
+  title: feedb.ax by 365STEPS
+  description: |
+    Interagiere mit deiner Zielgruppe!
+    feedb.ax ist ein kostenloser Service von 365STEPS.
+
   lets-go: Los geht's
   see-more: Mehr über feedb.ax
   your-tool: Das Umfrage-Tool für deine Veranstaltung.

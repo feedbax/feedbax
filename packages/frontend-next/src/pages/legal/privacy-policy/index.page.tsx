@@ -1,21 +1,15 @@
 import Head from 'next/head';
 import { memo } from 'react';
-
 import { useTranslation } from '@/utils/i18n/hook';
-import { withI18n } from '@/utils/i18n/loader';
 
 import getContent from '@/utils/i18n/locales/generic/__generated/loader-privacy-policy';
 import hyphens from '@/components/Hyphens';
 
 import * as styles from './index.styles';
 
-import type { GetStaticProps } from 'next';
-
-type PrivacyPolicyProps = { locale: string };
-
 export default memo(
-  function PrivacyPolicy({ locale }: PrivacyPolicyProps) {
-    const { t } = useTranslation();
+  function PrivacyPolicy() {
+    const { t, locale } = useTranslation();
     const Content = getContent[locale];
 
     return (
@@ -31,8 +25,4 @@ export default memo(
       </div>
     );
   },
-);
-
-export const getStaticProps: GetStaticProps = withI18n(
-  async (context) => ({ props: context }),
 );

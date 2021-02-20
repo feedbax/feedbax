@@ -2,13 +2,10 @@ import Head from 'next/head';
 
 import { memo, useState } from 'react';
 import { useRouter } from 'next/router';
-
 import { useTranslation } from '@/utils/i18n/hook';
-import { withI18n } from '@/utils/i18n/loader';
 
 import CookieConsent from '@/components/CookieConsent/dynamic';
 import Logo from '@/components/Logo';
-import hyphens from '@/components/Hyphens';
 
 import Background from './components/Background';
 import Title from './components/Title';
@@ -18,8 +15,6 @@ import SeeMore from './components/SeeMore';
 import Benefits, { Benefit } from './components/Benefits';
 
 import * as styles from './styles';
-
-import type { GetStaticProps } from 'next';
 
 export default memo(
   function Home() {
@@ -46,8 +41,16 @@ export default memo(
         <CookieConsent />
 
         <Head>
-          <title>{t('pages', 'home')}</title>
           <link rel="icon" href="/favicon.ico" />
+
+          <title>{t('home', 'title')}</title>
+          <meta name="description" content={t('home', 'description')} />
+
+          <meta property="og:type" content= "website" />
+          <meta property="og:url" content="https://feedb.ax"/>
+          <meta property="og:title" content={t('home', 'title')} />
+          <meta property="og:description" content={t('home', 'description')} />
+          <meta property="og:image" content="https://cdn.sstatic.net/Sites/webapps/Img/apple-touch-icon@2.png?v=f700edad5c7b" />
         </Head>
 
         <Background />
@@ -82,7 +85,11 @@ export default memo(
 
         <div css={styles.benefitsGroup}>
           <Benefits>
-            <Benefit src="/assets/images/benefit-1.png" width={1228} height={663}>
+            <Benefit
+              src="/assets/images/benefit-1.png"
+              width={1228}
+              height={663}
+            >
               {t('home', 'benefit-1')}
             </Benefit>
 
@@ -97,31 +104,27 @@ export default memo(
             <Benefit src="/assets/images/benefit-4.png" width={895} height={763}>
               {t('home', 'benefit-4', 'title')}
 
-              <hyphens.small>
+              <small>
                 <ul>
                   <li>{t('home', 'benefit-4', 'content-1')}</li>
                   <li>{t('home', 'benefit-4', 'content-2')}</li>
                 </ul>
-              </hyphens.small>
+              </small>
             </Benefit>
 
             <Benefit src="/assets/images/benefit-5.png" width={1019} height={601}>
               {t('home', 'benefit-5', 'title')}
-              <hyphens.small>{t('home', 'benefit-5', 'content-1')}</hyphens.small>
+              <small>{t('home', 'benefit-5', 'content-1')}</small>
               <code>{t('home', 'benefit-5', 'content-2')}</code>
             </Benefit>
 
             <Benefit src="/assets/images/benefit-6.png" width={1151} height={990}>
               {t('home', 'benefit-6', 'title')}
-              <hyphens.small>{t('home', 'benefit-6', 'content-1')}</hyphens.small>
+              <small>{t('home', 'benefit-6', 'content-1')}</small>
             </Benefit>
           </Benefits>
         </div>
       </div>
     );
   },
-);
-
-export const getStaticProps: GetStaticProps = withI18n(
-  async (context) => ({ props: context }),
 );
