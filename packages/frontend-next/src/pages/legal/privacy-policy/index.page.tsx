@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { memo } from 'react';
-import { useTranslation } from '@/utils/i18n/hook';
+import { useTranslation } from '@/utils/i18n/hooks';
 
 import getContent from '@/utils/i18n/locales/generic/__generated/loader-privacy-policy';
 import hyphens from '@/components/Hyphens';

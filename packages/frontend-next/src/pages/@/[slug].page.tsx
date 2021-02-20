@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { useRouter } from 'next/router';
-import { useTranslation } from '@/utils/i18n/hook';
+import { useTranslation } from '@/utils/i18n/hooks';
 
 import type { GetStaticPaths, GetStaticProps } from 'next';
 

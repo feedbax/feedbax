@@ -1,8 +1,7 @@
-import Head from 'next/head';
-
 import ModalProvider from '@/components/Modal/provider';
 import ModalWrapper from '@/components/Modal/Wrapper/dynamic';
 import Theme from '@/components/Theme';
+import TranslationLoader from '@/utils/i18n/loader';
 
 import type { AppProps } from 'next/app';
 
@@ -13,11 +12,7 @@ export default (
     const { Component, pageProps } = props;
   
     return (
-      <>
-        <Head>
-          <meta data-locale={props.router.locale} />
-        </Head>
-  
+      <TranslationLoader locale={props.router.locale}>
         <Theme />
   
         <ModalProvider>
@@ -26,7 +21,7 @@ export default (
           { /* eslint-disable-next-line react/jsx-props-no-spreading */ }
           <Component {...pageProps} />
         </ModalProvider>
-      </>
+      </TranslationLoader>
     );
   }  
 );

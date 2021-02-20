@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { memo } from 'react';
-import { useTranslation } from '@/utils/i18n/hook';
+import { useTranslation } from '@/utils/i18n/hooks';
 
 import * as styles from '@/pages/legal/privacy-policy/index.styles';
 

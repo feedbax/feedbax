@@ -1,6 +1,6 @@
 import { memo, useEffect, useState } from 'react';
 
-import { useTranslation } from '@/utils/i18n/hook';
+import { useTranslation } from '@/utils/i18n/hooks';
 import { useRouter } from 'next/router';
 
 import cookies from 'js-cookie';
@@ -10,7 +10,7 @@ import Modal from '@/components/Modal/portal';
 import hyphens from '@/components/Hyphens';
 import StyledLink from '@/components/StyledLink';
 import Icon, { Icons } from '@/components/Icon';
-import Button from './Button';
+import Button from './components/Button';
 
 export default memo(
   function CookieConsent() {

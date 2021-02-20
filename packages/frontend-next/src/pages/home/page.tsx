@@ -2,7 +2,7 @@ import Head from 'next/head';
 
 import { memo, useState } from 'react';
 import { useRouter } from 'next/router';
-import { useTranslation } from '@/utils/i18n/hook';
+import { useTranslation } from '@/utils/i18n/hooks';
 
 import CookieConsent from '@/components/CookieConsent/dynamic';
 import Logo from '@/components/Logo';
