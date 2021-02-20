@@ -47,9 +47,7 @@ export default memo(
             &nbsp;
 
             <StyledLink href="/legal/privacy-policy" ccss={styles.link}>
-              {t('generic', 'footer', 'privacy-policy')}
-              {' & '}
-              {t('generic', 'footer', 'imprint')}
+              {t('pages', 'privacy-policy', 'title')}
             </StyledLink>
           </small>
 

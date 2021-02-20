@@ -5,7 +5,7 @@ pages:
     title: Impressum & Datenschutz
 
   disclaimer:
-    title: Lizenzen
+    title: OSS Lizenzen
 
   home:
     title: feedb.ax by 365STEPS
@@ -45,10 +45,6 @@ generic:
     create-event: Event erstellen
     logout: Ausloggen
 
-  footer:
-    privacy-policy: Datenschutz
-    imprint: Impressum
-    disclaimer: Haftungsausschluss
 
   cookie-consent:
     title: Wir nutzen Cookies!

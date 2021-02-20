@@ -2,10 +2,10 @@
 
 pages:
   privacy-policy:
-    title: Impressum & Datenschutz
+    title: Imprint & Privacy Policy
 
   disclaimer:
-    title: Lizenzen
+    title: OSS Licenses
 
   home:
     title: feedb.ax by 365STEPS
@@ -43,11 +43,6 @@ generic:
     change-locale: Change language
     create-event: Create event
     logout: Logout
-
-  footer:
-    privacy-policy: Privacy Policy
-    imprint: Imprint
-    disclaimer: Disclaimer
 
   cookie-consent:
     title: We use cookies!
