@@ -35,8 +35,6 @@ type TranslationHook = {
 
 const loadTranslationData = (
   (locale: string, load: (translation: Translation) => void): void => {  
-    console.log('loadTranslationData', locale);
-
     import(`@/utils/i18n/locales/${locale}/__generated/translation.json`)
       .then(({ default: json }) => load(json));
    }
