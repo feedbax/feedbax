@@ -11,11 +11,11 @@ export default (
     static async getInitialProps(context: DocumentContext) {
       const initialProps = await Document.getInitialProps(context);   
 
-      const currentLocaleElement = initialProps.head?.find((el) => 'data-locale' in el?.props);
+      const findLocale = (el: JSX.Element | null) => 'data-locale' in el?.props;
+      const currentLocaleElement = initialProps.head?.find(findLocale);
       const currentLocale = currentLocaleElement?.props['data-locale'];
 
-      const translationsDir = path.resolve(process.cwd(), 'src/utils/i18n/locales');
-      const translationDir = path.join(translationsDir, currentLocale);
+      const translationDir = path.resolve(process.cwd(), 'src/utils/i18n/locales', currentLocale);
       const translationPath = path.join(translationDir, '__generated/translation.json');
       const translationData = fs.readFileSync(translationPath, 'utf-8');
 
