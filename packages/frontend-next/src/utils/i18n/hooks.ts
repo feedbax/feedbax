@@ -64,12 +64,11 @@ export function useTranslationData(locale?: string) {
 
   useEffect(
     () => {
-      if ((window as any).translationInitial) {
-        (window as any).translationInitial = false;
-        return;
+      if (!(window as any).translationHydrated) {
+        (window as any).translationHydrated = true;
+      } else {
+        loadTranslationData(locale, setTranslation);
       }
-
-      loadTranslationData(locale, setTranslation);
     },
 
     [locale],
