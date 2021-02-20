@@ -1,5 +1,5 @@
-import { memo } from "react";
-import Head from "next/head";
+import { memo } from 'react';
+import Head from 'next/head';
 
 import { TranslationProvider } from './context';
 import { useTranslationData } from './hooks';
@@ -23,5 +23,5 @@ export default memo(
         {children}
       </TranslationProvider>
     );
-  }
+  },
 );

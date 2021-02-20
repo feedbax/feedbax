@@ -1,5 +1,6 @@
 import Document from 'next/document';
-import { Html, Head, Main, NextScript } from 'next/document';
+import { Html, Head } from 'next/document';
+import { Main, NextScript } from 'next/document';
 
 import fs from 'fs';
 import path from 'path';
@@ -9,7 +10,7 @@ import type { DocumentContext } from 'next/document';
 export default (
   class FeedbaxDocument extends Document<{ translation: unknown }> {
     static async getInitialProps(context: DocumentContext) {
-      const initialProps = await Document.getInitialProps(context);   
+      const initialProps = await Document.getInitialProps(context);
 
       const findLocale = (el: JSX.Element | null) => 'data-locale' in el?.props;
       const currentLocaleElement = initialProps.head?.find(findLocale);
@@ -23,8 +24,8 @@ export default (
 
       return { ...initialProps, translation };
     }
-  
-    render() {      
+
+    render() {
       return (
         <Html>
           <Head />
@@ -35,16 +36,18 @@ export default (
 
             <script
               id="__I18N_DATA__"
+
+              // eslint-disable-next-line react/no-danger
               dangerouslySetInnerHTML={{
                 __html: [
-                  `window.translationInitial = true;`,
+                  'window.translationInitial = true;',
                   `window.translation = ${JSON.stringify(this.props.translation)};`,
                 ].join('\n'),
               }}
             />
           </body>
         </Html>
-      )
+      );
     }
   }
 );

@@ -46,8 +46,8 @@ export default memo(
           <title>{t('pages', 'home', 'title')}</title>
           <meta name="description" content={t('pages', 'home', 'description')} />
 
-          <meta property="og:type" content= "website" />
-          <meta property="og:url" content="https://feedb.ax"/>
+          <meta property="og:type" content="website" />
+          <meta property="og:url" content="https://feedb.ax" />
           <meta property="og:title" content={t('pages', 'home', 'title')} />
           <meta property="og:description" content={t('pages', 'home', 'description')} />
           <meta property="og:image" content="https://cdn.sstatic.net/Sites/webapps/Img/apple-touch-icon@2.png?v=f700edad5c7b" />

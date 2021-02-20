@@ -34,10 +34,10 @@ type TranslationHook = {
 };
 
 const loadTranslationData = (
-  (locale: string, load: (translation: Translation) => void): void => {  
+  (locale: string, load: (translation: Translation) => void): void => {
     import(`@/utils/i18n/locales/${locale}/__generated/translation.json`)
       .then(({ default: json }) => load(json));
-   }
+  }
 );
 
 function useDefaultTranslationData(locale: string): Translation {
@@ -46,7 +46,11 @@ function useDefaultTranslationData(locale: string): Translation {
   if (process.browser) {
     defaultTranslation = (window as any).translation;
   } else {
+    /* eslint-disable import/no-dynamic-require */
+    /* eslint-disable global-require */
     defaultTranslation = require(`@/utils/i18n/locales/${locale}/__generated/translation.json`);
+    /* eslint-enable import/no-dynamic-require */
+    /* eslint-enable global-require */
   }
 
   return defaultTranslation;
@@ -74,7 +78,7 @@ export function useTranslationData(locale?: string) {
   return translation;
 }
 
-export function useTranslation(): TranslationHook {  
+export function useTranslation(): TranslationHook {
   const { locale, locales } = useRouter();
   const translation = useContext(TranslationContext);
 
@@ -83,19 +87,20 @@ export function useTranslation(): TranslationHook {
 
   const translate = useCallback(
     (...args: string[]) => {
-      try {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        let translationAny = translation as any;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      let translationAny = translation as any;
 
-        for (let i = 0; i < args.length; i++) {
+      try {
+        for (let i = 0; i < args.length; i += 1) {
           const arg = args[i];
           translationAny = translationAny[arg];
         }
-
-        return translationAny;
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.warn(error);
       }
+
+      return translationAny;
     },
 
     [translation],
@@ -103,7 +108,7 @@ export function useTranslation(): TranslationHook {
 
   const distinctLocales = useMemo(
     () => locales.filter(($locale) => $locale !== locale),
-    [locale, locales]
+    [locale, locales],
   );
 
   return {

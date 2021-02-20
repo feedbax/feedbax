@@ -1,7 +1,7 @@
 import { memo } from 'react';
 
 import Image from 'next/image';
-import hyphens from "@/components/Hyphens";
+import hyphens from '@/components/Hyphens';
 
 import * as styles from './styles';
 

@@ -8,20 +8,21 @@ import type { AppProps } from 'next/app';
 import '@/utils/styles/globals.css';
 
 export default (
-  function FeedbaxApp(props: AppProps): JSX.Element {  
-    const { Component, pageProps } = props;
-  
+  function FeedbaxApp(props: AppProps): JSX.Element {
+    const { Component, pageProps, router } = props;
+    const { locale } = router;
+
     return (
-      <TranslationLoader locale={props.router.locale}>
+      <TranslationLoader locale={locale}>
         <Theme />
-  
+
         <ModalProvider>
           <ModalWrapper />
-  
+
           { /* eslint-disable-next-line react/jsx-props-no-spreading */ }
           <Component {...pageProps} />
         </ModalProvider>
       </TranslationLoader>
     );
-  }  
+  }
 );
