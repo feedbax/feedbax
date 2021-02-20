@@ -36,7 +36,10 @@ export default (
             <script
               id="__I18N_DATA__"
               dangerouslySetInnerHTML={{
-                __html: `window.translation = ${JSON.stringify(this.props.translation)};`,
+                __html: [
+                  `window.translationInitial = true;`,
+                  `window.translation = ${JSON.stringify(this.props.translation)};`,
+                ].join('\n'),
               }}
             />
           </body>

@@ -35,6 +35,8 @@ type TranslationHook = {
 
 const loadTranslationData = (
   (locale: string, load: (translation: Translation) => void): void => {  
+    console.log('loadTranslationData', locale);
+
     import(`@/utils/i18n/locales/${locale}/__generated/translation.json`)
       .then(({ default: json }) => load(json));
    }
@@ -59,7 +61,15 @@ export function useTranslationData(locale?: string) {
   const [translation, setTranslation] = useState<Translation>(defaultTranslation);
 
   useEffect(
-    () => loadTranslationData(locale, setTranslation),
+    () => {
+      if ((window as any).translationInitial) {
+        (window as any).translationInitial = false;
+        return;
+      }
+
+      loadTranslationData(locale, setTranslation);
+    },
+
     [locale],
   );
 
