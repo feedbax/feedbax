@@ -40,7 +40,7 @@ export default (
               // eslint-disable-next-line react/no-danger
               dangerouslySetInnerHTML={{
                 __html: [
-                  'window.translationHydrated = true;',
+                  'window.translationHydrated = false;',
                   `window.translation = ${JSON.stringify(this.props.translation)};`,
                 ].join('\n'),
               }}
