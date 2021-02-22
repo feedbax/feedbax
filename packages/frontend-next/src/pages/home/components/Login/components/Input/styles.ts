@@ -18,8 +18,13 @@ export const eventCodeInput = css(
 
     ':focus, :active, :hover': {
       outline: 0,
-      border: `2px solid ${cssVar('--color-feedbax-primary')}`,
-      boxSizing: 'border-box',
+
+      borderWidth: '2px',
+      borderStyle: 'solid',
+      borderRightColor: cssVar('--color-feedbax-primary'),
+      borderBottomColor: cssVar('--color-feedbax-primary'),
+      borderTopColor: cssVar('--color-feedbax-secondary'),
+      borderLeftColor: cssVar('--color-feedbax-secondary'),
     },
   },
 
