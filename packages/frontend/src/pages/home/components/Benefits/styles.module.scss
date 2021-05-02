@@ -1,0 +1,17 @@
+@import '@/styles/mixins/media';
+
+.container {
+  position: relative;
+  width: 100%;
+  display: grid;
+
+  grid-template-columns: repeat(1, 100%);
+
+  @include media(45rem) {
+    grid-template-columns: repeat(2, 50%);
+  }
+
+  @include media(70rem) {
+    grid-template-columns: repeat(3, 33.33%);
+  }
+}

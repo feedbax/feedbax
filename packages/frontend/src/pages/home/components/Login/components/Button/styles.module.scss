@@ -1,0 +1,31 @@
+@import '@/styles/mixins/media';
+@import '@/pages/home/components/Login/styles.module';
+
+.button {
+  @extend .input-shared;
+
+  color: var(--color-text-primary);
+  background-color: var(--color-feedbax-primary);
+  border-color: var(--color-feedbax-primary);
+
+  &:disabled {
+    color: var(--color-text-disabled);
+
+    background-color: var(--color-feedbax-primary-darken-6);
+    border-color: var(--color-feedbax-primary-darken-6);
+  }
+
+  &:focus, &:active, &:hover {
+    &:not(:disabled) {
+      cursor: pointer;
+      background-color: var(--color-feedbax-primary-darken-6);
+      border-color: var(--color-feedbax-primary-darken-6);
+      outline: 0;  
+    }
+  }
+
+  @include fluid($screen-sm, $screen-xl) using ($steps, $step) {
+    height: calc-fluid($steps, $step, 3.13rem, 4.38rem);
+    font-size: calc-fluid($steps, $step, 1.5rem, 2rem);
+  }
+}

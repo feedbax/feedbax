@@ -1,0 +1,49 @@
+@import '@/styles/mixins/media';
+
+.container {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  @include fluid($screen-sm, $screen-xl) using ($steps, $step) {
+    font-size: calc-fluid($steps, $step, 1rem, 1.13rem);
+    height: calc-fluid($steps, $step, 8rem, 11rem);
+  }
+}
+
+.text {
+  flex: 0 1 auto;
+  padding: 0.11em 0.33em;
+
+  color: var(--color-feedbax-primary);
+  font-family: var(--font-feedbax-primary);
+
+  font-style: normal;
+  font-weight: normal;
+  text-align: center;
+
+  text-shadow:
+      1px  0   0 var(--color-text-primary),
+     -1px  0   0 var(--color-text-primary),
+      0    1px 0 var(--color-text-primary),
+      0   -1px 0 var(--color-text-primary);
+}
+
+.guide {
+  flex: 1 1 auto;
+  display: block;
+  height: 100%;
+  margin-top: 1em;
+  width: 0;
+
+  border: 0.13rem solid black;
+  border-top: 0;
+  border-bottom: 0;
+  border-right-color: var(--color-text-primary);
+  border-left-color: var(--color-feedbax-primary);
+
+  border-radius: 0.13rem;
+}

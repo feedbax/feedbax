@@ -2,7 +2,9 @@ import { memo } from 'react';
 import dynamic from 'next/dynamic';
 
 import StyledLink from '@/components/StyledLink';
-import * as styles from './styles';
+
+import clsx from 'clsx';
+import styles from './styles.module.scss';
 
 const getSrc = (variant: Variant) => {
   switch (variant) {
@@ -25,13 +27,15 @@ export default memo(
   function Logo(props: LogoProps) {
     const { variant = 'normal' } = props;
     const { href = '/' } = props;
+    const { className } = props;
 
     const LogoSVG = getSrc(variant);
+    const classNames = clsx(styles.logo, className);
 
     return (
       <StyledLink
         href={href}
-        ccss={[styles.logoStatic, styles.logoSize(props)]}
+        className={classNames}
       >
         <LogoSVG />
       </StyledLink>
@@ -40,61 +44,9 @@ export default memo(
 );
 
 export type Variant = 'normal' | 'no-text' | 'no-shadow-and-text';
-
 export type LogoProps = {
-  variant?: Variant;
   href?: string;
 
-  sizeFactor?: number;
+  className: string;
+  variant?: Variant;
 };
-
-/*
-
-import React from 'react';
-import isEqual from 'lodash.isequal';
-
-import { jsx } from '@emotion/react';
-import { stylesImageWrapper } from './styles';
-
-import loadable from '@loadable/component';
-
-import LocaleLink from '~components/I18n/LocaleLink';
-
-import type { Variant, LogoProps } from './types';
-
-const Logo = React.memo((props: LogoProps) => {
-  const { variant = 'text' } = props;
-  const { link = '/' } = props;
-
-  const LogoSVG = getSrc(variant);
-
-  return (
-    <div css={stylesImageWrapper(props)}>
-      <LocaleLink to={link}>
-        <LogoSVG />
-      </LocaleLink>
-    </div>
-  );
-}, isEqual);
-
-export default Logo;
-export type { Variant } from './types';
-
-const getSrc = (variant: Variant) => {
-  switch (variant) {
-    case 'no-shadow-and-text': {
-      return loadable(() => import('~assets/images/logo_no_shadow_no_text.inline.svg'));
-    }
-
-    case 'no-text': {
-      return loadable(() => import('~assets/images/logo_no_text.inline.svg'));
-    }
-
-    default:
-    case 'text': {
-      return loadable(() => import('~assets/images/logo.inline.svg'));
-    }
-  }
-};
-
-*/

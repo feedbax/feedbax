@@ -1,12 +1,19 @@
 import { memo } from 'react';
-import * as styles from './styles';
 
-type LoginProps = { children: React.ReactNode };
+import clsx from 'clsx';
+import styles from './styles.module.scss';
+
+type LoginProps = {
+  children: React.ReactNode;
+  className?: string;
+};
 
 export default memo(
-  function Login({ children }: LoginProps): JSX.Element {
+  function Login({ children, className }: LoginProps): JSX.Element {
+    const classNames = clsx(className, styles.form);
+
     return (
-      <div className="login-form" css={styles.loginForm}>
+      <div className={classNames}>
         {children}
       </div>
     );

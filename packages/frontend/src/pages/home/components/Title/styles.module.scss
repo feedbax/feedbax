@@ -1,0 +1,27 @@
+@import '@/styles/mixins/media';
+
+.text {
+  display: inline-block;
+  position: relative;
+
+  font-family: var(--font-feedbax-primary);
+  font-style: normal;
+  font-weight: normal;
+
+  text-align: center;
+  color: var(--color-text-primary);
+
+  @include fluid($screen-sm, $screen-xl) using ($steps, $step) {
+    font-size: calc-fluid($steps, $step, 4.38rem, 15rem);
+
+    $sa: calc-fluid($steps, $step, -0.13rem, -0.25rem);
+    $sb: calc-fluid($steps, $step,  0.13rem,  0.25rem);
+    $sc: calc-fluid($steps, $step, -0.19rem, -0.38rem);
+    $sd: calc-fluid($steps, $step,  0.19rem,  0.38rem);
+
+    text-shadow:  $sa $sa 0px var(--color-feedbax-secondary),
+                  $sb $sb 0px var(--color-feedbax-primary),
+                  $sc $sc 0px var(--color-text-primary),
+                  $sd $sd 0px var(--color-text-primary);
+  }
+}

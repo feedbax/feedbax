@@ -18,7 +18,7 @@ export const content = css(
     boxSizing: 'border-box',
     maxHeight: '100%',
     overflow: 'auto',
-    color: cssVar('--color-primary-text'),
+    color: cssVar('--color-text-primary'),
   },
 
   fluid(['20rem', '120rem', '240rem'], {
@@ -34,7 +34,7 @@ export const block = css({
 });
 
 export const link = css({
-  color: cssVar('--color-primary-text'),
+  color: cssVar('--color-text-primary'),
 });
 
 export const languageChooser = css({
@@ -43,8 +43,8 @@ export const languageChooser = css({
 
   fontSize: '0.8em',
 
-  color: cssVar('--color-primary-text'),
-  borderTop: `1px solid ${cssVar('--color-primary-text')}`,
+  color: cssVar('--color-text-primary'),
+  borderTop: `1px solid ${cssVar('--color-text-primary')}`,
 
   display: 'flex',
   flexDirection: 'row',
@@ -62,8 +62,8 @@ export const language = css({
   paddingBottom: 0,
   paddingLeft: '0.4em',
 
-  borderRight: `1px solid ${cssVar('--color-primary-text')}`,
-  color: cssVar('--color-primary-text'),
+  borderRight: `1px solid ${cssVar('--color-text-primary')}`,
+  color: cssVar('--color-text-primary'),
 
   ':last-child': {
     borderStyle: 'none',

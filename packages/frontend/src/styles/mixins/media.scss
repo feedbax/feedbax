@@ -1,0 +1,25 @@
+$screen-sm: 20rem;
+$screen-xl: 120rem;
+
+@mixin media($size) {
+  @media (min-width: #{$size}) {
+    @content;
+  }
+}
+
+@mixin fluid($min, $max, $steps: 4) {
+  @content($steps, 0);
+
+  @for $i from 1 through $steps {
+    $delta: ($max - $min) / $steps;
+
+    @media (min-width: #{$min + $i * $delta}) {
+      @content($steps, $i);
+    }
+  }
+}
+
+@function calc-fluid($steps, $step, $min, $max) {
+  $delta: ($max - $min) / $steps;
+  @return $min + $step * $delta;
+}

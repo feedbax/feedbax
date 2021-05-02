@@ -3,7 +3,7 @@ import { memo } from 'react';
 import Image from 'next/image';
 import hyphens from '@/components/Hyphens';
 
-import * as styles from './styles';
+import styles from './styles.module.scss';
 
 type BenefitProps = {
   children: React.ReactNode;
@@ -19,8 +19,8 @@ export default memo(
     const { src, width, height } = props;
 
     return (
-      <div css={styles.benefitContainer}>
-        <div css={styles.benefitImage}>
+      <div className={styles.container}>
+        <div className={styles.image}>
           <Image
             layout="responsive"
             objectFit="contain"
@@ -32,7 +32,7 @@ export default memo(
           />
         </div>
 
-        <hyphens.div ccss={styles.benefitText}>
+        <hyphens.div className={styles.text}>
           {children}
         </hyphens.div>
       </div>

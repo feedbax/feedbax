@@ -1,0 +1,31 @@
+@import '@/styles/mixins/media';
+@import '@/pages/home/components/Login/styles.module';
+
+.input {
+  @extend .input-shared;
+
+  color: var(--color-feedbax-primary);
+  background-color: var(--color-text-primary);
+  border-color: var(--color-text-primary);
+
+  &::placeholder {
+    color: var(--color-feedbax-primary);
+    opacity: 0.8;
+  }
+
+  &:focus, &:active, &:hover {
+    outline: 0;
+
+    border-width: 2px;
+    border-style: solid;
+    border-right-color: var(--color-feedbax-primary);
+    border-bottom-color: var(--color-feedbax-primary);
+    border-top-color: var(--color-feedbax-secondary);
+    border-left-color: var(--color-feedbax-secondary);
+  }
+
+  @include fluid($screen-sm, $screen-xl) using ($steps, $step) {
+    height: calc-fluid($steps, $step, 3.13rem, 4.38rem);
+    font-size: calc-fluid($steps, $step, 1.5rem, 2rem);
+  }
+}

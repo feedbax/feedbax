@@ -11,6 +11,6 @@ export const colors = {
   '--color-feedbax-secondary-shade-20': shade(0.20, colorFeedbaxSecondary),
 
   '--color-transparent': 'transparent',
-  '--color-primary-text': tint(1.00, '#000'),
+  '--color-text-primary': tint(1.00, '#000'),
   '--color-background-footer': shade(0.90, '#fff'),
 };

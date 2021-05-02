@@ -1,14 +1,21 @@
 import { memo } from 'react';
-import * as styles from './styles';
 
-type SeeMoreProps = { children: React.ReactNode };
+import clsx from 'clsx';
+import styles from './styles.module.scss';
+
+type SeeMoreProps = {
+  children: React.ReactNode;
+  className?: string;
+};
 
 export default memo(
-  function SeeMore({ children }: SeeMoreProps): JSX.Element {
+  function SeeMore({ children, className }: SeeMoreProps): JSX.Element {
+    const classNames = clsx(className, styles.container);
+
     return (
-      <div className="see-more" css={styles.seeMoreContainer}>
-        <div css={styles.seeMoreText}>{children}</div>
-        <div css={styles.seeMoreGuide} />
+      <div className={classNames}>
+        <div className={styles.text}>{children}</div>
+        <div className={styles.guide} />
       </div>
     );
   },

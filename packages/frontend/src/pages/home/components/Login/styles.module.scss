@@ -1,0 +1,46 @@
+@import '@/styles/mixins/media';
+
+.form {
+  position: relative;
+  display: block;
+  width: 100%;
+
+  @include fluid($screen-sm, $screen-xl) using ($steps, $step) {
+    $sa: calc-fluid($steps, $step, -0.13rem, -0.25rem);
+    $sb: calc-fluid($steps, $step,  0.13rem,  0.25rem);
+    $sc: calc-fluid($steps, $step, -0.19rem, -0.38rem);
+    $sd: calc-fluid($steps, $step,  0.19rem,  0.38rem);
+
+    max-width: calc-fluid($steps, $step, 20rem, 23.75rem);
+    box-shadow: $sa $sa 0 var(--color-feedbax-secondary),
+                $sb $sb 0 var(--color-feedbax-primary),
+                $sc $sc 0 var(--color-text-primary),
+                $sd $sd 0 var(--color-text-primary);
+  }
+}
+
+.input-shared {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+
+  border-radius: 0 !important;
+  appearance: none;
+
+  padding: 0;
+  margin: 0;
+
+  font-family: var(--font-feedbax-primary);
+  font-style: normal;
+  font-weight: normal;
+
+  text-indent: 1em;
+  text-align: left;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  border-width: 2px;
+  border-style: solid;
+}

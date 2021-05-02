@@ -1,0 +1,43 @@
+@import '@/styles/mixins/media';
+
+.container {
+  font-family: var(--font-feedbax-secondary);
+
+  position: relative;
+  background-color: var(--color-feedbax-primary);
+
+  color: var(--color-text-primary);
+  text-align: left;
+
+  @include fluid($screen-sm, $screen-xl) using ($steps, $step) {
+    padding-top: calc-fluid($steps, $step, 1.5rem, 2.5rem);
+  }
+
+  & .content {
+    text-align: justify;
+
+    @for $i from 0 to 6 {
+      & h#{$i} {
+        text-align: left;
+      }
+    }
+
+    padding: 0 20px;
+    margin: auto;
+
+    box-sizing: border-box;
+    color: var(--color-text-primary);
+
+    & * {
+      white-space: normal;
+      overflow-wrap: break-word;
+      color: var(--color-text-primary);
+    }
+
+    @include fluid($screen-sm, $screen-xl) using ($steps, $step) {
+      margin: calc-fluid($steps, $step, 2.75rem, 3.75rem) auto;
+      font-size: calc-fluid($steps, $step, 1rem, 1.5rem);
+      max-width: calc-fluid($steps, $step, 25rem, 50rem);
+    }
+  }
+}

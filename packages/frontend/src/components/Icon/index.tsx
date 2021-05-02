@@ -18,7 +18,7 @@ export default memo(
     return (
       <SvgIcon
         css={[styles.icon, ccss]}
-        fill={cssVar(color.icon ?? '--color-primary-text')}
+        fill={cssVar(color.icon ?? '--color-text-primary')}
       />
     );
   },

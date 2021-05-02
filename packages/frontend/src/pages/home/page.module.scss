@@ -1,0 +1,68 @@
+@import '@/styles/mixins/media';
+
+.container {
+  color: var(--color-text-primary);
+  position: relative;
+  width: 100%;
+
+  .main {
+    color: var(--color-feedbax-primary);
+  
+    position: relative;
+    z-index: 1;
+  
+    width: 100%;
+    min-height: 100vh;
+    min-height: calc(var(--vh, 1vh) * 100);
+  
+    box-sizing: border-box;
+  
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  
+    padding-top: 1rem;
+
+    .logo-size {
+      $size_width_min: 4.6875rem;
+      $size_width_max: 7.5rem;
+      $size_height_min: 6.0469rem;
+      $size_height_max: 9.675rem;
+
+      @include fluid($screen-sm, $screen-xl) using ($steps, $step) {
+        width: calc-fluid($steps, $step, $size_width_min, $size_width_max);
+        height: calc-fluid($steps, $step, $size_height_min, $size_height_max);
+      }
+    }
+  
+    &-group {
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: 3rem 0;
+
+      @include fluid($screen-sm, $screen-xl) using ($steps, $step) {
+        &-login-form {
+          margin-top: calc-fluid($steps, $step, 1rem, 2rem);
+        }
+  
+        &-see-more {
+          margin-top: calc-fluid($steps, $step, 2.73rem, 3.13rem);
+        }
+      }
+    }
+  }
+
+  .your-tool-group,
+  .benefits-group {
+    position: relative;
+    margin: 0 auto;
+
+    @include fluid($screen-sm, $screen-xl) using ($steps, $step) {
+      max-width: calc-fluid($steps, $step, 20rem, 80rem);
+    }
+  }
+}

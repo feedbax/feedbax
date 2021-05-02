@@ -4,13 +4,13 @@ import YAML from 'yaml';
 
 import getHyphen from './get-hypen';
 
-type Reviver = (key: string, value: unknown) => unknown;
+type Reviver = (key: unknown, value: unknown) => unknown;
 
 export default (
   async function createReviver(yamlPath: string, locale: string): Promise<Reviver> {
     const { hyphenateSync } = await getHyphen(locale);
 
-    return function reviver(key: string, value: unknown): unknown {
+    return function reviver(key: unknown, value: unknown): unknown {
       if (typeof value === 'object' && value !== null) {
         if ('ref' in value) {
           const refRelativePath = (value as Record<string, string>).ref as string;

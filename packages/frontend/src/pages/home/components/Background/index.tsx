@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import * as styles from './styles';
+import styles from './styles.module.scss';
 
 import BackgroundTop from './assets/background_top';
 import BackgroundBottom from './assets/background_bottom';
@@ -7,18 +7,18 @@ import BackgroundBottom from './assets/background_bottom';
 export default memo(
   function Background(): JSX.Element {
     return (
-      <div css={styles.backgroundContainer}>
-        <div css={styles.imagesContainer}>
-          <div css={styles.topContainer}>
-            <BackgroundTop ccss={styles.topImage} />
+      <div className={styles.container}>
+        <div className={styles.images}>
+          <div className={styles['image-top-container']}>
+            <BackgroundTop className={styles['image-top']} />
           </div>
 
-          <div css={styles.bottomContainer}>
-            <BackgroundBottom ccss={styles.bottomImage} />
+          <div className={styles['image-bottom-container']}>
+            <BackgroundBottom className={styles['image-bottom']} />
           </div>
         </div>
 
-        <div css={styles.coloredBackground} />
+        <div className={styles.background} />
       </div>
     );
   },

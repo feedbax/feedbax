@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import * as styles from './styles';
+import styles from './styles.module.scss';
 
 type InputProps = {
   value: string;
@@ -16,7 +16,7 @@ export default memo(
     return (
       <input
         type="text"
-        css={styles.eventCodeInput}
+        className={styles.input}
         placeholder={placeholder}
 
         value={value}

@@ -1,19 +1,21 @@
 import { memo } from 'react';
-import * as styles from './styles';
+import styles from './styles.module.scss';
 
 type ButtonProps = {
   children: string;
+  disabled?: boolean;
   onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 };
 
 export default memo(
   function Button(props: ButtonProps): JSX.Element {
-    const { children, onClick } = props;
+    const { children, onClick, disabled } = props;
 
     return (
       <button
         type="submit"
-        css={styles.loginButton}
+        className={styles.button}
+        disabled={disabled}
         onClick={onClick}
       >
         {children}

@@ -1,0 +1,62 @@
+@import '@/styles/mixins/media';
+
+.logo {
+  position: relative;
+  display: inline-block;
+
+  & svg {
+    display: block;
+    height: auto;
+    width: auto;
+  }
+}
+
+.container {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+
+  @include fluid($screen-sm, $screen-xl) using ($steps, $step) {
+    padding: calc-fluid($steps, $step, 1.5rem, 2.5rem);
+  }
+
+  .image {
+    position: relative;
+    margin: 0 auto;
+    width: 100%;  
+  }
+
+  .text {
+    position: relative;
+    color: var(--color-text-primary);
+    font-family: var(--font-feedbax-primary);
+    font-style: normal;
+    font-weight: normal;
+    text-align: center;
+
+    & ul {
+      text-align: left;
+      margin: 0;
+      margin-block: 0;
+      padding-inline: 0;
+    }
+
+    & small {
+      display: block;
+      font-family: var(--font-feedbax-tertiary);
+      font-size: 0.6em;
+    }
+
+    & code, & small {
+      margin-top: 1rem;
+    }
+
+    @include fluid($screen-sm, $screen-xl) using ($steps, $step) {
+      font-size: calc-fluid($steps, $step, 1.5rem, 2rem);
+      margin-top: calc-fluid($steps, $step, 1.13rem, 1.63rem);
+    }
+  }
+}

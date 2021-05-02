@@ -14,7 +14,7 @@ import YourTool from './components/YourTool';
 import SeeMore from './components/SeeMore';
 import Benefits, { Benefit } from './components/Benefits';
 
-import * as styles from './styles';
+import styles from './page.module.scss';
 
 export default memo(
   function Home() {
@@ -37,7 +37,7 @@ export default memo(
     );
 
     return (
-      <div css={styles.container}>
+      <div className={styles.container}>
         <CookieConsent />
 
         <Head>
@@ -55,35 +55,35 @@ export default memo(
 
         <Background />
 
-        <div css={styles.main}>
-          <Logo />
+        <div className={styles.main}>
+          <Logo className={styles['logo-size']} />
 
-          <div css={styles.mainGroup}>
+          <div className={styles['main-group']}>
             <Title>feedb.ax</Title>
 
-            <Login>
+            <Login className={styles['main-group-login-form']}>
               <Input
                 placeholder="Event-Code"
                 value={eventCode}
                 setValue={setEventCodeClean}
               />
 
-              <Button onClick={handleEventLogin}>
+              <Button disabled={eventCode.length === 0} onClick={handleEventLogin}>
                 {t('pages', 'home', 'lets-go')}
               </Button>
             </Login>
 
-            <SeeMore>
+            <SeeMore className={styles['main-group-see-more']}>
               {t('pages', 'home', 'see-more')}
             </SeeMore>
           </div>
         </div>
 
-        <div css={styles.yourToolGroup}>
+        <div className={styles['your-tool-group']}>
           <YourTool>{t('pages', 'home', 'your-tool')}</YourTool>
         </div>
 
-        <div css={styles.benefitsGroup}>
+        <div className={styles['benefits-group']}>
           <Benefits>
             <Benefit
               src="/assets/images/benefit-1.png"
@@ -115,7 +115,7 @@ export default memo(
             <Benefit src="/assets/images/benefit-5.png" width={1019} height={601}>
               {t('pages', 'home', 'benefit-5', 'title')}
               <small>{t('pages', 'home', 'benefit-5', 'content-1')}</small>
-              <code>{t('pages', 'home', 'benefit-5', 'content-2')}</code>
+              <small>{t('pages', 'home', 'benefit-5', 'content-2')}</small>
             </Benefit>
 
             <Benefit src="/assets/images/benefit-6.png" width={1151} height={990}>

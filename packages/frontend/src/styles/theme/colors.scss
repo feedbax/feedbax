@@ -1,0 +1,22 @@
+@use 'sass:color';
+
+$colorFeedbaxPrimary: #3a5568;
+$colorFeedbaxSecondary: #ff7d65;
+
+:root {
+  --color-feedbax-primary: #{$colorFeedbaxPrimary};
+  --color-feedbax-secondary: #{$colorFeedbaxSecondary};
+
+  --color-text-primary: #fff;
+  --color-text-disabled: #d3d3d3;
+  
+  --color-background-footer: #191919;
+
+  @each $factor in 2, 4, 6, 8 {
+    --color-feedbax-primary-lighten-#{$factor}: #{lighten($colorFeedbaxPrimary, $factor * 1%)};
+    --color-feedbax-primary-darken-#{$factor}: #{darken($colorFeedbaxPrimary, $factor * 1%)};
+
+    --color-feedbax-secondary-lighten-#{$factor}: #{lighten($colorFeedbaxSecondary, $factor * 1%)};
+    --color-feedbax-secondary-darken-#{$factor}: #{darken($colorFeedbaxSecondary, $factor * 1%)};
+  }
+}
