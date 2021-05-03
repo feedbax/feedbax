@@ -1,11 +1,11 @@
 import Head from 'next/head';
 
-import { memo, useState } from 'react';
+import { memo, useCallback, useState } from 'react';
 import { useRouter } from 'next/router';
-import { useTranslation } from '@/utils/i18n/hooks';
+import { useTranslation } from '@/i18n/hooks';
 
-import CookieConsent from '@/components/CookieConsent/dynamic';
 import Logo from '@/components/Logo';
+import CookieConsent from '@/components/CookieConsent/dynamic';
 
 import Background from './components/Background';
 import Title from './components/Title';
@@ -16,20 +16,29 @@ import Benefits, { Benefit } from './components/Benefits';
 
 import styles from './page.module.scss';
 
+function useEventCode(): [string, (code: string) => void] {
+  const [eventCode, setEventCode] = useState('');
+
+  const setEventCodeClean = (
+    useCallback(
+      (code: string) => {
+        const cleanCode = code
+          .trim()
+          .toLocaleLowerCase();
+
+        setEventCode(cleanCode);
+      }, [],
+    )
+  );
+
+  return [eventCode, setEventCodeClean];
+}
+
 export default memo(
   function Home() {
     const { t } = useTranslation();
     const router = useRouter();
-
-    const [eventCode, setEventCode] = useState('');
-
-    const setEventCodeClean = (
-      (code: string) => setEventCode(
-        code
-          .trim()
-          .toLocaleLowerCase(),
-      )
-    );
+    const [eventCode, setEventCode] = useEventCode();
 
     const handleEventLogin = () => (
       eventCode !== ''
@@ -65,7 +74,7 @@ export default memo(
               <Input
                 placeholder="Event-Code"
                 value={eventCode}
-                setValue={setEventCodeClean}
+                setValue={setEventCode}
               />
 
               <Button disabled={eventCode.length === 0} onClick={handleEventLogin}>

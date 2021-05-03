@@ -3,7 +3,7 @@
 $colorFeedbaxPrimary: #3a5568;
 $colorFeedbaxSecondary: #ff7d65;
 
-:root {
+@mixin colors {
   --color-feedbax-primary: #{$colorFeedbaxPrimary};
   --color-feedbax-secondary: #{$colorFeedbaxSecondary};
 
@@ -19,4 +19,8 @@ $colorFeedbaxSecondary: #ff7d65;
     --color-feedbax-secondary-lighten-#{$factor}: #{lighten($colorFeedbaxSecondary, $factor * 1%)};
     --color-feedbax-secondary-darken-#{$factor}: #{darken($colorFeedbaxSecondary, $factor * 1%)};
   }
+}
+
+:root {
+  @include colors;
 }

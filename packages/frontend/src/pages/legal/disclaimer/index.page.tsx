@@ -1,22 +1,54 @@
-import Head from 'next/head';
 import { memo } from 'react';
-import { useTranslation } from '@/utils/i18n/hooks';
+import { useTranslation } from '@/i18n/hooks';
 
-import * as styles from '@/pages/legal/privacy-policy/index.styles';
+import slugify from 'slugify';
+
+import Head from 'next/head';
+import hyphens from '@/components/Hyphens';
+import StyledLink from '@/components/StyledLink';
+import Logo from '@/components/Logo';
+
+import licenses from '@licenses';
+
+import legalStyles from '@/pages/legal/page.module.scss';
+import styles from './page.module.scss';
 
 export default memo(
   function Disclaimer() {
     const { t } = useTranslation();
 
-    // const [firstLicense] = licenses;
-    // console.log('firstLicense', JSON.stringify(firstLicense, null, 2));
-
     return (
-      <div css={styles.container}>
+      <div className={legalStyles.container}>
         <Head>
           <title>{t('pages', 'disclaimer', 'title')}</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
+
+        <Logo
+          href="/legal/privacy-policy"
+          className={legalStyles.logo}
+        />
+
+        <div className={styles.content}>
+          <hyphens.p>
+            {t('pages', 'disclaimer', 'text')}
+          </hyphens.p>
+
+          {licenses.map((license) => {
+            const licenseId = `${license.name}-${license.version}`;
+            const licenseLink = slugify(licenseId);
+
+            return (
+              <StyledLink
+                className={styles['license-link']}
+                href={`/legal/license/${licenseLink}`}
+                key={licenseId}
+              >
+                {`${license.name}@${license.version} | (${license.license})`}
+              </StyledLink>
+            );
+          })}
+        </div>
       </div>
     );
   },

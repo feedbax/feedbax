@@ -1,5 +1,4 @@
-import type { ThemeColorKeys } from '@/utils/theme/types';
-import type { Interpolation, Theme } from '@emotion/react';
+import type { ClassNames as ThemeColorKeys } from '@/styles/theme/_export.scss';
 
 export enum Icons {
   Heart,
@@ -26,7 +25,7 @@ export type IconColors = {
 export type IconProps = {
   icon: Icons;
 
-  ccss?: Interpolation<Theme>;
+  className?: string;
   variant?: Variants;
   color?: IconColors;
 };

@@ -16,7 +16,7 @@ export default (
       const currentLocaleElement = initialProps.head?.find(findLocale);
       const currentLocale = currentLocaleElement?.props['data-locale'];
 
-      const translationDir = path.resolve(process.cwd(), 'src/utils/i18n/locales', currentLocale);
+      const translationDir = path.resolve(process.cwd(), 'src/i18n/locales', currentLocale);
       const translationPath = path.join(translationDir, '__generated/translation.json');
       const translationData = fs.readFileSync(translationPath, 'utf-8');
 
@@ -32,7 +32,7 @@ export default (
 
           <body>
             <Main />
-            <NextScript />
+            <div id="modal" />
 
             <script
               id="__I18N_DATA__"
@@ -45,6 +45,8 @@ export default (
                 ].join('\n'),
               }}
             />
+
+            <NextScript />
           </body>
         </Html>
       );

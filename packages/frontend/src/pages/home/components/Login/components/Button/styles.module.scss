@@ -7,21 +7,20 @@
   color: var(--color-text-primary);
   background-color: var(--color-feedbax-primary);
   border-color: var(--color-feedbax-primary);
+  cursor: pointer;
 
-  &:disabled {
-    color: var(--color-text-disabled);
-
+  &:focus, &:active, &:hover, &:disabled {
     background-color: var(--color-feedbax-primary-darken-6);
     border-color: var(--color-feedbax-primary-darken-6);
   }
 
+  &:disabled {
+    cursor: default;
+    color: var(--color-text-disabled);
+  }
+
   &:focus, &:active, &:hover {
-    &:not(:disabled) {
-      cursor: pointer;
-      background-color: var(--color-feedbax-primary-darken-6);
-      border-color: var(--color-feedbax-primary-darken-6);
-      outline: 0;  
-    }
+    outline: 0;  
   }
 
   @include fluid($screen-sm, $screen-xl) using ($steps, $step) {

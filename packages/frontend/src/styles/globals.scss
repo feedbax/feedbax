@@ -1,3 +1,5 @@
+@import '@/styles/mixins/utils';
+
 html, body, #__next {
   position: relative;
   margin: 0px;
@@ -8,6 +10,21 @@ html, body, #__next {
   touch-action: pan-y;
   font-size: 100%;
   hyphens: none;
+
+  z-index: 100;
+
+  &.disable-scroll {
+    overflow: hidden;
+  }
+}
+
+#modal {
+  position: fixed;
+  z-index: 200;
+  overflow: auto;
+
+  top: 0;
+  left: 0;
 }
 
 img.emoji {

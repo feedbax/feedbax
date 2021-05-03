@@ -1,0 +1,13 @@
+@import '@/styles/mixins/media';
+
+.button {
+  display: inline-block;
+  cursor: pointer;
+  background-color: var(--color-feedbax-secondary);
+  padding: 0.13rem 0.31rem;
+
+  &:hover, &:focus, &:active {
+    background-color: var(--color-feedbax-secondary-darken-6);
+    outline: 0;
+  }
+}

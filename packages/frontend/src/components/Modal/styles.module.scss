@@ -1,0 +1,25 @@
+@import '@/styles/mixins/utils';
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  min-height: 100%;
+
+  @include all-widths(100vw);
+
+  @include all-heights(100vh);
+  @include all-heights(calc(var(--vh, 1vh) * 100));
+}
+
+.backdrop {
+  z-index: -1;
+
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  opacity: 0.85;
+  background-color: var(--color-feedbax-primary);
+}

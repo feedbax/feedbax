@@ -1,0 +1,11 @@
+@mixin all-heights($height) {
+  height: $height;
+  min-height: $height;
+  max-height: $height;  
+}
+
+@mixin all-widths($height) {
+  width: $height;
+  min-width: $height;
+  max-width: $height;  
+}

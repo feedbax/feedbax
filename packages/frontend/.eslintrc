@@ -24,7 +24,7 @@
     "import/order": ["off"],
     "import/no-extraneous-dependencies": [
       "error", {
-        "devDependencies": ["./src/utils/i18n/generator/**/*.{ts,tsx}"]
+        "devDependencies": ["./src/i18n/generator/**/*.{ts,tsx}"]
       }
     ],
 

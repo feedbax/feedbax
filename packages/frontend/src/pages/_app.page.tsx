@@ -1,10 +1,10 @@
-import ModalProvider from '@/components/Modal/provider';
-import ModalWrapper from '@/components/Modal/Wrapper/dynamic';
+// import ModalProvider from '@/components/Modal/provider';
+// import ModalWrapper from '@/components/Modal/Wrapper/dynamic';
 
-import LazyFontLoader from '@/components/LazyFontLoader';
-import ViewportFix from '@/components/ViewportFix';
+import LazyFontLoader from '@/components/Utils/LazyFontLoader';
+import ViewportFix from '@/components/Utils/ViewportFix';
 
-import TranslationLoader from '@/utils/i18n/loader';
+import TranslationLoader from '@/i18n/loader';
 
 import type { AppProps } from 'next/app';
 
@@ -22,12 +22,13 @@ export default (
         <LazyFontLoader />
         <ViewportFix />
 
-        <ModalProvider>
-          <ModalWrapper />
+        {/* <ModalProvider>
+          <ModalWrapper /> */}
 
-          { /* eslint-disable-next-line react/jsx-props-no-spreading */ }
-          <Component {...pageProps} />
-        </ModalProvider>
+        { /* eslint-disable-next-line react/jsx-props-no-spreading */ }
+        <Component {...pageProps} />
+
+        {/* </ModalProvider> */}
       </TranslationLoader>
     );
   }

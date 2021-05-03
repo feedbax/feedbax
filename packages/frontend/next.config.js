@@ -1,7 +1,7 @@
 const path = require('path');
 const LicensePlugin = require('webpack-license-plugin');
 
-const config = require('./src/utils/i18n/config.json');
+const config = require('./src/i18n/config.json');
 
 module.exports = {
   pageExtensions: ['page.tsx'],

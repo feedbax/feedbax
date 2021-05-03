@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import * as styles from './styles';
+import styles from './styles.module.scss';
 
 import type React from 'react';
 
@@ -16,7 +16,7 @@ type ButtonProps = {
 export default memo(
   ({ onAction, label }: ButtonProps) => (
     <span
-      css={styles.button}
+      className={styles.button}
 
       onClick={onAction}
       onKeyPress={onAction}
