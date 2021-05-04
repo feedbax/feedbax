@@ -9,12 +9,13 @@ const io = new Server(httpServer, {});
 io.on("connection", (socket: Socket) => {
   const api = FBXAPI.from({ socket });
 
-  api.on('login', (data, res) => {
-    console.log(data.uuid, data.eventSlug);
-
-    res({
-      err: new Error('lol'),
-    });
+  api.on({
+    id: 'login',
+    handler: (data, res) => {
+      res({
+        err: 'not implemented'
+      });
+    },
   });
 });
 

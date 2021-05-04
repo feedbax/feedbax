@@ -1,6 +1,9 @@
 /node_modules
+
 /client
 /server
+/base
+/test
 
 /*.log
 /.cache
