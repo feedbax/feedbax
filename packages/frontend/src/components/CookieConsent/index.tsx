@@ -12,7 +12,6 @@ import StyledLink from '@/components/StyledLink';
 import Icon, { Icons } from '@/components/Icon';
 
 import Button from './components/Button';
-
 import styles from './styles.module.scss';
 
 function useUnmount(onUnmount: () => void) {
@@ -85,7 +84,7 @@ export default memo(
             {t('generic', 'cookie-consent', 'small')}
             &nbsp;
 
-            <StyledLink href="/legal/privacy-policy" /* ccss={styles.link} */ className={styles.link}>
+            <StyledLink href="/legal/privacy-policy" className={styles.link}>
               {t('pages', 'privacy-policy', 'title')}
             </StyledLink>
           </small>
