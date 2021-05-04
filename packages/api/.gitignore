@@ -1,7 +1,6 @@
 /node_modules
-/dist
-
-/src/lib/protos
+/client
+/server
 
 /*.log
 /.cache

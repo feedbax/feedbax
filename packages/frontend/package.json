@@ -1,7 +1,8 @@
 {
   "name": "frontend-next",
   "version": "0.1.0",
-  "private": true,
+  "author": "Silas Rosenkranz",
+  "license": "AGPL-3.0-only",
   "scripts": {
     "dev": "concurrently 'pnpm dev:scss-types' 'pnpm dev:next' 'pnpm dev:i18n'",
     "dev:next": "next dev",

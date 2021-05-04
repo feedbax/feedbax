@@ -1,6 +1,4 @@
-import React, { memo } from 'react';
-import { useCallback, useEffect, useState } from 'react';
-
+import React, { memo, useCallback } from 'react';
 import cookies from 'js-cookie';
 
 import { useTranslation } from '@/i18n/hooks';
@@ -14,43 +12,7 @@ import Icon, { Icons } from '@/components/Icon';
 import Button from './components/Button';
 import styles from './styles.module.scss';
 
-function useUnmount(onUnmount: () => void) {
-  useEffect(() => onUnmount, []);
-}
-
-function useScrollLock(lock: boolean) {
-  useUnmount(() => {
-    const html = document.querySelector<HTMLElement>('html');
-    html?.classList.remove('disable-scroll');
-  });
-
-  useEffect(
-    function showModalToggled() {
-      const html = document.querySelector<HTMLElement>('html');
-
-      if (lock) {
-        html?.classList.add('disable-scroll');
-      } else {
-        html?.classList.remove('disable-scroll');
-      }
-    },
-
-    [lock],
-  );
-}
-
-function useModalVisibility(): [boolean, (show: boolean) => void] {
-  const [showModal, setShowModal] = useState<boolean>(false);
-
-  useEffect(() => {
-    const cookieConsentAccepted = cookies.get('consent-accepted');
-    const hasConsetAccepted = typeof cookieConsentAccepted !== 'undefined';
-
-    setShowModal(!hasConsetAccepted);
-  }, []);
-
-  return [showModal, setShowModal];
-}
+import { useModalVisibility, useScrollLock } from './hooks';
 
 export default memo(
   function CookieConsent() {

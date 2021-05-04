@@ -56,12 +56,20 @@
     }
   }
 
-  .your-tool-group,
-  .benefits-group {
+  .your-tool-group {
     position: relative;
     margin: 0 auto;
 
     @include fluid($screen-sm, $screen-xl) using ($steps, $step) {
+      max-width: calc-fluid($steps, $step, 20rem, 90rem);
+    }
+  }
+
+  .benefits-group {
+    position: relative;
+
+    @include fluid($screen-sm, $screen-xl) using ($steps, $step) {
+      margin: calc-fluid($steps, $step, 2rem, 6rem) auto;
       max-width: calc-fluid($steps, $step, 20rem, 80rem);
     }
   }

@@ -1,0 +1,11 @@
+{
+  "name": "@feedbax/server",
+  "version": "1.0.0",
+  "description": "",
+  "author": "Silas Rosenkranz",
+  "license": "AGPL-3.0-only",
+  "dependencies": {
+    "@feedbax/api": "workspace:^1.0.0",
+    "typescript": "^4.2.4"
+  }
+}

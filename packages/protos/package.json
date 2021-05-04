@@ -1,7 +1,6 @@
 {
   "name": "@feedbax/protos",
   "version": "1.0.0",
-  "description": "",
   "author": "Silas Rosenkranz",
   "license": "AGPL-3.0-only",
   "main": "dist/protos.js",

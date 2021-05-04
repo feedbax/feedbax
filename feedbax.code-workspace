@@ -5,6 +5,10 @@
 			"path": "packages/frontend"
 		},
 		{
+			"name": "@feedbax/server",
+			"path": "packages/server"
+		},
+		{
 			"name": "@feedbax/api",
 			"path": "packages/api"
 		},

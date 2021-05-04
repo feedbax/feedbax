@@ -1,14 +1,14 @@
 const path = require('path');
 const LicensePlugin = require('webpack-license-plugin');
 
-const config = require('./src/i18n/config.json');
+const i18nConfig = require('./src/i18n/config.json');
 
 module.exports = {
   pageExtensions: ['page.tsx'],
 
   i18n: {
-    locales: config.locales,
-    defaultLocale: config.defaultLocale,
+    locales: i18nConfig.locales,
+    defaultLocale: i18nConfig.defaultLocale,
   },
 
   webpack: (config, { dev }) => {

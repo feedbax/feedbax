@@ -4,18 +4,28 @@
     "module": "CommonJS",
     "moduleResolution": "Node",
     "declaration": true,
-    "outDir": "./dist",
     "strict": true,
     "allowJs": true,
     "esModuleInterop": true,
+    "rootDir": "./src",
+    "outDir": ".",
     "baseUrl": "./src",
 
-    "paths": {},
+    "paths": {
+      "@/*": ["./*"],
+    },
 
     "plugins": [
       { "transform": "@zerollup/ts-transform-paths" }
     ]
   },
+
+  "exclude": [
+    "node_modules",
+    "browser",
+    "node"
+  ],
+
   "include": [
     "src",
   ]

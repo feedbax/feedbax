@@ -1,7 +1,6 @@
 {
   "name": "@feedbax/api",
   "version": "1.0.0",
-  "description": "",
   "author": "Silas Rosenkranz",
   "license": "AGPL-3.0-only",
   "main": "dist/index.js",
@@ -12,21 +11,15 @@
   "devDependencies": {
     "@types/flake-idgen": "^0.1.30",
     "@types/node": "^14.14.35",
-    "@typescript-eslint/eslint-plugin": "^4.19.0",
-    "@typescript-eslint/parser": "^4.19.0",
     "@zerollup/ts-transform-paths": "^1.7.18",
-    "eslint": "7.22.0",
-    "eslint-config-airbnb": "18.2.1",
-    "eslint-config-airbnb-base": "^14.2.0",
-    "eslint-import-resolver-typescript": "^2.4.0",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-react": "^7.23.0",
-    "eslint-plugin-react-hooks": "4.2.0",
     "ttypescript": "^1.5.12",
     "typescript": "^4.2.3"
   },
   "dependencies": {
-    "@feedbax/protos": "workspace:^1.0.0"
+    "@feedbax/protos": "workspace:^1.0.0",
+    "consola": "^2.15.3",
+    "roarr": "^4.2.5",
+    "socket.io": "^4.0.1",
+    "socket.io-client": "^4.0.1"
   }
 }

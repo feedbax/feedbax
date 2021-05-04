@@ -1,11 +1,13 @@
 import Head from 'next/head';
-import Logo from '@/components/Logo';
 
 import { memo } from 'react';
 import { useTranslation } from '@/i18n/hooks';
 
 import getContent from '@/i18n/locales/generic/__generated/loader-privacy-policy';
+
 import hyphens from '@/components/Hyphens';
+import Footer from '@/components/Footer';
+import Logo from '@/components/Logo';
 
 import legalStyles from '@/pages/legal/page.module.scss';
 import styles from './page.module.scss';
@@ -27,6 +29,8 @@ export default memo(
         <hyphens.div className={styles.content}>
           <Content />
         </hyphens.div>
+
+        <Footer />
       </div>
     );
   },

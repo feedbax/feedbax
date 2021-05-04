@@ -13,7 +13,6 @@
   min-height: calc(var(--vh, 1vh) * 100);
 
   box-sizing: border-box;
-  padding: 1rem;
 
   @include fluid($screen-sm, $screen-xl) using ($steps, $step) {
     padding-top: calc-fluid($steps, $step, 2.75rem, 3.75rem);

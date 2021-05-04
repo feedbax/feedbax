@@ -1,0 +1,22 @@
+.container {
+  position: relative;
+  padding: 2rem 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-color: var(--color-background-footer);
+  font-family: var(--font-feedbax-primary);
+
+  & .title {
+    font-weight: bold;
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+  }
+
+  & .link {
+    color: var(--color-text-primary);
+  }
+}

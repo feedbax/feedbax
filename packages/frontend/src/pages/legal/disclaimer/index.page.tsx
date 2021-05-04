@@ -1,13 +1,14 @@
 import { memo } from 'react';
 import { useTranslation } from '@/i18n/hooks';
 
-import slugify from 'slugify';
-
 import Head from 'next/head';
+
 import hyphens from '@/components/Hyphens';
 import StyledLink from '@/components/StyledLink';
 import Logo from '@/components/Logo';
+import Footer from '@/components/Footer';
 
+import slugify from 'slugify';
 import licenses from '@licenses';
 
 import legalStyles from '@/pages/legal/page.module.scss';
@@ -49,6 +50,8 @@ export default memo(
             );
           })}
         </div>
+
+        <Footer />
       </div>
     );
   },

@@ -6,13 +6,13 @@ import { useTranslation } from '@/i18n/hooks';
 
 import Logo from '@/components/Logo';
 import CookieConsent from '@/components/CookieConsent/dynamic';
-
 import Background from './components/Background';
 import Title from './components/Title';
 import Login, { Input, Button } from './components/Login';
 import YourTool from './components/YourTool';
 import SeeMore from './components/SeeMore';
 import Benefits, { Benefit } from './components/Benefits';
+import Footer from '@/components/Footer';
 
 import styles from './page.module.scss';
 
@@ -133,6 +133,8 @@ export default memo(
             </Benefit>
           </Benefits>
         </div>
+
+        <Footer />
       </div>
     );
   },

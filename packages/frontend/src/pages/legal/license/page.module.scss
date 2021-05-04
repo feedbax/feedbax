@@ -2,19 +2,21 @@
 
 .content {
   text-align: left;
+
   margin: 0 auto;
+  padding: 2rem 1rem;
 
   box-sizing: border-box;
   color: var(--color-text-primary);
-
-  & p {
-    text-align: justify;
-  }
 
   & * {
     white-space: normal;
     overflow-wrap: break-word;
     color: var(--color-text-primary);
+  }
+
+  & p {
+    text-align: justify;
   }
 
   @include fluid($screen-sm, $screen-xl) using ($steps, $step) {
