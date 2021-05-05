@@ -7,9 +7,8 @@
     "strict": true,
     "allowJs": true,
     "esModuleInterop": true,
-
     "rootDir": "./src",
-    "outDir": ".",
+    "outDir": "./dist",
     "baseUrl": "./src",
 
     "paths": {

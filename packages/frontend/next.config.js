@@ -21,10 +21,13 @@ module.exports = {
   
         unacceptableLicenseTest: (licenseIdentifier) => {
           const blacklist = [
-            'GPL',
-            'AGPL',
-            'LGPL',
-            'NGPL',
+            'GPL-3.0-only',
+            'AGPL-3.0-only',
+            'LGPL-3.0-only',
+            'GPL-2.0+',
+            'LGPL-2.1',
+            'GPL-3.0-or-later',
+            'GPL-2.0-only',
           ];
   
           return blacklist.includes(licenseIdentifier);

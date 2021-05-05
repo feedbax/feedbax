@@ -21,3 +21,6 @@ export default class FBXAPI extends FBXAPI_BASE<Socket> {
     this.socket.on(props.id, props.handler);
   }
 }
+
+export { default as parser } from '@/base/parser';
+export * as logger from '@/base/logger';

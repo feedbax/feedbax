@@ -1,17 +1,23 @@
 import { createServer } from "http";
 import { Server, Socket } from "@feedbax/api/server/socket";
-
-import FBXAPI from "@feedbax/api/server/api";
+import FBXAPI, { parser, logger } from "@feedbax/api/server/api";
 
 const httpServer = createServer();
-const io = new Server(httpServer, {});
+const io = new Server(httpServer, {
+  parser,
+  cors: {
+    origin: '*',
+  }
+});
 
 io.on("connection", (socket: Socket) => {
-  const api = FBXAPI.from({ socket });
+  const api = FBXAPI.from({ socket, logLevel: logger.LogLevel.Trace });
 
   api.on({
     id: 'login',
     handler: (data, res) => {
+      api.console.debug('api.on', 'login', 'handler', data.uuid, data.eventSlug);
+
       res({
         err: 'not implemented'
       });
@@ -19,4 +25,4 @@ io.on("connection", (socket: Socket) => {
   });
 });
 
-httpServer.listen(3000);
+httpServer.listen(4000);

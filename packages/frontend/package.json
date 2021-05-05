@@ -17,6 +17,7 @@
     "ts-node": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' ts-node --compiler ttypescript"
   },
   "dependencies": {
+    "@feedbax/api": "workspace:^1.0.0",
     "clsx": "^1.1.1",
     "framer-motion": "^4.1.11",
     "js-cookie": "^2.2.1",
