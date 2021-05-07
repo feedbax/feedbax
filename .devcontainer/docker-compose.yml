@@ -1,0 +1,25 @@
+version: '3.4'
+
+services:
+  postgresql:
+    image: postgres
+    restart: always
+
+    environment:
+      POSTGRES_USER: dev
+      POSTGRES_PASSWORD: dev
+      POSTGRES_DB: dev
+
+  vscode:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+
+    restart: always
+    command: tail -f /dev/null
+
+    depends_on:
+      - postgresql
+
+    volumes:
+      - ../:/workspace/feedbax/backend

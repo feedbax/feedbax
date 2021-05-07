@@ -1,7 +1,0 @@
-package feedbax.Packets.Response.Event;
-syntax = "proto3";
-
-message Get {
-  feedbax.Utils.Error error = 1;
-  feedbax.Model.Event event = 2;
-}

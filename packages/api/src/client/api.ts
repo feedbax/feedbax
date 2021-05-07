@@ -1,5 +1,5 @@
-import { LogLevel } from '@/base/logger';
-import FBXAPI_BASE from '@/base/api';
+import { LogLevel } from '@/generic/logger';
+import FBXAPI_BASE from '@/generic/api';
 
 import type { Socket } from 'socket.io-client';
 
@@ -22,5 +22,5 @@ export default class FBXAPI extends FBXAPI_BASE<Socket> {
   }
 }
 
-export { default as parser } from '@/base/parser';
-export * as logger from '@/base/logger';
+export { default as parser } from '@/generic/parser';
+export * as logger from '@/generic/logger';

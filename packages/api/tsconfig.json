@@ -1,13 +1,7 @@
 {
-  "compilerOptions": {
-    "target": "ES2015",
-    "module": "CommonJS",
-    "moduleResolution": "Node",
-    "declaration": true,
-    "strict": true,
-    "allowJs": true,
-    "esModuleInterop": true,
+  "extends": "@feedbax/common/tsconfig.json",
 
+  "compilerOptions": {
     "rootDir": "./src",
     "outDir": ".",
     "baseUrl": "./src",
@@ -15,10 +9,6 @@
     "paths": {
       "@/*": ["./*"],
     },
-
-    "plugins": [
-      { "transform": "@zerollup/ts-transform-paths" }
-    ]
   },
 
   "exclude": [

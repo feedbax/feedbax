@@ -1,11 +1,15 @@
 {
+  "extends": "@feedbax/common/tsconfig.json",
+
   "compilerOptions": {
     "target": "es5",
+
     "lib": [
       "dom",
       "dom.iterable",
       "esnext"
     ],
+
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -17,26 +21,25 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
+
     "baseUrl": ".",
     "paths": {
       "@/*": [
         "./src/*"
       ],
+
       "@licenses": [
         "./licenses.json"
       ]
     },
-    "plugins": [
-      {
-        "transform": "@zerollup/ts-transform-paths"
-      }
-    ]
   },
+
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
   ],
+
   "exclude": [
     "node_modules",
     "deprecated"

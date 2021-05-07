@@ -6,10 +6,24 @@
   "license": "AGPL-3.0-only",
   "scripts": {
     "build": "tsc",
-    "start": "node dist/main.js"
+    "prisma": "prisma",
+    "p:mig": "prisma migrate dev",
+    "p:gen": "prisma generate",
+    "p:std": "prisma studio",
+    "start": "node dist/main.js",
+    "seed": "node dist/seed.js"
   },
   "dependencies": {
-    "@feedbax/api": "workspace:^1.0.0",
-    "typescript": "^4.2.4"
+    "@feedbax/api": "workspace:^0.0.1",
+    "@feedbax/common": "workspace:^0.0.1",
+    "@feedbax/prisma": "workspace:^0.0.1",
+    "@feedbax/services": "workspace:^0.0.1",
+    "base-x": "^3.0.8",
+    "bcrypt": "^5.0.1",
+    "flake-idgen": "^1.4.0"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^3.0.1",
+    "@types/flake-idgen": "^0.1.30"
   }
 }

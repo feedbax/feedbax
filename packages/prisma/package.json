@@ -1,0 +1,20 @@
+{
+  "name": "@feedbax/prisma",
+  "version": "0.0.1",
+  "author": "Silas Rosenkranz",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "pnpm p:gen && ttsc",
+    "prisma": "prisma",
+    "p:mig": "prisma migrate dev",
+    "p:gen": "prisma generate",
+    "p:std": "prisma studio"
+  },
+  "dependencies": {
+    "@feedbax/common": "workspace:^0.0.1",
+    "@prisma/client": "^2.22.0",
+    "prisma": "^2.22.0"
+  }
+}

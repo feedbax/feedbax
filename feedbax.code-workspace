@@ -13,11 +13,19 @@
 			"path": "packages/api"
 		},
 		{
-			"name": "@feedbax/protos",
-			"path": "packages/protos"
+			"name": "@feedbax/prisma",
+			"path": "packages/prisma"
+		},
+		{
+			"name": "@feedbax/services",
+			"path": "packages/services"
+		},
+		{
+			"name": "@feedbax/common",
+			"path": "packages/common"
 		}
 	],
 	"settings": {
-		"typescript.tsdk": "@feedbax/frontend/node_modules/typescript/lib"
+		"typescript.tsdk": "@feedbax/common/node_modules/typescript/lib"
 	}
 }

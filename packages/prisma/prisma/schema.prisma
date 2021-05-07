@@ -1,0 +1,74 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://dev:dev@postgresql:5432/dev"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id       String @id
+  email    String @unique
+  password String
+  name     String
+
+  events Event[]
+}
+
+model Event {
+  id        String     @id
+  slug      String     @unique
+  questions Question[]
+
+  User   User   @relation(fields: [userId], references: [id])
+  userId String
+}
+
+model Question {
+  id               String           @id
+  likesDisplayMode LikesDisplayMode
+  answersMode      AnswersMode
+  text             String
+  likesCount       Int              @default(0)
+
+  answers Answer[]
+
+  Event   Event  @relation(fields: [eventId], references: [id])
+  eventId String
+}
+
+enum LikesDisplayMode {
+  Percentage
+  Numeric
+}
+
+enum AnswersMode {
+  ReadOnly
+  ReadWrite
+}
+
+model Answer {
+  id         String   @id
+  text       String
+  author     String
+  createdAt  DateTime @default(now())
+  likesCount Int      @default(0)
+
+  likes Like[]
+
+  Question   Question @relation(fields: [questionId], references: [id])
+  questionId String
+}
+
+model Like {
+  author String
+
+  Answer   Answer @relation(fields: [answerId], references: [id])
+  answerId String
+
+  @@id([author, answerId])
+}

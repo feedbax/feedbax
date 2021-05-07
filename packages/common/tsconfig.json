@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ES2015",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "declaration": true,
+    "strict": true,
+    "allowJs": true,
+    "esModuleInterop": true,
+
+    "plugins": [
+      { "transform": "../common/node_modules/@zerollup/ts-transform-paths" }
+    ]
+  }
+}

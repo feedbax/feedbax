@@ -1,6 +1,0 @@
-package feedbax.Utils;
-syntax = "proto3";
-
-message Error {
-  string message = 1;
-}

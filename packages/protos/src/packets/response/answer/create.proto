@@ -1,9 +1,0 @@
-package feedbax.Packets.Response.Answer;
-syntax = "proto3";
-
-message Create {
-  feedbax.Utils.Error error = 1;
-
-  feedbax.Model.Question question = 2;
-  feedbax.Model.Answer answer = 3;
-}

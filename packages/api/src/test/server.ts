@@ -1,7 +1,7 @@
 import { createServer } from "http";
 import { Server, Socket } from "@/server/socket";
 
-import { LogLevel } from '@/base/logger';
+import { LogLevel } from '@/generic/logger';
 import FBXAPI from '@/server/api';
 
 const httpServer = createServer();

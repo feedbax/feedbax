@@ -1,6 +1,6 @@
 {
   "files.exclude": {
-    "base/": true,
+    "generic/": true,
     "client/": true,
     "node_modules/": true,
     "server/": true,

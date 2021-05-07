@@ -1,6 +1,6 @@
 import { io } from '@/client/socket';
 
-import { LogLevel } from '@/base/logger';
+import { LogLevel } from '@/generic/logger';
 import FBXAPI from '@/client/api';
 
 export const client = async () => {

@@ -1,6 +1,0 @@
-package feedbax.Model;
-syntax = "proto3";
-
-message Like {
-  string author = 1;
-}
