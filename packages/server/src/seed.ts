@@ -1,115 +1,138 @@
-import { AnswersMode, LikesDisplayMode, PrismaClient } from '@feedbax/prisma';
-import { generate } from './flake';
+import { Prisma, PrismaClient } from '@feedbax/prisma';
+import { generate } from '@/utils/flake';
+
 import bcrypt from 'bcrypt';
 
-const prisma = new PrismaClient();
-const seed = async () => {
+
+const deleteOldSeededData = async (prisma: PrismaClient) => {
+  const oldUser = await prisma.user.findUnique({
+    where: {
+      email: 'silas@rosenkra.nz',
+    },
+
+    include: {
+      events: {
+        include: {
+          questions: {
+            include: {
+              answers: {
+                include: {
+                  likes: true,
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  });
+
+  if (oldUser) {
+    for (const event of oldUser.events) {
+      for (const question of event.questions) {
+        for (const answer of question.answers) {
+          for (const like of answer.likes) {
+            try {
+              await prisma.like.delete({ where: { author_answerId: like } });
+            } catch (error) {
+              console.log(error);
+            }
+          }
+
+          try {
+            await prisma.answer.delete({ where: { id: answer.id } });
+          } catch (error) {
+            console.log(error);
+          }
+        }
+
+        try {
+          await prisma.question.delete({ where: { id: question.id } });
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+      try {
+        await prisma.event.delete({ where: { id: event.id } });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    try {
+      await prisma.user.delete({ where: { id: oldUser.id } });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+};
+
+(async () => {
+  const prisma = new PrismaClient();
+
+  await deleteOldSeededData(prisma);
   await prisma.user.create({
     data: {
       id: generate(),
-      email: 'silas@rosenkra.nz',
       name: 'Silas Rosenkranz',
+      email: 'silas@rosenkra.nz',
       password: bcrypt.hashSync('dev', 10),
+
       events: {
         create: {
           id: generate(),
           slug: 'dev',
+
           questions: {
             create: [
               {
                 id: generate(),
-                answersMode: AnswersMode.ReadOnly,
-                likesDisplayMode: LikesDisplayMode.Percentage,
-                text: 'question-percentage-ro',
+                text: 'Wel­che an­de­ren Fra­gen hast du selbst noch, die nicht zu den Ka­te­go­ri­en pas­sen?',
                 likesCount: 0,
+                answersMode: 'ReadOnly',
+                likesDisplayMode: 'Percentage',
 
                 answers: {
                   create: [
                     {
                       id: generate(),
-                      text: 'question-percentage-ro-answer-a',
-                      author: 'author-a',
-                      likesCount: 3,
-                      likes: {
-                        create: [
-                          {
-                            author: 'author-a',
-                          },
-                          {
-                            author: 'author-b',
-                          },
-                          {
-                            author: 'author-c',
-                          }
-                        ],
-                      },
+                      author: generate(),
+                      text: 'Wie kann man für Gott bren­nen (auch das gan­ze Le­ben lang)?',
                     },
+
                     {
                       id: generate(),
-                      text: 'question-percentage-ro-answer-b',
-                      author: 'author-b',
-                      likesCount: 2,
-                      likes: {
-                        create: [
-                          {
-                            author: 'author-b',
-                          },
-                          {
-                            author: 'author-c',
-                          }
-                        ],
-                      },
+                      author: generate(),
+                      text: 'Wie kann ich Zei­ten in mei­nem Le­ben ver­mei­den, in de­nen ich mich von Gott ent­fer­ne?',
                     },
                   ],
                 },
               },
+
               {
                 id: generate(),
-                answersMode: AnswersMode.ReadWrite,
-                likesDisplayMode: LikesDisplayMode.Numeric,
-                text: 'question-numeric-rw',
+                text: 'Wel­che Fra­gen an den Glau­ben ha­ben dei­ne Be­kann­ten, die nicht an Gott glau­ben?',
                 likesCount: 0,
+                answersMode: 'ReadOnly',
+                likesDisplayMode: 'Percentage',
 
                 answers: {
                   create: [
                     {
                       id: generate(),
-                      text: 'question-numeric-rw-answer-a',
-                      author: 'author-b',
-                      likesCount: 3,
-                      likes: {
-                        create: [
-                          {
-                            author: 'author-a',
-                          },
-                          {
-                            author: 'author-b',
-                          },
-                          {
-                            author: 'author-c',
-                          }
-                        ],
-                      },
+                      author: generate(),
+                      text: 'War­um ist aus­ge­rech­net dein Gott der ein­zig wah­re, ein­zi­ge Gott',
                     },
+
                     {
                       id: generate(),
-                      text: 'question-numeric-rw-answer-b',
-                      author: 'author-c',
-                      likesCount: 2,
-                      likes: {
-                        create: [
-                          {
-                            author: 'author-b',
-                          },
-                          {
-                            author: 'author-c',
-                          }
-                        ],
-                      },
+                      author: generate(),
+                      text: 'Wie kann ein lie­ben­der Gott so viel Leid zu­las­sen?',
                     },
                   ],
                 },
-              },
+              }
             ],
           },
         },
@@ -118,6 +141,4 @@ const seed = async () => {
   });
 
   await prisma.$disconnect();
-};
-
-seed();
+})();

@@ -3,10 +3,8 @@ import { createServer } from "http";
 import { Server, Socket } from "@feedbax/api/server/socket";
 import FBXAPI, { parser, logger } from "@feedbax/api/server/api";
 
-import EventService from './services/event';
-import { PrismaClient } from '@feedbax/prisma';
+import EventService from '@/services/event';
 
-const prisma = new PrismaClient();
 const httpServer = createServer();
 const io = new Server(httpServer, {
   parser,
