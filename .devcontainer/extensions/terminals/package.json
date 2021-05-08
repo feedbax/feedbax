@@ -1,6 +1,6 @@
 {
 	"name": "@feedbax/terminals",
-	"description": "Opens named default terminals for the packages",
+	"description": "Opens named terminals for the project packages.",
 	"publisher": "feedbax",
 	"version": "0.0.1",
 	"main": "./extension.js",
@@ -10,6 +10,20 @@
 	},
 
   "activationEvents": [
-		"onStartupFinished"
-	]
+		"onCommand:feedbax.terminals.open",
+		"onCommand:feedbax.terminals.reset"
+	],
+
+	"contributes": {
+		"commands": [
+			{
+				"command": "feedbax.terminals.open",
+				"title": "Feedbax Terminals: Open"
+			},
+			{
+				"command": "feedbax.terminals.reset",
+				"title": "Feedbax Terminals: Reset"
+			}
+		]
+	}
 }
