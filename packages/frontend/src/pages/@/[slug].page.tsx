@@ -11,14 +11,12 @@ export default memo(
   function Event() {
     const router = useRouter();
 
-    const questionIds = useStore((state) => state.event.questionIds);
-    const addQuestions = useStore((state) => state.addQuestions);
+    const store = useStore();
+    const loadEvent = useStore((state) => state.loadEvent);
 
     const apiRef = useRef<boolean>(false);
 
-    useEffect(() => {
-      console.log('question-ids', questionIds);
-    }, [questionIds]);
+    useEffect(() => console.log('store', store), [store]);
 
     useEffect(() => {
       if (typeof router.query.slug === 'string' && apiRef.current === false) {
@@ -31,7 +29,7 @@ export default memo(
           id: 'login',
 
           data: {
-            uuid: '',
+            uuid: 'author-a',
             eventSlug: router.query.slug,
           },
 
@@ -41,8 +39,10 @@ export default memo(
               return;
             }
 
-            api.console.debug('api.send', 'login', 'callback', data.event);
-            // addQuestions(data.event?.questions ?? []);
+            if (data.event) {
+              api.console.debug('api.send', 'login', 'callback', data.event);
+              loadEvent(data.event);
+            }
           },
         });
       }

@@ -121,14 +121,6 @@ importers:
       webpack-license-plugin: 4.1.2
       yaml: 2.0.0-5
 
-  packages/models:
-    specifiers:
-      '@feedbax/common': workspace:^0.0.1
-      '@feedbax/prisma': workspace:^0.0.1
-    dependencies:
-      '@feedbax/common': link:../common
-      '@feedbax/prisma': link:../prisma
-
   packages/prisma:
     specifiers:
       '@feedbax/common': workspace:^0.0.1
@@ -144,7 +136,6 @@ importers:
       '@feedbax/api': workspace:^0.0.1
       '@feedbax/common': workspace:^0.0.1
       '@feedbax/prisma': workspace:^0.0.1
-      '@feedbax/services': workspace:^0.0.1
       '@types/bcrypt': ^3.0.1
       '@types/flake-idgen': ^0.1.30
       base-x: ^3.0.8
@@ -154,7 +145,6 @@ importers:
       '@feedbax/api': link:../api
       '@feedbax/common': link:../common
       '@feedbax/prisma': link:../prisma
-      '@feedbax/services': link:../services
       base-x: 3.0.8
       bcrypt: 5.0.1
       flake-idgen: 1.4.0

@@ -17,10 +17,6 @@
 			"path": "packages/prisma"
 		},
 		{
-			"name": "@feedbax/services",
-			"path": "packages/services"
-		},
-		{
 			"name": "@feedbax/common",
 			"path": "packages/common"
 		}

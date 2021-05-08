@@ -44,6 +44,22 @@ const seed = async () => {
                         ],
                       },
                     },
+                    {
+                      id: generate(),
+                      text: 'question-percentage-ro-answer-b',
+                      author: 'author-b',
+                      likesCount: 2,
+                      likes: {
+                        create: [
+                          {
+                            author: 'author-b',
+                          },
+                          {
+                            author: 'author-c',
+                          }
+                        ],
+                      },
+                    },
                   ],
                 },
               },
@@ -55,7 +71,43 @@ const seed = async () => {
                 likesCount: 0,
 
                 answers: {
-                  create: [],
+                  create: [
+                    {
+                      id: generate(),
+                      text: 'question-numeric-rw-answer-a',
+                      author: 'author-b',
+                      likesCount: 3,
+                      likes: {
+                        create: [
+                          {
+                            author: 'author-a',
+                          },
+                          {
+                            author: 'author-b',
+                          },
+                          {
+                            author: 'author-c',
+                          }
+                        ],
+                      },
+                    },
+                    {
+                      id: generate(),
+                      text: 'question-numeric-rw-answer-b',
+                      author: 'author-c',
+                      likesCount: 2,
+                      likes: {
+                        create: [
+                          {
+                            author: 'author-b',
+                          },
+                          {
+                            author: 'author-c',
+                          }
+                        ],
+                      },
+                    },
+                  ],
                 },
               },
             ],

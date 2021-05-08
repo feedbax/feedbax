@@ -4,6 +4,7 @@
     "client/": true,
     "node_modules/": true,
     "server/": true,
-    "test/": true
+    "test/": true,
+    "models/": true
   }
 }

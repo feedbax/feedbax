@@ -10,7 +10,8 @@
     "prisma": "prisma",
     "p:mig": "prisma migrate dev",
     "p:gen": "prisma generate",
-    "p:std": "prisma studio"
+    "p:std": "prisma studio",
+    "p:reset": "prisma migrate reset"
   },
   "dependencies": {
     "@feedbax/common": "workspace:^0.0.1",

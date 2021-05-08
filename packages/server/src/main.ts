@@ -3,7 +3,7 @@ import { createServer } from "http";
 import { Server, Socket } from "@feedbax/api/server/socket";
 import FBXAPI, { parser, logger } from "@feedbax/api/server/api";
 
-import EventService from '@feedbax/services/event';
+import EventService from './services/event';
 import { PrismaClient } from '@feedbax/prisma';
 
 const prisma = new PrismaClient();
@@ -32,17 +32,7 @@ io.on("connection", async (socket: Socket) => {
         });
       }
 
-      console.log(event);
-
-      // return res({
-      //   event: {
-      //     id: '',
-      //     slug: '',
-      //     questions: [{
-
-      //     }],
-      //   },
-      // });
+      return res({ event });
     },
   });
 });

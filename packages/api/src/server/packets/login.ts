@@ -1,6 +1,6 @@
 import type { _PacketHandler } from '@/server/packets/_utils';
 
-type ClientPacketData = import('@/client/packets/login').PacketData;
+type ClientPacket = import('@/client/packets/login').Packet;
 
 export type PacketId = 'login';
 export type PacketData = {
@@ -10,5 +10,5 @@ export type PacketData = {
 
 export type PacketProps = {
   id: PacketId;
-  handler: _PacketHandler<PacketData, ClientPacketData>;
+  handler: _PacketHandler<PacketData, ClientPacket>;
 };
