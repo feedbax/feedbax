@@ -33,7 +33,7 @@ function activate(context) {
 			terminal.creationOptions.name = name;
 
 			terminal.sendText(`cd ${path}`);
-			terminal.sendText(`export PS1='\\u${name}: '`);
+			terminal.sendText(`export PS1='[\\u${name}]$ '`);
 			terminal.sendText("clear");
 			terminal.show();	
 		}	
