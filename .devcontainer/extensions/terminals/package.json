@@ -1,0 +1,15 @@
+{
+	"name": "@feedbax/terminals",
+	"description": "Opens named default terminals for the packages",
+	"publisher": "feedbax",
+	"version": "0.0.1",
+	"main": "./extension.js",
+
+	"engines": {
+		"vscode": "^1.56.0"
+	},
+
+  "activationEvents": [
+		"onStartupFinished"
+	]
+}
