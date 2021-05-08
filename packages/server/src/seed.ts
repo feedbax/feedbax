@@ -13,6 +13,7 @@ const deleteOldSeededData = async (prisma: PrismaClient) => {
     include: {
       events: {
         include: {
+          meta: true,
           questions: {
             include: {
               answers: {
@@ -53,6 +54,14 @@ const deleteOldSeededData = async (prisma: PrismaClient) => {
         }
       }
 
+      if (event.meta) {
+        try {
+          await prisma.eventMeta.delete({ where: { eventId: event.id } });
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
       try {
         await prisma.event.delete({ where: { id: event.id } });
       } catch (error) {
@@ -83,6 +92,14 @@ const deleteOldSeededData = async (prisma: PrismaClient) => {
         create: {
           id: generate(),
           slug: 'dev',
+
+          meta: {
+            create: {
+              title: 'Glaubst du ...?',
+              description: 'Beantworte unser steps-faq und hilf uns dabei, die Fragen deiner Generation zu beantworten.',
+              image: Buffer.from([7, 7, 7])
+            },
+          },
 
           questions: {
             create: [

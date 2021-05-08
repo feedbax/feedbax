@@ -17,6 +17,7 @@ type This = { prisma: PrismaClient };
 
 const eventInclude = (
   Prisma.validator<Prisma.EventInclude>()({
+    meta: true,
     questions: {
       include: {
         answers: {
@@ -36,8 +37,17 @@ export class GetInitialBy {
     const result: PacketData = {} as PacketData;
 
     result.id = event.id;
-    result.slug = event.slug;
+    result.slug = event.slug;    
     result.questions = [];
+
+    result.meta  = event.meta
+      ? {
+        title: event.meta.title,
+        description: event.meta.description,
+        image: event.meta.image,
+      }
+      : null;
+
 
     for (let i = 0; i < event.questions.length; i += 1) {
       const question = event.questions[i];
