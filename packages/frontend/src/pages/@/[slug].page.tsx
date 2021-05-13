@@ -1,70 +1,171 @@
-import { memo, useEffect, useRef } from 'react';
-import { useRouter } from 'next/router';
+import { PrismaClient } from '@feedbax/prisma';
+import { motion, AnimatePresence } from 'framer-motion';
 
-import { io } from '@feedbax/api/client/socket';
-import FBXAPI, { parser, logger } from '@feedbax/api/client/api';
+import { memo } from 'react';
+import { useEffect, useState, useRef } from 'react';
+import { useStore, selectors } from '@/store';
 
-import type { GetStaticPaths, GetStaticProps } from 'next';
-import { useStore } from '@/store';
+import Head from 'next/head';
+
+import Loading from './components/Loading';
+import Logo from './components/Logo';
+import Pagination from './components/Pagination';
+import Questions from './components/Questions';
+
+import useFeedbaxApi from './hooks/use-feedbax-api';
+import styles from './page.module.scss';
+
+import type { GetServerSideProps } from 'next';
+import type { Variants, Transition } from 'framer-motion';
+
+const LOADING_TIMEOUT = 1000;
+
+const variants: Variants = {
+  initial: {
+    opacity: 1,
+    backdropFilter: 'blur(5px)',
+    WebkitBackdropFilter: 'blur(5px)',
+  },
+
+  exit: {
+    opacity: 0,
+    backdropFilter: 'blur(0px)',
+    WebkitBackdropFilter: 'blur(0px)',
+  },
+};
+
+const transition: Transition = {
+  duration: 0.4,
+};
 
 export default memo(
-  function Event() {
-    const router = useRouter();
+  function Event(props: Props) {
+    const now = useRef(Date.now());
 
-    const store = useStore();
-    const loadEvent = useStore((state) => state.loadEvent);
+    const { slug, ogTitle } = props;
+    const { ogDescription, ogImage } = props;
 
-    const apiRef = useRef<boolean>(false);
+    const [isLoading, setLoading] = useState(true);
 
-    useEffect(() => console.log('store', store), [store]);
+    const event = useStore(selectors.event);
+    const loadEvent = useStore(selectors.loadEvent);
+
+    const api = useFeedbaxApi();
 
     useEffect(() => {
-      if (typeof router.query.slug === 'string' && apiRef.current === false) {
-        apiRef.current = true;
+      if (event.id !== undefined) {
+        console.log('event', event);
 
-        const socket = io('ws://localhost:4000', { parser, transports: ['websocket'] });
-        const api = FBXAPI.from({ socket, logLevel: logger.LogLevel.Trace });
+        const timeSinceCreated = Date.now() - now.current;
+        console.log('1000 - timeSinceCreated', LOADING_TIMEOUT - timeSinceCreated);
+
+        setTimeout(() => setLoading(false), LOADING_TIMEOUT - timeSinceCreated);
+      }
+    }, [event]);
+
+    useEffect(
+      () => {
+        if (typeof slug !== 'string') return;
+        if (typeof api === 'undefined') return;
 
         api.send({
           id: 'login',
 
           data: {
             uuid: 'author-a',
-            eventSlug: router.query.slug,
+            eventSlug: slug,
           },
 
           cb: (data) => {
             if (data.err) {
-              api.console.error('api.send', 'login', 'callback', data.err);
+              api.console.error('send', 'login', 'callback', { data });
               return;
             }
 
             if (data.event) {
-              api.console.debug('api.send', 'login', 'callback', data.event);
+              api.console.debug('send', 'login', 'callback', { data });
               loadEvent(data.event);
             }
           },
         });
-      }
-    }, [router.query.slug]);
+      },
 
-    if (router.isFallback) return <div>Loading..</div>;
+      [api, slug],
+    );
 
     return (
-      <pre>
-        {JSON.stringify(router, null, 2)}
-      </pre>
+      <div className={styles.container}>
+        <Head>
+          <meta property="og:title" content={ogTitle ?? undefined} />
+          <meta property="og:description" content={ogDescription ?? undefined} />
+          <meta property="og:image" content={ogImage ?? undefined} />
+        </Head>
+
+        <AnimatePresence>
+          {isLoading && (
+            <motion.div
+              className={styles.loading}
+              transition={transition}
+              variants={variants}
+              initial="initial"
+              exit="exit"
+            >
+              <Loading />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <div className={styles.heading}>
+          <Logo />
+          <Pagination />
+          <Questions />
+        </div>
+
+        <div className="questions">
+          {event.questionIds.map((questionId) => (
+            <div key={questionId}>{questionId}</div>
+          ))}
+        </div>
+      </div>
     );
   },
 );
 
-export const getStaticProps: GetStaticProps = (
-  async () => ({
-    props: {},
-    revalidate: 1,
-  })
-);
+type Params = { slug: string };
+type Props = {
+  ogTitle: string | null;
+  ogDescription: string | null;
+  ogImage: string | null;
 
-export const getStaticPaths: GetStaticPaths = (
-  async () => ({ paths: [], fallback: true })
+  slug: string | null;
+};
+
+const prisma = new PrismaClient();
+
+export const getServerSideProps: GetServerSideProps<Props, Params> = (
+  async (context) => {
+    const slug = context.params?.slug;
+    const { host } = context.req.headers;
+
+    const event = await prisma.event.findUnique({
+      where: { slug },
+      select: {
+        meta: {
+          select: {
+            title: true,
+            description: true,
+          },
+        },
+      },
+    });
+
+    return {
+      props: {
+        slug: slug ?? null,
+        ogTitle: event?.meta?.title ?? null,
+        ogDescription: event?.meta?.description ?? null,
+        ogImage: `${host}/api/event/${slug}/image.jpg`,
+      },
+    };
+  }
 );

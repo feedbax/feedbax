@@ -1,0 +1,43 @@
+@import "@/styles/mixins/media";
+
+.container {
+  color: var(--color-text-primary);
+  position: relative;
+  overflow: hidden;
+
+  width: 100%;
+  min-height: 100vh;
+  min-height: calc(var(--vh, 1vh) * 100);
+
+  & .heading {
+    position: relative;
+    width: 100%;
+    background-color: var(--color-feedbax-secondary);
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    & .logo {
+      $size_min: 2rem;
+      $size_max: 2.5rem;
+  
+      @include fluid($screen-sm, $screen-xl) using ($steps, $step) {
+        width: calc-fluid($steps, $step, $size_min, $size_max);
+        height: calc-fluid($steps, $step, $size_min, $size_max);
+      }
+    }
+  }
+
+  & .loading {
+    position: fixed;
+    z-index: 2;
+  
+    width: 100%;
+    min-height: 100vh;
+    min-height: calc(var(--vh, 1vh) * 100);
+  
+    top: 0;
+    left: 0;
+  }
+}

@@ -4,7 +4,7 @@ const LicensePlugin = require('webpack-license-plugin');
 const i18nConfig = require('./src/i18n/config.json');
 
 module.exports = {
-  pageExtensions: ['page.tsx'],
+  pageExtensions: ['page.tsx', 'page.ts'],
 
   i18n: {
     locales: i18nConfig.locales,

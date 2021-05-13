@@ -40,37 +40,41 @@ export class GetInitialBy {
     result.slug = event.slug;    
     result.questions = [];
 
-    result.meta  = event.meta
-      ? {
-        title: event.meta.title,
-        description: event.meta.description,
-        image: event.meta.image,
-      }
-      : null;
-
-
     for (let i = 0; i < event.questions.length; i += 1) {
       const question = event.questions[i];
-      const { id, likesCount, text } = question;
+      const { id, eventId } = question;
+      const { order, likesCount, text } = question;
       const { likesDisplayMode, answersMode } = question;
       const { answers } = question;
 
       const resultQuestion: QuestionWith<'answers'> = {
-        id, likesCount, text,
+        id,
+        eventId,
+
+        likesCount,
+        text,
+        order,
+
         likesDisplayMode,
         answersMode,
+
         answers: [],
         hasLiked: false,
       };
 
       for (let j = 0; j < answers.length; j += 1) {
         const answer = answers[j];
-        const { id, author, text } = answer;
+        const { id, questionId } = answer;
+        const { author, text } = answer;
         const { likes, likesCount } = answer;
         const { createdAt } = answer;
 
         const resultAnswer: Answer = {
-          id, text, createdAt,
+          id,
+          questionId,
+
+          text,
+          createdAt,
           likesCount,
 
           hasLiked: false,

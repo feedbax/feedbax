@@ -34,8 +34,8 @@ function activate(context) {
 
 			terminal.sendText(`cd ${path}`);
 			terminal.sendText(`export PS1='[\\u${name}]$ '`);
-			terminal.sendText("clear");
-			terminal.show();	
+			terminal.sendText("clear && history -c");
+			terminal.show();
 		}	
 	};
 

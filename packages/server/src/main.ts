@@ -3,7 +3,7 @@ import { createServer } from "http";
 import { Server, Socket } from "@feedbax/api/server/socket";
 import FBXAPI, { parser, logger } from "@feedbax/api/server/api";
 
-import EventService from '@/services/event';
+import packetHandlers from '@/handler';
 
 const httpServer = createServer();
 const io = new Server(httpServer, {
@@ -15,24 +15,12 @@ const io = new Server(httpServer, {
 
 io.on("connection", async (socket: Socket) => {
   const api = FBXAPI.from({ socket, logLevel: logger.LogLevel.Trace });
+  const handlers = await Promise.all(packetHandlers);
 
-  api.on({
-    id: 'login',
-    handler: async (data, res) => {
-      api.console.debug('api.on', 'login', 'handler', data.uuid, data.eventSlug);
-
-      const { uuid, eventSlug } = data;
-      const event = await EventService.getInitialBy({ userUuid: uuid, eventSlug });
-
-      if (event === null) {
-        return res({
-          err: `event '${data.eventSlug}' doesn't exist`
-        });
-      }
-
-      return res({ event });
-    },
-  });
+  for (let i = 0; i < handlers.length; i++) {
+    const handler = handlers[i];
+    handler.default(api);
+  }
 });
 
 httpServer.listen(4000);

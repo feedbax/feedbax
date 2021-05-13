@@ -10,13 +10,10 @@ import type { DocumentContext } from 'next/document';
 export default (
   class FeedbaxDocument extends Document<{ translation: unknown }> {
     static async getInitialProps(context: DocumentContext) {
+      const { locale } = context as unknown as { locale: string };
       const initialProps = await Document.getInitialProps(context);
 
-      const findLocale = (el: JSX.Element | null) => 'data-locale' in el?.props;
-      const currentLocaleElement = initialProps.head?.find(findLocale);
-      const currentLocale = currentLocaleElement?.props['data-locale'];
-
-      const translationDir = path.resolve(process.cwd(), 'src/i18n/locales', currentLocale);
+      const translationDir = path.resolve(process.cwd(), 'src/i18n/locales', locale);
       const translationPath = path.join(translationDir, '__generated/translation.json');
       const translationData = fs.readFileSync(translationPath, 'utf-8');
 
@@ -32,7 +29,7 @@ export default (
 
           <body>
             <Main />
-            <div id="modal" />
+            <div id="__modal" />
 
             <script
               id="__I18N_DATA__"

@@ -2,7 +2,8 @@ import { Prisma, PrismaClient } from '@feedbax/prisma';
 import { generate } from '@/utils/flake';
 
 import bcrypt from 'bcrypt';
-
+import fs from 'fs';
+import path from 'path';
 
 const deleteOldSeededData = async (prisma: PrismaClient) => {
   const oldUser = await prisma.user.findUnique({
@@ -97,7 +98,8 @@ const deleteOldSeededData = async (prisma: PrismaClient) => {
             create: {
               title: 'Glaubst du ...?',
               description: 'Beantworte unser steps-faq und hilf uns dabei, die Fragen deiner Generation zu beantworten.',
-              image: Buffer.from([7, 7, 7])
+              image: fs.readFileSync(path.join(process.cwd(), 'og_image.jpg')),
+              imageMimeType: 'image/jpg',
             },
           },
 
@@ -107,6 +109,8 @@ const deleteOldSeededData = async (prisma: PrismaClient) => {
                 id: generate(),
                 text: 'Wel­che an­de­ren Fra­gen hast du selbst noch, die nicht zu den Ka­te­go­ri­en pas­sen?',
                 likesCount: 0,
+                order: 1,
+
                 answersMode: 'ReadOnly',
                 likesDisplayMode: 'Percentage',
 
@@ -129,8 +133,36 @@ const deleteOldSeededData = async (prisma: PrismaClient) => {
 
               {
                 id: generate(),
+                text: 'Was glaubst du?',
+                likesCount: 0,
+                order: 0,
+
+                answersMode: 'ReadWrite',
+                likesDisplayMode: 'Numeric',
+
+                answers: {
+                  create: [
+                    {
+                      id: generate(),
+                      author: generate(),
+                      text: 'Wie kann man für Gott bren­nen (auch das gan­ze Le­ben lang)?',
+                    },
+
+                    {
+                      id: generate(),
+                      author: generate(),
+                      text: 'Wie kann ich Zei­ten in mei­nem Le­ben ver­mei­den, in de­nen ich mich von Gott ent­fer­ne?',
+                    },
+                  ],
+                },
+              },
+
+              {
+                id: generate(),
                 text: 'Wel­che Fra­gen an den Glau­ben ha­ben dei­ne Be­kann­ten, die nicht an Gott glau­ben?',
                 likesCount: 0,
+                order: 2,
+
                 answersMode: 'ReadOnly',
                 likesDisplayMode: 'Percentage',
 

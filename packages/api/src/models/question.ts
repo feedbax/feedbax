@@ -4,10 +4,14 @@ import type { Answer } from '@/models/answer';
 type _Question = Prisma.QuestionGetPayload<{
   select: {
     id: true;
+    eventId: true;
+
     text: true;
+    likesCount: true;
+    order: true;
+
     answersMode: true;
     likesDisplayMode: true;
-    likesCount: true;
   };
 }>;
 

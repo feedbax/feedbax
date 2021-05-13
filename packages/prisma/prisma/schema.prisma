@@ -33,18 +33,22 @@ model Event {
 model EventMeta {
   title       String @db.VarChar(50)
   description String @db.VarChar(200)
-  image       Bytes
+
+  image         Bytes
+  imageMimeType String
 
   event   Event  @relation(fields: [eventId], references: [id])
   eventId String @id
 }
 
 model Question {
-  id               String           @id
+  id         String @id
+  text       String
+  order      Int
+  likesCount Int    @default(0)
+
   likesDisplayMode LikesDisplayMode
   answersMode      AnswersMode
-  text             String
-  likesCount       Int              @default(0)
 
   answers Answer[]
 

@@ -1,5 +1,4 @@
 import { memo } from 'react';
-import Head from 'next/head';
 
 import { TranslationProvider } from './context';
 import { useTranslationData } from './hooks';
@@ -16,10 +15,6 @@ export default memo(
 
     return (
       <TranslationProvider value={translation}>
-        <Head>
-          <meta data-locale={locale} />
-        </Head>
-
         {children}
       </TranslationProvider>
     );

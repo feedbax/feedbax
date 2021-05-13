@@ -8,7 +8,7 @@ export default memo(
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
-      const modalRoot = document.querySelector<HTMLDivElement>('#modal');
+      const modalRoot = document.querySelector<HTMLDivElement>('#__modal');
 
       if (modalRoot) {
         modalRootRef.current = modalRoot;

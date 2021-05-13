@@ -1,0 +1,35 @@
+@import "@/styles/mixins/media";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1.25rem 0;
+
+  & .text {
+    color: var(--color-text-primary);
+    font-family: var(--font-feedbax-primary);
+    font-weight: bold;
+
+    &-primary {
+      font-size: 0.875rem;
+    }
+
+    &-secondary {
+      font-size: 0.625rem;
+    }
+  }
+
+  & .logo {
+    margin-bottom: 0.2rem;
+
+    $size_min: 2rem;
+    $size_max: 2.5rem;
+  
+    @include fluid($screen-sm, $screen-xl) using ($steps, $step) {
+      width: calc-fluid($steps, $step, $size_min, $size_max);
+      height: calc-fluid($steps, $step, $size_min, $size_max);
+    }
+  }
+}

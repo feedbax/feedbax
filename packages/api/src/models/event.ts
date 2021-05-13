@@ -5,13 +5,6 @@ type _Event = Prisma.EventGetPayload<{
   select: {
     id: true;
     slug: true;
-    meta: {
-      select: {
-        title: true;
-        description: true;
-        image: true;
-      };
-    };
   };
 }>;
 

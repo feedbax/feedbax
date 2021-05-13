@@ -5,6 +5,23 @@
   "service": "vscode",
   "workspaceFolder": "/workspace/feedbax/backend",
 
+  "forwardPorts": [3000, 4000],
+  "portsAttributes": {
+    "3000": {
+      "label": "@feedbax/frontend",
+      "onAutoForward": "silent"
+    },
+
+    "4000": {
+      "label": "@feedbax/server",
+      "onAutoForward": "silent"
+    }
+  },
+
+  "otherPortsAttributes": {
+    "onAutoForward": "ignore"
+  },
+
   "extensions": [
     "zxh404.vscode-proto3",
     "dbaeumer.vscode-eslint",
