@@ -6,6 +6,7 @@ import { useEffect, useState, useRef } from 'react';
 import { useStore, selectors } from '@/store';
 
 import Head from 'next/head';
+import CookieConsent from '@/components/CookieConsent/dynamic';
 
 import Loading from './components/Loading';
 import Logo from './components/Logo';
@@ -100,6 +101,8 @@ export default memo(
           <meta property="og:description" content={ogDescription ?? undefined} />
           <meta property="og:image" content={ogImage ?? undefined} />
         </Head>
+
+        <CookieConsent />
 
         <AnimatePresence>
           {isLoading && (
