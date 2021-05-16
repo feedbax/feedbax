@@ -11,6 +11,7 @@ import type { AppProps } from 'next/app';
 import '@/styles/theme/fonts.scss';
 import '@/styles/theme/colors.scss';
 import '@/styles/globals.scss';
+import 'normalize.css';
 
 export default (
   function FeedbaxApp(props: AppProps): JSX.Element {

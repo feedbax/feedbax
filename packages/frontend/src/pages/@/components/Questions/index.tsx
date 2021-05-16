@@ -1,122 +1,94 @@
 import { memo } from 'react';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import { useStore, selectors } from '@/store';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 
-import hyphens from '@/components/Hyphens';
+import Question from './Question';
+import Arrow from './Arrow';
+
 import styles from './style.module.scss';
 
-import type { FeedbaxStore } from '@/store/types';
-import type { PanInfo, Variants, Transition } from 'framer-motion';
+import type { PanInfo } from 'framer-motion';
 
-const transition: Transition = {
-  bounce: false,
-  ease: 'linear',
-  duration: 0.2,
+type GetHeight = (el: HTMLDivElement | null) => void;
+const useQuestionHeight = (): [number, GetHeight] => {
+  const [questionHeight, setQuestionHeight] = useState(0);
+
+  const getHeight = useCallback((el: HTMLDivElement | null) => {
+    if (typeof el?.clientHeight === 'number') {
+      setQuestionHeight(el?.clientHeight);
+    }
+  }, []);
+
+  return [questionHeight, getHeight];
 };
 
-const variants = (swipeDirection: number): Variants => ({
-  initial: { x: swipeDirection * 200, opacity: 0 },
-  animate: { x: 0, opacity: 1 },
-  exit: { x: swipeDirection * -200, opacity: 0 },
-});
+type DragEndEvent = MouseEvent | TouchEvent | PointerEvent;
+type Direction = 'left' | 'right';
 
-const useCurrentQuestion = (currentQuestionId?: string) => {
-  const currentQuestionSelector = useCallback(
-    (state: FeedbaxStore) => {
-      if (typeof currentQuestionId === 'string') {
-        return state.questions[currentQuestionId];
+type DoSwipe = (direction: Direction | DragEndEvent, info?: PanInfo) => void;
+
+const useQuestionSwipe = (): [number, DoSwipe] => {
+  const nextQuestion = useStore(selectors.nextQuestion);
+  const previousQuestion = useStore(selectors.previousQuestion);
+
+  const [swipeDirection, setSwipeDirection] = useState(1);
+
+  const doSwipe = useCallback(
+    (direction: Direction | DragEndEvent, info?: PanInfo) => {
+      const isLeft = (
+        (typeof direction === 'string' && direction === 'left')
+        || (typeof info !== 'undefined' && info.offset.x > 0)
+      );
+
+      const isRight = (
+        (typeof direction === 'string' && direction === 'right')
+        || (typeof info !== 'undefined' && info.offset.x < 0)
+      );
+
+      if (isLeft) {
+        setSwipeDirection(-1);
+        setTimeout(previousQuestion, 0);
+        return;
       }
 
-      return undefined;
+      if (isRight) {
+        setSwipeDirection(1);
+        setTimeout(nextQuestion, 0);
+      }
     },
 
-    [currentQuestionId],
+    [],
   );
 
-  const currentQuestion = useStore(currentQuestionSelector);
-
-  return currentQuestion;
-};
-
-const useDragLock = () => {
-  const [locked, setLocked] = useState(false);
-
-  const doLock = useCallback(() => setLocked(true), []);
-  const doUnlock = useCallback(() => setLocked(false), []);
-
-  return { locked, doLock, doUnlock };
+  return [swipeDirection, doSwipe];
 };
 
 export default memo(
   function Questions() {
-    const nextQuestion = useStore(selectors.nextQuestion);
-    const previousQuestion = useStore(selectors.previousQuestion);
-
     const currentQuestionId = useStore(selectors.currentQuestionId);
-    const currentQuestionNumber = useStore(selectors.currentQuestionNumber);
-    const currentQuestion = useCurrentQuestion(currentQuestionId);
 
-    const [questionHeight, setQuestionHeight] = useState(0);
-    const [swipeDirection, setSwipeDirection] = useState(1);
-    const { locked, doLock, doUnlock } = useDragLock();
-
-    useEffect(() => console.log('questionHeight', questionHeight), [questionHeight]);
-    useEffect(() => console.log('currentQuestion', currentQuestion), [currentQuestion]);
-
-    type DragEndEvent = MouseEvent | TouchEvent | PointerEvent;
-    const doSwipe = useCallback((_: DragEndEvent, info: PanInfo) => {
-      if (info.delta.x > 0) {
-        setSwipeDirection(-1);
-        previousQuestion();
-      }
-
-      if (info.delta.x < 0) {
-        setSwipeDirection(1);
-        nextQuestion();
-      }
-    }, []);
-
-    const getGeight = useCallback((el: HTMLDivElement | null) => {
-      if (typeof el?.clientHeight === 'number') {
-        setQuestionHeight(el?.clientHeight);
-      }
-    }, []);
+    const [questionHeight, getHeight] = useQuestionHeight();
+    const [swipeDirection, doSwipe] = useQuestionSwipe();
 
     return (
       <div
         className={styles.container}
         style={{ height: questionHeight }}
       >
+        <Arrow type="left" onClick={() => doSwipe('left')} />
+        <Arrow type="right" onClick={() => doSwipe('right')} />
+
         <AnimatePresence initial={false}>
-          <motion.div
-            key={currentQuestion?.id}
-            className={styles.question}
-            ref={getGeight}
+          <Question
+            key={currentQuestionId}
+            questionId={currentQuestionId}
 
-            drag={locked ? false : 'x'}
-            dragConstraints={{ left: 0, right: 0 }}
-
-            transition={transition}
-            variants={variants(swipeDirection)}
-
-            initial="initial"
-            animate="animate"
-            exit="exit"
-
-            onDragEnd={doSwipe}
-            onAnimationStart={doLock}
-            onAnimationComplete={doUnlock}
-          >
-            <div className={styles.number}>
-              {currentQuestionNumber}
-            </div>
-
-            <hyphens.div className={styles.text}>
-              {currentQuestion?.text}
-            </hyphens.div>
-          </motion.div>
+            swipeDirection={swipeDirection}
+            doSwipe={doSwipe}
+            getHeight={getHeight}
+          />
         </AnimatePresence>
       </div>
     );

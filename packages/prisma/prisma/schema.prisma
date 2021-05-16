@@ -16,44 +16,89 @@ model User {
   password String
   name     String
 
+  workspaces WorkspacesOnUsers[]
+}
+
+model Workspace {
+  id     String  @id
+  name   String
   events Event[]
+
+  users WorkspacesOnUsers[]
+}
+
+model WorkspacesOnUsers {
+  user     User               @relation(fields: [userId], references: [id])
+  userId   String
+  userRole WorkspaceUserRoles
+
+  workspace   Workspace @relation(fields: [workspaceId], references: [id])
+  workspaceId String
+
+  @@id([userId, workspaceId])
+}
+
+enum WorkspaceUserRoles {
+  Administrator
+  Moderator
+  Reader
 }
 
 model Event {
   id   String @id
   slug String @unique
 
-  questions Question[]
-  meta      EventMeta?
+  meta     EventMeta?
+  settings EventSettings?
 
-  user   User   @relation(fields: [userId], references: [id])
-  userId String
+  questions Question[]
+
+  Workspace   Workspace @relation(fields: [workspaceId], references: [id])
+  workspaceId String
+}
+
+model EventSettings {
+  startDate DateTime
+  endDate   DateTime
+
+  event   Event  @relation(fields: [eventId], references: [id])
+  eventId String @id
 }
 
 model EventMeta {
   title       String @db.VarChar(50)
   description String @db.VarChar(200)
-
-  image         Bytes
-  imageMimeType String
+  image       Bytes
 
   event   Event  @relation(fields: [eventId], references: [id])
   eventId String @id
 }
 
 model Question {
-  id         String @id
-  text       String
-  order      Int
-  likesCount Int    @default(0)
+  id    String @id
+  text  String
+  order Int
 
-  likesDisplayMode LikesDisplayMode
-  answersMode      AnswersMode
-
-  answers Answer[]
+  answers  Answer[]
+  settings QuestionSettings?
 
   event   Event  @relation(fields: [eventId], references: [id])
   eventId String
+}
+
+model QuestionSettings {
+  allowAnswers Boolean
+  limitAnswers Boolean
+  answersLimit Int
+
+  allowLikes Boolean
+  limitLikes Boolean
+  likesLimit Int
+
+  likesDisplayMode LikesDisplayMode
+
+  question   Question @relation(fields: [questionId], references: [id])
+  questionId String   @id
 }
 
 enum LikesDisplayMode {
@@ -61,17 +106,12 @@ enum LikesDisplayMode {
   Numeric
 }
 
-enum AnswersMode {
-  ReadOnly
-  ReadWrite
-}
-
 model Answer {
-  id         String   @id
-  text       String
-  author     String
-  createdAt  DateTime @default(now())
-  likesCount Int      @default(0)
+  id           String   @id
+  text         String
+  author       String
+  createdAt    DateTime @default(now())
+  isPredefined Boolean  @default(false)
 
   likes Like[]
 

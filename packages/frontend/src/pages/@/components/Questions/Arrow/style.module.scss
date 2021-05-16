@@ -1,0 +1,54 @@
+@import "@/styles/mixins/media";
+
+.arrow-container {
+  position: absolute;
+  z-index: 2;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 1.5rem;
+  box-sizing: border-box;
+
+  cursor: pointer;
+  opacity: 0.5;
+
+  @media (hover: none) and (pointer: coarse) {
+    display: none;
+  }
+
+
+  &.arrow-hidden {
+    display: none;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+
+  & .arrow {
+    position: absolute;
+
+    border: solid var(--color-feedbax-primary);
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 5px;
+  }
+
+  &-left {
+    left: 0;
+
+    & .arrow {
+      transform: rotate(135deg);
+    }
+  }
+
+  &-right {
+    right: 0;
+
+    & .arrow {
+      transform: rotate(-45deg);
+    }
+  }
+}

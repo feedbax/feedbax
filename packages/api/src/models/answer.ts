@@ -7,11 +7,11 @@ type _Answer = Prisma.AnswerGetPayload<{
 
     text: true;
     createdAt: true;
-    likesCount: true;
   };
 }>;
 
 export type Answer = _Answer & {
+  likesCount: number;
   hasLiked: boolean;
   isMine: boolean;
 };

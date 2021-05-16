@@ -11,7 +11,7 @@
     $sc: calc-fluid($steps, $step, -0.19rem, -0.38rem);
     $sd: calc-fluid($steps, $step,  0.19rem,  0.38rem);
 
-    max-width: calc-fluid($steps, $step, 20rem, 23.75rem);
+    max-width: calc-fluid($steps, $step, 18rem, 23.75rem);
     box-shadow: $sa $sa 0 var(--color-feedbax-secondary),
                 $sb $sb 0 var(--color-feedbax-primary),
                 $sc $sc 0 var(--color-text-primary),

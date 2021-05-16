@@ -20,6 +20,7 @@ const eventInclude = (
     meta: true,
     questions: {
       include: {
+        settings: true,
         answers: {
           include: {
             likes: true,
@@ -43,22 +44,20 @@ export class GetInitialBy {
     for (let i = 0; i < event.questions.length; i += 1) {
       const question = event.questions[i];
       const { id, eventId } = question;
-      const { order, likesCount, text } = question;
-      const { likesDisplayMode, answersMode } = question;
-      const { answers } = question;
+      const { order, text } = question;
+      const { answers, settings } = question;
 
       const resultQuestion: QuestionWith<'answers'> = {
         id,
         eventId,
 
-        likesCount,
+        likesCount: 0,
         text,
         order,
 
-        likesDisplayMode,
-        answersMode,
-
+        settings,
         answers: [],
+
         hasLiked: false,
       };
 
@@ -66,7 +65,7 @@ export class GetInitialBy {
         const answer = answers[j];
         const { id, questionId } = answer;
         const { author, text } = answer;
-        const { likes, likesCount } = answer;
+        const { likes } = answer;
         const { createdAt } = answer;
 
         const resultAnswer: Answer = {
@@ -75,7 +74,7 @@ export class GetInitialBy {
 
           text,
           createdAt,
-          likesCount,
+          likesCount: 0,
 
           hasLiked: false,
           isMine: author === userUuid,
@@ -86,6 +85,9 @@ export class GetInitialBy {
 
           resultQuestion.hasLiked ||= like.author === userUuid
           resultAnswer.hasLiked ||= like.author === userUuid;
+
+          resultAnswer.likesCount++;
+          resultQuestion.likesCount++;
         }
 
         resultQuestion.answers.push(resultAnswer);

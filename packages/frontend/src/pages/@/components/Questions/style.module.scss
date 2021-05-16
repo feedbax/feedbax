@@ -1,38 +1,14 @@
 @import "@/styles/mixins/media";
 
 .container {
-  padding-bottom: 1.25rem;
   position: relative;
 
-  max-width: 512px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  max-width: 32rem;
   width: 100%;
 
   margin: 0 auto;
-
-  & .question {
-    position: absolute;
-    color: rgb(58, 85, 106);
-    max-width: 100%;
-    width: 100%;
-
-    box-sizing: border-box;
-    padding: 0 3rem;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-
-    user-select: none;
-    font-family: "Klinic Slab";
-
-    @include fluid($screen-sm, $screen-xl) using ($steps, $step) {
-      font-size: calc-fluid($steps, $step, 1.125rem, 1.625rem);
-      line-height: calc-fluid($steps, $step, 1.125rem, 1.625rem);
-
-      & .number {
-        margin-right: calc-fluid($steps, $step, 1rem, 1rem);
-      }
-    }
-  }
 }

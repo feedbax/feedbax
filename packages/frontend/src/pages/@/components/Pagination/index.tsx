@@ -9,8 +9,6 @@ export default memo(
     const currentQuestionId = useStore(selectors.currentQuestionId);
     const questionIds = useStore(selectors.questionIds);
 
-    console.log({ currentQuestionId, questionIds });
-
     return (
       <div className={styles.container}>
         {questionIds.map((questionId) => {

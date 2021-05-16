@@ -7,15 +7,13 @@ type _Question = Prisma.QuestionGetPayload<{
     eventId: true;
 
     text: true;
-    likesCount: true;
     order: true;
-
-    answersMode: true;
-    likesDisplayMode: true;
+    settings: true;
   };
 }>;
 
 export type Question = _Question & {
+  likesCount: number;
   hasLiked: boolean;
 };
 
