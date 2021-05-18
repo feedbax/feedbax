@@ -22,7 +22,7 @@ services:
       - postgresql
 
     volumes:
-      - feedbax-data:/workspace
-
-volumes:
-  feedbax-data:
+      - ../:/workspace/feedbax
+      - ./extensions/terminals:/root/.vscode-server/extensions/terminals
+      - ./extensions/terminals:/root/.vscode-remote/extensions/terminals
+      - ./extensions/terminals:/root/.vscode/extensions/terminals

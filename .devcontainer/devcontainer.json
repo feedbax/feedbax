@@ -4,7 +4,6 @@
   "dockerComposeFile": ["./docker-compose.yml"],
   "service": "vscode",
   "workspaceFolder": "/workspace/feedbax",
-  "postCreateCommand": "/scripts/post-create.sh",
 
   "forwardPorts": [3000, 4000],
   "portsAttributes": {
