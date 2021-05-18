@@ -2,10 +2,10 @@ import fs from 'fs';
 import path from 'path';
 import YAML from 'yaml';
 
-import config from '@/i18n/config.json';
-import createReviver from '@/i18n/generator/helper/create-reviver';
+import config from '@/lib/i18n/config.json';
+import createReviver from '@/lib/i18n/generator/helper/create-reviver';
 
-import type { Translation, Context } from '@/i18n/generator';
+import type { Translation, Context } from '@/lib/i18n/generator';
 
 export default (
   async function generateJson({ translationDir }: Context): Promise<void> {

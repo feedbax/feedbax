@@ -35,7 +35,7 @@ type TranslationHook = {
 
 const loadTranslationData = (
   (locale: string, load: (translation: Translation) => void): void => {
-    import(`@/i18n/locales/${locale}/__generated/translation.json`)
+    import(`@/lib/i18n/locales/${locale}/__generated/translation.json`)
       .then(({ default: json }) => load(json));
   }
 );
@@ -48,7 +48,7 @@ function useDefaultTranslationData(locale: string): Translation {
   } else {
     /* eslint-disable import/no-dynamic-require */
     /* eslint-disable global-require */
-    defaultTranslation = require(`@/i18n/locales/${locale}/__generated/translation.json`);
+    defaultTranslation = require(`@/lib/i18n/locales/${locale}/__generated/translation.json`);
     /* eslint-enable import/no-dynamic-require */
     /* eslint-enable global-require */
   }

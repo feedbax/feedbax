@@ -4,12 +4,12 @@ import create from 'zustand';
 import produce from 'immer';
 import consola from '@feedbax/api/generic/logger';
 
-import { createEventStore } from '@/store/modules/event';
-import { createQuestionsStore } from '@/store/modules/questions';
-import { createAnswersStore } from '@/store/modules/answers';
-import { createAppStore } from '@/store/modules/app';
+import { createEventStore } from '@/lib/store/modules/event';
+import { createQuestionsStore } from '@/lib/store/modules/questions';
+import { createAnswersStore } from '@/lib/store/modules/answers';
+import { createAppStore } from '@/lib/store/modules/app';
 
-import type { FeedbaxStore, WithImmer } from '@/store/types';
+import type { FeedbaxStore, WithImmer } from '@/lib/store/types';
 
 export const useStore = create<FeedbaxStore>((set) => {
   const withImmer: WithImmer = (fn) => set((state) => produce(state, fn));
@@ -31,4 +31,4 @@ export const useStore = create<FeedbaxStore>((set) => {
   };
 });
 
-export { default as selectors } from '@/store/selectors';
+export { default as selectors } from '@/lib/store/selectors';

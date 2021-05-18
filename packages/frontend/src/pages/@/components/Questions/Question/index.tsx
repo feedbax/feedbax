@@ -1,13 +1,13 @@
 import { memo } from 'react';
 import { useCallback, useState } from 'react';
 
-import { useStore, selectors } from '@/store';
+import { useStore, selectors } from '@/lib/store';
 import { motion } from 'framer-motion';
 
 import hyphens from '@/components/Hyphens';
 import styles from './style.module.scss';
 
-import type { FeedbaxStore } from '@/store/types';
+import type { FeedbaxStore } from '@/lib/store/types';
 import type { PanInfo, Variants, Transition } from 'framer-motion';
 
 const transition: Transition = {

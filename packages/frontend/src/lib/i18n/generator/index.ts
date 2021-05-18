@@ -8,7 +8,7 @@ export type Translation = Record<string, unknown>;
 export type Context = { translationDir: string };
 
 (async function main() {
-  const translationDir = path.resolve(process.cwd(), 'src/i18n/locales');
+  const translationDir = path.resolve(process.cwd(), 'src/lib/i18n/locales');
 
   await generateJson({ translationDir });
   await generateTypes({ translationDir });

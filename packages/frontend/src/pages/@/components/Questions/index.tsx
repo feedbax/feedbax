@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { useCallback, useState } from 'react';
 
-import { useStore, selectors } from '@/store';
+import { useStore, selectors } from '@/lib/store';
 import { AnimatePresence } from 'framer-motion';
 
 import Question from './Question';
@@ -49,13 +49,10 @@ const useQuestionSwipe = (): [number, DoSwipe] => {
 
       if (isLeft) {
         setSwipeDirection(-1);
-        setTimeout(previousQuestion, 0);
-        return;
-      }
-
-      if (isRight) {
+        setTimeout(() => previousQuestion(), 0);
+      } else if (isRight) {
         setSwipeDirection(1);
-        setTimeout(nextQuestion, 0);
+        setTimeout(() => nextQuestion(), 0);
       }
     },
 

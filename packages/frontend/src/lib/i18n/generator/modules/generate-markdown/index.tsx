@@ -8,10 +8,10 @@ import Link from 'next/link';
 import { Fragment } from 'react';
 import { compiler } from 'markdown-to-jsx';
 
-import config from '@/i18n/config.json';
-import getHyphen from '@/i18n/generator/helper/get-hypen';
+import config from '@/lib/i18n/config.json';
+import getHyphen from '@/lib/i18n/generator/helper/get-hypen';
 
-import type { Context } from '@/i18n/generator';
+import type { Context } from '@/lib/i18n/generator';
 
 type Loader = { locale: string; componentPath: string };
 
@@ -69,7 +69,7 @@ export default (
 
         const loaders = loadersMap.get(fileParsedPath.name) ?? [];
 
-        loaders.push({ locale, componentPath: `@/i18n/locales/${locale}/__generated/${fileParsedPath.name}` });
+        loaders.push({ locale, componentPath: `@/lib/i18n/locales/${locale}/__generated/${fileParsedPath.name}` });
         loadersMap.set(fileParsedPath.name, loaders);
       }
     }

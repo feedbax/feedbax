@@ -1,7 +1,7 @@
 const path = require('path');
-const LicensePlugin = require('webpack-license-plugin');
+const { LicenseWebpackPlugin } = require('license-webpack-plugin');
 
-const i18nConfig = require('./src/i18n/config.json');
+const i18nConfig = require('./src/lib/i18n/config.json');
 
 module.exports = {
   pageExtensions: ['page.tsx', 'page.ts'],
@@ -11,30 +11,60 @@ module.exports = {
     defaultLocale: i18nConfig.defaultLocale,
   },
 
-  webpack: (config, { dev }) => {
-    if (dev === false) {
+  webpack: (config, { dev, isServer }) => {
+    if (dev === false && isServer == false) {
       const nextDir = path.join(process.cwd(), '.next');
-      const licensesPath = path.join(process.cwd(), 'licenses.json')
-  
-      const licensePlugin = new LicensePlugin({
+      const licensesPath = path.join(process.cwd(), `licenses2.json`);
+
+      config.plugins.push(new LicenseWebpackPlugin({
         outputFilename: path.relative(nextDir, licensesPath),
-  
-        unacceptableLicenseTest: (licenseIdentifier) => {
-          const blacklist = [
-            'GPL-3.0-only',
-            'AGPL-3.0-only',
-            'LGPL-3.0-only',
-            'GPL-2.0+',
-            'LGPL-2.1',
-            'GPL-3.0-or-later',
-            'GPL-2.0-only',
+        perChunkOutput: false,
+
+        unacceptableLicenseTest: (licenseType) => {
+          const whitelist = [
+            'MIT',
+            '0BSD',
+            'Apache-2.0',
+            'ISC',
+            'BSD-3-Clause'
           ];
-  
-          return blacklist.includes(licenseIdentifier);
+
+          return !whitelist.includes(licenseType);
         },
-      });
-  
-      config.plugins.push(licensePlugin);  
+
+        renderLicenses: (modules) => {
+          const licenses = [];
+
+          for (let i = 0; i < modules.length; i += 1) {
+            const module = modules[i];
+            let _tempA, _tempB, _tempC;
+
+            licenses.push({
+              name: module.name,
+              version:
+                  (_tempA = module.packageJson.version) !== null
+                && _tempA !== void 0 ? _tempA : null,
+
+              author:
+                  typeof module.packageJson.author === 'string'
+                  ? module.packageJson.author
+                  : (_tempC = (_tempB = module.packageJson.author) === null
+                    || _tempB === void 0 ? void 0 : _tempB.name) !== null
+                    && _tempC !== void 0 ? _tempC : null,
+
+              license: module.licenseId,
+              licenseText: module.licenseText,
+            });
+          }
+
+          return JSON.stringify(licenses, null, 2);
+        },
+
+        stats: {
+          warnings: false,
+          errors: true
+        }
+      }));  
     }
 
     return config

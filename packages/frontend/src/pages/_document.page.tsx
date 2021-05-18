@@ -13,7 +13,7 @@ export default (
       const { locale } = context as unknown as { locale: string };
       const initialProps = await Document.getInitialProps(context);
 
-      const translationDir = path.resolve(process.cwd(), 'src/i18n/locales', locale);
+      const translationDir = path.resolve(process.cwd(), 'src/lib/i18n/locales', locale);
       const translationPath = path.join(translationDir, '__generated/translation.json');
       const translationData = fs.readFileSync(translationPath, 'utf-8');
 

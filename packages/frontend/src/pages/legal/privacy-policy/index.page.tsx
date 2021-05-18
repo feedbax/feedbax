@@ -1,9 +1,9 @@
 import Head from 'next/head';
 
 import { memo } from 'react';
-import { useTranslation } from '@/i18n/hooks';
+import { useTranslation } from '@/lib/i18n/hooks';
 
-import getContent from '@/i18n/locales/generic/__generated/loader-privacy-policy';
+import getContent from '@/lib/i18n/locales/generic/__generated/loader-privacy-policy';
 
 import hyphens from '@/components/Hyphens';
 import Footer from '@/components/Footer';

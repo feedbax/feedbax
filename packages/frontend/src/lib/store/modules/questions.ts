@@ -3,7 +3,7 @@
 import consola from '@feedbax/api/generic/logger';
 
 import type { Question, QuestionWith } from '@feedbax/api/models/question';
-import type { FeedbaxStore, WithImmer } from '@/store/types';
+import type { FeedbaxStore, WithImmer } from '@/lib/store/types';
 
 interface QuestionsStoreData {
   questions: {
@@ -26,7 +26,7 @@ interface QuestionsStoreActions {
   removeQuestionsById: (targetQuestionIds: string[], draft?: FeedbaxStore) => void;
 }
 
-declare module '@/store/types' {
+declare module '@/lib/store/types' {
   interface FeedbaxStoreData extends QuestionsStoreData {}
   interface FeedbaxStoreActions extends QuestionsStoreActions {}
 }

@@ -79,17 +79,17 @@ model Question {
   text  String
   order Int
 
-  answers  Answer[]
-  settings QuestionSettings?
+  reactions Reaction[]
+  settings  QuestionSettings?
 
   event   Event  @relation(fields: [eventId], references: [id])
   eventId String
 }
 
 model QuestionSettings {
-  allowAnswers Boolean
-  limitAnswers Boolean
-  answersLimit Int
+  allowReactions Boolean
+  limitReactions Boolean
+  reactionsLimit Int
 
   allowLikes Boolean
   limitLikes Boolean
@@ -106,7 +106,7 @@ enum LikesDisplayMode {
   Numeric
 }
 
-model Answer {
+model Reaction {
   id           String   @id
   text         String
   author       String
@@ -122,8 +122,8 @@ model Answer {
 model Like {
   author String
 
-  answer   Answer @relation(fields: [answerId], references: [id])
-  answerId String
+  reaction   Reaction @relation(fields: [reactionId], references: [id])
+  reactionId String
 
-  @@id([author, answerId])
+  @@id([author, reactionId])
 }

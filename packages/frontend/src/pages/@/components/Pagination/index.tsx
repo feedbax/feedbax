@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { useStore, selectors } from '@/store';
+import { useStore, selectors } from '@/lib/store';
 
 import styles from './style.module.scss';
 import clsx from 'clsx';
@@ -7,9 +7,10 @@ import clsx from 'clsx';
 export default memo(
   function Pagination() {
     const currentQuestionId = useStore(selectors.currentQuestionId);
+    const isSingleQuestion = useStore(selectors.isSingleQuestion);
     const questionIds = useStore(selectors.questionIds);
 
-    if (questionIds.length === 1) return null;
+    if (isSingleQuestion) return null;
 
     return (
       <div className={styles.container}>

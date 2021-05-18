@@ -67,6 +67,7 @@ importers:
       immer: ^9.0.2
       js-cookie: ^2.2.1
       json-to-ts: ^1.7.0
+      license-webpack-plugin: ^2.3.18
       lodash.merge: ^4.6.2
       markdown-to-jsx: ^7.1.2
       next: v10.2.1-canary.5
@@ -79,7 +80,6 @@ importers:
       slugify: ^1.5.3
       ts-node: ^9.1.1
       typed-scss-modules: ^4.1.1
-      webpack-license-plugin: ^4.1.2
       yaml: ^2.0.0-5
       zustand: ^3.5.1
     dependencies:
@@ -115,12 +115,12 @@ importers:
       glob: 7.1.7
       hyphen: 1.6.4
       json-to-ts: 1.7.0
+      license-webpack-plugin: 2.3.18
       markdown-to-jsx: 7.1.2_react@17.0.2
       nodemon: 2.0.7
       pretty-format: 26.6.2
       ts-node: 9.1.1
       typed-scss-modules: 4.1.1_sass@1.32.13
-      webpack-license-plugin: 4.1.2
       yaml: 2.0.0-5
 
   packages/prisma:
@@ -476,6 +476,10 @@ packages:
   /@types/node/15.0.2:
     resolution: {integrity: sha512-p68+a+KoxpoB47015IeYZYRrdqMUcpbK8re/zpFB8Ld46LHC1lPEbp3EXgkEhAYEcPvjJF6ZO+869SQ0aH1dcA==}
 
+  /@types/node/15.3.0:
+    resolution: {integrity: sha512-8/bnjSZD86ZfpBsDlCIkNXIvm+h6wi9g7IqL+kmFkQ+Wvu3JrasgLElfiPgoo8V8vVfnEi0QVS12gbl94h9YsQ==}
+    dev: true
+
   /@types/normalize-package-data/2.4.0:
     resolution: {integrity: sha512-f5j5b/Gf71L+dbqxIpQ4Z2WlmI/mPJ0fOkGGmFgtb6sAu97EPczzbS3/tJKxmcYDj55OX6ssqwDAWOHIYDRDGA==}
     dev: true
@@ -500,6 +504,18 @@ packages:
 
   /@types/scheduler/0.16.1:
     resolution: {integrity: sha512-EaCxbanVeyxDRTQBkdLb3Bvl/HK7PBK6UJjsSixB0iHKoWxE5uu2Q/DgtpOhPIojN0Zl1whvOd7PoHs2P0s5eA==}
+    dev: true
+
+  /@types/source-list-map/0.1.2:
+    resolution: {integrity: sha512-K5K+yml8LTo9bWJI/rECfIPrGgxdpeNbj+d53lwN4QjW1MCwlkhUms+gtdzigTeUyBr09+u8BwOIY3MXvHdcsA==}
+    dev: true
+
+  /@types/webpack-sources/0.1.8:
+    resolution: {integrity: sha512-JHB2/xZlXOjzjBB6fMOpH1eQAfsrpqVVIbneE0Rok16WXwFaznaI5vfg75U5WgGJm7V9W1c4xeRQDjX/zwvghA==}
+    dependencies:
+      '@types/node': 15.3.0
+      '@types/source-list-map': 0.1.2
+      source-map: 0.6.1
     dev: true
 
   /@types/ws/7.4.2:
@@ -2275,13 +2291,6 @@ packages:
       has: 1.0.3
       has-symbols: 1.0.2
 
-  /get-npm-tarball-url/2.0.2:
-    resolution: {integrity: sha512-2dPhgT0K4pVyciTqdS0gr9nEwyCQwt9ql1/t5MCUMvcjWjAysjGJgT7Sx4n6oq3tFBjBN238mxX4RfTjT3838Q==}
-    engines: {node: '>=4'}
-    dependencies:
-      normalize-registry-url: 1.0.0
-    dev: true
-
   /get-orientation/1.1.2:
     resolution: {integrity: sha512-/pViTfifW+gBbh/RnlFYHINvELT9Znt+SYyDKAUL6uV6By019AK/s+i9XP4jSwq7lwP38Fd8HVeTxym3+hkwmQ==}
     dependencies:
@@ -2510,6 +2519,7 @@ packages:
     engines: {node: '>=0.10.0'}
     dependencies:
       safer-buffer: 2.1.2
+    dev: false
 
   /iconv-lite/0.6.2:
     resolution: {integrity: sha512-2y91h5OpQlolefMPmUlivelittSWy0rP+oYVpn6A7GwVHNE8AWzoYOBNmlwks3LobaJxgHCYZAnyNo2GgpNRNQ==}
@@ -2887,6 +2897,18 @@ packages:
       type-check: 0.4.0
     dev: true
 
+  /license-webpack-plugin/2.3.18:
+    resolution: {integrity: sha512-a6tSN07AgKkX9nVntBd9MP7OAzt7gKAcnXOy6xegH5y0012vVPNiglLdR0qrEIagg7TMAGhZi1WONiNOg8pe8w==}
+    peerDependencies:
+      webpack: '*'
+    peerDependenciesMeta:
+      webpack:
+        optional: true
+    dependencies:
+      '@types/webpack-sources': 0.1.8
+      webpack-sources: 1.4.3
+    dev: true
+
   /lines-and-columns/1.1.6:
     resolution: {integrity: sha1-HADHQ7QzzQpOgHWPe2SldEDZ/wA=}
     dev: true
@@ -2938,10 +2960,6 @@ packages:
 
   /lodash.truncate/4.4.2:
     resolution: {integrity: sha1-WjUNoLERO4N+z//VgSy+WNbq4ZM=}
-    dev: true
-
-  /lodash/4.17.20:
-    resolution: {integrity: sha512-PlhdFcillOINfeV7Ni6oF1TAEayyZBoZ8bcshTHqOYJYlrqzRK5hagpagky5o4HfCzzd1TRkXPMFq6cKk9rGmA==}
     dev: true
 
   /lodash/4.17.21:
@@ -3104,16 +3122,6 @@ packages:
 
   /natural-compare/1.4.0:
     resolution: {integrity: sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=}
-    dev: true
-
-  /needle/2.6.0:
-    resolution: {integrity: sha512-KKYdza4heMsEfSWD7VPUIz3zX2XDwOyX2d+geb4vrERZMT5RMU6ujjaD+I5Yr54uZxQ2w6XRTAhHBbSCyovZBg==}
-    engines: {node: '>= 4.4.x'}
-    hasBin: true
-    dependencies:
-      debug: 3.2.7
-      iconv-lite: 0.4.24
-      sax: 1.2.4
     dev: true
 
   /negotiator/0.6.2:
@@ -3296,10 +3304,6 @@ packages:
   /normalize-path/3.0.0:
     resolution: {integrity: sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==}
     engines: {node: '>=0.10.0'}
-
-  /normalize-registry-url/1.0.0:
-    resolution: {integrity: sha512-0v6T4851b72ykk5zEtFoN4QX/Fqyk7pouIj9xZyAvAe9jlDhAwT4z6FlwsoQCHjeuK2EGUoAwy/F4y4B1uZq9A==}
-    dev: true
 
   /normalize-url/4.5.0:
     resolution: {integrity: sha512-2s47yzUxdexf1OhyRi4Em83iQk0aPvwTddtFz4hnSSw9dCEsLEGf6SwIO8ss/19S9iBb5sJaOuTvTGDeZI00BQ==}
@@ -4036,6 +4040,7 @@ packages:
 
   /safer-buffer/2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
+    dev: false
 
   /sass/1.32.13:
     resolution: {integrity: sha512-dEgI9nShraqP7cXQH+lEXVf73WOPCse0QlFzSD8k+1TcOxCMwVXfQlr0jtoluZysQOyJGnfr21dLvYKDJq8HkA==}
@@ -4044,10 +4049,6 @@ packages:
     dependencies:
       chokidar: 3.5.1
     dev: false
-
-  /sax/1.2.4:
-    resolution: {integrity: sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==}
-    dev: true
 
   /scheduler/0.20.2:
     resolution: {integrity: sha512-2eWfGgAqqWFGqtdMmcL5zCMK1U8KlXv8SQFGglL3CEtd0aDVDWgeF/YoCmvln55m5zSk3J/20hTaSBeSObsQDQ==}
@@ -4247,12 +4248,6 @@ packages:
     dependencies:
       spdx-exceptions: 2.3.0
       spdx-license-ids: 3.0.7
-    dev: true
-
-  /spdx-expression-validate/2.0.0:
-    resolution: {integrity: sha512-b3wydZLM+Tc6CFvaRDBOF9d76oGIHNCLYFeHbftFXUWjnfZWganmDmvtM5sm1cRwJc/VDBMLyGGrsLFd1vOxbg==}
-    dependencies:
-      spdx-expression-parse: 3.0.1
     dev: true
 
   /spdx-license-ids/3.0.7:
@@ -4894,23 +4889,8 @@ packages:
     resolution: {integrity: sha512-YQ+BmxuTgd6UXZW3+ICGfyqRyHXVlD5GtQr5+qjiNW7bF0cqrzX500HVXPBOvgXb5YnzDd+h0zqyv61KUD7+Sg==}
     dev: false
 
-  /webpack-license-plugin/4.1.2:
-    resolution: {integrity: sha512-aS/fMx9zGfqs7OSj02iCX7W4hnaiGolihz+sHn6nEwaMTFeTEp0Uu+QIyRMluC731USIB42hFIdI/vje1SKdrQ==}
-    engines: {node: '>=8.0.0'}
-    peerDependencies:
-      webpack: '>=4.0.0 < 6.0.0'
-    dependencies:
-      chalk: 4.1.0
-      get-npm-tarball-url: 2.0.2
-      lodash: 4.17.20
-      needle: 2.6.0
-      spdx-expression-validate: 2.0.0
-      webpack-sources: 2.2.0
-    dev: true
-
-  /webpack-sources/2.2.0:
-    resolution: {integrity: sha512-bQsA24JLwcnWGArOKUxYKhX3Mz/nK1Xf6hxullKERyktjNMC4x8koOeaDNTA2fEJ09BdWLbM/iTW0ithREUP0w==}
-    engines: {node: '>=10.13.0'}
+  /webpack-sources/1.4.3:
+    resolution: {integrity: sha512-lgTS3Xhv1lCOKo7SA5TjKXMjpSM4sBjNV5+q2bqesbSPs5FjGmU6jjtBSkX9b4qW87vDIsCIlUPOEhbZrMdjeQ==}
     dependencies:
       source-list-map: 2.0.1
       source-map: 0.6.1

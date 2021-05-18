@@ -4,7 +4,7 @@
 import LazyFontLoader from '@/components/Utils/LazyFontLoader';
 import ViewportFix from '@/components/Utils/ViewportFix';
 
-import TranslationLoader from '@/i18n/loader';
+import TranslationLoader from '@/lib/i18n/loader';
 
 import type { AppProps } from 'next/app';
 

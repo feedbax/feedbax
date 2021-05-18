@@ -3,7 +3,7 @@
 import consola from '@feedbax/api/generic/logger';
 
 import type { Event } from '@feedbax/api/models/event';
-import type { FeedbaxStore, WithImmer } from '@/store/types';
+import type { FeedbaxStore, WithImmer } from '@/lib/store/types';
 
 type LoginPacketData = import('@feedbax/api/client/packets/login').PacketData;
 
@@ -18,7 +18,7 @@ interface EventStoreActions {
   loadEvent: (event: LoginPacketData) => void;
 }
 
-declare module '@/store/types' {
+declare module '@/lib/store/types' {
   interface FeedbaxStoreData extends EventStoreData {}
   interface FeedbaxStoreActions extends EventStoreActions {}
 }

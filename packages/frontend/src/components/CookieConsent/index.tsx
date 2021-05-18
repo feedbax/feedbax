@@ -1,7 +1,7 @@
 import React, { memo, useCallback } from 'react';
 import cookies from 'js-cookie';
 
-import { useTranslation } from '@/i18n/hooks';
+import { useTranslation } from '@/lib/i18n/hooks';
 import { useRouter } from 'next/router';
 
 import Modal from '@/components/Modal/dynamic';

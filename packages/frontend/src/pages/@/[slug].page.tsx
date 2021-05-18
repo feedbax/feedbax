@@ -1,9 +1,8 @@
-import { PrismaClient } from '@feedbax/prisma';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { memo } from 'react';
 import { useEffect, useState, useRef } from 'react';
-import { useStore, selectors } from '@/store';
+import { useStore, selectors } from '@/lib/store';
 
 import Head from 'next/head';
 import CookieConsent from '@/components/CookieConsent/dynamic';
@@ -12,7 +11,9 @@ import Loading from './components/Loading';
 import Logo from './components/Logo';
 import Pagination from './components/Pagination';
 import Questions from './components/Questions';
+import Reactions from './components/Reactions';
 
+import prisma from '@/lib/prisma';
 import useFeedbaxApi from './hooks/use-feedbax-api';
 import styles from './page.module.scss';
 
@@ -122,12 +123,7 @@ export default memo(
           <Logo />
           <Pagination />
           <Questions />
-        </div>
-
-        <div className="questions">
-          {event.questionIds.map((questionId) => (
-            <div key={questionId}>{questionId}</div>
-          ))}
+          <Reactions />
         </div>
       </div>
     );
@@ -142,8 +138,6 @@ type Props = {
 
   slug: string | null;
 };
-
-const prisma = new PrismaClient();
 
 export const getServerSideProps: GetServerSideProps<Props, Params> = (
   async (context) => {
@@ -165,9 +159,9 @@ export const getServerSideProps: GetServerSideProps<Props, Params> = (
     return {
       props: {
         slug: slug ?? null,
-        ogTitle: event?.meta?.title ?? null,
+        ogTitle: event?.meta?.title ?? slug ?? null,
         ogDescription: event?.meta?.description ?? null,
-        ogImage: `${host}/api/event/${slug}/image.jpg`,
+        ogImage: `${host}/api/event/${slug}/meta/image.jpg`,
       },
     };
   }

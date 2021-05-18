@@ -1,4 +1,4 @@
-declare module '@/store/types' {
+declare module '@/lib/store/types' {
   interface FeedbaxStoreData {}
 
   interface FeedbaxStoreActions {

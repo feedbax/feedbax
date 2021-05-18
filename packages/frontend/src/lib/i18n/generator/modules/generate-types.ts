@@ -2,9 +2,9 @@ import fs from 'fs';
 import path from 'path';
 import jsonToTs from 'json-to-ts';
 
-import config from '@/i18n/config.json';
+import config from '@/lib/i18n/config.json';
 
-import type { Translation, Context } from '@/i18n/generator';
+import type { Translation, Context } from '@/lib/i18n/generator';
 
 export default (
   async function generateTypes({ translationDir }: Context): Promise<void> {

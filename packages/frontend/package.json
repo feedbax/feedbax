@@ -7,10 +7,10 @@
     "dev": "concurrently 'pnpm dev:scss-types' 'pnpm dev:next' 'pnpm dev:i18n'",
     "dev:next": "next dev",
     "dev:scss-types": "tsm --watch src --aliasPrefixes.@ src --nameFormat param --exportType default",
-    "dev:i18n": "nodemon --watch src/i18n/locales -e yaml,md --exec 'pnpm build:i18n'",
+    "dev:i18n": "nodemon --watch src/lib/i18n/locales -e yaml,md --exec 'pnpm build:i18n'",
     "build": "pnpm build:i18n && pnpm build:scss-types && pnpm build:next",
     "build:next": "next build",
-    "build:i18n": "pnpm ts-node src/i18n/generator/index.ts",
+    "build:i18n": "pnpm ts-node src/lib/i18n/generator/index.ts",
     "build:scss-types": "tsm src --aliasPrefixes.@ src --nameFormat param --exportType default",
     "start": "next start",
     "lint": "eslint src/**/*.{js,ts,jsx,tsx}",
@@ -50,12 +50,12 @@
     "glob": "^7.1.7",
     "hyphen": "^1.6.4",
     "json-to-ts": "^1.7.0",
+    "license-webpack-plugin": "^2.3.18",
     "markdown-to-jsx": "^7.1.2",
     "nodemon": "^2.0.7",
     "pretty-format": "^26.6.2",
     "ts-node": "^9.1.1",
     "typed-scss-modules": "^4.1.1",
-    "webpack-license-plugin": "^4.1.2",
     "yaml": "^2.0.0-5"
   }
 }

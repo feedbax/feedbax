@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 
 import consola from '@feedbax/api/generic/logger';
-import type { FeedbaxStore, WithImmer } from '@/store/types';
+import type { FeedbaxStore, WithImmer } from '@/lib/store/types';
 
 interface AppStoreData {
   app: {
@@ -17,7 +17,7 @@ interface AppStoreActions {
   previousQuestion: (workingDraft?: FeedbaxStore) => void;
 }
 
-declare module '@/store/types' {
+declare module '@/lib/store/types' {
   interface FeedbaxStoreData extends AppStoreData {}
   interface FeedbaxStoreActions extends AppStoreActions {}
 }

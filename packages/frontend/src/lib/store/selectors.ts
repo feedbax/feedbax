@@ -1,8 +1,24 @@
-import type { FeedbaxStore } from '@/store/types';
+import type { FeedbaxStore } from '@/lib/store/types';
 
 export default {
   currentQuestionId: (state: FeedbaxStore) => state.app.currentQuestionId,
   currentQuestionNumber: (state: FeedbaxStore) => `${state.app.currentQuestionIndex + 1}`.padStart(2, '0'),
+
+  currentQuestionAnswerIds: (state: FeedbaxStore) => {
+    const { currentQuestionId } = state.app;
+    if (typeof currentQuestionId === 'undefined') return [];
+
+    const { [currentQuestionId]: currentQuestion } = state.questions;
+    return currentQuestion.answerIds;
+  },
+
+  currentQuestionSettings: (state: FeedbaxStore) => {
+    const { currentQuestionId } = state.app;
+    if (typeof currentQuestionId === 'undefined') return [];
+
+    const { [currentQuestionId]: currentQuestion } = state.questions;
+    return currentQuestion.settings;
+  },
 
   isFirstQuestion: (state: FeedbaxStore) => {
     const { currentQuestionIndex } = state.app;
@@ -21,7 +37,7 @@ export default {
 
   event: (state: FeedbaxStore) => state.event,
   questionIds: (state: FeedbaxStore) => state.event.questionIds,
-  questionsCount: (state: FeedbaxStore) => state.event.questionIds.length,
+  isSingleQuestion: (state: FeedbaxStore) => state.event.questionIds.length === 1,
 
   questions: (state: FeedbaxStore) => state.questions,
   answers: (state: FeedbaxStore) => state.answers,

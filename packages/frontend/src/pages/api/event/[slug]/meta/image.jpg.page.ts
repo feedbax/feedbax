@@ -1,13 +1,11 @@
-import { PrismaClient } from '@feedbax/prisma';
+import prisma from '@/lib/prisma';
 import type { NextApiRequest, NextApiResponse } from 'next';
-
-const primsa = new PrismaClient();
 
 export default async (req: NextApiRequest, res: NextApiResponse<Buffer>) => {
   const { slug } = req.query;
 
   if (typeof slug === 'string') {
-    const event = await primsa.event.findUnique({
+    const event = await prisma.event.findUnique({
       where: { slug },
       include: {
         meta: true,

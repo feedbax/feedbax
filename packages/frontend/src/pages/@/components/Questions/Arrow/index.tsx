@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 
 import { memo } from 'react';
-import { useStore, selectors } from '@/store';
+import { useStore, selectors } from '@/lib/store';
 
 import styles from './style.module.scss';
 

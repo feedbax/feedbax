@@ -2,8 +2,8 @@ import Head from 'next/head';
 
 import { memo, useCallback, useState } from 'react';
 import { useRouter } from 'next/router';
-import { useTranslation } from '@/i18n/hooks';
-import { useStore, selectors } from '@/store';
+import { useTranslation } from '@/lib/i18n/hooks';
+import { useStore, selectors } from '@/lib/store';
 
 import Logo from '@/components/Logo';
 import CookieConsent from '@/components/CookieConsent/dynamic';
