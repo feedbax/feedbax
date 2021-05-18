@@ -1,5 +1,5 @@
 import type { Prisma } from '@feedbax/prisma';
-import type { Answer } from '@/models/answer';
+import type { Reaction } from '@/models/reaction';
 
 type _Question = Prisma.QuestionGetPayload<{
   select: {
@@ -17,13 +17,13 @@ export type Question = _Question & {
   hasLiked: boolean;
 };
 
-type WithProperties = 'answers';
+type WithProperties = 'reactions';
 type Optional = '' | '?'
 
 export type QuestionWith<With extends `${WithProperties}${Optional}`> = (
-  'answers' extends With
-    ? Question & { answers: Answer[] }
-    : 'answers?' extends With
-      ? Question & { answers?: Answer[] }
+  'reactions' extends With
+    ? Question & { reactions: Reaction[] }
+    : 'reactions?' extends With
+      ? Question & { reactions?: Reaction[] }
       : Question
 );

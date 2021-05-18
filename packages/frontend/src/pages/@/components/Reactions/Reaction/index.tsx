@@ -12,7 +12,7 @@ type ReactionProps = {
 
 export default memo(
   function Reaction() {
-    const answerIds = useStore(selectors.currentQuestionAnswerIds);
+    const answerIds = useStore(selectors.currentQuestionReactionIds);
     const settings = useStore(selectors.currentQuestionSettings);
 
     return (

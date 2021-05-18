@@ -4,7 +4,7 @@ export default {
   currentQuestionId: (state: FeedbaxStore) => state.app.currentQuestionId,
   currentQuestionNumber: (state: FeedbaxStore) => `${state.app.currentQuestionIndex + 1}`.padStart(2, '0'),
 
-  currentQuestionAnswerIds: (state: FeedbaxStore) => {
+  currentQuestionReactionIds: (state: FeedbaxStore) => {
     const { currentQuestionId } = state.app;
     if (typeof currentQuestionId === 'undefined') return [];
 
@@ -40,10 +40,10 @@ export default {
   isSingleQuestion: (state: FeedbaxStore) => state.event.questionIds.length === 1,
 
   questions: (state: FeedbaxStore) => state.questions,
-  answers: (state: FeedbaxStore) => state.answers,
+  reactions: (state: FeedbaxStore) => state.reactions,
 
   reset: (state: FeedbaxStore) => state.reset,
   loadEvent: (state: FeedbaxStore) => state.loadEvent,
-  removeAnswers: (state: FeedbaxStore) => state.removeAnswers,
+  removeReactions: (state: FeedbaxStore) => state.removeReactions,
   removeQuestions: (state: FeedbaxStore) => state.removeQuestions,
 };

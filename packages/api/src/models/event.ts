@@ -10,10 +10,10 @@ type _Event = Prisma.EventGetPayload<{
 
 export type Event = _Event & {};
 
-type WithProperties = 'questions' | 'answers';
+type WithProperties = 'questions' | 'reactions';
 type Optional = '' | '?'
 
-type QuestionWithExtract<T> = QuestionWith<Extract<T, `answers${Optional}`>>;
+type QuestionWithExtract<T> = QuestionWith<Extract<T, `reactions${Optional}`>>;
 
 export type EventWith<With extends `${WithProperties}${Optional}`> = (
   'questions' extends With

@@ -1,6 +1,6 @@
 import type { Prisma } from '@feedbax/prisma';
 
-type _Answer = Prisma.AnswerGetPayload<{
+type _Reaction = Prisma.ReactionGetPayload<{
   select: {
     id: true;
     questionId: true;
@@ -10,7 +10,7 @@ type _Answer = Prisma.AnswerGetPayload<{
   };
 }>;
 
-export type Answer = _Answer & {
+export type Reaction = _Reaction & {
   likesCount: number;
   hasLiked: boolean;
   isMine: boolean;

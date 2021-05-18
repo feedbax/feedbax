@@ -5,7 +5,7 @@ import styles from './style.module.scss';
 
 export default memo(
   function Reactions() {
-    const answerIds = useStore(selectors.currentQuestionAnswerIds);
+    const answerIds = useStore(selectors.currentQuestionReactionIds);
     const settings = useStore(selectors.currentQuestionSettings);
 
     return (

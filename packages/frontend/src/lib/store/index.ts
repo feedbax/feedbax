@@ -4,10 +4,10 @@ import create from 'zustand';
 import produce from 'immer';
 import consola from '@feedbax/api/generic/logger';
 
+import { createAppStore } from '@/lib/store/modules/app';
 import { createEventStore } from '@/lib/store/modules/event';
 import { createQuestionsStore } from '@/lib/store/modules/questions';
-import { createAnswersStore } from '@/lib/store/modules/answers';
-import { createAppStore } from '@/lib/store/modules/app';
+import { createReactionsStore } from '@/lib/store/modules/reactions';
 
 import type { FeedbaxStore, WithImmer } from '@/lib/store/types';
 
@@ -15,10 +15,10 @@ export const useStore = create<FeedbaxStore>((set) => {
   const withImmer: WithImmer = (fn) => set((state) => produce(state, fn));
 
   return {
+    ...createAppStore(withImmer),
     ...createEventStore(withImmer),
     ...createQuestionsStore(withImmer),
-    ...createAnswersStore(withImmer),
-    ...createAppStore(withImmer),
+    ...createReactionsStore(withImmer),
 
     reset: () => withImmer((draft) => {
       consola.trace('FeedbaxStore', 'reset');
@@ -26,7 +26,7 @@ export const useStore = create<FeedbaxStore>((set) => {
       draft.resetApp(draft);
       draft.resetEvent(draft);
       draft.resetQuestions(draft);
-      draft.resetAnswers(draft);
+      draft.resetReactions(draft);
     }),
   };
 });

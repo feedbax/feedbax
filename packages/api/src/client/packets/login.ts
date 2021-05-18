@@ -4,7 +4,7 @@ import type { EventWith } from '@/models/event';
 type ServerPacketId = import('@/server/packets/login').PacketId;
 type ServerPacketData = import('@/server/packets/login').PacketData;
 
-export type PacketData = EventWith<'questions' | 'answers'>;
+export type PacketData = EventWith<'questions' | 'reactions'>;
 export type Packet = {
   err?: string;
   event?: PacketData;

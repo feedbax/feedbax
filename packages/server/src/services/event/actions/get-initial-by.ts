@@ -2,7 +2,7 @@ import { Prisma, PrismaClient } from '@feedbax/prisma';
 
 import type { PacketData } from '@feedbax/api/client/packets/login';
 import type { QuestionWith } from '@feedbax/api/models/question';
-import type { Answer } from '@feedbax/api/models/answer';
+import type { Reaction } from '@feedbax/api/models/reaction';
 
 type GetInitialByCommon<T> = T & { userUuid: string };
 type GetInitialById = GetInitialByCommon<{ eventId: string }>;
@@ -21,7 +21,7 @@ const eventInclude = (
     questions: {
       include: {
         settings: true,
-        answers: {
+        reactions: {
           include: {
             likes: true,
           },
@@ -45,9 +45,9 @@ export class GetInitialBy {
       const question = event.questions[i];
       const { id, eventId } = question;
       const { order, text } = question;
-      const { answers, settings } = question;
+      const { reactions, settings } = question;
 
-      const resultQuestion: QuestionWith<'answers'> = {
+      const resultQuestion: QuestionWith<'reactions'> = {
         id,
         eventId,
 
@@ -56,19 +56,19 @@ export class GetInitialBy {
         order,
 
         settings,
-        answers: [],
+        reactions: [],
 
         hasLiked: false,
       };
 
-      for (let j = 0; j < answers.length; j += 1) {
-        const answer = answers[j];
+      for (let j = 0; j < reactions.length; j += 1) {
+        const answer = reactions[j];
         const { id, questionId } = answer;
         const { author, text } = answer;
         const { likes } = answer;
         const { createdAt } = answer;
 
-        const resultAnswer: Answer = {
+        const resultAnswer: Reaction = {
           id,
           questionId,
 
@@ -90,7 +90,7 @@ export class GetInitialBy {
           resultQuestion.likesCount++;
         }
 
-        resultQuestion.answers.push(resultAnswer);
+        resultQuestion.reactions.push(resultAnswer);
       }
 
       result.questions.push(resultQuestion);

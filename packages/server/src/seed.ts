@@ -7,7 +7,7 @@ import path from 'path';
 
 const deleteOldSeededData = async (prisma: PrismaClient) => {
   await prisma.like.deleteMany({});
-  await prisma.answer.deleteMany({});
+  await prisma.reaction.deleteMany({});
 
   await prisma.questionSettings.deleteMany({});
   await prisma.question.deleteMany({});
@@ -69,9 +69,9 @@ const deleteOldSeededData = async (prisma: PrismaClient) => {
 
                         settings: {
                           create: {
-                            allowAnswers: true,
-                            limitAnswers: true,
-                            answersLimit: 2,
+                            allowReactions: true,
+                            limitReactions: true,
+                            reactionsLimit: 2,
 
                             allowLikes: true,
                             limitLikes: true,
@@ -81,7 +81,7 @@ const deleteOldSeededData = async (prisma: PrismaClient) => {
                           },
                         },
 
-                        answers: {
+                        reactions: {
                           create: [
                             {
                               id: generate(),
@@ -119,9 +119,9 @@ const deleteOldSeededData = async (prisma: PrismaClient) => {
 
                         settings: {
                           create: {
-                            allowAnswers: true,
-                            limitAnswers: true,
-                            answersLimit: 2,
+                            allowReactions: true,
+                            limitReactions: true,
+                            reactionsLimit: 2,
 
                             allowLikes: true,
                             limitLikes: true,
@@ -131,7 +131,7 @@ const deleteOldSeededData = async (prisma: PrismaClient) => {
                           },
                         },
 
-                        answers: {
+                        reactions: {
                           create: [
                             {
                               id: generate(),
@@ -169,9 +169,9 @@ const deleteOldSeededData = async (prisma: PrismaClient) => {
 
                         settings: {
                           create: {
-                            allowAnswers: false,
-                            limitAnswers: true,
-                            answersLimit: 2,
+                            allowReactions: false,
+                            limitReactions: true,
+                            reactionsLimit: 2,
 
                             allowLikes: true,
                             limitLikes: true,
@@ -181,7 +181,7 @@ const deleteOldSeededData = async (prisma: PrismaClient) => {
                           },
                         },
 
-                        answers: {
+                        reactions: {
                           create: [
                             {
                               id: generate(),

@@ -16,8 +16,8 @@ interface QuestionsStoreData {
 interface QuestionsStoreActions {
   resetQuestions: (draft?: FeedbaxStore) => void;
 
-  addQuestion: (question: QuestionWith<'answers?'>, draft?: FeedbaxStore) => void;
-  addQuestions: (questions: QuestionWith<'answers?'>[], draft?: FeedbaxStore) => void;
+  addQuestion: (question: QuestionWith<'reactions?'>, draft?: FeedbaxStore) => void;
+  addQuestions: (questions: QuestionWith<'reactions?'>[], draft?: FeedbaxStore) => void;
 
   removeQuestion: (targetQuestion: Question, draft?: FeedbaxStore) => void;
   removeQuestionById: (targetQuestionId: string, draft?: FeedbaxStore) => void;
@@ -56,7 +56,7 @@ export const createQuestionsStore = (withImmer: WithImmer): QuestionsStore => ({
     consola.trace('FeedbaxStore', 'addQuestion', { question, workingDraft });
 
     const implementation = (draft: FeedbaxStore) => {
-      const { answers, ...questionRest } = question;
+      const { reactions, ...questionRest } = question;
 
       draft.questions[question.id] = {
         ...draft.questions[question.id],
@@ -71,7 +71,7 @@ export const createQuestionsStore = (withImmer: WithImmer): QuestionsStore => ({
         return questionA.order - questionB.order;
       });
 
-      draft.addAnswers(answers ?? [], draft);
+      draft.addReactions(reactions ?? [], draft);
     };
 
     return typeof workingDraft === 'undefined'
@@ -125,10 +125,10 @@ export const createQuestionsStore = (withImmer: WithImmer): QuestionsStore => ({
       if (typeof question !== 'undefined') {
         for (let i = 0; i < question.answerIds.length; i += 1) {
           const answerId = question.answerIds[i];
-          const answer = draft.answers[answerId];
+          const answer = draft.reactions[answerId];
 
           if (typeof answer !== 'undefined') {
-            draft.removeAnswer(answer, draft);
+            draft.removeReaction(answer, draft);
           }
         }
 
