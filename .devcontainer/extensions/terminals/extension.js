@@ -15,11 +15,11 @@ function activate(context) {
 
 	const openTerminals = () => {
 		const terminalsToOpen = {
-			'@feedbax/frontend': '/workspace/feedbax/backend/packages/frontend',
-			'@feedbax/server': '/workspace/feedbax/backend/packages/server',
-			'@feedbax/api': '/workspace/feedbax/backend/packages/api',
-			'@feedbax/prisma': '/workspace/feedbax/backend/packages/prisma',
-			'@feedbax/common': '/workspace/feedbax/backend/packages/common',
+			'@feedbax/frontend': '/workspace/feedbax/packages/frontend',
+			'@feedbax/server': '/workspace/feedbax/packages/server',
+			'@feedbax/api': '/workspace/feedbax/packages/api',
+			'@feedbax/prisma': '/workspace/feedbax/packages/prisma',
+			'@feedbax/common': '/workspace/feedbax/packages/common',
 		};
 
 		const terminalsEntries = Object.entries(terminalsToOpen);
