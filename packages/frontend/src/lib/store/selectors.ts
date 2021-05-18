@@ -9,7 +9,7 @@ export default {
     if (typeof currentQuestionId === 'undefined') return [];
 
     const { [currentQuestionId]: currentQuestion } = state.questions;
-    return currentQuestion.answerIds;
+    return currentQuestion.reactionIds;
   },
 
   currentQuestionSettings: (state: FeedbaxStore) => {

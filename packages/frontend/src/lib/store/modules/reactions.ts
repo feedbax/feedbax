@@ -16,14 +16,14 @@ interface ReactionsStoreData {
 interface ReactionsStoreActions {
   resetReactions: (draft?: FeedbaxStore) => void;
 
-  addReaction: (answer: Reaction, draft?: FeedbaxStore) => void;
-  addReactions: (answers: Reaction[], draft?: FeedbaxStore) => void;
+  addReaction: (reaction: Reaction, draft?: FeedbaxStore) => void;
+  addReactions: (reactions: Reaction[], draft?: FeedbaxStore) => void;
 
-  removeReaction: (targetAnswer: Reaction, draft?: FeedbaxStore) => void;
-  removeReactionById: (targetAnswerId: string, draft?: FeedbaxStore) => void;
+  removeReaction: (targetReaction: Reaction, draft?: FeedbaxStore) => void;
+  removeReactionById: (targetReactionId: string, draft?: FeedbaxStore) => void;
 
-  removeReactions: (targetAnswers: Reaction[], draft?: FeedbaxStore) => void;
-  removeReactionsByIds: (targetAnswerIds: string[], draft?: FeedbaxStore) => void;
+  removeReactions: (targetReactions: Reaction[], draft?: FeedbaxStore) => void;
+  removeReactionsByIds: (targetReactionIds: string[], draft?: FeedbaxStore) => void;
 }
 
 declare module '@/lib/store/types' {
@@ -52,18 +52,18 @@ export const createReactionsStore = (withImmer: WithImmer): ReactionsStore => ({
       : implementation(workingDraft);
   },
 
-  addReaction: (answer, workingDraft) => {
-    consola.trace('FeedbaxStore', 'addReaction', { answer, workingDraft });
+  addReaction: (reaction, workingDraft) => {
+    consola.trace('FeedbaxStore', 'addReaction', { reaction, workingDraft });
 
     const implementation = (draft: FeedbaxStore) => {
-      const question = draft.questions[answer.questionId];
+      const question = draft.questions[reaction.questionId];
 
       if (typeof question !== 'undefined') {
-        question.answerIds ??= [];
-        question.answerIds.push(answer.id);
+        question.reactionIds ??= [];
+        question.reactionIds.push(reaction.id);
       }
 
-      draft.reactions[answer.id] = answer;
+      draft.reactions[reaction.id] = reaction;
     };
 
     return typeof workingDraft === 'undefined'
@@ -71,15 +71,15 @@ export const createReactionsStore = (withImmer: WithImmer): ReactionsStore => ({
       : implementation(workingDraft);
   },
 
-  addReactions: (answers, workingDraft) => {
-    consola.trace('FeedbaxStore', 'addReactions', { answers, workingDraft });
+  addReactions: (reactions, workingDraft) => {
+    consola.trace('FeedbaxStore', 'addReactions', { reactions, workingDraft });
 
     const implementation = (draft: FeedbaxStore) => {
-      for (let i = 0; i < answers.length; i += 1) {
-        const answer = answers[i];
+      for (let i = 0; i < reactions.length; i += 1) {
+        const reaction = reactions[i];
 
-        if (typeof answer !== 'undefined') {
-          draft.addReaction(answer, draft);
+        if (typeof reaction !== 'undefined') {
+          draft.addReaction(reaction, draft);
         }
       }
     };
@@ -89,11 +89,11 @@ export const createReactionsStore = (withImmer: WithImmer): ReactionsStore => ({
       : implementation(workingDraft);
   },
 
-  removeReaction: (targetAnswer, workingDraft) => {
-    consola.trace('FeedbaxStore', 'removeReaction', { targetAnswer, workingDraft });
+  removeReaction: (targetReaction, workingDraft) => {
+    consola.trace('FeedbaxStore', 'removeReaction', { targetReaction, workingDraft });
 
     const implementation = (draft: FeedbaxStore) => {
-      draft.removeReactionById(targetAnswer.id, draft);
+      draft.removeReactionById(targetReaction.id, draft);
     };
 
     return typeof workingDraft === 'undefined'
@@ -101,25 +101,25 @@ export const createReactionsStore = (withImmer: WithImmer): ReactionsStore => ({
       : implementation(workingDraft);
   },
 
-  removeReactionById: (targetAnswerId, workingDraft) => {
-    consola.trace('FeedbaxStore', 'removeReactionById', { targetAnswerId, workingDraft });
+  removeReactionById: (targetReactionId, workingDraft) => {
+    consola.trace('FeedbaxStore', 'removeReactionById', { targetReactionId, workingDraft });
 
     const implementation = (draft: FeedbaxStore) => {
-      const answer = draft.reactions[targetAnswerId];
+      const reaction = draft.reactions[targetReactionId];
 
-      if (typeof answer !== 'undefined') {
-        const question = draft.questions[answer.questionId];
+      if (typeof reaction !== 'undefined') {
+        const question = draft.questions[reaction.questionId];
 
         if (typeof question !== 'undefined') {
-          const answerIdIndex = question.answerIds
-            .findIndex((answerId) => answerId === targetAnswerId);
+          const reactionIdIndex = question.reactionIds
+            .findIndex((reactionId) => reactionId === targetReactionId);
 
-          if (answerIdIndex !== -1) {
-            question.answerIds.splice(answerIdIndex, 1);
+          if (reactionIdIndex !== -1) {
+            question.reactionIds.splice(reactionIdIndex, 1);
           }
         }
 
-        delete draft.reactions[targetAnswerId];
+        delete draft.reactions[targetReactionId];
       }
 
       return draft;
@@ -130,12 +130,12 @@ export const createReactionsStore = (withImmer: WithImmer): ReactionsStore => ({
       : implementation(workingDraft);
   },
 
-  removeReactions: (targetAnswers, workingDraft) => {
-    consola.trace('FeedbaxStore', 'removeReactions', { targetAnswers, workingDraft });
+  removeReactions: (targetReactions, workingDraft) => {
+    consola.trace('FeedbaxStore', 'removeReactions', { targetReactions, workingDraft });
 
     const implementation = (draft: FeedbaxStore) => {
-      const targetAnswersIds = targetAnswers.map((answer) => answer.id);
-      draft.removeReactionsByIds(targetAnswersIds, draft);
+      const targetReactionsIds = targetReactions.map((reaction) => reaction.id);
+      draft.removeReactionsByIds(targetReactionsIds, draft);
     };
 
     return typeof workingDraft === 'undefined'
@@ -143,13 +143,13 @@ export const createReactionsStore = (withImmer: WithImmer): ReactionsStore => ({
       : implementation(workingDraft);
   },
 
-  removeReactionsByIds: (targetAnswersIds, workingDraft) => {
-    consola.trace('FeedbaxStore', 'removeReactionsByIds', { targetAnswersIds, workingDraft });
+  removeReactionsByIds: (targetReactionsIds, workingDraft) => {
+    consola.trace('FeedbaxStore', 'removeReactionsByIds', { targetReactionsIds, workingDraft });
 
     const implementation = (draft: FeedbaxStore) => {
-      for (let i = 0; i < targetAnswersIds.length; i += 1) {
-        const targetAnswerId = targetAnswersIds[i];
-        draft.removeReactionById(targetAnswerId, draft);
+      for (let i = 0; i < targetReactionsIds.length; i += 1) {
+        const targetReactionId = targetReactionsIds[i];
+        draft.removeReactionById(targetReactionId, draft);
       }
     };
 

@@ -8,7 +8,7 @@ import type { FeedbaxStore, WithImmer } from '@/lib/store/types';
 interface QuestionsStoreData {
   questions: {
     [questionId: string]: Question & {
-      answerIds: string[];
+      reactionIds: string[];
     };
   };
 }
@@ -123,12 +123,12 @@ export const createQuestionsStore = (withImmer: WithImmer): QuestionsStore => ({
       const question = draft.questions[targetQuestionId];
 
       if (typeof question !== 'undefined') {
-        for (let i = 0; i < question.answerIds.length; i += 1) {
-          const answerId = question.answerIds[i];
-          const answer = draft.reactions[answerId];
+        for (let i = 0; i < question.reactionIds.length; i += 1) {
+          const reactionId = question.reactionIds[i];
+          const reaction = draft.reactions[reactionId];
 
-          if (typeof answer !== 'undefined') {
-            draft.removeReaction(answer, draft);
+          if (typeof reaction !== 'undefined') {
+            draft.removeReaction(reaction, draft);
           }
         }
 

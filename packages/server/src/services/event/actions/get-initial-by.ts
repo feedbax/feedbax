@@ -62,13 +62,13 @@ export class GetInitialBy {
       };
 
       for (let j = 0; j < reactions.length; j += 1) {
-        const answer = reactions[j];
-        const { id, questionId } = answer;
-        const { author, text } = answer;
-        const { likes } = answer;
-        const { createdAt } = answer;
+        const reaction = reactions[j];
+        const { id, questionId } = reaction;
+        const { author, text } = reaction;
+        const { likes } = reaction;
+        const { createdAt } = reaction;
 
-        const resultAnswer: Reaction = {
+        const resultReaction: Reaction = {
           id,
           questionId,
 
@@ -84,13 +84,13 @@ export class GetInitialBy {
           const like = likes[k];
 
           resultQuestion.hasLiked ||= like.author === userUuid
-          resultAnswer.hasLiked ||= like.author === userUuid;
+          resultReaction.hasLiked ||= like.author === userUuid;
 
-          resultAnswer.likesCount++;
+          resultReaction.likesCount++;
           resultQuestion.likesCount++;
         }
 
-        resultQuestion.reactions.push(resultAnswer);
+        resultQuestion.reactions.push(resultReaction);
       }
 
       result.questions.push(resultQuestion);
