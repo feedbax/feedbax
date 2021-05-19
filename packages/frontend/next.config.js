@@ -14,7 +14,7 @@ module.exports = {
   webpack: (config, { dev, isServer }) => {
     if (dev === false && isServer == false) {
       const nextDir = path.join(process.cwd(), '.next');
-      const licensesPath = path.join(process.cwd(), `licenses2.json`);
+      const licensesPath = path.join(process.cwd(), `licenses.json`);
 
       config.plugins.push(new LicenseWebpackPlugin({
         outputFilename: path.relative(nextDir, licensesPath),
@@ -57,7 +57,10 @@ module.exports = {
             });
           }
 
-          return JSON.stringify(licenses, null, 2);
+          const sortedLicenses = licenses
+            .sort((licenseA, licenseB) => licenseA.name.localeCompare(licenseB.name));
+
+          return JSON.stringify(sortedLicenses, null, 2);
         },
 
         stats: {

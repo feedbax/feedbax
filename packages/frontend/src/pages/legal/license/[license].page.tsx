@@ -2,7 +2,6 @@ import { memo } from 'react';
 import { useTranslation } from '@/lib/i18n/hooks';
 
 import Head from 'next/head';
-import Link from 'next/link';
 
 import Logo from '@/components/Logo';
 import Footer from '@/components/Footer';
@@ -29,7 +28,6 @@ type Parameter = {
 export default memo(
   function Disclaimer({ license }: Props) {
     const { t } = useTranslation();
-    const packageUrl = `https://www.npmjs.com/package/${license?.name}/v/${license?.version}`;
 
     return (
       <div className={legalStyles.container}>
@@ -48,16 +46,6 @@ export default memo(
           <div>{`Version: ${license?.version}`}</div>
           <div>{`Author: ${license?.author ?? '-'}`}</div>
           <div>{`License: ${license?.license}`}</div>
-
-          <Link href={packageUrl}>
-            NPM
-          </Link>
-
-          {', '}
-
-          <Link href={license?.source ?? '#'}>
-            Source
-          </Link>
 
           <p>{license?.licenseText}</p>
         </div>
