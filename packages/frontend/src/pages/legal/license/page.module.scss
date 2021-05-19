@@ -1,10 +1,12 @@
 @import '@/styles/mixins/media';
 
 .content {
+  flex: 1 1 auto;
   text-align: left;
 
   margin: 0 auto;
   padding: 2rem 1rem;
+  width: 100%;
 
   box-sizing: border-box;
   color: var(--color-text-primary);

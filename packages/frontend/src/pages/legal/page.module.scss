@@ -1,6 +1,9 @@
 @import '@/styles/mixins/media';
 
 .container {
+  display: flex;
+  flex-direction: column;
+
   font-family: var(--font-feedbax-secondary);
 
   position: relative;
