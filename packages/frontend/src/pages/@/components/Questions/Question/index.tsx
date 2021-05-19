@@ -22,7 +22,7 @@ const variants = (swipeDirection: number): Variants => ({
   exit: { x: swipeDirection * -200, opacity: 0 },
 });
 
-const useCurrentQuestion = (currentQuestionId?: string) => {
+const useQuestion = (currentQuestionId?: string) => {
   const currentQuestionSelector = useCallback(
     (state: FeedbaxStore) => {
       if (typeof currentQuestionId === 'string') {
@@ -64,7 +64,7 @@ export default memo(
     const { getHeight, doSwipe } = props;
 
     const currentQuestionNumber = useStore(selectors.currentQuestionNumber);
-    const currentQuestion = useCurrentQuestion(questionId);
+    const currentQuestion = useQuestion(questionId);
 
     const { locked, doLock, doUnlock } = useDragLock();
 
