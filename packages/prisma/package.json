@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@feedbax/common": "workspace:^0.0.1",
-    "@prisma/client": "^2.22.1",
-    "prisma": "^2.22.1"
+    "@prisma/client": "^2.23.0",
+    "prisma": "^2.23.0"
   }
 }
