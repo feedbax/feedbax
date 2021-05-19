@@ -18,7 +18,7 @@
     "flake-idgen": "^1.4.0"
   },
   "devDependencies": {
-    "@types/bcrypt": "^3.0.1",
+    "@types/bcrypt": "^5.0.0",
     "@types/flake-idgen": "^0.1.30"
   }
 }
