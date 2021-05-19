@@ -67,14 +67,7 @@ export function useTranslationData(locale?: string) {
   const [translation, setTranslation] = useState<Translation>(defaultTranslation);
 
   useEffect(
-    () => {
-      if (!(window as any).translationHydrated) {
-        (window as any).translationHydrated = true;
-      } else {
-        loadTranslationData(locale, setTranslation);
-      }
-    },
-
+    () => loadTranslationData(locale, setTranslation),
     [locale],
   );
 
