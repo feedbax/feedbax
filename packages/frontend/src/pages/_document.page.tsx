@@ -2,22 +2,15 @@ import Document from 'next/document';
 import { Html, Head } from 'next/document';
 import { Main, NextScript } from 'next/document';
 
-import fs from 'fs';
-import path from 'path';
+import I18nServer from '@/lib/i18n/server';
 
 import type { DocumentContext } from 'next/document';
 
 export default (
   class FeedbaxDocument extends Document<{ translation: unknown }> {
     static async getInitialProps(context: DocumentContext) {
-      const { locale } = context as unknown as { locale: string };
+      const translation = I18nServer.extractTranslation(context.renderPage);
       const initialProps = await Document.getInitialProps(context);
-
-      const translationDir = path.resolve(process.cwd(), 'src/lib/i18n/locales', locale);
-      const translationPath = path.join(translationDir, '__generated/translation.json');
-      const translationData = fs.readFileSync(translationPath, 'utf-8');
-
-      const translation = JSON.parse(translationData);
 
       return { ...initialProps, translation };
     }
@@ -38,7 +31,7 @@ export default (
               dangerouslySetInnerHTML={{
                 __html: [
                   'window.translationHydrated = false;',
-                  `window.translation = ${JSON.stringify(this.props.translation)};`,
+                  `window.translation = ${this.props.translation};`,
                 ].join('\n'),
               }}
             />

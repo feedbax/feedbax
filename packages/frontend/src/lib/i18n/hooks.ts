@@ -4,8 +4,12 @@ import { useRouter } from 'next/router';
 
 import { TranslationContext } from './context';
 
+import I18nServer from '@/lib/i18n/server';
+
 type TranslateFunction = {
-  <A extends keyof Translation> (a: A): Translation[A];
+  <
+    A extends keyof Translation,
+  > (a: A): Translation[A];
 
   <
     A extends keyof Translation,
@@ -93,6 +97,13 @@ export function useTranslation(): TranslationHook {
         for (let i = 0; i < args.length; i += 1) {
           const arg = args[i];
           translationAny = translationAny[arg];
+        }
+
+        if (!process.browser) {
+          I18nServer.cacheArray.push({
+            translation: translationAny,
+            args,
+          });
         }
       } catch (error) {
         // eslint-disable-next-line no-console
