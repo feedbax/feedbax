@@ -14,7 +14,7 @@ export default {
 
   currentQuestionSettings: (state: FeedbaxStore) => {
     const { currentQuestionId } = state.app;
-    if (typeof currentQuestionId === 'undefined') return [];
+    if (typeof currentQuestionId === 'undefined') return null;
 
     const { [currentQuestionId]: currentQuestion } = state.questions;
     return currentQuestion.settings;
