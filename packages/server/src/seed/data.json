@@ -1,0 +1,103 @@
+{
+  "name": "Silas Rosenkranz",
+  "email": "dev@feedb.ax",
+  "password": "dev",
+
+  "workspaces": [{
+    "name": "Devspace",
+    "events": [{
+      "slug": "dev",
+
+      "meta": {
+        "title": "Glaubst du ...?",
+        "description": "Beantworte unser steps-faq und hilf uns dabei, die Fragen deiner Generation zu beantworten."
+      },
+
+      "questions": [
+        {
+          "text": "Was glaubst du?",
+
+          "settings": {
+            "allowReactions": true,
+            "limitReactions": true,
+            "reactionsLimit": 2,
+
+            "allowLikes": true,
+            "limitLikes": true,
+            "likesLimit": 5,
+
+            "likesDisplayMode": "Percentage"
+          },
+
+          "reactions": [
+            {
+              "text": "Ich glaube daran, dass Jesus Christus am Kreuz für mich gestorben ist.",
+              "likes": 2
+            },
+
+            {
+              "text": "Da ist schon irgendwas höheres, aber festlegen möchte ich mich nicht.",
+              "likes": 3
+            }
+          ]
+        },
+        
+        {
+          "text": "Wel­che an­de­ren Fra­gen hast du selbst noch, die nicht zu den Ka­te­go­ri­en pas­sen?",
+
+          "settings": {
+            "allowReactions": true,
+            "limitReactions": true,
+            "reactionsLimit": 2,
+
+            "allowLikes": true,
+            "limitLikes": true,
+            "likesLimit": 5,
+
+            "likesDisplayMode": "Numeric"
+          },
+
+          "reactions": [
+            {
+              "text": "Wie kann man für Gott bren­nen (auch das gan­ze Le­ben lang)?",
+              "likes": 7
+            },
+
+            {
+              "text": "Wie kann ich Zei­ten in mei­nem Le­ben ver­mei­den, in de­nen ich mich von Gott ent­fer­ne?",
+              "likes": 2
+            }
+          ]
+        },
+
+        {
+          "text": "Wel­che Fra­gen an den Glau­ben ha­ben dei­ne Be­kann­ten, die nicht an Gott glau­ben?",
+
+          "settings": {
+            "allowReactions": false,
+            "limitReactions": true,
+            "reactionsLimit": 2,
+
+            "allowLikes": true,
+            "limitLikes": true,
+            "likesLimit": 5,
+
+            "likesDisplayMode": "Percentage"
+          },
+
+          "reactions": [
+            {
+              "text": "War­um ist aus­ge­rech­net dein Gott der ein­zig wah­re, ein­zi­ge Gott?",
+              "likes": 3
+            },
+
+            {
+              "text": "Wie kann ein lie­ben­der Gott so viel Leid zu­las­sen?",
+              "likes": 5
+            }
+          ]
+        }
+      ]
+    }]
+  }]
+}

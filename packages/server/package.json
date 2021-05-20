@@ -7,7 +7,7 @@
   "scripts": {
     "build": "ttsc",
     "start": "node dist/main.js",
-    "seed": "node dist/seed.js"
+    "seed": "node dist/seed/index.js"
   },
   "dependencies": {
     "@feedbax/api": "workspace:^0.0.1",
