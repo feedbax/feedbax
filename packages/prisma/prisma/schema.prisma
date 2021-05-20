@@ -53,7 +53,7 @@ model Event {
 
   questions Question[]
 
-  Workspace   Workspace @relation(fields: [workspaceId], references: [id])
+  workspace   Workspace @relation(fields: [workspaceId], references: [id])
   workspaceId String
 }
 
