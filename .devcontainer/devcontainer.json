@@ -30,6 +30,9 @@
   ],
 
   "settings": {
+    "editor.tabSize": 2,
+    "editor.detectIndentation": false,
+    "editor.insertSpaces": true,
     "terminal.integrated.defaultProfile.linux": "/bin/bash"
   }
 }
