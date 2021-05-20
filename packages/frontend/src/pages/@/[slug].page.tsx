@@ -123,8 +123,9 @@ export default memo(
           <Logo />
           <Pagination />
           <Questions />
-          <Reactions />
         </div>
+
+        <Reactions />
       </div>
     );
   },
