@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { memo } from 'react';
 import { useEffect, useState, useRef } from 'react';
 import { useStore, selectors } from '@/lib/store';
+import { useApiLogin } from '@/lib/api';
 
 import Head from 'next/head';
 import CookieConsent from '@/components/CookieConsent/dynamic';
@@ -14,7 +15,6 @@ import Questions from './components/Questions';
 import Reactions from './components/Reactions';
 
 import prisma from '@/lib/prisma';
-import useFeedbaxApi from './hooks/use-feedbax-api';
 import styles from './page.module.scss';
 
 import type { GetServerSideProps } from 'next';
@@ -48,52 +48,22 @@ export default memo(
     const { ogDescription, ogImage } = props;
 
     const [isLoading, setLoading] = useState(true);
-
     const event = useStore(selectors.event);
-    const loadEvent = useStore(selectors.loadEvent);
-
-    const api = useFeedbaxApi();
-
-    useEffect(() => {
-      if (event.id !== undefined) {
-        console.log('event', event);
-
-        const timeSinceCreated = Date.now() - now.current;
-        console.log('1000 - timeSinceCreated', LOADING_TIMEOUT - timeSinceCreated);
-
-        setTimeout(() => setLoading(false), LOADING_TIMEOUT - timeSinceCreated);
-      }
-    }, [event]);
 
     useEffect(
-      () => {
-        if (typeof slug !== 'string') return;
-        if (typeof api === 'undefined') return;
+      function eventChanged() {
+        if (event.id !== undefined) {
+          console.log('event', event);
 
-        api.send({
-          id: 'login',
-
-          data: {
-            uuid: 'author-a',
-            eventSlug: slug,
-          },
-
-          cb: (data) => {
-            if (data.err) {
-              api.console.error('send', 'login', 'callback', { data });
-              return;
-            }
-
-            if (data.event) {
-              api.console.debug('send', 'login', 'callback', { data });
-              loadEvent(data.event);
-            }
-          },
-        });
+          const timeSinceCreated = Date.now() - now.current;
+          setTimeout(() => setLoading(false), LOADING_TIMEOUT - timeSinceCreated);
+        }
       },
 
-      [api, slug],
+      [event],
     );
+
+    useApiLogin(slug);
 
     return (
       <div className={styles.container}>

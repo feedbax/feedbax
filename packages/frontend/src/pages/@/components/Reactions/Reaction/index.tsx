@@ -32,34 +32,6 @@ const useReaction = (reactionId?: string) => {
   return reaction;
 };
 
-const useReactionStyle = (
-  (likesDisplayMode: LikesDisplayMode) => useCallback(
-    () => {
-      let reactionStyle: string | undefined;
-
-      switch (likesDisplayMode) {
-        case 'Numeric': {
-          reactionStyle = styles['reaction-numeric'];
-          break;
-        }
-
-        case 'Percentage': {
-          reactionStyle = styles['reaction-percentage'];
-          break;
-        }
-
-        default: {
-          reactionStyle = undefined;
-        }
-      }
-
-      return clsx(styles.reaction, reactionStyle);
-    },
-
-    [likesDisplayMode],
-  )
-);
-
 export default memo(
   function Reaction(props: ReactionProps) {
     const { reactionId } = props;

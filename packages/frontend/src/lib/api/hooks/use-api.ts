@@ -10,18 +10,22 @@ type ApiStore = {
   setApi: (api: FBXAPI) => void;
 };
 
-const useApi = create<ApiStore>((set) => ({
+const useStore = create<ApiStore>((set) => ({
   api: undefined,
-
   setApi: (api) => set((state) => ({
     ...state,
     api,
   })),
 }));
 
-export default function useFeedbaxApi() {
-  const api = useApi((state) => state.api);
-  const setApi = useApi((state) => state.setApi);
+const selectors = {
+  api: (state: ApiStore) => state.api,
+  setApi: (state: ApiStore) => state.setApi,
+};
+
+export function useApi() {
+  const api = useStore(selectors.api);
+  const setApi = useStore(selectors.setApi);
 
   useMounted(() => {
     if (typeof api === 'undefined') {
