@@ -134,6 +134,15 @@ const getLikesDisplayModeFromString = (likesDisplayMode: string) => {
             },
           });
 
+          await prisma.questionSettings.update({
+            where: { questionId: question.id },
+            data: {
+              predefinedReactions: {
+                connect: { id: reaction.id },
+              },
+            },
+          });
+
           for (let i = 0; i < reactionData.likes; i += 1) {
             await prisma.like.create({
               data: {

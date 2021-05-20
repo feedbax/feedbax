@@ -87,6 +87,8 @@ model Question {
 }
 
 model QuestionSettings {
+  predefinedReactions Reaction[]
+
   allowReactions Boolean
   limitReactions Boolean
   reactionsLimit Int
@@ -107,16 +109,18 @@ enum LikesDisplayMode {
 }
 
 model Reaction {
-  id           String   @id
-  text         String
-  author       String
-  createdAt    DateTime @default(now())
-  isPredefined Boolean  @default(false)
+  id        String   @id
+  text      String
+  author    String
+  createdAt DateTime @default(now())
 
   likes Like[]
 
   question   Question @relation(fields: [questionId], references: [id])
   questionId String
+
+  questionSettings           QuestionSettings? @relation(fields: [questionSettingsQuestionId], references: [questionId])
+  questionSettingsQuestionId String?
 }
 
 model Like {
