@@ -22,22 +22,21 @@ const variants = (swipeDirection: number): Variants => ({
   exit: { x: swipeDirection * -200, opacity: 0 },
 });
 
-const useQuestion = (currentQuestionId?: string) => {
-  const currentQuestionSelector = useCallback(
+const useQuestion = (questionId?: string) => {
+  const questionSelector = useCallback(
     (state: FeedbaxStore) => {
-      if (typeof currentQuestionId === 'string') {
-        return state.questions[currentQuestionId];
+      if (typeof questionId === 'string') {
+        return state.questions[questionId];
       }
 
       return undefined;
     },
 
-    [currentQuestionId],
+    [questionId],
   );
 
-  const currentQuestion = useStore(currentQuestionSelector);
-
-  return currentQuestion;
+  const question = useStore(questionSelector);
+  return question;
 };
 
 const useDragLock = () => {
