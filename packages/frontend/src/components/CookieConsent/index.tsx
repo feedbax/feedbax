@@ -7,7 +7,8 @@ import { useRouter } from 'next/router';
 import Modal from '@/components/Modal/dynamic';
 import hyphens from '@/components/Hyphens';
 import StyledLink from '@/components/StyledLink';
-import Icon, { Icons } from '@/components/Icon';
+
+import IconLanguage from '@/components/Icon/icons/Language';
 
 import Button from './components/Button';
 import styles from './styles.module.scss';
@@ -17,7 +18,7 @@ import { useModalVisibility, useScrollLock } from './hooks';
 export default memo(
   function CookieConsent() {
     const [showModal, setShowModal] = useModalVisibility();
-    const { pathname } = useRouter();
+    const { asPath } = useRouter();
     const { t, distinctLocales } = useTranslation();
 
     const acceptCookies = (
@@ -59,14 +60,14 @@ export default memo(
           </p>
 
           <div className={styles['language-chooser']}>
-            <Icon icon={Icons.Language} className={styles.language} />
+            <IconLanguage className={styles.icon} />
             <div className={styles['language-divider']} />
 
             {distinctLocales.map((locale, index) => (
               <React.Fragment key={locale}>
                 <StyledLink
                   className={styles.language}
-                  href={pathname}
+                  href={asPath}
                   locale={locale}
                 >
                   {t('generic', 'locales', locale as keyof Locales)}
