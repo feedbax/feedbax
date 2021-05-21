@@ -3,7 +3,6 @@ import Head from 'next/head';
 import { memo, useCallback, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useTranslation } from '@/lib/i18n/hooks';
-import { useStore, selectors } from '@/lib/store';
 
 import Logo from '@/components/Logo';
 import CookieConsent from '@/components/CookieConsent/dynamic';
@@ -40,11 +39,9 @@ export default memo(
     const { t } = useTranslation();
     const router = useRouter();
     const [eventCode, setEventCode] = useEventCode();
-    const resetStore = useStore(selectors.reset);
 
     const handleEventLogin = () => {
       if (eventCode !== '') {
-        resetStore();
         router.push(`/@/${eventCode}`);
       }
     };
