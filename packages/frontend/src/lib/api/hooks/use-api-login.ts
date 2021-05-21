@@ -5,6 +5,7 @@ import { useApi } from './use-api';
 export function useApiLogin(slug: string | null) {
   const api = useApi();
   const loadEvent = useStore(selectors.loadEvent);
+  const reset = useStore(selectors.reset);
 
   useEffect(
     () => {
@@ -27,6 +28,8 @@ export function useApiLogin(slug: string | null) {
 
           if (data.event) {
             api.console.debug('send', 'login', 'callback', { data });
+
+            reset();
             loadEvent(data.event);
           }
         },
