@@ -28,8 +28,7 @@ const useReaction = (reactionId?: string) => {
     [reactionId],
   );
 
-  const reaction = useStore(reactionSelector);
-  return reaction;
+  return useStore(reactionSelector);
 };
 
 export default memo(
