@@ -6,7 +6,7 @@ export default memo(
     useEffect(
       function mounted() {
         const fixViewportUnits = () => {
-          const vh = window.innerHeight * 0.01;
+          const vh = (window.innerHeight - 1) * 0.01;
           document.documentElement.style.setProperty('--vh', `${vh}px`);
         };
 
