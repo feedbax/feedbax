@@ -1,0 +1,54 @@
+@import "@/styles/mixins/media";
+
+.filters {
+  width: 100%;
+  max-width: 32rem;
+
+  position: relative;
+
+  margin: 0 auto;
+  margin-bottom: 1.5rem;
+
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  & .filter {
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+
+    box-sizing: border-box;
+    border: 15px solid var(--color-feedbax-secondary-lighten-4);
+
+    transform: scale(0.8);
+    opacity: 1;
+
+    transition: 
+      transform 0.2s ease,
+      opacity 0.2s ease,
+      border-width 0.2s ease,
+      border-color 0.2s ease;
+
+    &-disabled {
+      opacity: 0.5;
+    }
+
+    &:hover,
+    &-active {
+      transform: scale(1);
+      border-width: 1px;
+      border-color: var(--color-text-primary);
+    }
+
+    & :global(svg) {
+      position: absolute;
+    }
+  }
+}

@@ -12,6 +12,7 @@ import Loading from './components/Loading';
 import Logo from './components/Logo';
 import Pagination from './components/Pagination';
 import Questions from './components/Questions';
+import Filters from './components/Filters';
 import Reactions from './components/Reactions';
 
 import prisma from '@/lib/prisma';
@@ -89,10 +90,11 @@ export default memo(
           )}
         </AnimatePresence>
 
-        <div className={styles.heading}>
+        <div className={styles.heading} ref={console.log}>
           <Logo />
           <Pagination />
           <Questions />
+          <Filters />
         </div>
 
         <Reactions />
