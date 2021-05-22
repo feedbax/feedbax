@@ -3,7 +3,7 @@
 import consola from '@feedbax/api/generic/logger';
 
 import type { Question, QuestionWith } from '@feedbax/api/models/question';
-import type { FeedbaxStore, WithImmer } from '@/lib/store/types';
+import type { WithImmer, ImmerAction } from '@/lib/store/types';
 
 interface QuestionsStoreData {
   questions: {
@@ -14,16 +14,16 @@ interface QuestionsStoreData {
 }
 
 interface QuestionsStoreActions {
-  resetQuestions: (draft?: FeedbaxStore) => void;
+  resetQuestions: ImmerAction<() => void>;
 
-  addQuestion: (question: QuestionWith<'reactions?'>, draft?: FeedbaxStore) => void;
-  addQuestions: (questions: QuestionWith<'reactions?'>[], draft?: FeedbaxStore) => void;
+  addQuestion: ImmerAction<(question: QuestionWith<'reactions?'>) => void>;
+  addQuestions: ImmerAction<(questions: QuestionWith<'reactions?'>[]) => void>;
 
-  removeQuestion: (targetQuestion: Question, draft?: FeedbaxStore) => void;
-  removeQuestionById: (targetQuestionId: string, draft?: FeedbaxStore) => void;
+  removeQuestion: ImmerAction<(targetQuestion: Question) => void>;
+  removeQuestionById: ImmerAction<(targetQuestionId: string) => void>;
 
-  removeQuestions: (targetQuestions: Question[], draft?: FeedbaxStore) => void;
-  removeQuestionsById: (targetQuestionIds: string[], draft?: FeedbaxStore) => void;
+  removeQuestions: ImmerAction<(targetQuestions: Question[]) => void>;
+  removeQuestionsById: ImmerAction<(targetQuestionIds: string[]) => void>;
 }
 
 declare module '@/lib/store/types' {
@@ -40,132 +40,88 @@ const initial: QuestionsStoreData = {
 export const createQuestionsStore = (withImmer: WithImmer): QuestionsStore => ({
   questions: initial.questions,
 
-  resetQuestions: (workingDraft) => {
-    consola.trace('FeedbaxStore', 'resetQuestions', { workingDraft });
+  resetQuestions: withImmer((draft) => {
+    consola.trace('FeedbaxStore', 'resetQuestions');
+    draft.questions = initial.questions;
+  }),
 
-    const implementation = (draft: FeedbaxStore) => {
-      draft.questions = initial.questions;
+  addQuestion: withImmer((draft, question) => {
+    consola.trace('FeedbaxStore', 'addQuestion', { question });
+
+    const { reactions, ...questionRest } = question;
+
+    draft.questions[question.id] = {
+      ...draft.questions[question.id],
+      ...questionRest,
     };
 
-    return typeof workingDraft === 'undefined'
-      ? withImmer(implementation)
-      : implementation(workingDraft);
-  },
+    draft.event.questionIds.push(question.id);
+    draft.event.questionIds.sort((qIdA, qIdB) => {
+      const questionA = draft.questions[qIdA];
+      const questionB = draft.questions[qIdB];
 
-  addQuestion: (question, workingDraft) => {
-    consola.trace('FeedbaxStore', 'addQuestion', { question, workingDraft });
+      return questionA.order - questionB.order;
+    });
 
-    const implementation = (draft: FeedbaxStore) => {
-      const { reactions, ...questionRest } = question;
+    draft.addReactions.withDraft(draft)(reactions ?? []);
+  }),
 
-      draft.questions[question.id] = {
-        ...draft.questions[question.id],
-        ...questionRest,
-      };
+  addQuestions: withImmer((draft, questions) => {
+    consola.trace('FeedbaxStore', 'addQuestions', { questions });
 
-      draft.event.questionIds.push(question.id);
-      draft.event.questionIds.sort((qIdA, qIdB) => {
-        const questionA = draft.questions[qIdA];
-        const questionB = draft.questions[qIdB];
-
-        return questionA.order - questionB.order;
-      });
-
-      draft.addReactions(reactions ?? [], draft);
-    };
-
-    return typeof workingDraft === 'undefined'
-      ? withImmer(implementation)
-      : implementation(workingDraft);
-  },
-
-  addQuestions: (questions, workingDraft) => {
-    consola.trace('FeedbaxStore', 'addQuestions', { questions, workingDraft });
-
-    const implementation = (draft: FeedbaxStore) => {
-      for (let i = 0; i < questions.length; i += 1) {
-        const question = questions[i];
-
-        if (typeof question !== 'undefined') {
-          draft.addQuestion(question, draft);
-        }
-      }
-    };
-
-    return typeof workingDraft === 'undefined'
-      ? withImmer(implementation)
-      : implementation(workingDraft);
-  },
-
-  removeQuestion: (targetQuestion, workingDraft) => {
-    consola.trace('FeedbaxStore', 'removeQuestion', { targetQuestion, workingDraft });
-
-    const implementation = (draft: FeedbaxStore) => {
-      draft.removeQuestionById(targetQuestion.id, draft);
-    };
-
-    return typeof workingDraft === 'undefined'
-      ? withImmer(implementation)
-      : implementation(workingDraft);
-  },
-
-  removeQuestionById: (targetQuestionId, workingDraft) => {
-    consola.trace('FeedbaxStore', 'removeQuestionById', { targetQuestionId, workingDraft });
-
-    const implementation = (draft: FeedbaxStore) => {
-      const questionIdIndex = draft.event.questionIds
-        .findIndex((questionId) => questionId === targetQuestionId);
-
-      if (questionIdIndex !== -1) {
-        draft.event.questionIds.splice(questionIdIndex, 1);
-      }
-
-      const question = draft.questions[targetQuestionId];
+    for (let i = 0; i < questions.length; i += 1) {
+      const question = questions[i];
 
       if (typeof question !== 'undefined') {
-        for (let i = 0; i < question.reactionIds.length; i += 1) {
-          const reactionId = question.reactionIds[i];
-          const reaction = draft.reactions[reactionId];
+        draft.addQuestion.withDraft(draft)(question);
+      }
+    }
+  }),
 
-          if (typeof reaction !== 'undefined') {
-            draft.removeReaction(reaction, draft);
-          }
+  removeQuestion: withImmer((draft, targetQuestion) => {
+    consola.trace('FeedbaxStore', 'removeQuestion', { targetQuestion });
+    draft.removeQuestionById.withDraft(draft)(targetQuestion.id);
+  }),
+
+  removeQuestionById: withImmer((draft, targetQuestionId) => {
+    consola.trace('FeedbaxStore', 'removeQuestionById', { targetQuestionId });
+
+    const questionIdIndex = draft.event.questionIds
+      .findIndex((questionId) => questionId === targetQuestionId);
+
+    if (questionIdIndex !== -1) {
+      draft.event.questionIds.splice(questionIdIndex, 1);
+    }
+
+    const question = draft.questions[targetQuestionId];
+
+    if (typeof question !== 'undefined') {
+      for (let i = 0; i < question.reactionIds.length; i += 1) {
+        const reactionId = question.reactionIds[i];
+        const reaction = draft.reactions[reactionId];
+
+        if (typeof reaction !== 'undefined') {
+          draft.removeReaction.withDraft(draft)(reaction);
         }
-
-        delete draft.questions[targetQuestionId];
       }
-    };
 
-    return typeof workingDraft === 'undefined'
-      ? withImmer(implementation)
-      : implementation(workingDraft);
-  },
+      delete draft.questions[targetQuestionId];
+    }
+  }),
 
-  removeQuestions: (targetQuestions, workingDraft) => {
-    consola.trace('FeedbaxStore', 'removeQuestions', { targetQuestions, workingDraft });
+  removeQuestions: withImmer((draft, targetQuestions) => {
+    consola.trace('FeedbaxStore', 'removeQuestions', { targetQuestions });
 
-    const implementation = (draft: FeedbaxStore) => {
-      const questionIds = targetQuestions.map((question) => question.id);
-      draft.removeQuestionsById(questionIds, draft);
-    };
+    const questionIds = targetQuestions.map((question) => question.id);
+    draft.removeQuestionsById.withDraft(draft)(questionIds);
+  }),
 
-    return typeof workingDraft === 'undefined'
-      ? withImmer(implementation)
-      : implementation(workingDraft);
-  },
+  removeQuestionsById: withImmer((draft, targetQuestionIds) => {
+    consola.trace('FeedbaxStore', 'removeQuestionsById', { targetQuestionIds });
 
-  removeQuestionsById: (targetQuestionIds, workingDraft) => {
-    consola.trace('FeedbaxStore', 'removeQuestionsById', { targetQuestionIds, workingDraft });
-
-    const implementation = (draft: FeedbaxStore) => {
-      for (let i = 0; i < targetQuestionIds.length; i += 1) {
-        const targetQuestionId = targetQuestionIds[i];
-        draft.removeQuestionById(targetQuestionId, draft);
-      }
-    };
-
-    return typeof workingDraft === 'undefined'
-      ? withImmer(implementation)
-      : implementation(workingDraft);
-  },
+    for (let i = 0; i < targetQuestionIds.length; i += 1) {
+      const targetQuestionId = targetQuestionIds[i];
+      draft.removeQuestionById.withDraft(draft)(targetQuestionId);
+    }
+  }),
 });

@@ -3,7 +3,7 @@
 import consola from '@feedbax/api/generic/logger';
 
 import type { Event } from '@feedbax/api/models/event';
-import type { FeedbaxStore, WithImmer } from '@/lib/store/types';
+import type { WithImmer, ImmerAction } from '@/lib/store/types';
 
 type LoginPacketData = import('@feedbax/api/client/packets/login').PacketData;
 
@@ -14,8 +14,8 @@ interface EventStoreData {
 }
 
 interface EventStoreActions {
-  resetEvent: (workingDraft?: FeedbaxStore) => void;
-  loadEvent: (event: LoginPacketData) => void;
+  resetEvent: ImmerAction<() => void>;
+  loadEvent: ImmerAction<(event: LoginPacketData) => void>;
 }
 
 declare module '@/lib/store/types' {
@@ -38,25 +38,18 @@ const initial: EventStoreData = {
 export const createEventStore = (withImmer: WithImmer): EventStore => ({
   event: initial.event,
 
-  resetEvent: (workingDraft) => {
-    consola.trace('FeedbaxStore', 'resetEvent', { workingDraft });
+  resetEvent: withImmer((draft) => {
+    consola.trace('FeedbaxStore', 'resetEvent');
+    draft.event = initial.event;
+  }),
 
-    const implementation = (draft: FeedbaxStore) => {
-      draft.event = initial.event;
-    };
-
-    return typeof workingDraft === 'undefined'
-      ? withImmer(implementation)
-      : implementation(workingDraft);
-  },
-
-  loadEvent: (event) => withImmer((draft) => {
+  loadEvent: withImmer((draft, event) => {
     consola.trace('FeedbaxStore', 'loadEvent', { event });
 
     if (typeof draft.event !== 'undefined') {
       draft.event.id = event.id;
       draft.event.slug = event.slug;
-      draft.addQuestions(event.questions, draft);
+      draft.addQuestions.withDraft(draft)(event.questions);
 
       const [firstQuestionId] = draft.event.questionIds;
       draft.app.currentQuestionId = firstQuestionId;

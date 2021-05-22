@@ -1,8 +1,9 @@
 import type { FeedbaxStore } from '@/lib/store/types';
 
+import { appSelectors } from '@/lib/store/modules/app';
+
 export default {
-  currentQuestionId: (state: FeedbaxStore) => state.app.currentQuestionId,
-  currentQuestionNumber: (state: FeedbaxStore) => `${state.app.currentQuestionIndex + 1}`.padStart(2, '0'),
+  ...appSelectors,
 
   currentQuestionReactionIds: (state: FeedbaxStore) => {
     const { currentQuestionId } = state.app;
