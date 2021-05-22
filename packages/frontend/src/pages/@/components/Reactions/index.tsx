@@ -6,8 +6,8 @@ import styles from './style.module.scss';
 
 export default memo(
   function Reactions() {
-    const reactionIds = useStore(selectors.currentQuestionReactionIds);
-    const settings = useStore(selectors.currentQuestionSettings);
+    const reactionIds = useStore(selectors.questions.currentQuestionReactionIds);
+    const settings = useStore(selectors.questions.currentQuestionSettings);
 
     return (
       <div className={styles.reactions}>

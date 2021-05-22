@@ -19,7 +19,7 @@ const useReaction = (reactionId?: string) => {
   const reactionSelector = useCallback(
     (state: FeedbaxStore) => {
       if (typeof reactionId === 'string') {
-        return state.reactions[reactionId];
+        return state.reactions.state[reactionId];
       }
 
       return undefined;
@@ -54,6 +54,7 @@ export default memo(
         return (
           <div className={classNames}>
             {reaction?.text}
+            {reaction?.likesCount}
           </div>
         );
       }

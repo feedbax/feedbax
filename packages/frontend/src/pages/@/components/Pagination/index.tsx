@@ -6,9 +6,9 @@ import clsx from 'clsx';
 
 export default memo(
   function Pagination() {
-    const currentQuestionId = useStore(selectors.currentQuestionId);
-    const isSingleQuestion = useStore(selectors.isSingleQuestion);
-    const questionIds = useStore(selectors.questionIds);
+    const currentQuestionId = useStore(selectors.navigation.questionId);
+    const isSingleQuestion = useStore(selectors.event.isSingleQuestion);
+    const questionIds = useStore(selectors.event.questionIds);
 
     if (isSingleQuestion) return null;
 

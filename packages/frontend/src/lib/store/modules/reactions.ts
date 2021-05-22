@@ -3,111 +3,130 @@
 import consola from '@feedbax/api/generic/logger';
 
 import type { Reaction } from '@feedbax/api/models/reaction';
+import type { CreateStore, CreateSelectors, Selector } from '@/lib/store/types';
 import type { WithImmer, ImmerAction } from '@/lib/store/types';
 
-interface ReactionsStoreData {
-  reactions: {
-    [reactionId: string]: Reaction & {
-      questionId: string;
-    };
+type ReactionsStoreData = {
+  [reactionId: string]: Reaction & {
+    questionId: string;
   };
-}
-
-interface ReactionsStoreActions {
-  resetReactions: ImmerAction<() => void>;
-
-  addReaction: ImmerAction<(reaction: Reaction) => void>;
-  addReactions: ImmerAction<(reactions: Reaction[]) => void>;
-
-  removeReaction: ImmerAction<(targetReaction: Reaction) => void>;
-  removeReactionById: ImmerAction<(targetReactionId: string) => void>;
-
-  removeReactions: ImmerAction<(targetReactions: Reaction[]) => void>;
-  removeReactionsByIds: ImmerAction<(targetReactionIds: string[]) => void>;
-}
-
-declare module '@/lib/store/types' {
-  interface FeedbaxStoreData extends ReactionsStoreData {}
-  interface FeedbaxStoreActions extends ReactionsStoreActions {}
-}
-
-type ReactionsStore = ReactionsStoreData & ReactionsStoreActions;
-
-const initial: ReactionsStoreData = {
-  reactions: {},
 };
 
-export const createReactionsStore = (withImmer: WithImmer): ReactionsStore => ({
-  reactions: initial.reactions,
+type ReactionsStoreActions = {
+  reset: ImmerAction<() => void>;
 
-  resetReactions: withImmer((draft) => {
-    consola.trace('FeedbaxStore', 'resetReactions');
-    draft.reactions = initial.reactions;
-  }),
+  addOne: ImmerAction<(reaction: Reaction) => void>;
+  addMultiple: ImmerAction<(reactions: Reaction[]) => void>;
 
-  addReaction: withImmer((draft, reaction) => {
-    consola.trace('FeedbaxStore', 'addReaction', { reaction });
-    const question = draft.questions[reaction.questionId];
+  removeOne: ImmerAction<(targetReaction: Reaction) => void>;
+  removeOneById: ImmerAction<(targetReactionId: string) => void>;
 
-    if (typeof question !== 'undefined') {
-      question.reactionIds ??= [];
-      question.reactionIds.push(reaction.id);
-    }
+  removeMultiple: ImmerAction<(targetReactions: Reaction[]) => void>;
+  removeMultipleByIds: ImmerAction<(targetReactionIds: string[]) => void>;
+};
 
-    draft.reactions[reaction.id] = reaction;
-  }),
+type ReactionsStoreSelectors = {
+  get: Selector<ReactionsStoreData>,
+  removeMultiple: Selector<ReactionsStoreActions['removeMultiple']>,
+};
 
-  addReactions: withImmer((draft, reactions) => {
-    consola.trace('FeedbaxStore', 'addReactions', { reactions });
+type ModuleName = 'reactions';
 
-    for (let i = 0; i < reactions.length; i += 1) {
-      const reaction = reactions[i];
+type ReactionsStore =
+  CreateStore<ModuleName, ReactionsStoreData, ReactionsStoreActions>;
 
-      if (typeof reaction !== 'undefined') {
-        draft.addReaction.withDraft(draft)(reaction);
-      }
-    }
-  }),
+type ReactionsSelectors =
+  CreateSelectors<ModuleName, ReactionsStoreSelectors>;
 
-  removeReaction: withImmer((draft, targetReaction) => {
-    consola.trace('FeedbaxStore', 'removeReaction', { targetReaction });
-    draft.removeReactionById.withDraft(draft)(targetReaction.id);
-  }),
+declare module '@/lib/store/types' {
+  interface FeedbaxStore extends ReactionsStore {}
+}
 
-  removeReactionById: withImmer((draft, targetReactionId) => {
-    consola.trace('FeedbaxStore', 'removeReactionById', { targetReactionId });
-    const reaction = draft.reactions[targetReactionId];
+const initial: ReactionsStoreData = {};
 
-    if (typeof reaction !== 'undefined') {
-      const question = draft.questions[reaction.questionId];
+export const createReactionsStore = (
+  (withImmer: WithImmer): ReactionsStore => ({
+    reactions: {
+      state: initial,
+      actions: {
+        reset: withImmer((draft) => {
+          consola.trace('FeedbaxStore', 'resetReactions');
+          draft.reactions.state = initial;
+        }),
 
-      if (typeof question !== 'undefined') {
-        const reactionIdIndex = question.reactionIds
-          .findIndex((reactionId) => reactionId === targetReactionId);
+        addOne: withImmer((draft, reaction) => {
+          consola.trace('FeedbaxStore', 'addReaction', { reaction });
+          const question = draft.questions.state[reaction.questionId];
 
-        if (reactionIdIndex !== -1) {
-          question.reactionIds.splice(reactionIdIndex, 1);
-        }
-      }
+          if (typeof question !== 'undefined') {
+            question.reactionIds ??= [];
+            question.reactionIds.push(reaction.id);
+          }
 
-      delete draft.reactions[targetReactionId];
-    }
+          draft.reactions.state[reaction.id] = reaction;
+        }),
 
-    return draft;
-  }),
+        addMultiple: withImmer((draft, reactions) => {
+          consola.trace('FeedbaxStore', 'addReactions', { reactions });
 
-  removeReactions: withImmer((draft, targetReactions) => {
-    consola.trace('FeedbaxStore', 'removeReactions', { targetReactions });
-    const targetReactionsIds = targetReactions.map((reaction) => reaction.id);
-    draft.removeReactionsByIds.withDraft(draft)(targetReactionsIds);
-  }),
+          for (let i = 0; i < reactions.length; i += 1) {
+            const reaction = reactions[i];
 
-  removeReactionsByIds: withImmer((draft, targetReactionsIds) => {
-    consola.trace('FeedbaxStore', 'removeReactionsByIds', { targetReactionsIds });
+            if (typeof reaction !== 'undefined') {
+              draft.reactions.actions.addOne.withDraft(draft)(reaction);
+            }
+          }
+        }),
 
-    for (let i = 0; i < targetReactionsIds.length; i += 1) {
-      const targetReactionId = targetReactionsIds[i];
-      draft.removeReactionById.withDraft(draft)(targetReactionId);
-    }
-  }),
-});
+        removeOne: withImmer((draft, targetReaction) => {
+          consola.trace('FeedbaxStore', 'removeReaction', { targetReaction });
+          draft.reactions.actions.removeOneById.withDraft(draft)(targetReaction.id);
+        }),
+
+        removeOneById: withImmer((draft, targetReactionId) => {
+          consola.trace('FeedbaxStore', 'removeReactionById', { targetReactionId });
+          const reaction = draft.reactions.state[targetReactionId];
+
+          if (typeof reaction !== 'undefined') {
+            const question = draft.questions.state[reaction.questionId];
+
+            if (typeof question !== 'undefined') {
+              const reactionIdIndex = question.reactionIds
+                .findIndex((reactionId) => reactionId === targetReactionId);
+
+              if (reactionIdIndex !== -1) {
+                question.reactionIds.splice(reactionIdIndex, 1);
+              }
+            }
+
+            delete draft.reactions.state[targetReactionId];
+          }
+
+          return draft;
+        }),
+
+        removeMultiple: withImmer((draft, targetReactions) => {
+          consola.trace('FeedbaxStore', 'removeReactions', { targetReactions });
+          const targetReactionsIds = targetReactions.map((reaction) => reaction.id);
+          draft.reactions.actions.removeMultipleByIds.withDraft(draft)(targetReactionsIds);
+        }),
+
+        removeMultipleByIds: withImmer((draft, targetReactionsIds) => {
+          consola.trace('FeedbaxStore', 'removeReactionsByIds', { targetReactionsIds });
+
+          for (let i = 0; i < targetReactionsIds.length; i += 1) {
+            const targetReactionId = targetReactionsIds[i];
+            draft.reactions.actions.removeOneById.withDraft(draft)(targetReactionId);
+          }
+        }),
+      },
+    },
+  })
+);
+
+export const selectors: ReactionsSelectors = {
+  reactions: {
+    get: (store) => store.reactions.state,
+    removeMultiple: (store) => store.reactions.actions.removeMultiple,
+  },
+};

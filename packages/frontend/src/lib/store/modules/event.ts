@@ -3,56 +3,80 @@
 import consola from '@feedbax/api/generic/logger';
 
 import type { Event } from '@feedbax/api/models/event';
+import type { CreateStore, CreateSelectors, Selector } from '@/lib/store/types';
 import type { WithImmer, ImmerAction } from '@/lib/store/types';
 
 type LoginPacketData = import('@feedbax/api/client/packets/login').PacketData;
 
-interface EventStoreData {
-  event: Partial<Event> & {
-    questionIds: string[];
-  };
-}
-
-interface EventStoreActions {
-  resetEvent: ImmerAction<() => void>;
-  loadEvent: ImmerAction<(event: LoginPacketData) => void>;
-}
-
-declare module '@/lib/store/types' {
-  interface FeedbaxStoreData extends EventStoreData {}
-  interface FeedbaxStoreActions extends EventStoreActions {}
-}
-
-type EventStore = EventStoreData & EventStoreActions;
-
-const _: any = null;
-const initial: EventStoreData = {
-  event: {
-    id: undefined,
-    slug: undefined,
-
-    questionIds: [],
-  },
+type EventStoreData = Partial<Event> & {
+  questionIds: string[];
 };
 
-export const createEventStore = (withImmer: WithImmer): EventStore => ({
-  event: initial.event,
+type EventStoreActions = {
+  reset: ImmerAction<() => void>;
+  load: ImmerAction<(event: LoginPacketData) => void>;
+};
 
-  resetEvent: withImmer((draft) => {
-    consola.trace('FeedbaxStore', 'resetEvent');
-    draft.event = initial.event;
-  }),
+type EventStoreSelectors = {
+  get: Selector<EventStoreData>,
+  questionIds: Selector<EventStoreData['questionIds']>,
+  isSingleQuestion: Selector<boolean>,
 
-  loadEvent: withImmer((draft, event) => {
-    consola.trace('FeedbaxStore', 'loadEvent', { event });
+  load: Selector<EventStoreActions['load']>,
+};
 
-    if (typeof draft.event !== 'undefined') {
-      draft.event.id = event.id;
-      draft.event.slug = event.slug;
-      draft.addQuestions.withDraft(draft)(event.questions);
+type ModuleName = 'event';
 
-      const [firstQuestionId] = draft.event.questionIds;
-      draft.app.currentQuestionId = firstQuestionId;
-    }
-  }),
-});
+type EventStore =
+  CreateStore<ModuleName, EventStoreData, EventStoreActions>;
+
+type EventSelectors =
+  CreateSelectors<ModuleName, EventStoreSelectors>;
+
+declare module '@/lib/store/types' {
+  interface FeedbaxStore extends EventStore {}
+}
+
+const initial: EventStoreData = {
+  id: undefined,
+  slug: undefined,
+
+  questionIds: [],
+};
+
+export const createEventStore = (
+  (withImmer: WithImmer): EventStore => ({
+    event: {
+      state: initial,
+      actions: {
+        reset: withImmer((draft) => {
+          consola.trace('FeedbaxStore', 'resetEvent');
+          draft.event.state = initial;
+        }),
+
+        load: withImmer((draft, event) => {
+          consola.trace('FeedbaxStore', 'loadEvent', { event });
+
+          if (typeof draft.event !== 'undefined') {
+            draft.event.state.id = event.id;
+            draft.event.state.slug = event.slug;
+            draft.questions.actions.addMultiple.withDraft(draft)(event.questions);
+
+            const [firstQuestionId] = draft.event.state.questionIds;
+            draft.navigation.state.questionId = firstQuestionId;
+          }
+        }),
+      },
+    },
+  })
+);
+
+export const selectors: EventSelectors = {
+  event: {
+    get: (store) => store.event.state,
+    questionIds: (store) => store.event.state.questionIds,
+    isSingleQuestion: (store) => store.event.state.questionIds.length === 1,
+
+    load: (store) => store.event.actions.load,
+  },
+};

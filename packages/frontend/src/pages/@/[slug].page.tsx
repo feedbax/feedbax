@@ -49,7 +49,7 @@ export default memo(
     const { ogDescription, ogImage } = props;
 
     const [isLoading, setLoading] = useState(true);
-    const event = useStore(selectors.event);
+    const event = useStore(selectors.event.get);
 
     useEffect(
       function eventChanged() {

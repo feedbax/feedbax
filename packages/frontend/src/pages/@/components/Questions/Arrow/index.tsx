@@ -12,8 +12,8 @@ type ArrowProps = {
 
 export default memo(
   function Arrow({ type, onClick }: ArrowProps) {
-    const isFirstQuestion = useStore(selectors.isFirstQuestion);
-    const isLastQuestion = useStore(selectors.isLastQuestion);
+    const isFirstQuestion = useStore(selectors.navigation.isFirst);
+    const isLastQuestion = useStore(selectors.navigation.isLast);
 
     const arrowContainerLeft = clsx({
       [styles['arrow-container']]: true,

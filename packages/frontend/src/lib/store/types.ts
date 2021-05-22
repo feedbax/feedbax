@@ -1,11 +1,28 @@
 declare module '@/lib/store/types' {
-  interface FeedbaxStoreData {}
-  interface FeedbaxStoreActions {
+  interface FeedbaxStore {
     reset: () => void;
   }
 
-  type DraftFn = (draft: FeedbaxStore) => void;
-  export type SetWithImmer = (fn: DraftFn) => void;
+  export type CreateStore<
+    Name extends string,
+    State extends Record<string, unknown>,
+    Actions extends Record<string, unknown>,
+  > = {
+    [key in Name]: {
+      state: State;
+      actions: Actions;
+    }
+  };
+
+  export type Selector<T> = (store: FeedbaxStore) => T;
+  export type CreateSelectors<
+    Name extends string,
+    Selectors extends Record<string, unknown>,
+  > = {
+    [key in Name]: Selectors;
+  };
+
+  export type SetWithImmer = (fn: (draft: FeedbaxStore) => void) => void;
   export type WithoutDraft<T extends unknown[]> = (...props: T) => void;
   export type WithDraft<T extends unknown[]> = (draft: FeedbaxStore) => (...props: T) => void;
 
@@ -20,10 +37,6 @@ declare module '@/lib/store/types' {
 
   export type ImmerImplementation<T extends unknown[]> =
     (draft: FeedbaxStore, ...props: T) => void;
-
-  export type FeedbaxStore =
-    & FeedbaxStoreData
-    & FeedbaxStoreActions;
 }
 
 export default undefined;

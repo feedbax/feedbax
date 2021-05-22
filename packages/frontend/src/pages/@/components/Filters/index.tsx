@@ -11,8 +11,8 @@ import type { QuestionSettings } from '@feedbax/prisma';
 
 export default memo(
   function Filters() {
-    const reactionIds = useStore(selectors.currentQuestionReactionIds);
-    const settings = useStore(selectors.currentQuestionSettings);
+    const reactionIds = useStore(selectors.questions.currentQuestionReactionIds);
+    const settings = useStore(selectors.questions.currentQuestionSettings);
 
     return (
       <div className={styles.filters}>

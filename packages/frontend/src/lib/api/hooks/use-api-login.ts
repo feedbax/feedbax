@@ -4,7 +4,7 @@ import { useApi } from './use-api';
 
 export function useApiLogin(slug: string | null) {
   const api = useApi();
-  const loadEvent = useStore(selectors.loadEvent);
+  const loadEvent = useStore(selectors.event.load);
   const reset = useStore(selectors.reset);
 
   useEffect(

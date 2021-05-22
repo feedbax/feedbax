@@ -30,8 +30,8 @@ type Direction = 'left' | 'right';
 type DoSwipe = (direction: Direction | DragEndEvent, info?: PanInfo) => void;
 
 const useQuestionSwipe = (): [number, DoSwipe] => {
-  const nextQuestion = useStore(selectors.nextQuestion);
-  const previousQuestion = useStore(selectors.previousQuestion);
+  const nextQuestion = useStore(selectors.navigation.next);
+  const previousQuestion = useStore(selectors.navigation.previous);
 
   const [swipeDirection, setSwipeDirection] = useState(1);
 
@@ -64,7 +64,7 @@ const useQuestionSwipe = (): [number, DoSwipe] => {
 
 export default memo(
   function Questions() {
-    const currentQuestionId = useStore(selectors.currentQuestionId);
+    const currentQuestionId = useStore(selectors.navigation.questionId);
 
     const [questionHeight, getHeight] = useQuestionHeight();
     const [swipeDirection, doSwipe] = useQuestionSwipe();

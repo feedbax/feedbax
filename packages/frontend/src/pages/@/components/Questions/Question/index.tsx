@@ -26,7 +26,7 @@ const useQuestion = (questionId?: string) => {
   const questionSelector = useCallback(
     (state: FeedbaxStore) => {
       if (typeof questionId === 'string') {
-        return state.questions[questionId];
+        return state.questions.state[questionId];
       }
 
       return undefined;
@@ -62,7 +62,7 @@ export default memo(
     const { questionId, swipeDirection } = props;
     const { getHeight, doSwipe } = props;
 
-    const currentQuestionNumber = useStore(selectors.currentQuestionNumber);
+    const currentQuestionNumber = useStore(selectors.navigation.questionNumber);
     const currentQuestion = useQuestion(questionId);
 
     const { locked, doLock, doUnlock } = useDragLock();
