@@ -8,8 +8,8 @@ import TranslationLoader from '@/lib/i18n/loader';
 
 import type { AppProps } from 'next/app';
 
-import '@/styles/theme/fonts.scss';
-import '@/styles/theme/colors.scss';
+import '@/styles/theme/fonts/fonts.scss';
+import '@/styles/theme/colors/colors.scss';
 import '@/styles/globals.scss';
 import 'normalize.css';
 

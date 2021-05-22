@@ -12,6 +12,8 @@ $colorFeedbaxSecondary: #ff7d65;
   
   --color-background-footer: #191919;
 
+  --color-transparent: rgba(0, 0, 0, 0);
+
   @each $factor in 2, 4, 6, 8 {
     --color-feedbax-primary-lighten-#{$factor}: #{lighten($colorFeedbaxPrimary, $factor * 1%)};
     --color-feedbax-primary-darken-#{$factor}: #{darken($colorFeedbaxPrimary, $factor * 1%)};

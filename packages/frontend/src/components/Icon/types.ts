@@ -1,4 +1,4 @@
-import type { ClassNames as ThemeColorKeys } from '@/styles/theme/_export.scss';
+import type { ClassNames as ThemeColorKeys } from '@/styles/theme/colors/_export.scss';
 
 export enum Icons {
   Heart,
