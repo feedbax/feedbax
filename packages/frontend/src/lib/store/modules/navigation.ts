@@ -51,12 +51,12 @@ export const createNavigationStore = (
 
       actions: {
         reset: withImmer((draft) => {
-          consola.trace('FeedbaxStore', 'resetApp');
+          consola.trace('store.navigation.actions.reset');
           draft.navigation.state = initial;
         }),
 
         next: withImmer((draft) => {
-          consola.trace('FeedbaxStore', 'nextQuestion');
+          consola.trace('store.navigation.actions.next');
 
           const { questionIds } = draft.event.state;
           const { questionIndex } = draft.navigation.state;
@@ -72,7 +72,7 @@ export const createNavigationStore = (
         }),
 
         previous: withImmer((draft) => {
-          consola.trace('FeedbaxStore', 'previousQuestion');
+          consola.trace('store.navigation.actions.previous');
 
           const { questionIndex } = draft.navigation.state;
           const { questionIds } = draft.event.state;

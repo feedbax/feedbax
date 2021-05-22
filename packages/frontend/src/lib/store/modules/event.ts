@@ -50,12 +50,12 @@ export const createEventStore = (
       state: initial,
       actions: {
         reset: withImmer((draft) => {
-          consola.trace('FeedbaxStore', 'resetEvent');
+          consola.trace('store.event.actions.reset');
           draft.event.state = initial;
         }),
 
         load: withImmer((draft, event) => {
-          consola.trace('FeedbaxStore', 'loadEvent', { event });
+          consola.trace('store.event.actions.load', { event });
 
           if (typeof draft.event !== 'undefined') {
             draft.event.state.id = event.id;

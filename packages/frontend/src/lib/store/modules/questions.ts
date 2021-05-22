@@ -52,12 +52,12 @@ export const createQuestionsStore = (
       state: initial,
       actions: {
         reset: withImmer((draft) => {
-          consola.trace('FeedbaxStore', 'resetQuestions');
+          consola.trace('store.questions.actions.reset');
           draft.questions.state = initial;
         }),
 
         addOne: withImmer((draft, question) => {
-          consola.trace('FeedbaxStore', 'addQuestion', { question });
+          consola.trace('store.questions.actions.addOne', { question });
           const { reactions, ...questionRest } = question;
 
           draft.questions.state[question.id] = {
@@ -77,7 +77,7 @@ export const createQuestionsStore = (
         }),
 
         addMultiple: withImmer((draft, questions) => {
-          consola.trace('FeedbaxStore', 'addQuestions', { questions });
+          consola.trace('store.questions.actions.addMultiple', { questions });
 
           for (let i = 0; i < questions.length; i += 1) {
             const question = questions[i];
@@ -89,12 +89,12 @@ export const createQuestionsStore = (
         }),
 
         removeOne: withImmer((draft, targetQuestion) => {
-          consola.trace('FeedbaxStore', 'removeQuestion', { targetQuestion });
+          consola.trace('store.questions.actions.removeOne', { targetQuestion });
           draft.questions.actions.removeOneById.withDraft(draft)(targetQuestion.id);
         }),
 
         removeOneById: withImmer((draft, targetQuestionId) => {
-          consola.trace('FeedbaxStore', 'removeQuestionById', { targetQuestionId });
+          consola.trace('store.questions.actions.removeOneById', { targetQuestionId });
 
           const questionIdIndex = draft.event.state.questionIds
             .findIndex((questionId) => questionId === targetQuestionId);
@@ -120,14 +120,14 @@ export const createQuestionsStore = (
         }),
 
         removeMultiple: withImmer((draft, targetQuestions) => {
-          consola.trace('FeedbaxStore', 'removeQuestions', { targetQuestions });
+          consola.trace('store.questions.actions.removeMultiple', { targetQuestions });
 
           const questionIds = targetQuestions.map((question) => question.id);
           draft.questions.actions.removeMultipleByIds.withDraft(draft)(questionIds);
         }),
 
         removeMultipleByIds: withImmer((draft, targetQuestionIds) => {
-          consola.trace('FeedbaxStore', 'removeQuestionsById', { targetQuestionIds });
+          consola.trace('store.questions.actions.removeMultipleByIds', { targetQuestionIds });
 
           for (let i = 0; i < targetQuestionIds.length; i += 1) {
             const targetQuestionId = targetQuestionIds[i];

@@ -50,12 +50,12 @@ export const createReactionsStore = (
       state: initial,
       actions: {
         reset: withImmer((draft) => {
-          consola.trace('FeedbaxStore', 'resetReactions');
+          consola.trace('store.reactions.actions.reset');
           draft.reactions.state = initial;
         }),
 
         addOne: withImmer((draft, reaction) => {
-          consola.trace('FeedbaxStore', 'addReaction', { reaction });
+          consola.trace('store.reactions.actions.addOne', { reaction });
           const question = draft.questions.state[reaction.questionId];
 
           if (typeof question !== 'undefined') {
@@ -67,7 +67,7 @@ export const createReactionsStore = (
         }),
 
         addMultiple: withImmer((draft, reactions) => {
-          consola.trace('FeedbaxStore', 'addReactions', { reactions });
+          consola.trace('store.reactions.actions.addMultiple', { reactions });
 
           for (let i = 0; i < reactions.length; i += 1) {
             const reaction = reactions[i];
@@ -79,12 +79,12 @@ export const createReactionsStore = (
         }),
 
         removeOne: withImmer((draft, targetReaction) => {
-          consola.trace('FeedbaxStore', 'removeReaction', { targetReaction });
+          consola.trace('store.reactions.actions.removeOne', { targetReaction });
           draft.reactions.actions.removeOneById.withDraft(draft)(targetReaction.id);
         }),
 
         removeOneById: withImmer((draft, targetReactionId) => {
-          consola.trace('FeedbaxStore', 'removeReactionById', { targetReactionId });
+          consola.trace('store.reactions.actions.removeOneById', { targetReactionId });
           const reaction = draft.reactions.state[targetReactionId];
 
           if (typeof reaction !== 'undefined') {
@@ -106,13 +106,13 @@ export const createReactionsStore = (
         }),
 
         removeMultiple: withImmer((draft, targetReactions) => {
-          consola.trace('FeedbaxStore', 'removeReactions', { targetReactions });
+          consola.trace('store.reactions.actions.removeMultiple', { targetReactions });
           const targetReactionsIds = targetReactions.map((reaction) => reaction.id);
           draft.reactions.actions.removeMultipleByIds.withDraft(draft)(targetReactionsIds);
         }),
 
         removeMultipleByIds: withImmer((draft, targetReactionsIds) => {
-          consola.trace('FeedbaxStore', 'removeReactionsByIds', { targetReactionsIds });
+          consola.trace('store.reactions.actions.removeMultipleByIds', { targetReactionsIds });
 
           for (let i = 0; i < targetReactionsIds.length; i += 1) {
             const targetReactionId = targetReactionsIds[i];

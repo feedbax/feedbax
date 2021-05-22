@@ -48,12 +48,12 @@ export const createFiltersStore = (
 
       actions: {
         reset: withImmer((draft) => {
-          consola.trace('FeedbaxStore', 'resetFilters');
+          consola.trace('store.filters.actions.reset');
           draft.filters.state = initial;
         }),
 
         setCurrent: withImmer((draft, filter) => {
-          consola.trace('FeedbaxStore', 'setReactionsFilter', { filter });
+          consola.trace('store.filters.actions.setCurrent', { filter });
           draft.filters.state.current = filter;
         }),
       },
