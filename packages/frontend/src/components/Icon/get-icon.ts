@@ -11,7 +11,7 @@ export default (
       case `${Icons.Exit}_${Variants.None}`:
       case `${Icons.Exit}_${Variants.Filled}`:
       case `${Icons.Exit}_${Variants.Outline}`: {
-        return dynamic(() => import('./icons/ClockFilled'));
+        throw new Error('icon not implemented yet');
       }
 
       case `${Icons.Language}_${Variants.None}`:
@@ -29,40 +29,40 @@ export default (
       case `${Icons.Close}_${Variants.None}`:
       case `${Icons.Close}_${Variants.Filled}`:
       case `${Icons.Close}_${Variants.Outline}`: {
-        return dynamic(() => import('./icons/ClockFilled'));
+        throw new Error('icon not implemented yet');
       }
 
       case `${Icons.Menu}_${Variants.None}`:
       case `${Icons.Menu}_${Variants.Filled}`:
       case `${Icons.Menu}_${Variants.Outline}`: {
-        return dynamic(() => import('./icons/ClockFilled'));
+        throw new Error('icon not implemented yet');
       }
 
       case `${Icons.Heart}_${Variants.None}`:
       case `${Icons.Heart}_${Variants.Filled}`: {
-        return dynamic(() => import('./icons/ClockFilled'));
+        throw new Error('icon not implemented yet');
       }
 
       case `${Icons.Heart}_${Variants.Outline}`: {
-        return dynamic(() => import('./icons/ClockFilled'));
+        throw new Error('icon not implemented yet');
       }
 
       case `${Icons.Clock}_${Variants.None}`:
       case `${Icons.Clock}_${Variants.Filled}`: {
-        return dynamic(() => import('./icons/ClockFilled'));
+        throw new Error('icon not implemented yet');
       }
 
       case `${Icons.Clock}_${Variants.Outline}`: {
-        return dynamic(() => import('./icons/ClockFilled'));
+        throw new Error('icon not implemented yet');
       }
 
       case `${Icons.Person}_${Variants.None}`:
       case `${Icons.Person}_${Variants.Filled}`: {
-        return dynamic(() => import('./icons/ClockFilled'));
+        throw new Error('icon not implemented yet');
       }
 
       case `${Icons.Person}_${Variants.Outline}`: {
-        return dynamic(() => import('./icons/ClockFilled'));
+        throw new Error('icon not implemented yet');
       }
 
       default: {
