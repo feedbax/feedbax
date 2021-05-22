@@ -46,9 +46,11 @@ export const useStore = create<FeedbaxStore>((set) => {
       consola.trace('FeedbaxStore', 'reset');
 
       draft.filters.actions.reset.withDraft(draft)();
+      draft.navigation.actions.reset.withDraft(draft)();
+
       draft.event.actions.reset.withDraft(draft)();
-      draft.questions.actions.reset.withDraft(draft);
-      draft.reactions.actions.reset.withDraft(draft);
+      draft.questions.actions.reset.withDraft(draft)();
+      draft.reactions.actions.reset.withDraft(draft)();
     }),
   };
 });
