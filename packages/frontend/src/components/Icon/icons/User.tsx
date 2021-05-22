@@ -22,7 +22,7 @@ export default memo(
             <circle fill={`var(--${backgroundColor})`} cx="12" cy="12" r="12" />
 
             <path
-              fill="#000"
+              fill={`var(--${iconColor})`}
               fillRule="nonzero"
               d="M15.2,7.2c-0,1.769 -1.432,3.201 -3.2,3.201c-1.768,-0 -3.2,-1.432 -3.2,-3.201c0,-1.768 1.432,-3.2 3.2,-3.2c1.768,0 3.2,1.432 3.2,3.2Z"
             />
